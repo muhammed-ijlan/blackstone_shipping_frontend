@@ -1,13 +1,33 @@
 
-import './App.css'
+import { useEffect } from 'react';
 
-function App() {
+import { usePathname } from './routes/hooks';
+import { ThemeProvider } from './theme/theme-provider';
 
+
+// ----------------------------------------------------------------------
+
+type AppProps = {
+  children: React.ReactNode;
+};
+
+export default function App({ children }: AppProps) {
+  useScrollToTop();
   return (
-    <>
-     ts
-    </>
-  )
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
+  );
 }
 
-export default App
+// ----------------------------------------------------------------------
+
+function useScrollToTop() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
