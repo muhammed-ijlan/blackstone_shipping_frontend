@@ -17,6 +17,45 @@ const MuiBackdrop: Components<Theme>['MuiBackdrop'] = {
   },
 };
 
+const MuiContainer: Components<Theme>['MuiContainer'] = {
+  defaultProps: {
+    maxWidth: 'lg', 
+  },
+  styleOverrides: {
+    maxWidthXs: {
+      maxWidth: '444px',
+      '@media (min-width: 600px)': {
+        maxWidth: '444px',
+      },
+    },
+    maxWidthSm: {
+      maxWidth: '600px',
+      '@media (min-width: 600px)': {
+        maxWidth: '600px',
+      },
+    },
+    maxWidthMd: {
+      maxWidth: '900px',
+      '@media (min-width: 900px)': {
+        maxWidth: '900px',
+      },
+    },
+    maxWidthLg: {
+      maxWidth: '1200px',
+      '@media (min-width: 1200px)': {
+        maxWidth: '1300px',
+      },
+    },
+    maxWidthXl: {
+      maxWidth: '1440px',
+      '@media (min-width: 1536px)': {
+        maxWidth: '1440px',
+      },
+    },
+  },
+};
+
+
 const MuiButton: Components<Theme>['MuiButton'] = {
   defaultProps: {
     disableElevation: true,
@@ -168,4 +207,5 @@ export const components = {
   MuiCardHeader,
   MuiOutlinedInput,
   MuiFormControlLabel,
+  MuiContainer,
 };

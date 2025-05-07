@@ -12,6 +12,7 @@ import { DashboardLayout } from '../layouts/dashboard';
 // ----------------------------------------------------------------------
 
 export const HomePage = lazy(() => import('../pages/home'));
+export const CompanyPage = lazy(() => import('../pages/company')); 
 
 const renderFallback = () => (
   <Box
@@ -44,7 +45,7 @@ export const routesSection: RouteObject[] = [
     ),
     children: [
       { index: true, element: <HomePage /> },
-      // { path: 'user', element: <UserPage /> },
+      { path: 'company', element: <CompanyPage /> },
       // { path: 'products', element: <ProductsPage /> },
       // { path: 'blog', element: <BlogPage /> },
     ],
