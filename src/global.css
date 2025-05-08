@@ -46,3 +46,30 @@ input[type='number']::-webkit-inner-spin-button {
   margin: 0;
   -webkit-appearance: none;
 }
+
+/* BANNER HOME */
+.control-dots{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 100px !important;
+  padding-right: 100px !important;
+  /* transform: translateX(-50%);  */
+  text-align: right;
+  display: flex;
+  gap: 0px !important;
+  z-index: 1;
+}
+.control-dots .dot {
+  width: 12px !important;
+  height: 5px !important;
+  border-radius: 8px !important;
+  background-color: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+.control-dots .dot.selected {
+  opacity: 1;
+  width: 80px !important;
+}

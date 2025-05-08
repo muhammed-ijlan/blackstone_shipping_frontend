@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { Divider, Stack, useTheme } from '@mui/material';
+import { Divider, Stack, useTheme, Link as MuiLink } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -26,7 +26,7 @@ import Container from '@mui/material/Container';
 
 import { layoutClasses } from './classes';
 
-// Define navigation items with subcategories as per the image
+// Define navigation items with subcategories and links
 const navItems = [
   { title: 'Home', subcategories: [] },
   {
@@ -35,22 +35,30 @@ const navItems = [
       {
         category: 'About Us',
         items: [
-          'Purpose',
-          'Vision',
-          'Key Facts & Figures (At A Glance)',
+          { text: 'Purpose', link: '/company/about-us/purpose' },
+          { text: 'Vision', link: '/company/about-us/vision' },
+          { text: 'Key Facts & Figures (At A Glance)', link: '/company/about-us/key-facts' },
         ],
       },
       {
         category: 'Our Team',
-        items: ['Leadership'],
+        items: [
+          { text: 'Leadership', link: '/company/our-team/leadership' },
+        ],
       },
       {
         category: 'Our Network',
-        items: ['Interactive Map', 'Global Locations'],
+        items: [
+          { text: 'Interactive Map', link: '/company/our-network/interactive-map' },
+          { text: 'Global Locations', link: '/company/our-network/global-locations' },
+        ],
       },
       {
         category: 'Certifications & Partnerships',
-        items: ['Industry Certifications', 'Strategic Alliances'],
+        items: [
+          { text: 'Industry Certifications', link: '/company/certifications/industry' },
+          { text: 'Strategic Alliances', link: '/company/certifications/alliances' },
+        ],
       },
     ],
   },
@@ -60,34 +68,58 @@ const navItems = [
       {
         category: 'Ocean Freight',
         items: [
-          'Full Container Load (FCL)',
-          'Less Than Container Load (LCL)',
-          'Breakbulk & Ro-Ro',
+          { text: 'Full Container Load (FCL)', link: '/services/ocean-freight/fcl' },
+          { text: 'Less Than Container Load (LCL)', link: '/services/ocean-freight/lcl' },
+          { text: 'Breakbulk & Ro-Ro', link: '/services/ocean-freight/breakbulk-ro-ro' },
         ],
       },
       {
         category: 'Air Freight',
-        items: ['Express Services', 'Charter Services', 'Temperature-Controlled'],
+        items: [
+          { text: 'Express Services', link: '/services/air-freight/express' },
+          { text: 'Charter Services', link: '/services/air-freight/charter' },
+          { text: 'Temperature-Controlled', link: '/services/air-freight/temperature-controlled' },
+        ],
       },
       {
         category: 'Door To Door Shipments',
-        items: ['Trucking, Barge & Rail Distribution', 'First-Mile Transport', 'Last-Mile Delivery'],
+        items: [
+          { text: 'Trucking, Barge & Rail Distribution', link: '/services/door-to-door/trucking' },
+          { text: 'First-Mile Transport', link: '/services/door-to-door/first-mile' },
+          { text: 'Last-Mile Delivery', link: '/services/door-to-door/last-mile' },
+        ],
       },
       {
         category: 'Warehousing & Distribution',
-        items: ['Storage Solutions', 'Inventory Management', 'Order Fulfillment', 'Cross-Docking'],
+        items: [
+          { text: 'Storage Solutions', link: '/services/warehousing/storage' },
+          { text: 'Inventory Management', link: '/services/warehousing/inventory' },
+          { text: 'Order Fulfillment', link: '/services/warehousing/fulfillment' },
+          { text: 'Cross-Docking', link: '/services/warehousing/cross-docking' },
+        ],
       },
       {
         category: 'Customs Brokerage Consultancy',
-        items: ['Heavy Lift & Oversized', 'Turnkey Projects', 'Route Planning'],
+        items: [
+          { text: 'Heavy Lift & Oversized', link: '/services/customs/heavy-lift' },
+          { text: 'Turnkey Projects', link: '/services/customs/turnkey-projects' },
+          { text: 'Route Planning', link: '/services/customs/route-planning' },
+        ],
       },
       {
         category: 'IT Enabled Logistics',
-        items: ['Import/Export Clearance', 'Compliance & Documentation', 'Duty Management'],
+        items: [
+          { text: 'Import/Export Clearance', link: '/services/it-logistics/clearance' },
+          { text: 'Compliance & Documentation', link: '/services/it-logistics/compliance' },
+          { text: 'Duty Management', link: '/services/it-logistics/duty-management' },
+        ],
       },
       {
         category: 'Sustainable Logistics',
-        items: ['Integrated Solutions', 'Cost-Effective Options'],
+        items: [
+          { text: 'Integrated Solutions', link: '/services/sustainable/integrated' },
+          { text: 'Cost-Effective Options', link: '/services/sustainable/cost-effective' },
+        ],
       },
     ],
   },
@@ -97,60 +129,114 @@ const navItems = [
       {
         category: 'Ocean Freight',
         items: [
-          'Full Container Load (FCL)',
-          'Less Than Container Load (LCL)',
-          'Breakbulk & Ro-Ro',
+          { text: 'Full Container Load (FCL)', link: '/solutions/ocean-freight/fcl' },
+          { text: 'Less Than Container Load (LCL)', link: '/solutions/ocean-freight/lcl' },
+          { text: 'Breakbulk & Ro-Ro', link: '/solutions/ocean-freight/breakbulk-ro-ro' },
         ],
       },
       {
         category: 'Air Freight',
-        items: ['Express Services', 'Charter Services', 'Temperature-Controlled'],
+        items: [
+          { text: 'Express Services', link: '/solutions/air-freight/express' },
+          { text: 'Charter Services', link: '/solutions/air-freight/charter' },
+          { text: 'Temperature-Controlled', link: '/solutions/air-freight/temperature-controlled' },
+        ],
       },
       {
         category: 'Door To Door Shipments',
-        items: ['Trucking, Barge & Rail Distribution', 'First-Mile Transport', 'Last-Mile Delivery'],
+        items: [
+          { text: 'Trucking, Barge & Rail Distribution', link: '/solutions/door-to-door/trucking' },
+          { text: 'First-Mile Transport', link: '/solutions/door-to-door/first-mile' },
+          { text: 'Last-Mile Delivery', link: '/solutions/door-to-door/last-mile' },
+        ],
       },
       {
         category: 'Warehousing & Distribution',
-        items: ['Storage Solutions', 'Inventory Management', 'Order Fulfillment', 'Cross-Docking'],
+        items: [
+          { text: 'Storage Solutions', link: '/solutions/warehousing/storage' },
+          { text: 'Inventory Management', link: '/solutions/warehousing/inventory' },
+          { text: 'Order Fulfillment', link: '/solutions/warehousing/fulfillment' },
+          { text: 'Cross-Docking', link: '/solutions/warehousing/cross-docking' },
+        ],
       },
       {
         category: 'Customs Brokerage Consultancy',
-        items: ['Heavy Lift & Oversized', 'Turnkey Projects', 'Route Planning'],
+        items: [
+          { text: 'Heavy Lift & Oversized', link: '/solutions/customs/heavy-lift' },
+          { text: 'Turnkey Projects', link: '/solutions/customs/turnkey-projects' },
+          { text: 'Route Planning', link: '/solutions/customs/route-planning' },
+        ],
       },
       {
         category: 'IT Enabled Logistics',
-        items: ['Import/Export Clearance', 'Compliance & Documentation', 'Duty Management'],
+        items: [
+          { text: 'Import/Export Clearance', link: '/solutions/it-logistics/clearance' },
+          { text: 'Compliance & Documentation', link: '/solutions/it-logistics/compliance' },
+          { text: 'Duty Management', link: '/solutions/it-logistics/duty-management' },
+        ],
       },
       {
         category: 'Sustainable Logistics',
-        items: ['Integrated Solutions', 'Cost-Effective Options'],
+        items: [
+          { text: 'Integrated Solutions', link: '/solutions/sustainable/integrated' },
+          { text: 'Cost-Effective Options', link: '/solutions/sustainable/cost-effective' },
+        ],
       },
     ],
   },
   {
     title: 'Technology',
-    subcategories: ['Tracking System', 'Automation', 'AI Solutions', 'Data Analytics'],
+    subcategories: [
+      { text: 'Tracking System', link: '/technology/tracking-system' },
+      { text: 'Automation', link: '/technology/automation' },
+      { text: 'AI Solutions', link: '/technology/ai-solutions' },
+      { text: 'Data Analytics', link: '/technology/data-analytics' },
+    ],
   },
   {
     title: 'Quality & Sustainability',
-    subcategories: ['Certifications', 'Green Logistics', 'Safety Standards', 'Compliance'],
+    subcategories: [
+      { text: 'Certifications', link: '/quality-sustainability/certifications' },
+      { text: 'Green Logistics', link: '/quality-sustainability/green-logistics' },
+      { text: 'Safety Standards', link: '/quality-sustainability/safety-standards' },
+      { text: 'Compliance', link: '/quality-sustainability/compliance' },
+    ],
   },
   {
     title: 'Careers',
-    subcategories: ['Job Openings', 'Benefits', 'Culture', 'Apply Now'],
+    subcategories: [
+      { text: 'Job Openings', link: '/careers/job-openings' },
+      { text: 'Benefits', link: '/careers/benefits' },
+      { text: 'Culture', link: '/careers/culture' },
+      { text: 'Apply Now', link: '/careers/apply-now' },
+    ],
   },
   {
     title: 'Support',
-    subcategories: ['FAQ', 'Customer Service', 'Technical Support', 'Feedback'],
+    subcategories: [
+      { text: 'FAQ', link: '/support/faq' },
+      { text: 'Customer Service', link: '/support/customer-service' },
+      { text: 'Technical Support', link: '/support/technical-support' },
+      { text: 'Feedback', link: '/support/feedback' },
+    ],
   },
   {
     title: 'My Blackbox Freight',
-    subcategories: ['Dashboard', 'Shipments', 'Invoices', 'Settings'],
+    subcategories: [
+      { text: 'Dashboard', link: '/my-blackbox-freight/dashboard' },
+      { text: 'Shipments', link: '/my-blackbox-freight/shipments' },
+      { text: 'Invoices', link: '/my-blackbox-freight/invoices' },
+      { text: 'Settings', link: '/my-blackbox-freight/settings' },
+    ],
   },
   {
     title: 'Resources',
-    subcategories: ['Blog', 'Whitepapers', 'Guides', 'Case Studies'],
+    subcategories: [
+      { text: 'Blog', link: '/resources/blog' },
+      { text: 'Whitepapers', link: '/resources/whitepapers' },
+      { text: 'Guides', link: '/resources/guides' },
+      { text: 'Case Studies', link: '/resources/case-studies' },
+    ],
   },
 ];
 
@@ -170,9 +256,10 @@ const NavItem = styled('div', {
   display: 'inline-block',
   padding: theme.spacing(0.5, 1),
 }));
+
 const NavLink = styled(Typography)(({ theme }) => ({
-  fontSize: 14,
-  fontWeight: 500,
+  fontSize: "14px !important",
+  fontWeight: 600,
   cursor: 'pointer',
   color: theme.palette.text.primary,
   '&:hover': {
@@ -198,11 +285,10 @@ const SubMenu = styled(Box, {
   zIndex: 1000,
   width: '100%',
   minWidth: '900px',
-  // borderTop: `2px solid ${theme.palette.primary.main}`,
+  borderTop: `2px solid ${theme.palette.primary.main}`,
   [theme.breakpoints.down('md')]: {
     display: 'none',
   },
-  
 }));
 
 const SubMenuContent = styled(Box)(({ theme }) => ({
@@ -211,7 +297,6 @@ const SubMenuContent = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
   flexWrap: 'wrap',
   padding: theme.spacing(0, 12),
-  // justifyContent: 'center',
 }));
 
 const SubMenuCategory = styled(Box)(({ theme }) => ({
@@ -228,11 +313,12 @@ const SubMenuCategoryTitle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-const SubMenuItem = styled(Typography)(({ theme }) => ({
+const SubMenuItem = styled(MuiLink)(({ theme }) => ({
   fontSize: 14,
   cursor: 'pointer',
   color: '#6D6E71',
   lineHeight: '1.5',
+  textDecoration: 'none',
   '&:hover': {
     color: theme.palette.primary.main,
   },
@@ -284,15 +370,17 @@ export function HeaderSection({
   };
 
   // Function to render subcategories
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderSubcategories = (subcategories: any[]) => {
-    if (typeof subcategories[0] === 'string') {
+    if (typeof subcategories[0] === 'object' && 'text' in subcategories[0]) {
       return (
-
         <SubMenuContent>
           <SubMenuCategory>
-            {subcategories.map((subItem: string) => (
-              <SubMenuItem key={subItem}>{subItem}</SubMenuItem>
+            {subcategories.map((subItem: { text: string; link: string }) => (
+              <SubMenuItem key={subItem.text} href={subItem.link}>
+                {subItem.text}
+              </SubMenuItem>
             ))}
           </SubMenuCategory>
         </SubMenuContent>
@@ -301,12 +389,14 @@ export function HeaderSection({
 
     return (
       <SubMenuContent>
-  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {subcategories.map((category: any) => (
           <SubMenuCategory key={category.category}>
             <SubMenuCategoryTitle>{category.category}</SubMenuCategoryTitle>
-            {category.items.map((item: string) => (
-              <SubMenuItem key={item}>{item}</SubMenuItem>
+            {category.items.map((item: { text: string; link: string }) => (
+              <SubMenuItem key={item.text} href={item.link}>
+                {item.text}
+              </SubMenuItem>
             ))}
           </SubMenuCategory>
         ))}
@@ -327,7 +417,7 @@ export function HeaderSection({
           ...(isOffset && {
             '--color': `var(--offset-color, ${theme.vars.palette.text.primary})`,
           }),
-          bgcolor:"white"
+          bgcolor: "white",
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -376,25 +466,26 @@ export function HeaderSection({
 
               <NavBar>
                 {navItems.map((item, index) => (
-                  <div style={{paddingBottom:"15px"}}     onMouseEnter={() => handleMouseEnter(item.title)}
-                  onMouseLeave={handleMouseLeave}>
-                  <NavItem
-                    key={item.title}
-                    isLastItem={index >= navItems.length - 3} 
-               
+                  <div
+                    style={{ paddingBottom: "15px" }}
+                    onMouseEnter={() => handleMouseEnter(item.title)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <NavItem
+                      key={item.title}
+                      isLastItem={index >= navItems.length - 3}
                     >
-                    <NavLink>{item.title}</NavLink>
-                  </NavItem>
+                      <NavLink>{item.title}</NavLink>
+                    </NavItem>
                     {item.subcategories.length > 0 && (
                       <SubMenu
-                      isOpen={openSubmenu === item.title}
-                      isLastItem={index >= navItems.length - 2}
+                        isOpen={openSubmenu === item.title}
+                        isLastItem={index >= navItems.length - 2}
                       >
                         {renderSubcategories(item.subcategories)}
                       </SubMenu>
                     )}
-
-                    </div>
+                  </div>
                 ))}
               </NavBar>
             </Stack>

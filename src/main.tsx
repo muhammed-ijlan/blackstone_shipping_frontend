@@ -1,14 +1,15 @@
+// main.tsx
 import './global.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
 
-import App from './app';
+import App from './App';
+import client from '../apollo/client';
 import { routesSection } from './routes/sections';
 import { ErrorBoundary } from './routes/components';
-
-// ----------------------------------------------------------------------
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,8 @@ const root = createRoot(document.getElementById('root')!);
 
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </StrictMode>
 );
