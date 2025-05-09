@@ -41,8 +41,10 @@ const WhatWeOffer = () => {
     },
   ]
   return (
-    <Container maxWidth="lg" sx={{ padding: '3rem 0' }}> 
-  <SectionHead/>
+    <Container maxWidth="lg" sx={{ }}> 
+  <SectionHead title='What We Offer' 
+  subTitle='A Complete Suite of Logistics, Freight, and Supply Chain Solutions, Customized to Meet Global Business Needs 
+  '/>
   <CustomSlider >
     {
       offers.map((card,index) =>(

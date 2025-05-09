@@ -1,0 +1,62 @@
+import { Box, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import icon1 from "src/assets/icons/icon1.png";
+
+const ServiceCard = ({ item }: { item: { title: string; image: string; link: string } }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Stack
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      sx={{
+        border:"1px solid rgba(45, 55, 72, 1)",
+        width: "295px",
+        height: "350px",
+        borderRadius: "8px",
+        p: 3,
+        overflow: "hidden",
+        position: "relative",
+        cursor: "pointer",
+        background: "rgba(45, 55, 72, 1)",
+        transition: "color 0.4s ease-in-out",
+        '&::before': {
+          content: '""',
+          position: "absolute",
+          width: "300%",
+          height: "300%",
+          background: "white",
+          top: 0,
+          left: 0,
+          transform: hovered ? "translate(-50%, -50%) scale(1)" : "translate(-100%, 100%) scale(0)", 
+          transition: "transform 0.6s ease-in-out",
+          borderRadius: "50%",
+          zIndex: 0,
+        }
+      }}
+      justifyContent={"space-between"}
+    >
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        sx={{ position: "relative", zIndex: 1 }}
+      >
+        <Typography
+          variant='h4'
+          fontWeight={600}
+          sx={{ color: hovered ? "rgba(45, 55, 72, 1)" : "white", transition: "color 0.4s ease-in-out" }}
+        >
+          {item.title}
+        </Typography>
+        <Box component={"img"} src={icon1} width="40px" height={"40px"} />
+      </Stack>
+
+      <Stack width={"100%"} sx={{ position: "relative", zIndex: 1 }}>
+        <Box component={"img"} src={item.image} width={"100%"} borderRadius={"4px"} />
+      </Stack>
+    </Stack>
+  );
+};
+
+export default ServiceCard;
