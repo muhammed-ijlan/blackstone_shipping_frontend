@@ -18,6 +18,7 @@ import { LayoutSection } from '../core/layout-section';
 import type { MainSectionProps } from '../core/main-section';
 import type { HeaderSectionProps } from '../core/header-section';
 import type { LayoutSectionProps } from '../core/layout-section';
+import Footer from 'src/sections/footer/footer';
 
 // ----------------------------------------------------------------------
 
@@ -82,7 +83,7 @@ export function DashboardLayout({
     );
   };
 
-  const renderFooter = () => null;
+  const renderFooter = () => (<Footer/>);
 
   const renderMain = () => <MainSection {...slotProps?.main}>{children}</MainSection>;
 
