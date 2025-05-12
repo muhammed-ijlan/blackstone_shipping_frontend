@@ -491,10 +491,17 @@ export function HeaderSection({
             </Stack>
           </Stack>
         </Stack>
+        <HeaderCenterArea {...slotProps?.centerArea}>{slots?.centerArea}</HeaderCenterArea>
+
+
+        {slots?.rightArea}
       </HeaderContainer>
     </HeaderRoot>
   );
 }
+
+
+
 
 // ----------------------------------------------------------------------
 
@@ -563,7 +570,14 @@ const HeaderContainer = styled(Container, {
   display: 'flex',
   alignItems: 'center',
   color: 'var(--color)',
-  height: '150px !important',
-  padding: theme.spacing(0, 2),
+  height: 'auto !important',
+  padding: theme.spacing(2, 2),
   [theme.breakpoints.up(layoutQuery)]: { height: 'var(--layout-header-desktop-height)' },
+}));
+
+
+const HeaderCenterArea = styled('div')(() => ({
+  display: 'flex',
+  flex: '1 1 auto',
+  justifyContent: 'center',
 }));
