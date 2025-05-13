@@ -1,61 +1,39 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import SectionHead from "src/components/sectionHead/SectionHead";
-import icon from "src/assets/icons/icon.png";
 import IndustryCoverageCard from "../../components/home/IndustryCoverageCard";
+import { useQuery } from "@apollo/client";
+import { GET_INDUSTRY_COVERAGE } from "src/graphql/queries";
+
+export interface GetIndustryCoverageData {
+  page: {
+    title: string;
+    homePageFieldsIndustryCoverage: {
+      industryCoverageMainHeading: string;
+    };
+  };
+  industries: {
+    nodes: {
+      title: string;
+      content: string | null;
+      uri: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      industriesFieldOptions: {
+        colorCode: string;
+      };
+    }[];
+  };
+}
 
 const IndustryCoverage = () => {
-  const icons = [
-    {
-      title: "Manufacturing",
-      icon,
-      subTitle:"Transporting raw materials, components, machinery, equipment, and finished goods."
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-    {
-      title: "Manufacturing",
-      icon,
-    },
-  ];
+  const { data, loading, error } = useQuery<GetIndustryCoverageData>(GET_INDUSTRY_COVERAGE);
+
+  if (loading) return <Typography color="white">Loading...</Typography>;
+  if (error) return <Typography color="error">Error: {error.message}</Typography>;
 
   return (
     <Stack
@@ -67,11 +45,15 @@ const IndustryCoverage = () => {
       }}
     >
       <Container maxWidth="lg">
-        <SectionHead title="INDUSTRY  COVERAGE" color="white" />
-        <Grid container rowGap={5} my={5} align="center">
-          {icons.map((item, index) => (
-            <Grid size={{ xs: 6, md: 4 }}  key={index}>
-              <IndustryCoverageCard  item={item}/>
+        <SectionHead
+          title={data?.page?.homePageFieldsIndustryCoverage?.industryCoverageMainHeading || "INDUSTRY COVERAGE"}
+          color="white"
+        />
+
+        <Grid container  rowGap={6} my={5} alignItems={"center"} justifyContent={"space-around"}>
+          {data?.industries?.nodes?.map((item, index) => (
+            <Grid item xs={6} md={4} key={index}>
+              <IndustryCoverageCard item={item} />
             </Grid>
           ))}
         </Grid>

@@ -12,7 +12,7 @@ const ServiceCard = ({ item }: { item: { title: string; image: string; link: str
       sx={{
         border:"1px solid rgba(45, 55, 72, 1)",
         width: "295px",
-        height: "350px",
+        height: "100%",
         borderRadius: "8px",
         p: 3,
         overflow: "hidden",
@@ -41,6 +41,7 @@ const ServiceCard = ({ item }: { item: { title: string; image: string; link: str
         alignItems={"center"}
         justifyContent={"space-between"}
         sx={{ position: "relative", zIndex: 1 }}
+        
       >
         <Typography
           variant='h4'
@@ -52,8 +53,8 @@ const ServiceCard = ({ item }: { item: { title: string; image: string; link: str
         <Box component={"img"} src={icon1} width="40px" height={"40px"} />
       </Stack>
 
-      <Stack width={"100%"} sx={{ position: "relative", zIndex: 1 }}>
-        <Box component={"img"} src={item.image} width={"100%"} borderRadius={"4px"} />
+      <Stack width={"100%"} sx={{ position: "relative", zIndex: 1 }} mt={3}>
+        <Box component={"img"} src={item.image} width={"255px"} height={"255px"} sx={{objectFit:"cover"}} borderRadius={"4px"} />
       </Stack>
     </Stack>
   );

@@ -1,21 +1,51 @@
-// Testimonial.tsx
 import { Box, Container, Stack, Typography } from "@mui/material";
-import React, { ReactNode, RefObject, useRef } from "react";
+import React, { useRef } from "react";
+import { useQuery } from "@apollo/client";
+import DOMPurify from "dompurify";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SectionHead from "src/components/sectionHead/SectionHead";
-import quote from "src/assets/icons/testimonial.png";
-import user from "src/assets/images/user.jpg";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
+import quote from "src/assets/icons/testimonial.png";
+import { GET_TESTIMONIALS } from "src/graphql/queries";
 
-interface CustomSliderProps {
-  children: ReactNode;
-  scrollAmount?: number;
-  gap?: number;
-  scrollRef: RefObject<HTMLDivElement | null>;
+export interface TestimonialNode {
+  title: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  };
+  content: string;
+  uri: string;
+  testimonialsFieldOptions: {
+    testimonialAuthorDesignation: string;
+  };
 }
+
+export interface TestimonialsData {
+  page: {
+    title: string;
+    homePageFieldsTestimonials: {
+      testimonialsSubHeading: string;
+      testimonialsMainHeading: string;
+    };
+  };
+  testimonials: {
+    nodes: TestimonialNode[];
+  };
+}
+
 
 const Testimonial = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const { data, loading, error } = useQuery<TestimonialsData>(GET_TESTIMONIALS);
+
+  if (loading) return null;
+  if (error || !data) return <Typography color="error">Error loading testimonials.</Typography>;
+
+  const { testimonialsMainHeading, testimonialsSubHeading } =
+    data.page.homePageFieldsTestimonials;
 
   return (
     <Stack
@@ -31,55 +61,55 @@ const Testimonial = () => {
         <Stack direction={"row"} gap={2}>
           <Stack width={"40%"} gap={4} alignItems={"flex-start"}>
             <SectionHead
-              title="Testimonial"
+              title={testimonialsSubHeading}
               color="white"
-              subTitle="Delivering more than logistics—building relationships through reliability, service, and success."
+              subTitle={testimonialsMainHeading}
             />
             <SliderButton2 scrollRef={scrollRef} />
           </Stack>
 
           <Stack mt={10} width={"60%"}>
             <CustomSlider2 scrollRef={scrollRef}>
-              {[1, 2, 3, 4].map((item) => (
+              {data.testimonials.nodes.map((item, index) => (
                 <Stack
-                  key={item}
+                  key={index}
                   sx={{
-                    minWidth: "500px", // Use minWidth to force horizontal scrolling
+                    minWidth: "500px",
                     border: "2px solid rgba(109, 110, 113, 1)",
                     borderRadius: "8px",
                     p: 4,
                   }}
                   gap={4}
+                  justifyContent={"space-between"}
                 >
-                  <Box component={"img"} src={quote} width={"83px"} />
-                  <Typography variant="subtitle1" fontWeight={400}>
-                    Testimonial message number {item}.
-                  </Typography>
+                  <Box component={"img"} src={quote} width={"83px"} alt="quote icon" />
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={400}
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(item.content),
+                    }}
+                  />
                   <Stack direction={"row"} gap={3}>
                     <Box
                       component={"img"}
-                      src={user}
+                      src={item.featuredImage?.node.sourceUrl}
                       width={"84px"}
                       height={"84px"}
+                      sx={{objectFit:"cover"}}
                       borderRadius={"4px"}
+                      alt={item.title}
                     />
                     <Stack>
                       <Typography variant="h4" fontWeight={600}>
-                        James Turner {item}
+                        {item.title}
                       </Typography>
                       <Typography
                         variant="subtitle1"
                         fontWeight={400}
                         color="rgba(249, 250, 251, 0.5)"
                       >
-                        Logistics Director
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        fontWeight={400}
-                        color="rgba(249, 250, 251, 0.5)"
-                      >
-                        Orion Manufacturing Group
+                        {item.testimonialsFieldOptions.testimonialAuthorDesignation}
                       </Typography>
                     </Stack>
                   </Stack>

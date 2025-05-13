@@ -77,3 +77,103 @@ query {
   }
 }
 `;
+
+export const GET_INDUSTRY_COVERAGE = gql`
+ query GetIndustryCoverage {
+  page(id: "home", idType: URI) {
+    title
+    homePageFieldsIndustryCoverage {
+      industryCoverageMainHeading
+    }
+  }
+  industries {
+    nodes {
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      content
+      uri
+      industriesFieldOptions {
+        colorCode
+      }
+    }
+  }
+ }
+ `
+
+ export const GET_SERVICES = gql`
+  query {
+    page(id: "home", idType: URI) {
+      title
+      homePageFieldsOurServices {
+        ourServicesMainHeading
+      }
+    }
+
+    services {
+      nodes {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        content
+        uri
+      }
+    }
+  }
+`;
+export const GET_SUSTAINABILITY = gql`
+  query GetSustainability {
+    page(id: "home", idType: URI) {
+      title
+      homePageFieldsSustainabilityCommitment {
+        sustainabilityCommitmentSubHeading
+        sustainabilityCommitmentMainHeading
+      }
+    }
+    sustainabilityCommitments {
+      nodes {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        content
+        uri
+      }
+    }
+  }
+`;
+
+export const GET_TESTIMONIALS = gql`
+  query GetTestimonials {
+    page(id: "home", idType: URI) {
+      title
+      homePageFieldsTestimonials {
+        testimonialsSubHeading
+        testimonialsMainHeading
+      }
+    }
+    testimonials {
+      nodes {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        content
+        uri
+        testimonialsFieldOptions {
+          testimonialAuthorDesignation
+        }
+      }
+    }
+  }
+`;
