@@ -5,242 +5,21 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Divider, Stack, useTheme, Link as MuiLink } from '@mui/material';
-
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-
 import { Logo } from '../../components/logo';
-import logo from "../../assets/logo/navlogo.png";
-
+import logo from '../../assets/logo/navlogo.png';
 import type { AppBarProps } from '@mui/material/AppBar';
 import type { ContainerProps } from '@mui/material/Container';
 import type { Theme, SxProps, CSSObject, Breakpoint } from '@mui/material/styles';
-
 import { useScrollOffsetTop } from 'minimal-shared/hooks';
 import { varAlpha, mergeClasses } from 'minimal-shared/utils';
-
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-
 import { layoutClasses } from './classes';
 
-// Define navigation items with subcategories and links
-const navItems = [
-  { title: 'Home', subcategories: [] },
-  {
-    title: 'Company',
-    subcategories: [
-      {
-        category: 'About Us',
-        items: [
-          { text: 'Purpose', link: '/company/about-us/purpose' },
-          { text: 'Vision', link: '/company/about-us/vision' },
-          { text: 'Key Facts & Figures (At A Glance)', link: '/company/about-us/key-facts' },
-        ],
-      },
-      {
-        category: 'Our Team',
-        items: [
-          { text: 'Leadership', link: '/company/our-team/leadership' },
-        ],
-      },
-      {
-        category: 'Our Network',
-        items: [
-          { text: 'Interactive Map', link: '/company/our-network/interactive-map' },
-          { text: 'Global Locations', link: '/company/our-network/global-locations' },
-        ],
-      },
-      {
-        category: 'Certifications & Partnerships',
-        items: [
-          { text: 'Industry Certifications', link: '/company/certifications/industry' },
-          { text: 'Strategic Alliances', link: '/company/certifications/alliances' },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Services',
-    subcategories: [
-      {
-        category: 'Ocean Freight',
-        items: [
-          { text: 'Full Container Load (FCL)', link: '/services/ocean-freight/fcl' },
-          { text: 'Less Than Container Load (LCL)', link: '/services/ocean-freight/lcl' },
-          { text: 'Breakbulk & Ro-Ro', link: '/services/ocean-freight/breakbulk-ro-ro' },
-        ],
-      },
-      {
-        category: 'Air Freight',
-        items: [
-          { text: 'Express Services', link: '/services/air-freight/express' },
-          { text: 'Charter Services', link: '/services/air-freight/charter' },
-          { text: 'Temperature-Controlled', link: '/services/air-freight/temperature-controlled' },
-        ],
-      },
-      {
-        category: 'Door To Door Shipments',
-        items: [
-          { text: 'Trucking, Barge & Rail Distribution', link: '/services/door-to-door/trucking' },
-          { text: 'First-Mile Transport', link: '/services/door-to-door/first-mile' },
-          { text: 'Last-Mile Delivery', link: '/services/door-to-door/last-mile' },
-        ],
-      },
-      {
-        category: 'Warehousing & Distribution',
-        items: [
-          { text: 'Storage Solutions', link: '/services/warehousing/storage' },
-          { text: 'Inventory Management', link: '/services/warehousing/inventory' },
-          { text: 'Order Fulfillment', link: '/services/warehousing/fulfillment' },
-          { text: 'Cross-Docking', link: '/services/warehousing/cross-docking' },
-        ],
-      },
-      {
-        category: 'Customs Brokerage Consultancy',
-        items: [
-          { text: 'Heavy Lift & Oversized', link: '/services/customs/heavy-lift' },
-          { text: 'Turnkey Projects', link: '/services/customs/turnkey-projects' },
-          { text: 'Route Planning', link: '/services/customs/route-planning' },
-        ],
-      },
-      {
-        category: 'IT Enabled Logistics',
-        items: [
-          { text: 'Import/Export Clearance', link: '/services/it-logistics/clearance' },
-          { text: 'Compliance & Documentation', link: '/services/it-logistics/compliance' },
-          { text: 'Duty Management', link: '/services/it-logistics/duty-management' },
-        ],
-      },
-      {
-        category: 'Sustainable Logistics',
-        items: [
-          { text: 'Integrated Solutions', link: '/services/sustainable/integrated' },
-          { text: 'Cost-Effective Options', link: '/services/sustainable/cost-effective' },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Solutions',
-    subcategories: [
-      {
-        category: 'Ocean Freight',
-        items: [
-          { text: 'Full Container Load (FCL)', link: '/solutions/ocean-freight/fcl' },
-          { text: 'Less Than Container Load (LCL)', link: '/solutions/ocean-freight/lcl' },
-          { text: 'Breakbulk & Ro-Ro', link: '/solutions/ocean-freight/breakbulk-ro-ro' },
-        ],
-      },
-      {
-        category: 'Air Freight',
-        items: [
-          { text: 'Express Services', link: '/solutions/air-freight/express' },
-          { text: 'Charter Services', link: '/solutions/air-freight/charter' },
-          { text: 'Temperature-Controlled', link: '/solutions/air-freight/temperature-controlled' },
-        ],
-      },
-      {
-        category: 'Door To Door Shipments',
-        items: [
-          { text: 'Trucking, Barge & Rail Distribution', link: '/solutions/door-to-door/trucking' },
-          { text: 'First-Mile Transport', link: '/solutions/door-to-door/first-mile' },
-          { text: 'Last-Mile Delivery', link: '/solutions/door-to-door/last-mile' },
-        ],
-      },
-      {
-        category: 'Warehousing & Distribution',
-        items: [
-          { text: 'Storage Solutions', link: '/solutions/warehousing/storage' },
-          { text: 'Inventory Management', link: '/solutions/warehousing/inventory' },
-          { text: 'Order Fulfillment', link: '/solutions/warehousing/fulfillment' },
-          { text: 'Cross-Docking', link: '/solutions/warehousing/cross-docking' },
-        ],
-      },
-      {
-        category: 'Customs Brokerage Consultancy',
-        items: [
-          { text: 'Heavy Lift & Oversized', link: '/solutions/customs/heavy-lift' },
-          { text: 'Turnkey Projects', link: '/solutions/customs/turnkey-projects' },
-          { text: 'Route Planning', link: '/solutions/customs/route-planning' },
-        ],
-      },
-      {
-        category: 'IT Enabled Logistics',
-        items: [
-          { text: 'Import/Export Clearance', link: '/solutions/it-logistics/clearance' },
-          { text: 'Compliance & Documentation', link: '/solutions/it-logistics/compliance' },
-          { text: 'Duty Management', link: '/solutions/it-logistics/duty-management' },
-        ],
-      },
-      {
-        category: 'Sustainable Logistics',
-        items: [
-          { text: 'Integrated Solutions', link: '/solutions/sustainable/integrated' },
-          { text: 'Cost-Effective Options', link: '/solutions/sustainable/cost-effective' },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Technology',
-    subcategories: [
-      { text: 'Tracking System', link: '/technology/tracking-system' },
-      { text: 'Automation', link: '/technology/automation' },
-      { text: 'AI Solutions', link: '/technology/ai-solutions' },
-      { text: 'Data Analytics', link: '/technology/data-analytics' },
-    ],
-  },
-  {
-    title: 'Quality & Sustainability',
-    subcategories: [
-      { text: 'Certifications', link: '/quality-sustainability/certifications' },
-      { text: 'Green Logistics', link: '/quality-sustainability/green-logistics' },
-      { text: 'Safety Standards', link: '/quality-sustainability/safety-standards' },
-      { text: 'Compliance', link: '/quality-sustainability/compliance' },
-    ],
-  },
-  {
-    title: 'Careers',
-    subcategories: [
-      { text: 'Job Openings', link: '/careers/job-openings' },
-      { text: 'Benefits', link: '/careers/benefits' },
-      { text: 'Culture', link: '/careers/culture' },
-      { text: 'Apply Now', link: '/careers/apply-now' },
-    ],
-  },
-  {
-    title: 'Support',
-    subcategories: [
-      { text: 'FAQ', link: '/support/faq' },
-      { text: 'Customer Service', link: '/support/customer-service' },
-      { text: 'Technical Support', link: '/support/technical-support' },
-      { text: 'Feedback', link: '/support/feedback' },
-    ],
-  },
-  {
-    title: 'My Blackbox Freight',
-    subcategories: [
-      { text: 'Dashboard', link: '/my-blackbox-freight/dashboard' },
-      { text: 'Shipments', link: '/my-blackbox-freight/shipments' },
-      { text: 'Invoices', link: '/my-blackbox-freight/invoices' },
-      { text: 'Settings', link: '/my-blackbox-freight/settings' },
-    ],
-  },
-  {
-    title: 'Resources',
-    subcategories: [
-      { text: 'Blog', link: '/resources/blog' },
-      { text: 'Whitepapers', link: '/resources/whitepapers' },
-      { text: 'Guides', link: '/resources/guides' },
-      { text: 'Case Studies', link: '/resources/case-studies' },
-    ],
-  },
-];
-
-// Styled components
 const NavBar = styled('div')(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
@@ -257,11 +36,12 @@ const NavItem = styled('div', {
   padding: theme.spacing(0.5, 1),
 }));
 
-const NavLink = styled(Typography)(({ theme }) => ({
-  fontSize: "14px !important",
+const NavLink = styled(MuiLink)(({ theme }) => ({
+  fontSize: '14px !important',
   fontWeight: 600,
   cursor: 'pointer',
   color: theme.palette.text.primary,
+  textDecoration: 'none',
   '&:hover': {
     color: theme.palette.primary.main,
   },
@@ -306,11 +86,15 @@ const SubMenuCategory = styled(Box)(({ theme }) => ({
   minWidth: '200px',
 }));
 
-const SubMenuCategoryTitle = styled(Typography)(({ theme }) => ({
+const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
   fontSize: 16,
   fontWeight: 700,
   color: '#003087',
   marginBottom: theme.spacing(1),
+  textDecoration: 'none',
+  '&:hover': {
+    color: theme.palette.primary.main,
+  },
 }));
 
 const SubMenuItem = styled(MuiLink)(({ theme }) => ({
@@ -323,8 +107,6 @@ const SubMenuItem = styled(MuiLink)(({ theme }) => ({
     color: theme.palette.primary.main,
   },
 }));
-
-// ----------------------------------------------------------------------
 
 export type HeaderSectionProps = AppBarProps & {
   layoutQuery?: Breakpoint;
@@ -341,7 +123,17 @@ export type HeaderSectionProps = AppBarProps & {
     container?: ContainerProps;
     centerArea?: React.ComponentProps<'div'> & { sx?: SxProps<Theme> };
   };
+  data: MenuItem[];
 };
+
+interface MenuItem {
+  id: string;
+  label: string;
+  url: string;
+  childItems?: {
+    nodes: MenuItem[];
+  };
+}
 
 export function HeaderSection({
   sx,
@@ -351,35 +143,34 @@ export function HeaderSection({
   disableOffset,
   disableElevation,
   layoutQuery = 'md',
+  data,
   ...other
 }: HeaderSectionProps) {
   const { offsetTop: isOffset } = useScrollOffsetTop();
   const theme = useTheme();
 
-  // State to track which nav item's submenu is open
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
-  // Function to handle mouse enter
-  const handleMouseEnter = (title: string) => {
-    setOpenSubmenu(title);
+  const handleMouseEnter = (label: string) => {
+    setOpenSubmenu(label);
   };
 
-  // Function to handle mouse leave
   const handleMouseLeave = () => {
     setOpenSubmenu(null);
   };
 
-  // Function to render subcategories
-  
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderSubcategories = (subcategories: any[]) => {
-    if (typeof subcategories[0] === 'object' && 'text' in subcategories[0]) {
+  const renderSubcategories = (subcategories: MenuItem[]) => {
+    const hasNestedItems = subcategories.some(
+      (subItem) => subItem.childItems?.nodes && subItem.childItems.nodes.length > 0
+    );
+
+    if (!hasNestedItems) {
       return (
         <SubMenuContent>
           <SubMenuCategory>
-            {subcategories.map((subItem: { text: string; link: string }) => (
-              <SubMenuItem key={subItem.text} href={subItem.link}>
-                {subItem.text}
+            {subcategories.map((subItem) => (
+              <SubMenuItem key={subItem.id} href={subItem.url !== '#' ? subItem.url : undefined}>
+                {subItem.label}
               </SubMenuItem>
             ))}
           </SubMenuCategory>
@@ -389,13 +180,14 @@ export function HeaderSection({
 
     return (
       <SubMenuContent>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {subcategories.map((category: any) => (
-          <SubMenuCategory key={category.category}>
-            <SubMenuCategoryTitle>{category.category}</SubMenuCategoryTitle>
-            {category.items.map((item: { text: string; link: string }) => (
-              <SubMenuItem key={item.text} href={item.link}>
-                {item.text}
+        {subcategories.map((category) => (
+          <SubMenuCategory key={category.id}>
+            <SubMenuCategoryTitle href={category.url !== '#' ? category.url : undefined}>
+              {category.label}
+            </SubMenuCategoryTitle>
+            {category.childItems?.nodes.map((item) => (
+              <SubMenuItem key={item.id} href={item.url !== '#' ? item.url : undefined}>
+                {item.label}
               </SubMenuItem>
             ))}
           </SubMenuCategory>
@@ -417,7 +209,7 @@ export function HeaderSection({
           ...(isOffset && {
             '--color': `var(--offset-color, ${theme.vars.palette.text.primary})`,
           }),
-          bgcolor: "white",
+          bgcolor: 'white',
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -428,27 +220,36 @@ export function HeaderSection({
       <HeaderContainer maxWidth="lg">
         {slots?.leftArea}
 
-        <Stack width={"100%"} sx={{ mr: 1, ml: -1, [theme.breakpoints.down(layoutQuery)]: { display: 'none' } }}>
-          <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} sx={{ height: "100%" }}>
+        <Stack
+          width="100%"
+          sx={{ mr: 1, ml: -1, [theme.breakpoints.down(layoutQuery)]: { display: 'none' } }}
+        >
+          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: '100%' }}>
             <Stack>
-              <Logo href={logo} sx={{ height: "107px", width: "107px" }} />
+              <Logo href={logo} sx={{ height: '107px', width: '107px' }} />
             </Stack>
 
-            <Stack spacing={1} alignItems={"flex-end"} sx={{ height: "100%" }}>
+            <Stack spacing={1} alignItems="flex-end" sx={{ height: '100%' }}>
               <Box sx={{ display: 'flex', gap: 1, ml: 'auto' }}>
                 <IconButton size="small" sx={{ border: '1px solid #ccc', borderRadius: 1 }}>
                   <SearchIcon fontSize="small" />
-                  <Typography variant="body2" sx={{ ml: 0.5 }}>Search</Typography>
+                  <Typography variant="body2" sx={{ ml: 0.5 }}>
+                    Search
+                  </Typography>
                 </IconButton>
 
                 <IconButton size="small" sx={{ border: '1px solid #ccc', borderRadius: 1 }}>
                   <LocationOnIcon fontSize="small" />
-                  <Typography variant="body2" sx={{ ml: 0.5 }}>Tracking</Typography>
+                  <Typography variant="body2" sx={{ ml: 0.5 }}>
+                    Tracking
+                  </Typography>
                 </IconButton>
 
                 <IconButton size="small" sx={{ border: '1px solid #ccc', borderRadius: 1 }}>
                   <AccountTreeIcon fontSize="small" />
-                  <Typography variant="body2" sx={{ ml: 0.5 }}>My BBX</Typography>
+                  <Typography variant="body2" sx={{ ml: 0.5 }}>
+                    My BBX
+                  </Typography>
                 </IconButton>
 
                 <Button
@@ -462,48 +263,48 @@ export function HeaderSection({
                 </Button>
               </Box>
 
-              <Divider sx={{ width: "100%", borderBottomWidth: 1, borderColor: "rgba(109, 110, 113, 1)" }} />
+              <Divider
+                sx={{ width: '100%', borderBottomWidth: 1, borderColor: 'rgba(109, 110, 113, 1)' }}
+              />
 
               <NavBar>
-                {navItems.map((item, index) => (
-                  <div
-                    style={{ paddingBottom: "15px" }}
-                    onMouseEnter={() => handleMouseEnter(item.title)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <NavItem
-                      key={item.title}
-                      isLastItem={index >= navItems.length - 3}
+                {data.length === 0 ? (
+                  <></>
+                ) : (
+                  data.map((item, index) => (
+                    <div
+                      key={item.id}
+                      style={{ paddingBottom: '15px' }}
+                      onMouseEnter={() => (item?.childItems?.nodes?.length ?? 0) > 0 && handleMouseEnter(item.label)}
+                      onMouseLeave={() => (item?.childItems?.nodes?.length ?? 0) > 0 && handleMouseLeave()}
                     >
-                      <NavLink>{item.title}</NavLink>
-                    </NavItem>
-                    {item.subcategories.length > 0 && (
-                      <SubMenu
-                        isOpen={openSubmenu === item.title}
-                        isLastItem={index >= navItems.length - 2}
-                      >
-                        {renderSubcategories(item.subcategories)}
-                      </SubMenu>
-                    )}
-                  </div>
-                ))}
+                      <NavItem isLastItem={index >= data.length - 3}>
+                        <NavLink href={item.url !== '#' ? item.url : undefined}>
+                          {item.label}
+                        </NavLink>
+                      </NavItem>
+                      {item.childItems?.nodes && item.childItems.nodes.length > 0 && (
+                        <SubMenu
+                          isOpen={openSubmenu === item.label}
+                          isLastItem={index >= data.length - 2}
+                        >
+                          {renderSubcategories(item.childItems.nodes)}
+                        </SubMenu>
+                      )}
+                    </div>
+                  ))
+                )}
               </NavBar>
             </Stack>
           </Stack>
         </Stack>
         <HeaderCenterArea {...slotProps?.centerArea}>{slots?.centerArea}</HeaderCenterArea>
 
-
         {slots?.rightArea}
       </HeaderContainer>
     </HeaderRoot>
   );
 }
-
-
-
-
-// ----------------------------------------------------------------------
 
 type HeaderRootProps = Pick<HeaderSectionProps, 'disableOffset' | 'disableElevation'> & {
   isOffset: boolean;
@@ -535,7 +336,7 @@ const HeaderRoot = styled(AppBar, {
     zIndex: pauseZindex.top,
     backdropFilter: 'blur(6px)',
     WebkitBackdropFilter: 'blur(6px)',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     ...(isOffset && {
       opacity: 1,
       visibility: 'visible',
@@ -574,7 +375,6 @@ const HeaderContainer = styled(Container, {
   padding: theme.spacing(2, 2),
   [theme.breakpoints.up(layoutQuery)]: { height: 'var(--layout-header-desktop-height)' },
 }));
-
 
 const HeaderCenterArea = styled('div')(() => ({
   display: 'flex',

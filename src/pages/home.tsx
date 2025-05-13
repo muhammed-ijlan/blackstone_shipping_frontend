@@ -10,13 +10,13 @@ import WhatWeOffer from 'src/sections/home/WhatWeOffer'
 const Page = () => {
   return (
     <div>
-      {/* <HomeBanner/> */}
-      {/* <WhatWeOffer/> */}
-      {/* <IndustryCoverage/> */}
-      {/* <Serivces/> */}
-      {/* <Sustainablity/> */}
-      {/* <Testimonial/> */}
-      {/* <Contact/> */}
+      <HomeBanner/>
+      <WhatWeOffer/>
+      <IndustryCoverage/>
+      <Serivces/>
+      <Sustainablity/>
+      <Testimonial/>
+      <Contact/>
     </div>
   )
 }

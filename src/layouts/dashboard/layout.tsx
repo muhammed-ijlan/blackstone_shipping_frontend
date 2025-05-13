@@ -22,6 +22,8 @@ import Footer from 'src/sections/footer/Footer';
 import { Box, Stack } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
 import logo from "src/assets/logo/navlogo.png"
+import { useQuery } from '@apollo/client';
+import { GET_HEADER_MENU } from 'src/graphql/queries';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +37,23 @@ export type DashboardLayoutProps = LayoutBaseProps & {
   };
 };
 
+interface MenuItem {
+  id: string;
+  label: string;
+  url: string;
+  childItems?: {
+    nodes: MenuItem[];
+  };
+}
+
+ interface GetHeaderMenuData {
+  menu: {
+    menuItems: {
+      nodes: MenuItem[];
+    };
+  };
+}
+
 export function DashboardLayout({
   sx,
   cssVars,
@@ -43,6 +62,8 @@ export function DashboardLayout({
   layoutQuery = 'lg',
 }: DashboardLayoutProps) {
   const theme = useTheme();
+  const {data,loading,error}  = useQuery<GetHeaderMenuData>(GET_HEADER_MENU);
+
 
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
 
@@ -85,6 +106,7 @@ export function DashboardLayout({
         slots={{ ...headerSlots, ...slotProps?.header?.slots }}
         slotProps={merge(headerSlotProps, slotProps?.header?.slotProps ?? {})}
         sx={slotProps?.header?.sx}
+        data={data?.menu.menuItems.nodes ?? []}
       />
     );
   };
@@ -103,7 +125,7 @@ export function DashboardLayout({
       /** **************************************
        * @Footer
        *************************************** */
-      // footerSection={renderFooter()}
+      footerSection={renderFooter()}
       /** **************************************
        * @Styles
        *************************************** */
