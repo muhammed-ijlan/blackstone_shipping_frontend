@@ -27,7 +27,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <Stack color={"white"} sx={{ background: "rgba(26, 32, 44, 1)" }}>
-      <Container maxWidth="lg" sx={{ p: 3 }}>
+      <Container maxWidth="xl" sx={{ p: 3 }}>
         <Stack gap={2}>
           <Stack
             alignItems={"center"}

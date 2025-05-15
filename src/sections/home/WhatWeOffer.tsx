@@ -1,9 +1,12 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import CustomSlider from "src/components/customSlider/CustomSlider";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { useQuery } from "@apollo/client";
 import { GET_WHAT_WE_OFFER } from "src/graphql/queries";
+import CustomSlider2 from "src/components/customSlider/CustomSlider2";
+import SliderButton2 from "src/components/customSlider/SliderButton2";
+import CustomArrowButton from "src/components/CustomArrowButton";
 
 export interface GetWhatWeOfferData {
   page: {
@@ -27,6 +30,7 @@ export interface GetWhatWeOfferData {
 }
 
 const WhatWeOffer = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { data, loading, error } =
     useQuery<GetWhatWeOfferData>(GET_WHAT_WE_OFFER);
 
@@ -37,15 +41,21 @@ const WhatWeOffer = () => {
   const offers = data?.whatWeOffers?.nodes || [];
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl" sx={{ pb: 5 }}>
       <SectionHead
         title={headingData?.whatWeOffersubHeading || ""}
         subTitle={
           headingData?.whatWeOfferMainHeading?.replace(/\r\n/g, " ") || ""
         }
       />
+      <Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"} mb={3} gap={3}>
+        <Stack>
+          <SliderButton2 scrollRef={scrollRef} />
+        </Stack>
+        <CustomArrowButton name="View More"/>
+      </Stack>
 
-      <CustomSlider>
+      <CustomSlider2 scrollRef={scrollRef}>
         {offers.map((card, index) => (
           <Stack
             key={index}
@@ -56,7 +66,7 @@ const WhatWeOffer = () => {
               maxWidth: "400px",
               borderRadius: "5px",
               mb: 3,
-              height:"auto"
+              height: "auto",
             }}
           >
             <Typography
@@ -79,7 +89,7 @@ const WhatWeOffer = () => {
             />
           </Stack>
         ))}
-      </CustomSlider>
+      </CustomSlider2>
     </Container>
   );
 };

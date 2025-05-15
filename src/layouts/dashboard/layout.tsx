@@ -80,9 +80,8 @@ export function DashboardLayout({
       <Box component={"img"} sx={{[theme.breakpoints.up(layoutQuery)]: { display: 'none' }}} width={"70px"} src={logo} />
       ),
 
-
       rightArea: (
-        <Stack alignItems={"flex-end"}>
+        <Stack alignItems={"flex-end"} sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } }}>
           {/** @slot Nav mobile */}
           <Iconify width={30}  icon={"heroicons-outline:menu-alt-1"}  onClick={onOpen}
             sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } ,color:"redrgba(45, 55, 72, 1)"}}/>
@@ -95,7 +94,6 @@ export function DashboardLayout({
             open={open} onClose={onClose} workspaces={_workspaces} />
         </Stack>
       ),
-
     };
 
     return (
@@ -141,6 +139,7 @@ export function DashboardLayout({
               }),
             },
           },
+         
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

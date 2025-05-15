@@ -19,7 +19,7 @@ const MuiBackdrop: Components<Theme>['MuiBackdrop'] = {
 
 const MuiContainer: Components<Theme>['MuiContainer'] = {
   defaultProps: {
-    maxWidth: 'lg', 
+    maxWidth: 'xl', 
   },
   styleOverrides: {
     maxWidthXs: {
@@ -46,10 +46,43 @@ const MuiContainer: Components<Theme>['MuiContainer'] = {
         maxWidth: '1300px',
       },
     },
-    maxWidthXl: {
-      maxWidth: '1440px',
-      '@media (min-width: 1536px)': {
-        maxWidth: '1440px',
+   maxWidthXl: {
+      width: '100%',
+      maxWidth: '100%', 
+      
+      // Extra small mobiles (≤ 360px)
+      '@media (max-width: 360px)': {
+        maxWidth: '320px',
+      },
+
+      // Small mobiles (361px–599px)
+      '@media (min-width: 361px) and (max-width: 599px)': {
+        maxWidth: '360px',
+      },
+
+      // Tablets / Small Devices (600px–899px)
+      '@media (min-width: 600px) and (max-width: 899px)': {
+        maxWidth: '540px',
+      },
+
+      // Medium Devices / Tablets (900px–1199px)
+      '@media (min-width: 900px) and (max-width: 1199px)': {
+        maxWidth: '720px',
+      },
+
+      // Large Devices / Desktops (1200px–1535px)
+      '@media (min-width: 1200px) and (max-width: 1535px)': {
+        maxWidth: '1200px',
+      },
+
+      // Extra Large Devices / Monitors (1536px–2499px)
+      '@media (min-width: 1536px) and (max-width: 2499px)': {
+        maxWidth: '1320px',
+      },
+
+      // Ultra-wide Screens (≥ 2500px)
+      '@media (min-width: 2500px)': {
+        maxWidth: '1600px',
       },
     },
   },

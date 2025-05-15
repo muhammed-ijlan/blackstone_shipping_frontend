@@ -3,6 +3,7 @@ import ServiceCard from 'src/components/home/ServiceCard';
 import SectionHead from 'src/components/sectionHead/SectionHead';
 import { useQuery } from '@apollo/client';
 import { GET_SERVICES } from 'src/graphql/queries';
+import CustomArrowButton from 'src/components/CustomArrowButton';
 
 export interface ServiceItem {
   title: string;
@@ -38,7 +39,7 @@ const Serivces = () => {
   const services = data?.services?.nodes || [];
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Stack mb={5}>
         <SectionHead title={heading} />
 
@@ -57,7 +58,7 @@ const Serivces = () => {
         </Grid>
 
         <Stack alignItems="center">
-          <Button size="large" variant="outlined">Explore More</Button>
+         <CustomArrowButton name='Explore More'/>
         </Stack>
       </Stack>
     </Container>

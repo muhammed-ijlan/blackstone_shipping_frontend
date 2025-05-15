@@ -44,7 +44,7 @@ const IndustryCoverage = () => {
         background: "linear-gradient(114.75deg, #242E40 100%, #343D4D 0%)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <SectionHead
           title={data?.page?.homePageFieldsIndustryCoverage?.industryCoverageMainHeading || "INDUSTRY COVERAGE"}
           color="white"

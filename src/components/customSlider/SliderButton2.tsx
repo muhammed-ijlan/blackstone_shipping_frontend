@@ -7,7 +7,7 @@ interface SliderButton2Props {
   scrollAmount?: number;
 }
 
-const SliderButton2: React.FC<SliderButton2Props> = ({ scrollRef, scrollAmount = 300 }) => {
+const SliderButton2: React.FC<SliderButton2Props> = ({ scrollRef, scrollAmount = 1000 }) => {
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const amount = direction === "left" ? -scrollAmount : scrollAmount;

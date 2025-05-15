@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import React from "react";
+import CustomArrowButton from "src/components/CustomArrowButton";
 import CustomSlider from "src/components/customSlider/CustomSlider";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { GET_SUSTAINABILITY } from "src/graphql/queries";
@@ -58,7 +59,7 @@ const Sustainability = () => {
         pb: 5,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <SectionHead
           title={heading.sustainabilityCommitmentSubHeading}
           subTitle={heading.sustainabilityCommitmentMainHeading}
@@ -109,9 +110,7 @@ const Sustainability = () => {
         </CustomSlider>
 
         <Stack alignItems="center">
-          <Button size="large" variant="outlined">
-            Explore More
-          </Button>
+         <CustomArrowButton name="Explore More"/>
         </Stack>
       </Container>
     </Stack>

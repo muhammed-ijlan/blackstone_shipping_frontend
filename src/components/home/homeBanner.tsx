@@ -57,12 +57,13 @@ const HomeBanner :React.FC = () => {
       infiniteLoop={true}
       showThumbs={false}
       useKeyboardArrows={true}
-      autoPlay={true}
+      autoPlay={false}
       stopOnHover={true}
       swipeable={true}
-      dynamicHeight={true}
+      dynamicHeight={false}
       emulateTouch={true}
       autoFocus={true}
+      
     >
     
       {data?.sliders.nodes.map((slide, index) => (
@@ -75,11 +76,40 @@ const HomeBanner :React.FC = () => {
         unselectable="on"
         onMouseDown={(e) => e.preventDefault()}
         >
-          <img
+          {/* <img
             src={slide.featuredImage.node.sourceUrl}
             alt="Banner"
             style={{ objectFit: "cover", height: "600px",filter: "brightness(60%)", }}
-          />
+          /> */}
+
+          <Stack
+  sx={{
+    position: "relative",
+    width: "110vw",
+    height: { xs: "300px", md: "600px" }, // Responsive height
+    overflow: "hidden",
+    objectFit: "cover",
+  }}
+>
+  <iframe
+    src="https://www.youtube.com/embed/Lh5u7GOXvxc?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=Lh5u7GOXvxc"
+    title="Banner Video"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+    referrerPolicy="strict-origin-when-cross-origin"
+    style={{
+      position: "absolute",
+      top: "-25%",       // Vertically center & crop
+      left: 0,
+      width: "100vw",
+      height: "150%",    // Simulates object-fit: cover
+      pointerEvents: "none",
+      objectFit: "cover",
+    }}
+  ></iframe>
+</Stack>
+
 
           <Stack
             width={"600px"}

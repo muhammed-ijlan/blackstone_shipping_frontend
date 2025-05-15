@@ -4,7 +4,7 @@ import SectionHead from "src/components/sectionHead/SectionHead";
 
 const Contact = () => {
   return (
-    <Container maxWidth="lg" sx={{mb:10}}>
+    <Container maxWidth="xl" sx={{mb:10}}>
       <Stack direction={"row"} gap={8}>
         <SectionHead
           title="Contact  Us  "
@@ -24,7 +24,7 @@ const Contact = () => {
               <TextField variant="outlined" label="Phone Number" size="medium" fullWidth />
             </Grid>
             <Grid size={{ xs: 12, md: 12 }}>
-              <TextField variant="outlined" label="Message" size="medium" fullWidth />
+              <TextField multiline minRows={3} variant="outlined" label="Message" size="medium" fullWidth />
             </Grid>
             <Grid size={{ xs: 12, md: 12 }}>
               <Button size="large" fullWidth variant="contained">Submit</Button>
