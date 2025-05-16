@@ -9,7 +9,7 @@ import quote from "src/assets/icons/testimonial.png";
 import { GET_TESTIMONIALS } from "src/graphql/queries";
 import SliderProgress from "src/components/customSlider/SliderProgress";
 
-export interface TestimonialNode {
+ interface TestimonialNode {
   title: string;
   featuredImage: {
     node: {
@@ -23,7 +23,7 @@ export interface TestimonialNode {
   };
 }
 
-export interface TestimonialsData {
+ interface TestimonialsData {
   page: {
     title: string;
     homePageFieldsTestimonials: {
@@ -37,7 +37,7 @@ export interface TestimonialsData {
 }
 
 const Testimonial = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data, loading, error } = useQuery<TestimonialsData>(GET_TESTIMONIALS);

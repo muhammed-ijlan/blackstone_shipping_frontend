@@ -52,7 +52,7 @@ const IndustryCoverage = () => {
 
         <Grid container  rowGap={6} my={5} alignItems={"center"} justifyContent={"space-between"}>
           {data?.industries?.nodes?.map((item, index) => (
-            <Grid item xs={6} md={4} key={index}>
+            <Grid  key={index}>
               <IndustryCoverageCard item={item} />
             </Grid>
           ))}

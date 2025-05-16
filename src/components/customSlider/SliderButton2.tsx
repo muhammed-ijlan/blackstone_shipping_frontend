@@ -4,7 +4,7 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Iconify } from "../iconify";
 
 interface SliderButton2Props {
-  scrollRef: RefObject<HTMLDivElement>;
+  scrollRef: React.RefObject<HTMLDivElement | null>;
   scrollAmount?: number;
 }
 

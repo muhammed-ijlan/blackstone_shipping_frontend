@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Stack } from '@mui/material';
+import { Button, Container, Stack,Grid } from '@mui/material';
 import ServiceCard from 'src/components/home/ServiceCard';
 import SectionHead from 'src/components/sectionHead/SectionHead';
 import { useQuery } from '@apollo/client';
@@ -45,7 +45,7 @@ const Serivces = () => {
 
         <Grid container rowGap={4} mb={5} alignItems={"left"} justifyContent={"space-around"} sx={{height: "auto" }} >
           {services.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index} sx={{height: "auto !important"}}>
+            <Grid >
               <ServiceCard
                 item={{
                   title: item.title,

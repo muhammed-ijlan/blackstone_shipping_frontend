@@ -30,7 +30,7 @@ export interface GetWhatWeOfferData {
 }
 
 const WhatWeOffer = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const { data, loading, error } =
     useQuery<GetWhatWeOfferData>(GET_WHAT_WE_OFFER);
 
