@@ -1,6 +1,7 @@
 import React, { useRef, ReactNode } from "react";
 import { Box, IconButton, Stack } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { Iconify } from "../iconify";
 
 interface CustomSliderProps {
   children: ReactNode;
@@ -26,24 +27,26 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
     <Stack spacing={2}>
       <Stack direction="row" justifyContent="flex-end" gap={1}>
         <IconButton
+          size="large"
           onClick={() => scroll("left")}
-          sx={{
-            border: "1px solid black",
-            backgroundColor: "#fff",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-          }}
+          sx={{ border: "1px solid rgba(109, 110, 113, 0.1)" }}
         >
-          <ArrowBack />
+          <Iconify
+            icon={"icon-park-outline:arrow-left"}
+            width={"25px"}
+            color="rgba(26, 86, 219, 1)"
+          />
         </IconButton>
         <IconButton
+          size="large"
           onClick={() => scroll("right")}
-          sx={{
-            border: "1px solid black",
-            backgroundColor: "#fff",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-          }}
+          sx={{ border: "1px solid rgba(109, 110, 113, 0.1)" }}
         >
-          <ArrowForward />
+          <Iconify
+            icon={"icon-park-outline:arrow-right"}
+            width={"25px"}
+            color="rgba(26, 86, 219, 1)"
+          />
         </IconButton>
       </Stack>
 

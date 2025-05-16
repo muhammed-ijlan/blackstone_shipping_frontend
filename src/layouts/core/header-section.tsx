@@ -188,7 +188,7 @@ export function HeaderSection({
             {subcategories.map((subItem) => (
               <SubMenuItem
                 key={subItem.id}
-                href={subItem.url !== "#" ? subItem.url : undefined}
+                href={subItem.url !== "#" ? subItem.url: undefined}
               >
                 {subItem.label}
               </SubMenuItem>
@@ -369,7 +369,7 @@ export function HeaderSection({
                       }
                     >
                       <NavItem isLastItem={index >= data.length - 3}>
-                        <NavLink href={item.url !== "#" ? item.url : undefined}>
+                        <NavLink href={item.url !== "#" ? item.url.split("/")[length-1] : undefined}>
                           {item.label}
                         </NavLink>
                       </NavItem>

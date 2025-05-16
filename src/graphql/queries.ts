@@ -177,3 +177,47 @@ export const GET_TESTIMONIALS = gql`
     }
   }
 `;
+
+export const GET_COMPANY_BANNER = gql`
+query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+    }
+  }
+}
+`;
+
+export const GET_COMPANY_ABOUT = gql`
+  query GetCompanyPage {
+    page(id: "company", idType: URI) {
+      companyPageAboutSection {
+        aboutUsImage {
+          node {
+            sourceUrl
+          }
+        }
+        aboutUsTitle
+        aboutUsContent
+      }
+    }
+  }
+`;
+
+
+export const GET_COMPANY_HISTORY = gql`
+  query GetCompanyHistorySection {
+  page(id: "company", idType: URI) {
+    companyPageHistorySection {
+      historySectionMainTitle
+      historySectionSubTitle
+      historySectionContent
+    }
+  }
+}
+`;

@@ -47,10 +47,10 @@ const IndustryCoverage = () => {
       <Container maxWidth="xl">
         <SectionHead
           title={data?.page?.homePageFieldsIndustryCoverage?.industryCoverageMainHeading || "INDUSTRY COVERAGE"}
-          color="white"
+          titleColor="white"
         />
 
-        <Grid container  rowGap={6} my={5} alignItems={"center"} justifyContent={"space-around"}>
+        <Grid container  rowGap={6} my={5} alignItems={"center"} justifyContent={"space-between"}>
           {data?.industries?.nodes?.map((item, index) => (
             <Grid item xs={6} md={4} key={index}>
               <IndustryCoverageCard item={item} />

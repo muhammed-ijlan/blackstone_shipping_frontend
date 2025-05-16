@@ -63,7 +63,8 @@ const Sustainability = () => {
         <SectionHead
           title={heading.sustainabilityCommitmentSubHeading}
           subTitle={heading.sustainabilityCommitmentMainHeading}
-          color="rgba(109, 110, 113, 1)"
+          titleColor="rgba(26, 32, 44, 1)"
+          subTitleColor="rgba(109, 110, 113, 1)"
         />
 
         <CustomSlider>
@@ -77,7 +78,7 @@ const Sustainability = () => {
                 maxWidth: "400px",
                 borderRadius: "5px",
                 mb: 3,
-                height: "100%",
+                height: "auto",
                 bgcolor: "white",
                 p: 3,
               }}
@@ -110,7 +111,7 @@ const Sustainability = () => {
         </CustomSlider>
 
         <Stack alignItems="center">
-         <CustomArrowButton name="Explore More"/>
+         <CustomArrowButton name="Explore More" sx={{py:"12px",px:"24px"}}/>
         </Stack>
       </Container>
     </Stack>

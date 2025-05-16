@@ -48,19 +48,18 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 /* BANNER HOME */
-.control-dots{
+/* .control-dots{
   display: flex;
   justify-content: right;
   align-items: center;
   margin-bottom: 100px !important;
   padding-right: 100px !important;
-  /* transform: translateX(-50%);  */
   text-align: right;
   display: flex;
   gap: 0px !important;
   z-index: 1;
-}
-.control-dots .dot {
+} */
+/* .control-dots .dot {
   width: 12px !important;
   height: 5px !important;
   border-radius: 8px !important;
@@ -68,11 +67,12 @@ input[type='number']::-webkit-inner-spin-button {
   opacity: 0.5;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
+  display: none !important;
 }
 .control-dots .dot.selected {
   opacity: 1;
   width: 80px !important;
-}
+} */
 
 .carousel .slide iframe {
 margin:  0 !important;

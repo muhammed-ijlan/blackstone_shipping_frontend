@@ -25,7 +25,7 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
       onMouseLeave={() => setIsFlipped(false)}
       style={{ width: '320px', height: '200px' }}
     >
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedBackToFront={1} flipSpeedFrontToBack={1}>
         {/* Front Side */}
         <Stack
           p={3}

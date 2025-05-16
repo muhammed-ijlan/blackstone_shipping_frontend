@@ -47,12 +47,14 @@ const WhatWeOffer = () => {
         subTitle={
           headingData?.whatWeOfferMainHeading?.replace(/\r\n/g, " ") || ""
         }
+        titleColor="rgba(33, 52, 72, 1)"
+        subTitleColor="rgba(45, 55, 72, 1)"
       />
       <Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"} mb={3} gap={3}>
         <Stack>
           <SliderButton2 scrollRef={scrollRef} />
         </Stack>
-        <CustomArrowButton name="View More"/>
+        <CustomArrowButton name="View All" sx={{px:"24px",py:"12px"}}/>
       </Stack>
 
       <CustomSlider2 scrollRef={scrollRef}>

@@ -41,11 +41,11 @@ const Serivces = () => {
   return (
     <Container maxWidth="xl">
       <Stack mb={5}>
-        <SectionHead title={heading} />
+        <SectionHead title={heading} titleColor='rgba(26, 32, 44, 1)'/>
 
-        <Grid container rowGap={4} mb={5} alignItems={"center"} justifyContent={"space-around"}>
+        <Grid container rowGap={4} mb={5} alignItems={"left"} justifyContent={"space-around"} sx={{height: "auto" }} >
           {services.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={3} key={index} sx={{height: "auto !important"}}>
               <ServiceCard
                 item={{
                   title: item.title,
@@ -58,7 +58,7 @@ const Serivces = () => {
         </Grid>
 
         <Stack alignItems="center">
-         <CustomArrowButton name='Explore More'/>
+         <CustomArrowButton name='Explore More' sx={{py:"15px",px:"24px"}}/>
         </Stack>
       </Stack>
     </Container>

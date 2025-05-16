@@ -1,9 +1,4 @@
-import {
-  Box,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import React, { useRef, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import DOMPurify from "dompurify";
@@ -79,7 +74,7 @@ const Testimonial = () => {
       sx={{
         width: "100%",
         height: "100%",
-        background: "linear-gradient(114.75deg, #242E40 100%, #343D4D 0%)",
+        background: "rgba(45, 55, 72, 1)",
         pb: 5,
       }}
     >
@@ -88,11 +83,15 @@ const Testimonial = () => {
           <Stack width={"40%"} gap={4} alignItems={"flex-start"}>
             <SectionHead
               title={testimonialsSubHeading}
-              color="white"
+              titleColor="rgba(255, 255, 255, 0.5)"
+              subTitleColor="rgba(249, 250, 251, 1)"
               subTitle={testimonialsMainHeading}
             />
             <SliderButton2 scrollRef={scrollRef} />
-            <SliderProgress currentIndex={currentIndex} totalItems={testimonialsList.length} />
+            <SliderProgress
+              currentIndex={currentIndex}
+              totalItems={testimonialsList.length}
+            />
           </Stack>
 
           <Stack mt={10} width={"60%"}>
@@ -106,7 +105,7 @@ const Testimonial = () => {
                     borderRadius: "8px",
                     p: 4,
                   }}
-                  gap={4}
+                  gap={2}
                   justifyContent={"space-between"}
                 >
                   <Box
@@ -118,6 +117,13 @@ const Testimonial = () => {
                   <Typography
                     variant="subtitle1"
                     fontWeight={400}
+                    sx={{
+                      fontWeight: 500,
+                      fontSize: "16px",
+                      lineHeight: "28px",
+                      letterSpacing: "3%",
+                      textTransform: "capitalize",
+                    }}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(item.content),
                     }}
@@ -135,6 +141,16 @@ const Testimonial = () => {
                     <Stack>
                       <Typography variant="h4" fontWeight={600}>
                         {item.title}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight={400}
+                        color="rgba(249, 250, 251, 0.5)"
+                      >
+                        {
+                          item.testimonialsFieldOptions
+                            .testimonialAuthorDesignation
+                        }
                       </Typography>
                       <Typography
                         variant="subtitle1"
