@@ -1,4 +1,5 @@
 import type { Theme, SxProps } from '@mui/material/styles';
+// @ts-expect-error: Custom module declaration is provided in src/types/simplebar-react.d.ts
 import type { Props as SimplebarProps } from 'simplebar-react';
 
 // ----------------------------------------------------------------------
