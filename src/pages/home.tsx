@@ -9,7 +9,7 @@ import WhatWeOffer from 'src/sections/home/WhatWeOffer'
 
 const Page = () => {
   return (
-    <div>
+    <>
       <HomeBanner/>
       <WhatWeOffer/>
       <IndustryCoverage/>
@@ -17,7 +17,7 @@ const Page = () => {
       <Sustainablity/>
       <Testimonial/>
       <Contact/>
-    </div>
+    </>
   )
 }
 

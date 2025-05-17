@@ -86,11 +86,8 @@ export function DashboardLayout({
           <Iconify width={30}  icon={"heroicons-outline:menu-alt-1"}  onClick={onOpen}
             sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } ,color:"redrgba(45, 55, 72, 1)"}}/>
           <NavMobile data={[
-            {
-              title: 'Dashboard',
-              path: '/',
-              icon: "",
-            },]}
+            
+             ]}
             open={open} onClose={onClose} workspaces={_workspaces} />
         </Stack>
       ),
@@ -123,7 +120,7 @@ export function DashboardLayout({
       /** **************************************
        * @Footer
        *************************************** */
-      footerSection={renderFooter()}
+      // footerSection={renderFooter()}
       /** **************************************
        * @Styles
        *************************************** */

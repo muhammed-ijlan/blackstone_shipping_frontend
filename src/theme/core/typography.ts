@@ -44,84 +44,119 @@ export const typography: TypographyVariantsOptions = {
 
   h1: {
     fontFamily: primaryFont,
-    fontWeight: 800,
-    lineHeight: 1.2,
-    fontSize: scaledPxToRem(40), // original: 40px → reduced: 34px
-    ...responsiveFontSizes({ xs: 34, sm: 44, md: 49, lg: 54 }), // originally: xs: 40, sm: 52, md: 58, lg: 64
+    fontWeight: 700,
+    letterSpacing: '3%',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontSize: pxToRem(32),
+    lineHeight: pxToRem(40),
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: pxToRem(48),
+      lineHeight: pxToRem(56),
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(64),
+      lineHeight: pxToRem(74),
+      textAlign: 'left',
+    },
   },
+
   h2: {
     fontFamily: primaryFont,
-    fontWeight: 800,
-    lineHeight: 1.3,
-    fontSize: scaledPxToRem(32), // original: 32px → reduced: 27px
-    ...responsiveFontSizes({ xs: 27, sm: 31, md: 34, lg: 37 }), // originally: 32, 36, 40, 44
+    fontWeight: 600,
+    letterSpacing: '3%',
+    textTransform: 'capitalize',
+    textAlign: 'center',
+    fontSize: pxToRem(28),
+    lineHeight: pxToRem(40),
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(36),
+      lineHeight: pxToRem(48),
+      textAlign: 'left',
+    },
   },
+
   h3: {
     fontFamily: primaryFont,
-    fontWeight: 700,
-    lineHeight: 1.4,
-    fontSize: scaledPxToRem(24), // ori ginal: 24px → reduced: 20px
-    ...responsiveFontSizes({ xs: 20, sm: 22, md: 24, lg: 26 }), // originally: 24, 26, 28, 30
+    fontWeight: 600,
+    letterSpacing: '3%',
+    textTransform: 'uppercase',
+    fontSize: pxToRem(18),
+    lineHeight: 1,
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(24),
+      lineHeight: pxToRem(30),
+    },
   },
+
   h4: {
     fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(20), // original: 20px → reduced: 17px
-    ...responsiveFontSizes({ xs: 17, sm: 19, md: 20 }), // originally: 20, 22, 24
+    lineHeight: 1.4,
+    fontSize: pxToRem(20),
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(24),
+    },
   },
+
   h5: {
     fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(18), // original: 18px → reduced: 15px
-    ...responsiveFontSizes({ xs: 15, sm: 16 }), // originally: 18, 19
+    lineHeight: 1.4,
+    fontSize: pxToRem(17),
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(20),
+    },
   },
+
   h6: {
     fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15, md: 15 }), // originally: 16, 17, 18
+    lineHeight: 1.4,
+    fontSize: pxToRem(15),
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: pxToRem(16),
+    },
   },
+
   subtitle1: {
     fontWeight: 600,
     lineHeight: 1.5,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15 }), // originally: 16, 17
+    fontSize: pxToRem(15),
   },
+
   subtitle2: {
     fontWeight: 600,
     lineHeight: 1.5,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
+    fontSize: pxToRem(13),
   },
+
   body1: {
     fontWeight: 400,
     lineHeight: 1.6,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15 }), // originally: 16, 17
+    fontSize: pxToRem(15),
   },
+
   body2: {
     fontWeight: 400,
     lineHeight: 1.5,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
+    fontSize: pxToRem(13),
   },
+
   caption: {
     fontWeight: 400,
     lineHeight: 1.5,
-    fontSize: scaledPxToRem(12), // original: 12px → reduced: 10.2px
-    ...responsiveFontSizes({ xs: 10, sm: 11 }), // originally: 12, 13
+    fontSize: pxToRem(11),
   },
+
   overline: {
     fontWeight: 700,
     lineHeight: 1.5,
-    fontSize: scaledPxToRem(12), // original: 12px → reduced: 10.2px
+    fontSize: pxToRem(11),
     textTransform: 'uppercase',
   },
+
   button: {
     fontWeight: 700,
     lineHeight: 1.7,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
+    fontSize: pxToRem(13),
     textTransform: 'unset',
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
   },
 };

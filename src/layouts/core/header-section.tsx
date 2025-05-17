@@ -244,7 +244,6 @@ export function HeaderSection({
 
       <HeaderContainer maxWidth="xl">
         {slots?.leftArea}
-
         <Stack
           width="100%"
           sx={{ [theme.breakpoints.down(layoutQuery)]: { display: "none" } }}
@@ -288,8 +287,7 @@ export function HeaderSection({
                   sx={{
                     border: "1px solid rgba(109, 110, 113, 0.2)",
                     borderRadius: 1,
-                                       p:"10px 16px",
-
+                    p:"10px 16px",
                     gap:0.5,
                   }}
                 >
@@ -333,7 +331,6 @@ export function HeaderSection({
                   size="small"
                   variant="contained"
                   color="success"
-                   
                   sx={{ textTransform: "none", p:"10px 16px"  }}
                   startIcon={
                     <Box component={"img"} width={"16px"} src={contactIcon} />
@@ -389,7 +386,7 @@ export function HeaderSection({
             </Stack>
           </Stack>
         </Stack>
-
+      {/* <HeaderCenterArea {...slotProps?.centerArea}>{slots?.centerArea}</HeaderCenterArea> */}
         {slots?.rightArea}
       </HeaderContainer>
     </HeaderRoot>
@@ -471,11 +468,14 @@ const HeaderContainer = styled(Container, {
     [theme.breakpoints.up(layoutQuery)]: {
       height: "var(--layout-header-desktop-height)",
     },
+    [theme.breakpoints.down(layoutQuery)]: {
+      justifyContent: "space-between",
+    },
   })
 );
 
 const HeaderCenterArea = styled("div")(() => ({
   display: "none",
-  // flex: '1 1 auto',
-  // justifyContent: 'center',
+  flex: '1 1 auto',
+  justifyContent: 'center',
 }));

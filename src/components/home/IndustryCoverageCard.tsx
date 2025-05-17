@@ -23,7 +23,7 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
     <div
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
-      style={{ width: '320px', height: '200px' }}
+      // style={{ width: '320px', height: '200px' }}
     >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedBackToFront={1} flipSpeedFrontToBack={1}>
         {/* Front Side */}
@@ -33,8 +33,8 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
           alignItems="flex-start"
           justifyContent="center"
           sx={{
-            width: '320px',
-            height: '200px',
+            width: '100%',
+            height: '218px',
             borderRadius: '8px',
             background: 'linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)',
             position: 'relative',
@@ -69,8 +69,8 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
           alignItems="flex-start"
           justifyContent="center"
           sx={{
-            width: '320px',
-            height: '200px',
+        width: '100%',
+            height: '218px',
             borderRadius: '8px',
             background: 'linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)',
           }}

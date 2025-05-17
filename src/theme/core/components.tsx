@@ -20,6 +20,7 @@ const MuiBackdrop: Components<Theme>['MuiBackdrop'] = {
 const MuiContainer: Components<Theme>['MuiContainer'] = {
   defaultProps: {
     maxWidth: 'xl', 
+    disableGutters: true,
   },
   styleOverrides: {
     maxWidthXs: {
@@ -57,7 +58,7 @@ const MuiContainer: Components<Theme>['MuiContainer'] = {
 
       // Small mobiles (361px–599px)
       '@media (min-width: 361px) and (max-width: 599px)': {
-        maxWidth: '360px',
+        maxWidth: '370px',
       },
 
       // Tablets / Small Devices (600px–899px)
