@@ -30,7 +30,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router": "^7.5.3",
     "react-router-dom": "^7.5.3",
-    "simplebar-react": "^3.3.0",
+    "simplebar": "^6.3.1",
+    "simplebar-react": "^3.3.1",
     "video.js": "^7.6.5",
     "yup": "^1.6.1"
   },
