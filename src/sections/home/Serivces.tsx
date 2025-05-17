@@ -43,9 +43,9 @@ const Serivces = () => {
       <Stack mb={5}>
         <SectionHead title={heading} titleColor='rgba(26, 32, 44, 1)'/>
 
-        <Grid container rowGap={4} mb={5} alignItems={"left"} justifyContent={"space-around"} sx={{height: "auto" }} >
+        <Grid container rowGap={4} columnSpacing={3} mb={5} alignItems={"center"} justifyContent={"space-between"} sx={{height: "auto" }} >
           {services.map((item, index) => (
-            <Grid >
+            <Grid size={{xs: 12, sm: 6, md: 4}} key={index} p={0} sx={{width:{xs:"100%",sm:"295px !important"}}}>
               <ServiceCard
                 item={{
                   title: item.title,

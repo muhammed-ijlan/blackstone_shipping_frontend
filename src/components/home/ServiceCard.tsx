@@ -15,7 +15,7 @@ const ServiceCard = ({
       onMouseLeave={() => setHovered(false)}
       sx={{
         border: "1px solid rgba(45, 55, 72, 1)",
-        width: "295px",
+        width: "100%",
         height: "100%",
         borderRadius: "8px",
         p: 3,
@@ -78,7 +78,7 @@ const ServiceCard = ({
         <Box
           component={"img"}
           src={item.image}
-          width={"255px"}
+          width={"100%"}
           height={"255px"}
           sx={{ objectFit: "cover" }}
           borderRadius={"4px"}
