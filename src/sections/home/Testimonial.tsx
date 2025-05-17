@@ -9,7 +9,7 @@ import quote from "src/assets/icons/testimonial.png";
 import { GET_TESTIMONIALS } from "src/graphql/queries";
 import SliderProgress from "src/components/customSlider/SliderProgress";
 
- interface TestimonialNode {
+interface TestimonialNode {
   title: string;
   featuredImage: {
     node: {
@@ -23,7 +23,7 @@ import SliderProgress from "src/components/customSlider/SliderProgress";
   };
 }
 
- interface TestimonialsData {
+interface TestimonialsData {
   page: {
     title: string;
     homePageFieldsTestimonials: {
@@ -37,7 +37,9 @@ import SliderProgress from "src/components/customSlider/SliderProgress";
 }
 
 const Testimonial = () => {
-  const scrollRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const scrollRef = useRef<HTMLDivElement>(
+    null
+  ) as React.RefObject<HTMLDivElement>;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data, loading, error } = useQuery<TestimonialsData>(GET_TESTIMONIALS);
@@ -79,34 +81,45 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={"row"} gap={2}>
-          <Stack width={"40%"} gap={4} alignItems={"flex-start"}>
+        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+          <Stack
+            width={{ xs: "100%", sm: "40%" }}
+            gap={{xs:0,sm:3}}
+            alignItems={{ xs: "center", sm: "flex-start" }}
+          >
             <SectionHead
               title={testimonialsSubHeading}
               titleColor="rgba(255, 255, 255, 0.5)"
               subTitleColor="rgba(249, 250, 251, 1)"
               subTitle={testimonialsMainHeading}
             />
-            <SliderButton2 scrollRef={scrollRef} />
-            <SliderProgress
-              currentIndex={currentIndex}
-              totalItems={testimonialsList.length}
-            />
+            <Stack
+              display={{ xs: "none", sm: "flex" }}
+              gap={3}
+              alignItems={{ xs: "center", sm: "flex-start" }}
+            >
+              <SliderButton2 scrollRef={scrollRef} />
+              <SliderProgress
+                currentIndex={currentIndex}
+                totalItems={testimonialsList.length}
+              />
+            </Stack>
           </Stack>
 
-          <Stack mt={10} width={"60%"}>
+          <Stack mt={{xs:0,sm:10}} width={{ xs: "100%", sm: "50%" }}>
             <CustomSlider2 scrollRef={scrollRef}>
               {testimonialsList.map((item, index) => (
                 <Stack
                   key={index}
                   sx={{
-                    minWidth: "500px",
+                    minWidth: { xs: "100%", sm: "500px" },
                     border: "2px solid rgba(109, 110, 113, 1)",
                     borderRadius: "8px",
                     p: 4,
+                    height: { xs: "100%", sm: "auto" },
                   }}
                   gap={2}
-                  justifyContent={"space-between"}
+                  justifyContent={{ xs: "normal", sm: "space-between" }}
                 >
                   <Box
                     component={"img"}
@@ -167,6 +180,17 @@ const Testimonial = () => {
                 </Stack>
               ))}
             </CustomSlider2>
+          </Stack>
+          <Stack
+            display={{ xs: "flex", sm: "none" }}
+            gap={3}
+            alignItems={{ xs: "center", sm: "flex-start" }}
+          >
+            <SliderButton2 scrollRef={scrollRef} />
+            <SliderProgress
+              currentIndex={currentIndex}
+              totalItems={testimonialsList.length}
+            />
           </Stack>
         </Stack>
       </Container>

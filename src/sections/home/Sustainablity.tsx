@@ -8,9 +8,11 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import CustomArrowButton from "src/components/CustomArrowButton";
 import CustomSlider from "src/components/customSlider/CustomSlider";
+import CustomSlider2 from "src/components/customSlider/CustomSlider2";
+import SliderButton2 from "src/components/customSlider/SliderButton2";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { GET_SUSTAINABILITY } from "src/graphql/queries";
 
@@ -41,6 +43,7 @@ import { GET_SUSTAINABILITY } from "src/graphql/queries";
 
 
 const Sustainability = () => {
+  const scrollRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const { data, loading, error } = useQuery<GetSustainabilityData>(GET_SUSTAINABILITY);
 
   if (loading) return <Stack alignItems="center" py={10}><CircularProgress /></Stack>;
@@ -60,14 +63,23 @@ const Sustainability = () => {
       }}
     >
       <Container maxWidth="xl">
+      <Stack position={"relative"}>
+
         <SectionHead
           title={heading.sustainabilityCommitmentSubHeading}
           subTitle={heading.sustainabilityCommitmentMainHeading}
           titleColor="rgba(26, 32, 44, 1)"
           subTitleColor="rgba(109, 110, 113, 1)"
-        />
+          />
 
-        <CustomSlider>
+      <Stack  direction={"row"} alignItems={"center"} justifyContent={"center"} mb={3} gap={3} position={{xs:"static",sm:"absolute"}} right={0} bottom={0}>
+        <Stack display={{xs:"none",sm:"flex"}}>
+          <SliderButton2 scrollRef={scrollRef} />
+        </Stack>
+      </Stack>
+          </Stack>
+
+        <CustomSlider2 scrollRef={scrollRef}>
           {commitments.map((card, index) => (
             <Stack
               key={index}
@@ -108,10 +120,13 @@ const Sustainability = () => {
               />
             </Stack>
           ))}
-        </CustomSlider>
+        </CustomSlider2>
 
-        <Stack alignItems="center">
-         <CustomArrowButton name="Explore More" sx={{py:"12px",px:"24px"}}/>
+        <Stack alignItems="center"gap={3}>
+           <Stack display={{xs:"flex",sm:"none"}}>
+          <SliderButton2 scrollRef={scrollRef} />
+        </Stack>
+         <CustomArrowButton name="Explore More" sx={{py:"12px",px:"24px",width:{xs:"100%",md:"auto"}}}/>
         </Stack>
       </Container>
     </Stack>

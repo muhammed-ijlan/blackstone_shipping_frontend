@@ -50,9 +50,9 @@ const IndustryCoverage = () => {
           titleColor="white"
         />
 
-        <Grid container rowGap={3 } mb={10} columnSpacing={4} justifyContent="space-between">
+        <Grid container rowGap={3} mb={10} columnSpacing={0} justifyContent="space-between" alignItems={"center"} >
           {data?.industries?.nodes?.map((item, index) => (
-            <Grid mt={3} size={4} width={"359px"} height={"218px"}   key={index} p={0}>
+            <Grid mt={3} size={4} width={{xs:"100%",md:"359px"}} height={"218px"}   key={index} p={0}>
               <IndustryCoverageCard item={item} />
             </Grid>
           ))}

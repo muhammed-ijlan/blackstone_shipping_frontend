@@ -42,6 +42,8 @@ const WhatWeOffer = () => {
 
   return (
     <Container maxWidth="xl" sx={{ pb: 5 }}>
+      <Stack position={"relative"}>
+
       <SectionHead
         title={headingData?.whatWeOffersubHeading || ""}
         subTitle={
@@ -49,13 +51,14 @@ const WhatWeOffer = () => {
         }
         titleColor="rgba(33, 52, 72, 1)"
         subTitleColor="rgba(45, 55, 72, 1)"
-      />
-      <Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"} mb={3} gap={3}>
-        <Stack>
+        />
+      <Stack  direction={"row"} alignItems={"center"} justifyContent={"center"} mb={3} gap={3} position={{xs:"static",sm:"absolute"}} right={0} bottom={16}>
+        <Stack display={{xs:"none",sm:"flex"}}>
           <SliderButton2 scrollRef={scrollRef} />
         </Stack>
-        <CustomArrowButton name="View All" sx={{px:"24px",py:"12px"}}/>
+        <CustomArrowButton name="View All" sx={{px:"24px",py:"12px",width:{xs:"100%"}}}/>
       </Stack>
+        </Stack>
 
       <CustomSlider2 scrollRef={scrollRef}>
         {offers.map((card, index) => (

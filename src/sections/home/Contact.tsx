@@ -32,7 +32,7 @@ const Contact = () => {
 
   return (
     <Container maxWidth="xl" sx={{ mb: 10 }}>
-      <Stack direction={"row"} gap={8}>
+      <Stack direction={{xs:"column",sm:"row"}} gap={{xs:0,sm:8}}>
         <SectionHead
           title="Contact  Us  "
           subTitle="Contact us for quick and reliable support!"
@@ -41,7 +41,7 @@ const Contact = () => {
           contentColor="rgba(45, 55, 72, 1)"
           content="We’re here to assist you! Fill out the form, and our team will get back to you as soon as possible. Let’s work together to find the perfect solution for your business needs."
         />
-        <Stack mt={10} width={"100%"}>
+        <Stack mt={{xs:0,sm:10}} width={"100%"}>
           <Formik
             initialValues={initialValues}
             validationSchema={contactValidationSchema}
@@ -58,7 +58,7 @@ const Contact = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Grid container rowGap={2} columnSpacing={3}>
-                  <Grid size={{ xs: 6, md: 12 }}>
+                  <Grid size={{ xs: 12, md: 12 }}>
                     <TextField
                       name="name"
                       variant="outlined"

@@ -19,7 +19,7 @@ const SectionHead: React.FC<SectionHeadProps> = ({
   contentColor = 'rgba(33, 52, 72, 0.6)',
 }) => {
   return (
-    <Stack gap={3} mt={10} mb={5} >
+    <Stack gap={3} mt={10} mb={5} textAlign={{xs: "center", md: "left"}} >
       <Typography variant="h3" fontWeight={600} color={titleColor}>
         {title.toUpperCase()}
       </Typography>
@@ -27,7 +27,6 @@ const SectionHead: React.FC<SectionHeadProps> = ({
       {subTitle && (
         <Typography
           maxWidth={900}
-          sx={{fontSize:"40px !important"}}
           variant="h2"
           fontWeight={600}
           color={subTitleColor}
