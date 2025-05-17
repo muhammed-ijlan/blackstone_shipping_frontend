@@ -1,0 +1,79 @@
+/** **************************************
+* Fonts: app
+*************************************** */
+@import '@fontsource-variable/inter-tight';
+
+
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow/700.css';
+@import '@fontsource/barlow/800.css';
+
+/** **************************************
+* Baseline
+*************************************** */
+html {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+body,
+#root,
+#root__layout { 
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 100%; 
+  flex-direction: column;
+} 
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/* BANNER HOME */
+/* .control-dots{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 100px !important;
+  padding-right: 100px !important;
+  text-align: right;
+  display: flex;
+  gap: 0px !important;
+  z-index: 1;
+} */
+/* .control-dots .dot {
+  width: 12px !important;
+  height: 5px !important;
+  border-radius: 8px !important;
+  background-color: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  display: none !important;
+}
+.control-dots .dot.selected {
+  opacity: 1;
+  width: 80px !important;
+} */
+
+.carousel .slide iframe {
+margin:  0 !important;
+} 
