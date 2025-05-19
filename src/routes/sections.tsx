@@ -1,34 +1,37 @@
-import type { RouteObject } from 'react-router';
+import type { RouteObject } from "react-router";
 
-import { lazy, Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
-import { varAlpha } from 'minimal-shared/utils';
+import { lazy, Suspense } from "react";
+import { Outlet } from "react-router-dom";
+import { varAlpha } from "minimal-shared/utils";
 
-import Box from '@mui/material/Box';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import Box from "@mui/material/Box";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 
-import { DashboardLayout } from '../layouts/dashboard';
+import { DashboardLayout } from "../layouts/dashboard";
 
 // ----------------------------------------------------------------------
 
-export const HomePage = lazy(() => import('../pages/home'));
-export const CompanyPage = lazy(() => import('../pages/company')); 
+export const HomePage = lazy(() => import("../pages/home"));
+export const CompanyPage = lazy(() => import("../pages/company"));
 
 const renderFallback = () => (
   <Box
     sx={{
-      display: 'flex',
-      flex: '1 1 auto',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: "flex",
+      flex: "1 1 auto",
+      alignItems: "center",
+      justifyContent: "center",
     }}
   >
     <LinearProgress
       sx={{
         width: 1,
         maxWidth: 320,
-        bgcolor: (theme) => varAlpha(theme.vars.palette.text.primaryChannel, 0.16),
-        [`& .${linearProgressClasses.bar}`]: { bgcolor: 'text.primary' },
+        bgcolor: (theme) =>
+          varAlpha(theme.vars?.palette.text.primaryChannel, 0.16),
+        [`& .${linearProgressClasses.bar}`]: { bgcolor: "text.primary" },
       }}
     />
   </Box>
@@ -44,19 +47,34 @@ export const routesSection: RouteObject[] = [
       </DashboardLayout>
     ),
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'company', element: <CompanyPage /> },
+      {
+        index: true,
+        element: (
+          <Suspense fallback={renderFallback()}>
+             <HomePage />
+         
+          </Suspense>
+        ),
+      },
+      {
+        path: "company",
+        element: (
+          <Suspense fallback={renderFallback()}>
+             <CompanyPage />
+          </Suspense>
+        ),
+      },
     ],
   },
-  {
-      path: '/',
-      element: (
-        <Suspense fallback={renderFallback()}>
-          <HomePage />
-        </Suspense>
-      ),
-  }
-  
+  // {
+  //     path: '/',
+  //     element: (
+  //       <Suspense fallback={renderFallback()}>
+  //         <HomePage />
+  //       </Suspense>
+  //     ),
+  // }
+
   // {
   //   path: '404',
   //   element: <Page404 />,

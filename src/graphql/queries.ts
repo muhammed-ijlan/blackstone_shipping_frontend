@@ -221,3 +221,139 @@ export const GET_COMPANY_HISTORY = gql`
   }
 }
 `;
+
+export const GET_COMPANY_VISION = gql`
+query GetCompanyPage {
+    page(id: "company", idType: URI) {
+      companyPageVisionSection {
+        visionTitle
+        visionContent
+      }
+    }
+    visions(where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        content
+      }
+    }
+  }
+`;
+
+export const GET_COMPANY_SIMPLIFY_SHIPPING = gql`
+query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageSimply {
+      simplifyShippingTitle
+    }
+  }
+  shippingMethods(where: { orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      content
+    }
+  }
+}
+`;
+
+export const GET_COMPANY_WHO_WE_ARE = gql`
+query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageWhoWeAreSection {
+      whoWeAreTitle
+      whoWeAreContent
+      ourPurposeTitle
+      ourPurposeIcon {
+        node {
+          sourceUrl
+        }
+      }
+      ourPurposeContent
+      ourVisionTitle
+      ourVisionIcon {
+        node {
+          sourceUrl
+        }
+      }
+      ourVisionContent
+    }
+  }
+}
+`;
+
+export const GET_COMPANY_OUR_VALUES = gql`query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageOurValuesSection {
+      ourValuesTitle
+      ourValuesImage1 {
+        node {
+          sourceUrl
+        }
+      }
+      ourValuesImage2 {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+  values(where: { orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      content
+    }
+  }
+}
+`;
+
+export const GET_COMPANY_KEY_FACTS = gql`query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageKeyFactsSection {
+      keyFactsTitle
+      keyFactsBackgroundImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+  keyFacts(where: { orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+    }
+  }
+}
+`;  
+
+export const GET_COMPANY_GLOBAL_NETWORK = gql`
+query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageOurGlobalNetworkSection {
+      ourGlobalNetworkTitle
+      ourGlobalNetworkContent
+      ourGlobalNetworkBox1Text1
+      ourGlobalNetworkBox1Text2
+      ourGlobalNetworkBox2Text1
+      ourGlobalNetworkBox2Text2
+      ourGlobalNetworkBox3Text1
+      ourGlobalNetworkBox3Text2
+    }
+  }
+}
+`;
+

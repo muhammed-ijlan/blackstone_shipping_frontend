@@ -20,6 +20,8 @@
     "@iconify/react": "^6.0.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@types/google.maps": "^3.58.1",
+    "@vis.gl/react-google-maps": "^1.5.2",
     "dompurify": "^3.2.5",
     "formik": "^2.4.6",
     "graphql": "^16.11.0",
