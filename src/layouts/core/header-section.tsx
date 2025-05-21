@@ -29,6 +29,7 @@ import searchIcon from "src/assets/icons/search.png";
 import trackingIcon from "src/assets/icons/track.png";
 import myBBXIcon from "src/assets/icons/box.png";
 import contactIcon from "src/assets/icons/mail.png";
+import { useRouter } from "src/routes/hooks";
 
 const NavBar = styled("div")(({ theme }) => ({
   display: "flex",
@@ -167,6 +168,8 @@ export function HeaderSection({
 
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
+  const router = useRouter();
+
   const handleMouseEnter = (label: string) => {
     setOpenSubmenu(label);
   };
@@ -255,7 +258,9 @@ export function HeaderSection({
             sx={{ height: "100%" }}
           >
             <Stack>
-              <Logo href={logo} sx={{ height: "107px", width: "107px" }} />
+              <Logo onClick={()=>router.push("/")} href={
+                logo
+              } sx={{ height: "107px", width: "107px" }} />
             </Stack>
 
             <Stack gap={1} alignItems="flex-end" sx={{ height: "100%" }}>

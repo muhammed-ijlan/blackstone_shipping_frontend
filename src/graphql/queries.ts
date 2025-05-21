@@ -357,3 +357,62 @@ query GetCompanyPage {
 }
 `;
 
+export const GET_COMPANY_CERTIFICATION = gql`
+query GetCompanyPage {
+  page(id: "company", idType: URI) {
+    companyPageCertifications {
+      certificationMainTitle
+      certificationSubTitle1
+      certificationContent1
+      certificationSubTitle2
+      certificationContent2
+      certificationSubTitle3
+      certificationContent3
+    }
+  }
+  certifications(where: {orderby: {field: DATE, order: ASC}}) {
+    nodes {
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+  partners(where: {orderby: {field: DATE, order: ASC}}) {
+    nodes {
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_COMPANY_LOCATION = gql`
+query GetCompanyOfficeLocations {
+  page(id: "company", idType: URI) {
+    companyPageOfficeLocationSection {
+      officeLocationsTitle
+      officeLocationMapUrl
+    }
+  }
+  locations {
+    nodes {
+      title
+      locationsOptions {
+        latitude
+        longitude
+        name
+        address
+        phoneNumber
+        emailAddress
+      }
+    }
+  }
+}
+`;

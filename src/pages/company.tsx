@@ -2,9 +2,11 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import Banner from "src/components/banner/Banner";
 import BannerBottom from "src/components/banner/BannerBottom";
+import LoadingFallback from "src/components/LoadingFallback";
 import {
   GET_COMPANY_ABOUT,
   GET_COMPANY_BANNER,
+  GET_COMPANY_CERTIFICATION,
   GET_COMPANY_GLOBAL_NETWORK,
   GET_COMPANY_HISTORY,
   GET_COMPANY_KEY_FACTS,
@@ -13,6 +15,7 @@ import {
   GET_COMPANY_VISION,
   GET_COMPANY_WHO_WE_ARE,
 } from "src/graphql/queries";
+import Certification from "src/sections/company/Certification";
 import ConnectingWorld from "src/sections/company/ConnectingWorld";
 import History from "src/sections/company/History";
 import KeyFacts from "src/sections/company/KeyFacts";
@@ -23,6 +26,7 @@ import Vision from "src/sections/company/Vision";
 import WhoWeAre from "src/sections/company/WhoWeAre";
 import {
   GetCompanyAboutResponse,
+  GetCompanyCertificationsResponse,
   GetCompanyGlobalNetworkResponse,
   GetCompanyHistoryResponse,
   GetCompanyKeyFactsResponse,
@@ -71,9 +75,11 @@ const Page = () => {
     data:ourNetworkData 
   } = useQuery<GetCompanyGlobalNetworkResponse>(GET_COMPANY_GLOBAL_NETWORK)
 
+  const {data:ourCertificationData} = useQuery<GetCompanyCertificationsResponse>(GET_COMPANY_CERTIFICATION)
+
   return (
     <>
-      {companyBannerData && <Banner data={companyBannerData} />}
+      {companyBannerLoading ? <LoadingFallback/> : companyBannerData && <Banner data={companyBannerData} />}
       <BannerBottom>
         {aboutData && <ConnectingWorld data={aboutData} />}
       </BannerBottom>
@@ -87,6 +93,8 @@ const Page = () => {
     {ourValueData && <OurValues data={ourValueData} />}
     {keyFactsData && <KeyFacts data={keyFactsData}/>}
     {ourNetworkData && <OurNetwork data={ourNetworkData}/>}
+    {ourCertificationData && <Certification data={ourCertificationData}/>}
+
     </>
   );
 };
