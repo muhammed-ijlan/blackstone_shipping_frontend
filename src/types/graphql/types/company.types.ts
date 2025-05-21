@@ -176,3 +176,65 @@ export interface GetCompanyOfficeLocationResponse {
     };
   };
 }
+export interface GetCompanyCertificationsResponse {
+  page: {
+    companyPageCertifications: {
+      certificationMainTitle: string;
+      certificationSubTitle1: string;
+      certificationContent1: string;
+      certificationSubTitle2: string;
+      certificationContent2: string;
+      certificationSubTitle3: string;
+      certificationContent3: string;
+    };
+  };
+  certifications: {
+    nodes: {
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+  partners: {
+    nodes: {
+      title: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
+}
+
+
+export interface OfficeLocationSection {
+  officeLocationsTitle: string;
+  officeLocationMapUrl?: string;
+}
+
+export interface GetCompanyOfficeLocationsResponse {
+  page: {
+    companyPageOfficeLocationSection: {
+      officeLocationsTitle: string;
+      officeLocationMapUrl?: string;
+    };
+  };
+  locations: {
+    nodes: {
+      title: string;
+      locationsOptions: {
+        latitude: string;
+        longitude: string;
+        name: string;
+        address: string;
+        phoneNumber: number;
+        emailAddress: string;
+      };
+    }[];
+  };
+}
+

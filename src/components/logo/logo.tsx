@@ -23,6 +23,7 @@ export function Logo({
   disabled,
   className,
   href = '/',
+  onScroll,
   isSingle = true,
   ...other
 }: LogoProps) {
@@ -40,7 +41,7 @@ export function Logo({
   return (
     <LogoRoot
       component={RouterLink}
-      href={href}
+      // href={href}
       aria-label="Logo"
       underline="none"
       className={mergeClasses([logoClasses.root, className])}
