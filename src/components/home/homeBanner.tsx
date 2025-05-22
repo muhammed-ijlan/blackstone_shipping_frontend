@@ -57,6 +57,7 @@ if (error) return <p>Error: {error.message}</p>;
     fluid: true,
     loop: true, 
     muted: true,
+    playsinline: true,
 
     sources: [
       {
@@ -351,7 +352,7 @@ if (error) return <p>Error: {error.message}</p>;
                 </Box>
               ))}
             </Carousel>
-                      <VideoJS options={videoJsOptions} onReady={handlePlayerReady}  />
+              <VideoJS options={videoJsOptions} onReady={handlePlayerReady}  />
 
           </Stack>
         </Container>

@@ -6,7 +6,7 @@ import { GET_COMPANY_LOCATION } from 'src/graphql/queries';
 import { GetCompanyOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
 
 const LocationMap = () => {
-  const apiKey = 'AIzaSyCKalsabfN93i-SdYJU16XRJrGqd2pYeH4';
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const { data } = useQuery<GetCompanyOfficeLocationsResponse>(GET_COMPANY_LOCATION);
 
   const [selectedLocation, setSelectedLocation] = useState<{
@@ -18,23 +18,22 @@ const LocationMap = () => {
     email: string;
   } | null>(null);
 
-  // const defaultCenter = {
-  //   lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'), 
-  //   lng: parseFloat(data?.locations.nodes[0].locationsOptions.longitude ?? '0'),
-  // };
-  // console.log(defaultCenter)
-
+  const defaultCenter = {
+    lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'), 
+    lng: parseFloat(data?.locations.nodes[0].locationsOptions.longitude ?? '0'),
+  };
+  console.log(defaultCenter)
   return (
     <Stack>
       <Typography variant="h3" my={4}>
         {data?.page.companyPageOfficeLocationSection.officeLocationsTitle.toUpperCase()}
       </Typography>
 
-      <APIProvider apiKey={apiKey}>
+      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <div style={{ height: '100vh', width: '100%' }}>
           <Map
-            // defaultCenter={defaultCenter}
-            defaultZoom={3}
+            center={defaultCenter}
+            defaultZoom={4}
             gestureHandling="cooperative"
             disableDefaultUI={true}
             zoomControl

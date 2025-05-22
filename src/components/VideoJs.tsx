@@ -1,4 +1,3 @@
-
 import { Box, useTheme } from '@mui/material';
 import React, { useEffect, useRef } from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
@@ -18,7 +17,11 @@ export const VideoJS: React.FC<VideoJSProps> = ({ options, onReady }) => {
     if (!playerRef.current && videoRef.current) {
       const videoElement = document.createElement('video-js');
       videoElement.classList.add('vjs-big-play-centered');
-      videoRef.current.appendChild(videoElement);
+      videoElement.setAttribute('playsinline', '');
+
+      if (videoRef.current.children.length === 0) {
+        videoRef.current.appendChild(videoElement);
+      }
 
       const player = (playerRef.current = videojs(videoElement, options, () => {
         videojs.log('player is ready');
@@ -31,23 +34,33 @@ export const VideoJS: React.FC<VideoJSProps> = ({ options, onReady }) => {
       player.autoplay(options.autoplay ?? false);
       player.src(options.sources ?? []);
     }
-  }, [options]);
+  }, [options, onReady]);
 
- React.useEffect(() => {
-  const player = playerRef.current;
-
-  return () => {
-    // Fix: check if player.dispose exists and is a function
-    if (player && typeof player.dispose === 'function') {
-      player.dispose();
-      playerRef.current = null;
-    }
-  };
-}, []);
-
+  useEffect(() => {
+    const player = playerRef.current;
+    return () => {
+      if (player && typeof player.dispose === 'function') {
+        player.dispose();
+        playerRef.current = null;
+      }
+      if (videoRef.current) {
+        videoRef.current.innerHTML = '';
+      }
+    };
+  }, []);
 
   return (
-    <Box component={"div"} data-vjs-player style={{ [theme.breakpoints.down('sm')]:{borderRadius:"5px"}, overflow: 'hidden'}}>
+    <Box
+      component="div"
+      data-vjs-player
+      sx={{
+        borderRadius: 0,
+        overflow: 'hidden',
+        [theme.breakpoints.down('sm')]: {
+          borderRadius: '5px',
+        },
+      }}
+    >
       <div ref={videoRef} />
     </Box>
   );
