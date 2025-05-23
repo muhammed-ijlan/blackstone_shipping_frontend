@@ -122,13 +122,13 @@ const HomeBanner: React.FC = () => {
               infiniteLoop
               showThumbs={false}
               useKeyboardArrows
-              autoPlay={false}
+              autoPlay={true}
               stopOnHover
               swipeable
               emulateTouch
             >
               {data?.sliders.nodes.map((slide, index) => (
-                <Box
+                <Stack
                   key={index}
                   style={{
                     MozUserSelect: "none",
@@ -137,18 +137,23 @@ const HomeBanner: React.FC = () => {
                     userSelect: "none",
                     position: "relative",
                   }}
+                  display="flex"
+                  alignItems={{sm:"center",lg:"flex-start"}}
                   unselectable="on"
                   onMouseDown={(e) => e.preventDefault()}
+
                 >
-                  <Box
-                    width={"700px"}
+                  <Stack
+                    width={{sm:"600px",lg:"700px"}}
                     display="flex"
                     flexDirection="column"
                     gap={2}
-                    alignItems={"flex-start"}
+                    textAlign={{sm:"center",lg:"left"}}
+                     alignItems={{sm:"center",lg:"flex-start"}}
                   >
                     <Stack
                       direction="row"
+                     
                       gap={1}
                       borderBottom={2}
                       borderColor="rgba(32, 189, 103, 1)"
@@ -173,7 +178,10 @@ const HomeBanner: React.FC = () => {
                       {slide.sliderFields.sliderMainHeading.toUpperCase()}
                     </Typography>
 
-                    <Typography variant="h5" color="white" fontWeight={400}>
+                    <Typography variant="h5" color="white" fontWeight={400} 
+                    textAlign={{sm:"center",lg:"left"}}
+                    
+                    >
                       {slide.sliderFields.shortDescription}
                     </Typography>
 
@@ -226,8 +234,8 @@ const HomeBanner: React.FC = () => {
                         {slide.sliderFields.button2Text}
                       </Button>
                     </Stack>
-                  </Box>
-                </Box>
+                  </Stack>
+                </Stack>
               ))}
             </Carousel>
           </Stack>
@@ -311,6 +319,7 @@ const HomeBanner: React.FC = () => {
                       flexWrap={"nowrap"}
                       width={"100%"}
                       alignItems={"center"}
+                      height={"100%"}
                     >
                       <Button
                         onClick={() =>
@@ -325,11 +334,13 @@ const HomeBanner: React.FC = () => {
                           fontSize: "13px",
                           borderRadius: "8px",
                           // px: 3,
-                          py: 1.5,
+                          // py: 1.5,
                           width: "100%",
                           "&:hover": {
                             backgroundColor: "#0052cc",
                           },
+                          height:"45px"
+
                         }}
                       >
                         {slide.sliderFields.button1Text}
@@ -342,16 +353,15 @@ const HomeBanner: React.FC = () => {
                         sx={{
                           backgroundColor: "#28a745",
                           textTransform: "none",
+                          fontSize: "13px",
                           fontWeight: "600",
-                          // fontSize: "16px",
                           borderRadius: "8px",
                           width: "100%",
-
-                          // px: 3,
-                          py: 1.5,
                           "&:hover": {
                             backgroundColor: "#218838",
                           },
+                                                   height:"45px"
+
                         }}
                       >
                         {slide.sliderFields.button2Text}

@@ -81,9 +81,9 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={2}>
           <Stack
-            width={{ xs: "100%", sm: "40%" }}
+            width={{ xs: "100%", lg: "40%" }}
             gap={{ xs: 0, sm: 3 }}
             alignItems={{ xs: "center", sm: "flex-start" }}
           >
@@ -94,9 +94,9 @@ const Testimonial = () => {
               subTitle={testimonialsMainHeading}
             />
             <Stack
-              display={{ xs: "none", sm: "flex" }}
+              display={{ xs: "none", lg: "flex" }}
               gap={3}
-              alignItems={{ xs: "center", sm: "flex-start" }}
+              alignItems={{ xs: "center", lg: "flex-start" }}
             >
               <SliderButton2 scrollRef={scrollRef} />
               <SliderProgress
@@ -106,7 +106,7 @@ const Testimonial = () => {
             </Stack>
           </Stack>
 
-          <Stack mt={{ xs: 0, sm: 10 }} width={{ xs: "100%", sm: "60%" }}>
+          <Stack mt={{ xs: 0, lg: 10 }} width={{ xs: "100%", lg: "60%" }}>
             <CustomSlider2 scrollRef={scrollRef}>
               {testimonialsList.map((item, index) => (
                 <Stack
@@ -116,7 +116,7 @@ const Testimonial = () => {
                     border: "2px solid rgba(109, 110, 113, 1)",
                     borderRadius: "8px",
                     p: 4,
-                    height: { xs: "100%", sm: "auto" },
+                    height: { xs: "auto", lg: "auto" },
                   }}
                   gap={2}
                   justifyContent={{ xs: "normal", sm: "space-between" }}
@@ -130,11 +130,10 @@ const Testimonial = () => {
                     alt="quote icon"
                     />
                   <Typography
-                    variant="subtitle1"
+                    variant="body2"
                     fontWeight={400}
                     sx={{
                       fontWeight: 500,
-                      fontSize: "16px",
                       lineHeight: "28px",
                       letterSpacing: "3%",
                       textTransform: "capitalize",
@@ -164,7 +163,7 @@ const Testimonial = () => {
                       <Typography
                         sx={{
                           fontWeight: 400,
-                          fontSize: "16px",
+                          fontSize: {xs:"10px",sm:"16px"},
                           lineHeight: "26px",
                           letterSpacing: "3%",
                           textTransform: "capitalize",
@@ -179,7 +178,7 @@ const Testimonial = () => {
                       <Typography
                         sx={{
                           fontWeight: 400,
-                          fontSize: "16px",
+                        fontSize: {xs:"10px",sm:"16px"},
                           lineHeight: "26px",
                           letterSpacing: "3%",
                           textTransform: "capitalize",
@@ -198,9 +197,9 @@ const Testimonial = () => {
             </CustomSlider2>
           </Stack>
           <Stack
-            display={{ xs: "flex", sm: "none" }}
+            display={{ xs: "flex", lg: "none" }}
             gap={3}
-            alignItems={{ xs: "center", sm: "flex-start" }}
+            alignItems={{ xs: "center", lg: "flex-start" }}
           >
             <SliderButton2 scrollRef={scrollRef} />
             <SliderProgress

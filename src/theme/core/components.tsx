@@ -57,12 +57,12 @@ const MuiContainer: Components<Theme>["MuiContainer"] = {
 
       // Tablets / Small Devices (600px–899px)
       "@media (min-width: 600px) and (max-width: 899px)": {
-        maxWidth: "540px",
+         maxWidth: "700px",
       },
 
       // Medium Devices / Tablets (900px–1199px)
       "@media (min-width: 900px) and (max-width: 1199px)": {
-        maxWidth: "720px",
+        maxWidth: "900px",
       },
 
       // Large Devices / Desktops (1200px–1535px)
@@ -106,12 +106,12 @@ const MuiContainer: Components<Theme>["MuiContainer"] = {
 
       // Tablets / Small Devices (600px–899px)
       "@media (min-width: 600px) and (max-width: 899px)": {
-        maxWidth: "540px",
+        maxWidth: "680px",
       },
 
       // Medium Devices / Tablets (900px–1199px)
       "@media (min-width: 900px) and (max-width: 1199px)": {
-        maxWidth: "720px",
+              maxWidth: "820px",
       },
 
       // Large Devices / Desktops (1200px–1535px)

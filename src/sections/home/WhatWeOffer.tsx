@@ -30,7 +30,9 @@ export interface GetWhatWeOfferData {
 }
 
 const WhatWeOffer = () => {
-  const scrollRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const scrollRef = useRef<HTMLDivElement>(
+    null
+  ) as React.RefObject<HTMLDivElement>;
   const { data, loading, error } =
     useQuery<GetWhatWeOfferData>(GET_WHAT_WE_OFFER);
 
@@ -43,23 +45,52 @@ const WhatWeOffer = () => {
   return (
     <Container maxWidth="xl" sx={{ pb: 5 }}>
       <Stack position={"relative"}>
-
-      <SectionHead
-        title={headingData?.whatWeOffersubHeading || ""}
-        subTitle={
-          headingData?.whatWeOfferMainHeading?.replace(/\r\n/g, " ") || ""
-        }
-        titleColor="rgba(33, 52, 72, 1)"
-        subTitleColor="rgba(45, 55, 72, 1)"
+        <SectionHead
+          title={headingData?.whatWeOffersubHeading || ""}
+          subTitle={
+            headingData?.whatWeOfferMainHeading?.replace(/\r\n/g, " ") || ""
+          }
+          titleColor="rgba(33, 52, 72, 1)"
+          subTitleColor="rgba(45, 55, 72, 1)"
         />
-      <Stack  direction={"row"} alignItems={"center"} justifyContent={"center"} mb={3} gap={3} position={{xs:"static",sm:"absolute"}} right={0} bottom={16}>
-        <Stack display={{xs:"none",sm:"flex"}}>
+        <Stack
+          display={{ xs: "none", lg: "flex" }}
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          mb={3}
+          gap={3}
+          position={{ xs: "static", sm: "absolute" }}
+          right={0}
+          bottom={16}
+        >
+          <Stack display={{ xs: "none", lg: "flex" }}>
+            <SliderButton2 scrollRef={scrollRef} />
+          </Stack>
+          <CustomArrowButton
+            name="View All"
+            sx={{ px: "24px", py: "12px", width: { xs: "100%" } }}
+          />
+        </Stack>
+      </Stack>
+      <Stack
+        display={{ xs: "flex", lg: "none" }}
+        alignItems={"center"}
+        justifyContent={"center"}
+        mb={3}
+        gap={3}
+        position={{ xs: "static", lg: "absolute" }}
+        right={0}
+        bottom={16}
+      >
+        <Stack>
           <SliderButton2 scrollRef={scrollRef} />
         </Stack>
-        <CustomArrowButton name="View All" sx={{px:"24px",py:"12px",width:{xs:"100%"}}}/>
+        <CustomArrowButton
+          name="View All"
+          sx={{ px: "24px", py: "12px", width: { xs: "100%",sm:"50%" } }}
+        />
       </Stack>
-        </Stack>
-
       <CustomSlider2 scrollRef={scrollRef}>
         {offers.map((card, index) => (
           <Stack
@@ -79,7 +110,7 @@ const WhatWeOffer = () => {
               left={40}
               width={"50%"}
               color="white"
-              variant="h4"
+              sx={{fontSize:{xs:"20px",sm:"20px",textAlign:"left !important"}}}
               fontWeight={600}
               position="absolute"
               zIndex={888}
@@ -91,7 +122,7 @@ const WhatWeOffer = () => {
               src={card.featuredImage?.node?.sourceUrl}
               width="100%"
               height={"270px"}
-              sx={{filter:"brightness(80%)"}}
+              sx={{ filter: "brightness(80%)" }}
               borderRadius="7px"
               alt={card.title}
             />
