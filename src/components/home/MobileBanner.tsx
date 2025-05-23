@@ -43,9 +43,7 @@ const MobileBanner = () => {
             </Typography>
           </IconButton>
         </Grid>
-                     <Grid size={6} >
-
-
+        <Grid size={6}>
           <IconButton
             size="small"
             sx={{
@@ -53,7 +51,7 @@ const MobileBanner = () => {
               borderRadius: 1,
               p: "10px 16px",
               gap: 0.5,
-               width: "100%",
+              width: "100%",
             }}
           >
             <Box component={"img"} width={"16px"} src={trackingIcon} />
@@ -69,16 +67,14 @@ const MobileBanner = () => {
             </Typography>
           </IconButton>
         </Grid>
-                    <Grid size={6} >
-
-
+        <Grid size={6}>
           <IconButton
             size="small"
             sx={{
               border: "1px solid rgba(109, 110, 113, 0.2)",
               borderRadius: 1,
               p: "10px 16px",
- width: "100%",
+              width: "100%",
               gap: 0.5,
             }}
           >
@@ -95,15 +91,13 @@ const MobileBanner = () => {
             </Typography>
           </IconButton>
         </Grid>
-                    <Grid size={6} >
-
-
+        <Grid size={6}>
           <Button
-          fullWidth
+            fullWidth
             size="small"
             variant="contained"
             color="success"
-            sx={{ textTransform: "none", p: "10px 16px" }}
+            sx={{ textTransform: "none", p: "10px 16px",height:"100%" }}
             startIcon={
               <Box component={"img"} width={"16px"} src={contactIcon} />
             }
@@ -112,7 +106,7 @@ const MobileBanner = () => {
           </Button>
         </Grid>
       </Grid>
-      < Divider />
+      <Divider />
     </Stack>
   );
 };

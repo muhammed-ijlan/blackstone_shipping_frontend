@@ -7,11 +7,12 @@ interface SliderProgressProps {
 }
 
 const SliderProgress: React.FC<SliderProgressProps> = ({ currentIndex, totalItems }) => {
-  const progress = (currentIndex / Math.max(totalItems - 1, 1)) * 100;
+  const progress = ((currentIndex + 1) / totalItems) * 100;
+
 
   return (
     <Box sx={{ width: "200px" }}>
-      <Typography variant="body2">
+      <Typography variant="body1">
         {String(currentIndex + 1).padStart(2, '0')} / {String(totalItems).padStart(2, '0')}
       </Typography>
       <LinearProgress

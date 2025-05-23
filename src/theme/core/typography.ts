@@ -1,5 +1,5 @@
 import type { CSSObject, Breakpoint, TypographyVariantsOptions } from '@mui/material/styles';
-import { pxToRem, setFont } from 'minimal-shared/utils';
+import { setFont } from 'minimal-shared/utils';
 import { createTheme as getTheme } from '@mui/material/styles';
 import { themeConfig } from '../theme-config';
 
@@ -8,120 +8,419 @@ export type FontStyleExtend = {
   fontSecondaryFamily: CSSObject['fontFamily'];
 };
 
-export type ResponsiveFontSizesInput = Partial<Record<Breakpoint, number>>;
-export type ResponsiveFontSizesResult = Record<string, { fontSize: string }>;
-
 const defaultMuiTheme = getTheme();
 
-function responsiveFontSizes(obj: ResponsiveFontSizesInput): ResponsiveFontSizesResult {
-  const breakpoints: Breakpoint[] = defaultMuiTheme.breakpoints.keys;
-
-  return breakpoints.reduce((acc, breakpoint) => {
-    const value = obj[breakpoint];
-    if (value !== undefined && value >= 0) {
-      acc[defaultMuiTheme.breakpoints.up(breakpoint)] = {
-        fontSize: pxToRem(value),
-      };
-    }
-    return acc;
-  }, {} as ResponsiveFontSizesResult);
-}
-
 const primaryFont = setFont(themeConfig.fontFamily.primary);
-const secondaryFont = setFont(themeConfig.fontFamily.secondary);
 
-const scaleFactor = 0.85;
-
-const scaledPxToRem = (px: number) => pxToRem(px * scaleFactor);
 export const typography: TypographyVariantsOptions = {
   fontFamily: primaryFont,
-  fontSecondaryFamily: secondaryFont,
-  fontWeightLight: '300',
-  fontWeightRegular: '400',
-  fontWeightMedium: '500',
-  fontWeightSemiBold: '600',
-  fontWeightBold: '700',
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
+  fontWeightSemiBold: 600,
+  fontWeightBold: 700,
 
   h1: {
-    fontFamily: primaryFont,
-    fontWeight: 800,
-    lineHeight: 1.2,
-    fontSize: scaledPxToRem(40), // original: 40px → reduced: 34px
-    ...responsiveFontSizes({ xs: 34, sm: 44, md: 49, lg: 54 }), // originally: xs: 40, sm: 52, md: 58, lg: 64
+    fontWeight: 700,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '32px',
+      lineHeight: '40px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '38px',
+      lineHeight: '48px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '48px',
+      lineHeight: '56px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '64px',
+      lineHeight: '74px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
   },
   h2: {
-    fontFamily: primaryFont,
-    fontWeight: 800,
-    lineHeight: 1.3,
-    fontSize: scaledPxToRem(32), // original: 32px → reduced: 27px
-    ...responsiveFontSizes({ xs: 27, sm: 31, md: 34, lg: 37 }), // originally: 32, 36, 40, 44
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '28px',
+      lineHeight: '40px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '32px',
+      lineHeight: '44px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '36px',
+      lineHeight: '48px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '40px',
+      lineHeight: '54px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   h3: {
-    fontFamily: primaryFont,
-    fontWeight: 700,
-    lineHeight: 1.4,
-    fontSize: scaledPxToRem(24), // ori ginal: 24px → reduced: 20px
-    ...responsiveFontSizes({ xs: 20, sm: 22, md: 24, lg: 26 }), // originally: 24, 26, 28, 30
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '20px',
+      lineHeight: '20px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '20px',
+      lineHeight: '22px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '22px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '24px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
   },
   h4: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(20), // original: 20px → reduced: 17px
-    ...responsiveFontSizes({ xs: 17, sm: 19, md: 20 }), // originally: 20, 22, 24
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '10.88px',
+      lineHeight: '14.96px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '14px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '20px',
+      lineHeight: '30px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   h5: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(18), // original: 18px → reduced: 15px
-    ...responsiveFontSizes({ xs: 15, sm: 16 }), // originally: 18, 19
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '10px',
+      lineHeight: '14px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '14px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '20px',
+      lineHeight: '30px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   h6: {
     fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15, md: 15 }), // originally: 16, 17, 18
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '10px',
+      lineHeight: '14px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '12px',
+      lineHeight: '16px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '15px',
+      lineHeight: '22px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '18px',
+      lineHeight: '28px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   subtitle1: {
-    fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15 }), // originally: 16, 17
+    fontWeight: 700,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '16px',
+      lineHeight: '16px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '18px',
+      lineHeight: '20px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '20px',
+      lineHeight: '22px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '24px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
   },
   subtitle2: {
     fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '14px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '16px',
+      lineHeight: '20px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '18px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '20px',
+      lineHeight: '30px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   body1: {
-    fontWeight: 400,
-    lineHeight: 1.6,
-    fontSize: scaledPxToRem(16), // original: 16px → reduced: 13.6px
-    ...responsiveFontSizes({ xs: 14, sm: 15 }), // originally: 16, 17
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '14px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '15px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'center',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '16px',
+      lineHeight: '28px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   body2: {
-    fontWeight: 400,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
+    fontWeight: 600,
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '10.25px',
+      lineHeight: '19.04px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '12px',
+      lineHeight: '20px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '13px',
+      lineHeight: '22px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '14px',
+      lineHeight: '26px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   caption: {
     fontWeight: 400,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(12), // original: 12px → reduced: 10.2px
-    ...responsiveFontSizes({ xs: 10, sm: 11 }), // originally: 12, 13
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '8px',
+      lineHeight: '12px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '10px',
+      lineHeight: '14px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '11px',
+      lineHeight: '16px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '12px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'capitalize',
+      textAlign: 'left',
+    },
   },
   overline: {
     fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: scaledPxToRem(12), // original: 12px → reduced: 10.2px
-    textTransform: 'uppercase',
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '8px',
+      lineHeight: '12px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '10px',
+      lineHeight: '14px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '11px',
+      lineHeight: '16px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '12px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'uppercase',
+      textAlign: 'left',
+    },
   },
   button: {
     fontWeight: 700,
-    lineHeight: 1.7,
-    fontSize: scaledPxToRem(14), // original: 14px → reduced: 11.9px
-    textTransform: 'unset',
-    ...responsiveFontSizes({ xs: 12, sm: 13 }), // originally: 14, 15
+    [defaultMuiTheme.breakpoints.up('xs')]: {
+      fontSize: '10px',
+      lineHeight: '14px',
+      letterSpacing: '3%',
+      textTransform: 'unset',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('sm')]: {
+      fontSize: '12px',
+      lineHeight: '16px',
+      letterSpacing: '3%',
+      textTransform: 'unset',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('md')]: {
+      fontSize: '13px',
+      lineHeight: '18px',
+      letterSpacing: '3%',
+      textTransform: 'unset',
+      textAlign: 'left',
+    },
+    [defaultMuiTheme.breakpoints.up('lg')]: {
+      fontSize: '14px',
+      lineHeight: '20px',
+      letterSpacing: '3%',
+      textTransform: 'unset',
+      textAlign: 'left',
+    },
   },
 };

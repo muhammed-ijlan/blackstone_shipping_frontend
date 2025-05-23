@@ -81,10 +81,10 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={2}>
           <Stack
-            width={{ xs: "100%", sm: "40%" }}
-            gap={{xs:0,sm:3}}
+            width={{ xs: "100%", lg: "40%" }}
+            gap={{ xs: 0, sm: 3 }}
             alignItems={{ xs: "center", sm: "flex-start" }}
           >
             <SectionHead
@@ -94,9 +94,9 @@ const Testimonial = () => {
               subTitle={testimonialsMainHeading}
             />
             <Stack
-              display={{ xs: "none", sm: "flex" }}
+              display={{ xs: "none", lg: "flex" }}
               gap={3}
-              alignItems={{ xs: "center", sm: "flex-start" }}
+              alignItems={{ xs: "center", lg: "flex-start" }}
             >
               <SliderButton2 scrollRef={scrollRef} />
               <SliderProgress
@@ -106,33 +106,34 @@ const Testimonial = () => {
             </Stack>
           </Stack>
 
-          <Stack mt={{xs:0,sm:10}} width={{ xs: "100%", sm: "50%" }}>
+          <Stack mt={{ xs: 0, lg: 10 }} width={{ xs: "100%", lg: "60%" }}>
             <CustomSlider2 scrollRef={scrollRef}>
               {testimonialsList.map((item, index) => (
                 <Stack
                   key={index}
                   sx={{
-                    minWidth: { xs: "100%", sm: "500px" },
+                    minWidth: { xs: "100%", sm: "590px" },
                     border: "2px solid rgba(109, 110, 113, 1)",
                     borderRadius: "8px",
                     p: 4,
-                    height: { xs: "100%", sm: "auto" },
+                    height: { xs: "auto", lg: "auto" },
                   }}
                   gap={2}
                   justifyContent={{ xs: "normal", sm: "space-between" }}
                 >
+                  <Stack justifyContent={{ xs: "normal", sm: "space-between" }} gap={2}>
+
                   <Box
                     component={"img"}
                     src={quote}
                     width={"83px"}
                     alt="quote icon"
-                  />
+                    />
                   <Typography
-                    variant="subtitle1"
+                    variant="body2"
                     fontWeight={400}
                     sx={{
                       fontWeight: 500,
-                      fontSize: "16px",
                       lineHeight: "28px",
                       letterSpacing: "3%",
                       textTransform: "capitalize",
@@ -140,7 +141,11 @@ const Testimonial = () => {
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(item.content),
                     }}
-                  />
+                    />
+
+
+                    </Stack>
+
                   <Stack direction={"row"} gap={3}>
                     <Box
                       component={"img"}
@@ -156,8 +161,13 @@ const Testimonial = () => {
                         {item.title}
                       </Typography>
                       <Typography
-                        variant="subtitle1"
-                        fontWeight={400}
+                        sx={{
+                          fontWeight: 400,
+                          fontSize: {xs:"10px",sm:"16px"},
+                          lineHeight: "26px",
+                          letterSpacing: "3%",
+                          textTransform: "capitalize",
+                        }}
                         color="rgba(249, 250, 251, 0.5)"
                       >
                         {
@@ -166,8 +176,13 @@ const Testimonial = () => {
                         }
                       </Typography>
                       <Typography
-                        variant="subtitle1"
-                        fontWeight={400}
+                        sx={{
+                          fontWeight: 400,
+                        fontSize: {xs:"10px",sm:"16px"},
+                          lineHeight: "26px",
+                          letterSpacing: "3%",
+                          textTransform: "capitalize",
+                        }}
                         color="rgba(249, 250, 251, 0.5)"
                       >
                         {
@@ -182,9 +197,9 @@ const Testimonial = () => {
             </CustomSlider2>
           </Stack>
           <Stack
-            display={{ xs: "flex", sm: "none" }}
+            display={{ xs: "flex", lg: "none" }}
             gap={3}
-            alignItems={{ xs: "center", sm: "flex-start" }}
+            alignItems={{ xs: "center", lg: "flex-start" }}
           >
             <SliderButton2 scrollRef={scrollRef} />
             <SliderProgress

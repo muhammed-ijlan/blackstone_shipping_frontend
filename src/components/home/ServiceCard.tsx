@@ -47,21 +47,31 @@ const ServiceCard = ({
         alignItems={"center"}
         justifyContent={"space-between"}
         sx={{ position: "relative", zIndex: 1 }}
+        gap={1}
       >
         <Typography
-          variant="h4"
-          fontWeight={600}
           sx={{
             color: hovered ? "rgba(45, 55, 72, 1)" : "white",
             transition: hovered
               ? "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out 0.3s"
               : "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out",
 
-            textDecoration: "underline", 
+            textDecoration: "underline",
             textDecorationColor: hovered
               ? "rgba(45, 55, 72, 1)"
               : "transparent",
+
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "wrap",
+            fontWeight: 600,
+            fontSize: "20px",
+            lineHeight: "32px",
+            letterSpacing: "3%",
+            textTransform: "capitalize",
+            textAlign:"left"
           }}
+          variant={{xs:"h4",md:"h5"}}
         >
           {item.title}
         </Typography>

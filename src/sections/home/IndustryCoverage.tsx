@@ -1,4 +1,5 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
+import { Grid } from "@mui/system";
 import React from "react";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import IndustryCoverageCard from "../../components/home/IndustryCoverageCard";
@@ -30,10 +31,13 @@ export interface GetIndustryCoverageData {
 }
 
 const IndustryCoverage = () => {
-  const { data, loading, error } = useQuery<GetIndustryCoverageData>(GET_INDUSTRY_COVERAGE);
+  const { data, loading, error } = useQuery<GetIndustryCoverageData>(
+    GET_INDUSTRY_COVERAGE
+  );
 
   if (loading) return <Typography color="white">Loading...</Typography>;
-  if (error) return <Typography color="error">Error: {error.message}</Typography>;
+  if (error)
+    return <Typography color="error">Error: {error.message}</Typography>;
 
   return (
     <Stack
@@ -46,13 +50,23 @@ const IndustryCoverage = () => {
     >
       <Container maxWidth="xl">
         <SectionHead
-          title={data?.page?.homePageFieldsIndustryCoverage?.industryCoverageMainHeading || "INDUSTRY COVERAGE"}
+          title={
+            data?.page?.homePageFieldsIndustryCoverage
+              ?.industryCoverageMainHeading || "INDUSTRY COVERAGE"
+          }
           titleColor="white"
         />
 
-        <Grid container rowGap={3} mb={10} columnSpacing={0} justifyContent="space-between" alignItems={"center"} >
+        <Grid
+          container
+          rowGap={3}
+          mb={10}
+          columnSpacing={5}
+          justifyContent="space-between"
+          alignItems={"center"}
+        >
           {data?.industries?.nodes?.map((item, index) => (
-            <Grid mt={3} size={4} width={{xs:"100%",md:"359px"}} height={"218px"}   key={index} p={0}>
+            <Grid size={{ xs: 12, sm: 6,md:4 }} mt={3} key={index} p={0}>
               <IndustryCoverageCard item={item} />
             </Grid>
           ))}

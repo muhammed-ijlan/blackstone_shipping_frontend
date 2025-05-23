@@ -15,8 +15,9 @@ import { GET_SLIDERS } from "src/graphql/queries";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "src/routes/hooks";
 import MobileBanner from "./MobileBanner";
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
-import VideoJS from '../VideoJs';
+import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from "video.js";
+import VideoJS from "../VideoJs";
+import arrow from "src/assets/icons/arrowcircle.png";
 
 interface SliderNode {
   title: string;
@@ -43,25 +44,26 @@ interface GetSlidersData {
 }
 
 const HomeBanner: React.FC = () => {
-const { loading, error, data } = useQuery<GetSlidersData>(GET_SLIDERS);
-const router = useRouter();
-const playerRef = useRef<VideoJsPlayer | null>(null);
+  const { loading, error, data } = useQuery<GetSlidersData>(GET_SLIDERS);
+  const router = useRouter();
+  const playerRef = useRef<VideoJsPlayer | null>(null);
 
-if (loading) return <p>Loading...</p>;
-if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   const videoJsOptions: VideoJsPlayerOptions = {
     autoplay: true,
     controls: false,
     responsive: true,
     fluid: true,
-    loop: true, 
+    loop: true,
     muted: true,
+    playsinline: true,
 
     sources: [
       {
-        src: 'https://cdn.pixabay.com/video/2019/05/12/23544-335833111_large.mp4',
-        type: 'video/mp4',
+        src: "https://cdn.pixabay.com/video/2019/05/12/23544-335833111_large.mp4",
+        type: "video/mp4",
       },
     ],
   };
@@ -70,12 +72,12 @@ if (error) return <p>Error: {error.message}</p>;
     playerRef.current = player;
 
     // You can handle player events here
-    player.on('waiting', () => {
-      videojs.log('player is waiting');
+    player.on("waiting", () => {
+      videojs.log("player is waiting");
     });
 
-    player.on('dispose', () => {
-      videojs.log('player will dispose');
+    player.on("dispose", () => {
+      videojs.log("player will dispose");
     });
   };
   return (
@@ -97,8 +99,8 @@ if (error) return <p>Error: {error.message}</p>;
             zIndex: 0,
           }}
         >
-          <Box sx={{filter:"brightness(0.7)"}}>
-        <VideoJS options={videoJsOptions} onReady={handlePlayerReady}  />
+          <Box sx={{ filter: "brightness(0.7)" }}>
+            <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
           </Box>
         </Box>
 
@@ -120,13 +122,13 @@ if (error) return <p>Error: {error.message}</p>;
               infiniteLoop
               showThumbs={false}
               useKeyboardArrows
-              autoPlay={false}
+              autoPlay={true}
               stopOnHover
               swipeable
               emulateTouch
             >
               {data?.sliders.nodes.map((slide, index) => (
-                <Box
+                <Stack
                   key={index}
                   style={{
                     MozUserSelect: "none",
@@ -135,18 +137,23 @@ if (error) return <p>Error: {error.message}</p>;
                     userSelect: "none",
                     position: "relative",
                   }}
+                  display="flex"
+                  alignItems={{sm:"center",lg:"flex-start"}}
                   unselectable="on"
                   onMouseDown={(e) => e.preventDefault()}
+
                 >
-                  <Box
-                    width={"700px"}
+                  <Stack
+                    width={{sm:"600px",lg:"700px"}}
                     display="flex"
                     flexDirection="column"
                     gap={2}
-                    alignItems={"flex-start"}
+                    textAlign={{sm:"center",lg:"left"}}
+                     alignItems={{sm:"center",lg:"flex-start"}}
                   >
                     <Stack
                       direction="row"
+                     
                       gap={1}
                       borderBottom={2}
                       borderColor="rgba(32, 189, 103, 1)"
@@ -171,11 +178,9 @@ if (error) return <p>Error: {error.message}</p>;
                       {slide.sliderFields.sliderMainHeading.toUpperCase()}
                     </Typography>
 
-                    <Typography
-                      variant="h5"
-                      color="white"
-                      fontWeight={400}
-                      // sx={{ textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}
+                    <Typography variant="h5" color="white" fontWeight={400} 
+                    textAlign={{sm:"center",lg:"left"}}
+                    
                     >
                       {slide.sliderFields.shortDescription}
                     </Typography>
@@ -186,15 +191,18 @@ if (error) return <p>Error: {error.message}</p>;
                           router.push(slide.sliderFields.button1Link)
                         }
                         variant="contained"
-                        endIcon={<ArrowForward />}
+                        endIcon={<Box component={"img"} src={arrow} width="36px" height={"36px"}/>}
                         sx={{
                           backgroundColor: "#0061f2",
-                          textTransform: "none",
-                          fontWeight: "600",
-                          fontSize: "16px",
-                          borderRadius: "8px",
+                          borderRadius: "4px",
                           px: 3,
                           py: 1.5,
+                          // maxWidth:"227px",
+                          height: "60px",
+                          fontWeight: 600,
+                          fontSize: "16px",
+                          lineHeight: "100%",
+                          letterSpacing: "3%",
                           "&:hover": {
                             backgroundColor: "#0052cc",
                           },
@@ -210,9 +218,12 @@ if (error) return <p>Error: {error.message}</p>;
                         sx={{
                           backgroundColor: "#28a745",
                           textTransform: "none",
-                          fontWeight: "600",
+                          borderRadius: "4px",
+                           height: "60px",
+                          fontWeight: 600,
                           fontSize: "16px",
-                          borderRadius: "8px",
+                          lineHeight: "100%",
+                          letterSpacing: "3%",
                           px: 3,
                           py: 1.5,
                           "&:hover": {
@@ -223,8 +234,8 @@ if (error) return <p>Error: {error.message}</p>;
                         {slide.sliderFields.button2Text}
                       </Button>
                     </Stack>
-                  </Box>
-                </Box>
+                  </Stack>
+                </Stack>
               ))}
             </Carousel>
           </Stack>
@@ -301,7 +312,15 @@ if (error) return <p>Error: {error.message}</p>;
                       {slide.sliderFields.sliderMainHeading.toUpperCase()}
                     </Typography>
 
-                    <Stack direction="row" spacing={1} mt={2} flexWrap={"nowrap"} width={"100%"} alignItems={"center"} >
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      mt={2}
+                      flexWrap={"nowrap"}
+                      width={"100%"}
+                      alignItems={"center"}
+                      height={"100%"}
+                    >
                       <Button
                         onClick={() =>
                           router.push(slide.sliderFields.button1Link)
@@ -315,11 +334,13 @@ if (error) return <p>Error: {error.message}</p>;
                           fontSize: "13px",
                           borderRadius: "8px",
                           // px: 3,
-                          py: 1.5,
+                          // py: 1.5,
                           width: "100%",
                           "&:hover": {
                             backgroundColor: "#0052cc",
                           },
+                          height:"45px"
+
                         }}
                       >
                         {slide.sliderFields.button1Text}
@@ -332,16 +353,15 @@ if (error) return <p>Error: {error.message}</p>;
                         sx={{
                           backgroundColor: "#28a745",
                           textTransform: "none",
+                          fontSize: "13px",
                           fontWeight: "600",
-                          // fontSize: "16px",
                           borderRadius: "8px",
                           width: "100%",
-
-                          // px: 3,
-                          py: 1.5,
                           "&:hover": {
                             backgroundColor: "#218838",
                           },
+                                                   height:"45px"
+
                         }}
                       >
                         {slide.sliderFields.button2Text}
@@ -351,8 +371,7 @@ if (error) return <p>Error: {error.message}</p>;
                 </Box>
               ))}
             </Carousel>
-                      <VideoJS options={videoJsOptions} onReady={handlePlayerReady}  />
-
+            <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
           </Stack>
         </Container>
       </Stack>
