@@ -5,12 +5,8 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { Divider, Stack, useTheme, Link as MuiLink } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Logo } from "../../components/logo";
-import logo from "../../assets/logo/navlogo.png";
+import logo from "../../assets/logo/medium.png";
 import type { AppBarProps } from "@mui/material/AppBar";
 import type { ContainerProps } from "@mui/material/Container";
 import type {
@@ -20,10 +16,11 @@ import type {
   Breakpoint,
 } from "@mui/material/styles";
 import { useScrollOffsetTop } from "minimal-shared/hooks";
-import { varAlpha, mergeClasses } from "minimal-shared/utils";
+import { mergeClasses } from "minimal-shared/utils";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import { layoutClasses } from "./classes";
+import { useLocation } from "react-router-dom";
 
 import searchIcon from "src/assets/icons/search.png";
 import trackingIcon from "src/assets/icons/track.png";
@@ -33,11 +30,13 @@ import { useRouter } from "src/routes/hooks";
 
 const NavBar = styled("div")(({ theme }) => ({
   display: "flex",
-  flexWrap: "wrap",
-  gap: theme.spacing(1),
+  // flexWrap: "nowrap",
+  gap: theme.spacing(3),
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),
   alignItems: "center",
+  overflowX:"auto", 
+  maxWidth:"100%"
 }));
 
 const NavItem = styled("div", {
@@ -45,14 +44,17 @@ const NavItem = styled("div", {
 })<{ isLastItem?: boolean }>(({ theme, isLastItem }) => ({
   position: "relative",
   display: "inline-block",
-  padding: theme.spacing(0.5, 1),
+
 }));
 
-const NavLink = styled(MuiLink)(({ theme }) => ({
-  fontSize: "14px !important",
+const NavLink = styled(MuiLink, {
+  shouldForwardProp: (prop) => prop !== "isActive",
+})<{ isActive?: boolean }>(({ theme, isActive }) => ({
+  fontSize: "15px !important",
   fontWeight: 600,
   cursor: "pointer",
-  color: theme.palette.text.primary,
+  textWrap:"nowrap",
+  color: isActive ? "rgba(45, 55, 72, 1)" : "rgba(109, 110, 113, 1)",
   textDecoration: "none",
   "&:hover": {
     color: theme.palette.primary.main,
@@ -64,7 +66,7 @@ const SubMenu = styled(Box, {
 })<{ isOpen: boolean; isLastItem?: boolean }>(
   ({ theme, isOpen, isLastItem }) => ({
     position: "absolute",
-    top: "110px",
+    top: "135px",
     left: "0px",
     backgroundColor: "#fff",
     padding: theme.spacing(2, 4),
@@ -165,10 +167,9 @@ export function HeaderSection({
 }: HeaderSectionProps) {
   const { offsetTop: isOffset } = useScrollOffsetTop();
   const theme = useTheme();
-
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-
   const router = useRouter();
+  const location = useLocation();
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   const handleMouseEnter = (label: string) => {
     setOpenSubmenu(label);
@@ -191,7 +192,7 @@ export function HeaderSection({
             {subcategories.map((subItem) => (
               <SubMenuItem
                 key={subItem.id}
-                href={subItem.url !== "#" ? subItem.url: undefined}
+                href={subItem.url !== "#" ? subItem.url : undefined}
               >
                 {subItem.label}
               </SubMenuItem>
@@ -245,7 +246,7 @@ export function HeaderSection({
     >
       {slots?.topArea}
 
-      <HeaderContainer maxWidth="xl">
+      <HeaderContainer maxWidth="lg">
         {slots?.leftArea}
         <Stack
           width="100%"
@@ -258,9 +259,7 @@ export function HeaderSection({
             sx={{ height: "100%" }}
           >
             <Stack>
-              <Logo onClick={()=>router.push("/")} href={
-                logo
-              } sx={{ height: "107px", width: "107px" }} />
+              <Logo onClick={() => router.push("/")} href={logo} />
             </Stack>
 
             <Stack gap={1} alignItems="flex-end" sx={{ height: "100%" }}>
@@ -270,8 +269,8 @@ export function HeaderSection({
                   sx={{
                     border: "1px solid rgba(109, 110, 113, 0.2)",
                     borderRadius: 1,
-                    gap:0.5,
-                    p:"10px 16px",
+                    gap: 0.5,
+                    p: "10px 16px",
                   }}
                 >
                   <Box component={"img"} width={"16px"} src={searchIcon} />
@@ -281,7 +280,6 @@ export function HeaderSection({
                     sx={{ ml: 0.5 }}
                     color="rgba(45, 55, 72, 1)"
                     fontSize={14}
-
                   >
                     Search
                   </Typography>
@@ -292,12 +290,11 @@ export function HeaderSection({
                   sx={{
                     border: "1px solid rgba(109, 110, 113, 0.2)",
                     borderRadius: 1,
-                    p:"10px 16px",
-                    gap:0.5,
+                    p: "10px 16px",
+                    gap: 0.5,
                   }}
                 >
                   <Box component={"img"} width={"16px"} src={trackingIcon} />
-
                   <Typography
                     variant="body2"
                     fontSize={14}
@@ -314,13 +311,11 @@ export function HeaderSection({
                   sx={{
                     border: "1px solid rgba(109, 110, 113, 0.2)",
                     borderRadius: 1,
-                                        p:"10px 16px",
-
-                    gap:0.5,
+                    p: "10px 16px",
+                    gap: 0.5,
                   }}
                 >
                   <Box component={"img"} width={"16px"} src={myBBXIcon} />
-
                   <Typography
                     fontSize={14}
                     fontWeight={500}
@@ -336,7 +331,7 @@ export function HeaderSection({
                   size="small"
                   variant="contained"
                   color="success"
-                  sx={{ textTransform: "none", p:"10px 16px"  }}
+                  sx={{ textTransform: "none", p: "10px 16px" }}
                   startIcon={
                     <Box component={"img"} width={"16px"} src={contactIcon} />
                   }
@@ -371,7 +366,14 @@ export function HeaderSection({
                       }
                     >
                       <NavItem isLastItem={index >= data.length - 3}>
-                        <NavLink href={item.url !== "#" ? item.url.split("/")[length-1] : undefined}>
+                        <NavLink
+                          href={item.url !== "#" ? item.url : undefined}
+                          isActive={
+                            (item.url === "/" || item.url === "") 
+                              ? location.pathname === "/"
+                              : location.pathname === item.url
+                          }
+                        >
                           {item.label}
                         </NavLink>
                       </NavItem>
@@ -391,7 +393,6 @@ export function HeaderSection({
             </Stack>
           </Stack>
         </Stack>
-      {/* <HeaderCenterArea {...slotProps?.centerArea}>{slots?.centerArea}</HeaderCenterArea> */}
         {slots?.rightArea}
       </HeaderContainer>
     </HeaderRoot>
@@ -481,6 +482,6 @@ const HeaderContainer = styled(Container, {
 
 const HeaderCenterArea = styled("div")(() => ({
   display: "none",
-  flex: '1 1 auto',
-  justifyContent: 'center',
+  flex: "1 1 auto",
+  justifyContent: "center",
 }));

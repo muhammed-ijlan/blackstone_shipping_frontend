@@ -47,10 +47,9 @@ const ServiceCard = ({
         alignItems={"center"}
         justifyContent={"space-between"}
         sx={{ position: "relative", zIndex: 1 }}
+        gap={1}
       >
         <Typography
-          variant="h4"
-          fontWeight={600}
           sx={{
             color: hovered ? "rgba(45, 55, 72, 1)" : "white",
             transition: hovered
@@ -61,10 +60,19 @@ const ServiceCard = ({
             textDecorationColor: hovered
               ? "rgba(45, 55, 72, 1)"
               : "transparent",
+
+              overflow:"hidden",
+              textOverflow:"ellipsis",
+              whiteSpace:"wrap",
+               fontWeight: 600,
+  fontSize: "20px",
+  lineHeight: "32px",
+  letterSpacing: "3%",
+  textTransform: "capitalize"
           }}
         >
           {item.title}
-        </Typography>
+        </Typography> 
         <Box
           component={"img"}
           src={icon1}

@@ -75,12 +75,14 @@ const WhatWeOffer = () => {
             }}
           >
             <Typography
-              bottom={40}
+              bottom={20}
               left={40}
+              width={"50%"}
               color="white"
               variant="h4"
               fontWeight={600}
               position="absolute"
+              zIndex={888}
             >
               {card.title}
             </Typography>
@@ -89,6 +91,7 @@ const WhatWeOffer = () => {
               src={card.featuredImage?.node?.sourceUrl}
               width="100%"
               height={"270px"}
+              sx={{filter:"brightness(80%)"}}
               borderRadius="7px"
               alt={card.title}
             />

@@ -32,7 +32,7 @@ const Contact = () => {
 
   return (
     <Container maxWidth="xl" sx={{ mb: 10 }}>
-      <Stack direction={{xs:"column",sm:"row"}} gap={{xs:0,sm:8}}>
+      <Stack direction={{ xs: "column", sm: "row" }} gap={{ xs: 0, sm: 8 }}>
         <SectionHead
           title="Contact  Us  "
           subTitle="Contact us for quick and reliable support!"
@@ -41,7 +41,7 @@ const Contact = () => {
           contentColor="rgba(45, 55, 72, 1)"
           content="We’re here to assist you! Fill out the form, and our team will get back to you as soon as possible. Let’s work together to find the perfect solution for your business needs."
         />
-        <Stack mt={{xs:0,sm:10}} width={"100%"}>
+        <Stack mt={{ xs: 0, sm: 10 }} width={"100%"}>
           <Formik
             initialValues={initialValues}
             validationSchema={contactValidationSchema}
@@ -70,6 +70,18 @@ const Contact = () => {
                       onBlur={handleBlur}
                       error={touched.name && Boolean(errors.name)}
                       helperText={touched.name && errors.name}
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          height: "60px", 
+                        },
+                        "& input": {
+                          padding: "12px 14px", 
+                        },
+                        "& .MuiInputLabel-root": {
+                          fontSize: "1rem",
+                          mt:.5
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid size={{ xs: 12, md: 6 }}>
@@ -79,6 +91,18 @@ const Contact = () => {
                       label="Email"
                       size="medium"
                       fullWidth
+                         sx={{
+                        "& .MuiInputBase-root": {
+                          height: "60px", 
+                        },
+                        "& input": {
+                          padding: "12px 14px", 
+                        },
+                        "& .MuiInputLabel-root": {
+                          fontSize: "1rem",
+                          mt:.5
+                        },
+                      }}
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -92,6 +116,18 @@ const Contact = () => {
                       variant="outlined"
                       label="Phone Number"
                       size="medium"
+                         sx={{
+                        "& .MuiInputBase-root": {
+                          height: "60px", 
+                        },
+                        "& input": {
+                          padding: "12px 14px", 
+                        },
+                        "& .MuiInputLabel-root": {
+                          fontSize: "1rem",
+                          mt:.5
+                        },
+                      }}
                       fullWidth
                       value={values.phone}
                       onChange={handleChange}
@@ -108,6 +144,15 @@ const Contact = () => {
                       variant="outlined"
                       label="Message"
                       size="medium"
+                         sx={{  
+                        "& input": {
+                          padding: "12px 14px", 
+                        },
+                        "& .MuiInputLabel-root": {
+                          fontSize: "1rem",
+                          mt:.5
+                        },
+                      }}
                       fullWidth
                       value={values.message}
                       onChange={handleChange}
@@ -118,10 +163,10 @@ const Contact = () => {
                   </Grid>
                   <Grid size={{ xs: 12, md: 12 }}>
                     <Button
-                    sx={{
-                      height:"60px",
-                      background: "rgba(26, 86, 219, 1)",
-                    }}
+                      sx={{
+                        height: "60px",
+                        background: "rgba(26, 86, 219, 1)",
+                      }}
                       type="submit"
                       size="large"
                       fullWidth

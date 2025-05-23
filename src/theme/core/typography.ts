@@ -28,11 +28,10 @@ function responsiveFontSizes(obj: ResponsiveFontSizesInput): ResponsiveFontSizes
 
 
 const primaryFont = setFont(themeConfig.fontFamily.primary); 
-const secondaryFont = setFont(themeConfig.fontFamily.secondary);
 
 export const typography: TypographyVariantsOptions = {
   fontFamily: primaryFont,
-  fontSecondaryFamily: secondaryFont,
+  // fontSecondaryFamily: secondaryFont,
   fontWeightLight: 300,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
@@ -40,7 +39,7 @@ export const typography: TypographyVariantsOptions = {
   fontWeightBold: 700,
 
   h1: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 700,
     fontSize: pxToRem(64),
     lineHeight: pxToRem(74),
@@ -48,7 +47,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'uppercase',
   },
   h2: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(40),
     lineHeight: pxToRem(54),
@@ -56,7 +55,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   h3: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(24),
     lineHeight: '100%',
@@ -64,7 +63,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'uppercase',
   },
   h4: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(20),
     lineHeight: pxToRem(30),
@@ -72,7 +71,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   h5: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(20),
     lineHeight: pxToRem(30),
@@ -80,7 +79,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   h6: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(18),
     lineHeight: pxToRem(28),
@@ -88,7 +87,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   subtitle1: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 700,
     fontSize: pxToRem(24),
     lineHeight: '100%',
@@ -96,7 +95,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'uppercase',
   },
   subtitle2: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(20),
     lineHeight: pxToRem(30),
@@ -104,7 +103,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   body1: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 500,
     fontSize: pxToRem(16),
     lineHeight: pxToRem(28),
@@ -112,7 +111,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   body2: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 600,
     fontSize: pxToRem(14),
     lineHeight: pxToRem(26),
@@ -120,7 +119,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   caption: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 400,
     fontSize: pxToRem(12),
     lineHeight: pxToRem(18),
@@ -128,7 +127,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'capitalize',
   },
   overline: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 700,
     fontSize: pxToRem(12),
     lineHeight: pxToRem(18),
@@ -136,7 +135,7 @@ export const typography: TypographyVariantsOptions = {
     textTransform: 'uppercase',
   },
   button: {
-    fontFamily: primaryFont,
+    // fontFamily: primaryFont,
     fontWeight: 700,
     fontSize: pxToRem(14),
     lineHeight: pxToRem(20),

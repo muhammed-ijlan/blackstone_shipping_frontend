@@ -28,16 +28,18 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedBackToFront={1} flipSpeedFrontToBack={1}>
         {/* Front Side */}
         <Stack
-          p={3}
+          px={4}
+          py={4}
           gap={2}
           alignItems="flex-start"
-          justifyContent="center"
+          justifyContent="space-between"
           sx={{
             width: '100%',
             height: '218px',
             borderRadius: '8px',
             background: 'linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)',
             position: 'relative',
+            borderBottom:"1px solid rgba(249, 250, 251, 1)"
           }}
         >
           <div
@@ -54,10 +56,13 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
           <img
             src={item.featuredImage.node.sourceUrl}
             alt={item.title}
-            width="55px"
-            height="55px"
+            width="60px"
+            height="60px"
           />
-          <Typography variant="h6" fontWeight={600} color="white">
+          <Typography sx={{ fontWeight: 600,
+  fontSize: "20px",
+  lineHeight: "44px",
+  letterSpacing: "3%",}} color="white">
             {item.title}
           </Typography>
         </Stack>
@@ -73,6 +78,8 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             height: '218px',
             borderRadius: '8px',
             background: 'linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)',
+            borderBottom:"1px solid rgba(249, 250, 251, 1)"
+
           }}
         >
           <Typography variant="body2" color="white">

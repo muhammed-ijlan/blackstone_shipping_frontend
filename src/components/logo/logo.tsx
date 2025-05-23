@@ -47,10 +47,7 @@ export function Logo({
       className={mergeClasses([logoClasses.root, className])}
       sx={[
         {
-          width: 40,
-          height: 40,
-          ...(!isSingle && { width: 102, height: 36 }),
-          ...(disabled && { pointerEvents: 'none' }),
+          width: 147,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -62,7 +59,6 @@ export function Logo({
         sx={{
           width: 1,
           height: 1,
-          objectFit: 'contain',
         }}
       />
     </LogoRoot>

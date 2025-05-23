@@ -1,6 +1,5 @@
 // main.tsx
 import './global.css';
-import '@fontsource-variable/inter-tight'; 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
