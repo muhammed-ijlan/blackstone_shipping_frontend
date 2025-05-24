@@ -69,9 +69,9 @@ const ServiceCard = ({
             lineHeight: "32px",
             letterSpacing: "3%",
             textTransform: "capitalize",
-            textAlign:"left"
+            textAlign:"left",
+            typography:{xs:"h4",lg:"h5"}
           }}
-          variant={{xs:"h4",md:"h5"}}
         >
           {item.title}
         </Typography>

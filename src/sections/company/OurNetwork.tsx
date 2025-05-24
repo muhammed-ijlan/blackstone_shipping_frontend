@@ -13,7 +13,7 @@ const OurNetwork = ({ data }: { data: GetCompanyGlobalNetworkResponse }) => {
             {data?.page?.companyPageOurGlobalNetworkSection?.ourGlobalNetworkTitle.toUpperCase()}
           </Typography>
           <Typography
-            variant="h5"
+            variant="body1"
             sx={{ fontWeight: "500 !important" }}
             color={"rgba(45, 55, 72, 0.8)"}
           >

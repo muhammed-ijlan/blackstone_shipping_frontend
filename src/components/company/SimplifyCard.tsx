@@ -19,7 +19,7 @@ const SimplifyCard = ({method}:{method:ShippingMethodNode}) => {
         <Typography variant='h4'>
             {method.title.toUpperCase()}
         </Typography>
-        <Typography  dangerouslySetInnerHTML={{
+        <Typography sx={{textAlign:{xs:"left !important"}}}  dangerouslySetInnerHTML={{
               __html:method.content,
             }} variant='body1' fontWeight={500} color='rgba(109, 110, 113, 1)'/>
     </Stack>

@@ -94,7 +94,6 @@ const Page = () => {
     {keyFactsData && <KeyFacts data={keyFactsData}/>}
     {ourNetworkData && <OurNetwork data={ourNetworkData}/>}
     {ourCertificationData && <Certification data={ourCertificationData}/>}
-
     </>
   );
 };

@@ -65,8 +65,9 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             height="60px"
           />
           <Typography
-            variant={{xs:"h3",md:"h4"}}
+         
             sx={{
+              typography:{xs:"h4",lg:"h5"},
               fontWeight: 600,
               fontSize: "20px",
               lineHeight: "44px",
@@ -93,7 +94,7 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             borderBottom: "1px solid rgba(249, 250, 251, 1)",
           }}
         >
-          <Typography variant="body2" color="white">
+          <Typography sx={{typography: { xs: "body1", lg: "body2" },}} color="white">
             {item.content
               ? item.content.replace(/<[^>]+>/g, "")
               : "No description available."}

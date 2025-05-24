@@ -86,10 +86,10 @@ export const typography: TypographyVariantsOptions = {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
       fontSize: '20px',
-      lineHeight: '20px',
+      lineHeight: '25px',
       letterSpacing: '3%',
       textTransform: 'uppercase',
-      textAlign: 'left',
+      textAlign: 'center',
     },
     [defaultMuiTheme.breakpoints.up('sm')]: {
       fontSize: '20px',
@@ -107,7 +107,7 @@ export const typography: TypographyVariantsOptions = {
     },
     [defaultMuiTheme.breakpoints.up('lg')]: {
       fontSize: '24px',
-      lineHeight: '24px',
+      lineHeight: '36px',
       letterSpacing: '3%',
       textTransform: 'uppercase',
       textAlign: 'left',
@@ -116,21 +116,21 @@ export const typography: TypographyVariantsOptions = {
   h4: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '10.88px',
-      lineHeight: '14.96px',
+      fontSize: '17px',
+      lineHeight: '20px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
-      textAlign: 'left',
+      textAlign: 'center',
     },
     [defaultMuiTheme.breakpoints.up('sm')]: {
-      fontSize: '14px',
-      lineHeight: '18px',
+      fontSize: '18px',
+      lineHeight: '20px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
     },
     [defaultMuiTheme.breakpoints.up('md')]: {
-      fontSize: '16px',
+      fontSize: '20px',
       lineHeight: '24px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
@@ -147,8 +147,8 @@ export const typography: TypographyVariantsOptions = {
   h5: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '10px',
-      lineHeight: '14px',
+      fontSize: '15px',
+      lineHeight: '18px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
@@ -271,8 +271,8 @@ export const typography: TypographyVariantsOptions = {
   body1: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '14px',
-      lineHeight: '24px',
+      fontSize: '12px',
+      lineHeight: '20px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'center',
@@ -302,7 +302,7 @@ export const typography: TypographyVariantsOptions = {
   body2: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '10.25px',
+      fontSize: '11px',
       lineHeight: '19.04px',
       letterSpacing: '3%',
       textTransform: 'capitalize',

@@ -17,9 +17,10 @@ const Vision = ({ data }: { data: GetCompanyVisionResponse }) => {
             }}
             sx={{
               fontWeight: 500,
-              fontSize: "17px !important",
+              // fontSize: "17px !important",
               lineHeight: "32px",
               letterSpacing: "3%",
+              typography:{xs:"body1",lg:"body1"}
             }}
           />
 

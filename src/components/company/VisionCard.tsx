@@ -19,7 +19,7 @@ const VisionCard = ({ vision }: { vision: VisionNode }) => {
         alt={vision.title}
         style={{ width: "88px" }}
       />
-      <Typography variant="h4" fontWeight={600}>
+      <Typography sx={{typography:{xs:"h5",lg:"h4"}}} fontWeight={600}>
         {vision.title.toUpperCase()}
       </Typography>
     </Stack>

@@ -8,10 +8,10 @@ const SimplifyShipping = ({data}:{data:GetCompanyShippingResponse}) => {
     <Container maxWidth="xl" sx={{my:10}}>
 <Stack gap={4}>
     <Typography variant='h3'>{data.page.companyPageSimply.simplifyShippingTitle}</Typography>
-    <Grid container justifyContent={"space-between"} spacing={5}>
+    <Grid container justifyContent={"center"}  spacing={5}>
         {
             data.shippingMethods.nodes.map((method, index) => (
-                <Grid key={index} size={{xs:4}}>
+                <Grid key={index} size={{xs:12,lg:4}}>
                     <SimplifyCard method={method} />
                 </Grid>
             ))

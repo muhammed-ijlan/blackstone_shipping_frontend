@@ -99,7 +99,7 @@ const Contact = () => {
                           padding: "12px 14px", 
                         },
                         "& .MuiInputLabel-root": {
-                           fontSize: "0.9 rem !important",
+                          fontSize: "15px !important",
                           fontWeight: "500 !important",
                         },
                       }}

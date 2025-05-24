@@ -1,7 +1,6 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import {  GetCompanyPageResponse } from "src/types/graphql/types/company.types";
-
+import { GetCompanyPageResponse } from "src/types/graphql/types/company.types";
 
 const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
   return (
@@ -23,23 +22,22 @@ const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
           position: "absolute",
           top: 0,
           left: 0,
-        }}>
-          <Container maxWidth="xl">
-
-
-      <Typography
-        sx={{
-          fontSize: "100px !important",
-          fontWeight: "700",
-          color: "white !important",
-          position: "absolute",
-          bottom: "50px",
         }}
-        >
-        {data.page.companyPageBannerSection.bannerTitle}
-      </Typography>
-          </Container>
-        </Stack>
+      >
+        <Container maxWidth="xl" sx={{height:"100%",display:'flex',alignItems:{xs:'center',lg:"left"}, justifyContent:{xs:'center',lg:"left"}}}>
+          <Typography
+            sx={{
+              fontSize: {xs:"65px",lg:"6.25rem !important"},
+              fontWeight: "700",
+              color: "white !important",
+              position: {xs:"unset",lg:"absolute"},
+              bottom: "100px",
+            }}
+          >
+            {data.page.companyPageBannerSection.bannerTitle}
+          </Typography>
+        </Container>
+      </Stack>
     </Stack>
   );
 };
