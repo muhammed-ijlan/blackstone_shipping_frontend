@@ -1,12 +1,17 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import { GetCompanyPageResponse } from "src/types/graphql/types/company.types";
 
-const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
+interface BannerPropsTypes {
+  bgUrl:string;
+  subTitle?:string;
+  mainTitle:string
+}
+
+const Banner = ({bgUrl,subTitle,mainTitle}:BannerPropsTypes) => {
   return (
     <Stack
       sx={{
-        backgroundImage: `url(${data.page.companyPageBannerSection.bannerImage.node.sourceUrl})`,
+        backgroundImage: `url(${bgUrl})`,
         height: 600,
         width: "100%",
         backgroundSize: "cover",
@@ -34,7 +39,18 @@ const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
               bottom: "100px",
             }}
           >
-            {data.page.companyPageBannerSection.bannerTitle}
+            {subTitle}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: {xs:"65px",lg:"6.25rem !important"},
+              fontWeight: "700",
+              color: "white !important",
+              position: {xs:"unset",lg:"absolute"},
+              bottom: "100px",
+            }}
+          >
+            {mainTitle.toUpperCase()}
           </Typography>
         </Container>
       </Stack>

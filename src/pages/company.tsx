@@ -58,42 +58,54 @@ const Page = () => {
     error: visionError,
   } = useQuery<GetCompanyVisionResponse>(GET_COMPANY_VISION);
 
-  const {
-    data: simplifyShippingData,
-  } = useQuery<GetCompanyShippingResponse>(GET_COMPANY_SIMPLIFY_SHIPPING);
+  const { data: simplifyShippingData } = useQuery<GetCompanyShippingResponse>(
+    GET_COMPANY_SIMPLIFY_SHIPPING
+  );
 
-  const {
-    data:whoWeAreData 
-  } = useQuery<GetCompanyWhoWeAreResponse>(GET_COMPANY_WHO_WE_ARE)
-  const {
-    data:ourValueData 
-  } = useQuery<OurValuesSectionData>(GET_COMPANY_OUR_VALUES)
-  const {
-    data:keyFactsData 
-  } = useQuery<GetCompanyKeyFactsResponse>(GET_COMPANY_KEY_FACTS)
-  const {
-    data:ourNetworkData 
-  } = useQuery<GetCompanyGlobalNetworkResponse>(GET_COMPANY_GLOBAL_NETWORK)
+  const { data: whoWeAreData } = useQuery<GetCompanyWhoWeAreResponse>(
+    GET_COMPANY_WHO_WE_ARE
+  );
+  const { data: ourValueData } = useQuery<OurValuesSectionData>(
+    GET_COMPANY_OUR_VALUES
+  );
+  const { data: keyFactsData } = useQuery<GetCompanyKeyFactsResponse>(
+    GET_COMPANY_KEY_FACTS
+  );
+  const { data: ourNetworkData } = useQuery<GetCompanyGlobalNetworkResponse>(
+    GET_COMPANY_GLOBAL_NETWORK
+  );
 
-  const {data:ourCertificationData} = useQuery<GetCompanyCertificationsResponse>(GET_COMPANY_CERTIFICATION)
+  const { data: ourCertificationData } =
+    useQuery<GetCompanyCertificationsResponse>(GET_COMPANY_CERTIFICATION);
 
   return (
     <>
-      {companyBannerLoading ? <LoadingFallback/> : companyBannerData && <Banner data={companyBannerData} />}
+      {companyBannerLoading ? (
+        <LoadingFallback />
+      ) : (
+        companyBannerData && (
+          <Banner
+            bgUrl={
+              companyBannerData.page.companyPageBannerSection.bannerImage.node
+                .sourceUrl
+            }
+            mainTitle={
+              companyBannerData.page.companyPageBannerSection.bannerTitle
+            }
+          />
+        )
+      )}
       <BannerBottom>
         {aboutData && <ConnectingWorld data={aboutData} />}
       </BannerBottom>
       {companyHistoryData && <History data={companyHistoryData} />}
-      {visionData && (
-        <Vision 
-          data={visionData}/>
-      )}
-    {simplifyShippingData && (<SimplifyShipping data={simplifyShippingData}/>)}
-    {whoWeAreData&&(<WhoWeAre data={whoWeAreData}/>) }
-    {ourValueData && <OurValues data={ourValueData} />}
-    {keyFactsData && <KeyFacts data={keyFactsData}/>}
-    {ourNetworkData && <OurNetwork data={ourNetworkData}/>}
-    {ourCertificationData && <Certification data={ourCertificationData}/>}
+      {visionData && <Vision data={visionData} />}
+      {simplifyShippingData && <SimplifyShipping data={simplifyShippingData} />}
+      {whoWeAreData && <WhoWeAre data={whoWeAreData} />}
+      {ourValueData && <OurValues data={ourValueData} />}
+      {keyFactsData && <KeyFacts data={keyFactsData} />}
+      {ourNetworkData && <OurNetwork data={ourNetworkData} />}
+      {ourCertificationData && <Certification data={ourCertificationData} />}
     </>
   );
 };

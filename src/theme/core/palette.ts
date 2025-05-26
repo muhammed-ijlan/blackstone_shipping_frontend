@@ -133,7 +133,7 @@ export const basePalette = {
   error,
   common,
   grey,
-  divider: varAlpha(grey['500Channel'], 0.2),
+  divider: varAlpha(grey['500Channel'], 0.5),
 };
 
 export const palette: Partial<Record<ThemeColorScheme, ColorSystemOptions['palette']>> = {

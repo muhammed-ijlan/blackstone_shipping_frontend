@@ -416,3 +416,68 @@ query GetCompanyOfficeLocations {
   }
 }
 `;
+
+export const GET_SERVICES_PAGE = gql`
+query GetServicePage {
+  page(id: "services", idType: URI) {
+    servicesPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+      pageContent
+    }
+    servicePageOtherTopicsSection {
+      otherTopicsMainTitle
+      topic1Title
+      topic1Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic1Link {
+        nodes {
+          uri
+        }
+      }
+      topic2Title
+      topic2Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic2Link {
+        nodes {
+          uri
+        }
+      }
+      topic3Title
+      topic3Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic3Link {
+        nodes {
+          uri
+        }
+      }
+    }
+  }
+  services(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      uri
+      id
+    }
+  }
+}
+`;
