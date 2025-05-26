@@ -2,12 +2,12 @@ import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
 
 interface BannerPropsTypes {
-  bgUrl:string;
-  subTitle?:string;
-  mainTitle:string
+  bgUrl: string;
+  subTitle?: boolean;
+  mainTitle: string;
 }
 
-const Banner = ({bgUrl,subTitle,mainTitle}:BannerPropsTypes) => {
+const Banner = ({ bgUrl, subTitle = false, mainTitle }: BannerPropsTypes) => {
   return (
     <Stack
       sx={{
@@ -29,24 +29,34 @@ const Banner = ({bgUrl,subTitle,mainTitle}:BannerPropsTypes) => {
           left: 0,
         }}
       >
-        <Container maxWidth="xl" sx={{height:"100%",display:'flex',alignItems:{xs:'center',lg:"left"}, justifyContent:{xs:'center',lg:"left"}}}>
+        <Container
+          maxWidth="xl"
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: {xs:"column",md:'row'},
+            alignItems: { xs: "center", md: "left" },
+            justifyContent: { xs: "center", md: "left" },
+            gap: 3,
+          }}
+        >
           <Typography
+            variant="body1"
             sx={{
-              fontSize: {xs:"65px",lg:"6.25rem !important"},
               fontWeight: "700",
               color: "white !important",
-              position: {xs:"unset",lg:"absolute"},
-              bottom: "100px",
+              position: { xs: "unset", lg: "absolute" },
+              bottom: "180px",
             }}
           >
-            {subTitle}
+            {subTitle && "Services"}
           </Typography>
           <Typography
             sx={{
-              fontSize: {xs:"65px",lg:"6.25rem !important"},
+              fontSize: { xs: "40px", lg: "6.25rem !important" },
               fontWeight: "700",
               color: "white !important",
-              position: {xs:"unset",lg:"absolute"},
+              position: { xs: "unset", lg: "absolute" },
               bottom: "100px",
             }}
           >

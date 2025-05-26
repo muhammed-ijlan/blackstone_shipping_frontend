@@ -481,3 +481,67 @@ query GetServicePage {
   }
 }
 `;
+
+
+export const GET_SERVICE_WITH_SUBSERVICES = gql`
+  query GetServiceWithSubServices($id: ID!) {
+    service(id: $id, idType: ID) {
+      title
+      servicesPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      servicePageOtherTopicsSection {
+        otherTopicsMainTitle
+        topic1Title
+        topic1Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic1Link {
+          nodes {
+            uri
+          }
+        }
+        topic2Title
+        topic2Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic2Link {
+          nodes {
+            uri
+          }
+        }
+        topic3Title
+        topic3Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic3Link {
+          nodes {
+            uri
+          }
+        }
+      }
+    }
+    subServices: services(where: { parentIn: [$id] }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;

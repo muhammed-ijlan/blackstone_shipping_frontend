@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
+import { Outlet } from "react-router";
 import Banner from "src/components/banner/Banner";
 import { GET_SERVICES_PAGE } from "src/graphql/queries";
 import BannerContent from "src/sections/services/BannerContent";
@@ -29,6 +30,7 @@ const Page = () => {
           <BannerContent content={serviceData?.page?.servicesPageBannerSection?.pageContent} />
           <ServiceCards data={serviceData?.services.nodes}/>
           <OtherTopics data={serviceData.page.servicePageOtherTopicsSection}/>
+          <Outlet />
         </>
       )}
     </>

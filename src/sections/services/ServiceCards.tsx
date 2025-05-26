@@ -1,6 +1,6 @@
 import { Container, Divider, Grid } from '@mui/material'
 import React from 'react'
-import ServiceCard from 'src/components/compnay/ServiceCard'
+import ServiceCard from 'src/components/services/ServiceCard'
 import { ServiceNode } from 'src/types/graphql/types/services.types'
 
 const ServiceCards = ({data}:{data:ServiceNode[]})=> {
