@@ -16,7 +16,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
     >
       <Box
         component={"img"}
-        src={data.featuredImage.node.sourceUrl}
+        src={data.featuredImage?.node?.sourceUrl}
         alt={data.title}
         sx={{
           width: "400px",

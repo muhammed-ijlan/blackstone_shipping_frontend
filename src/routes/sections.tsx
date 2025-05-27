@@ -17,6 +17,8 @@ export const HomePage = lazy(() => import("../pages/home"));
 export const CompanyPage = lazy(() => import("../pages/company"));
 export const ServicesPage = lazy(() => import("../pages/services"));
 export const ServiceDetailPage = lazy(() => import("../pages/serviceDetail"));
+export const SolutionsPage = lazy(() => import("../pages/solutions"));
+export const SolutionDetailPage = lazy(() => import("../pages/solutionDetail"));
 
 const renderFallback = () => (
   <Box
@@ -78,6 +80,22 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <ServiceDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "solutions",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <SolutionsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "solutions/:solutionId",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <SolutionDetailPage />
           </Suspense>
         ),
       },

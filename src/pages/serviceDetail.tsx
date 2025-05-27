@@ -22,7 +22,7 @@ const Page = () => {
       data &&
       <>
 
-    <Banner bgUrl={data?.service.servicesPageBannerSection.bannerImage.node.sourceUrl} mainTitle={data?.service.servicesPageBannerSection.bannerTitle} subTitle={true} />
+    <Banner bgUrl={data?.service.servicesPageBannerSection.bannerImage.node.sourceUrl} mainTitle={data?.service.servicesPageBannerSection.bannerTitle} subTitle={"Services"} />
     <OtherServices data={data.subServices.nodes}/>
     <ContactUsCard/>
     <OtherTopics data={data?.service.servicePageOtherTopicsSection} />

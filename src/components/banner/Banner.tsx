@@ -3,11 +3,11 @@ import React from "react";
 
 interface BannerPropsTypes {
   bgUrl: string;
-  subTitle?: boolean;
+  subTitle?: string;
   mainTitle: string;
 }
 
-const Banner = ({ bgUrl, subTitle = false, mainTitle }: BannerPropsTypes) => {
+const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
   return (
     <Stack
       sx={{
@@ -34,10 +34,11 @@ const Banner = ({ bgUrl, subTitle = false, mainTitle }: BannerPropsTypes) => {
           sx={{
             height: "100%",
             display: "flex",
-            flexDirection: {xs:"column",md:'row'},
-            alignItems: { xs: "center", md: "left" },
-            justifyContent: { xs: "center", md: "left" },
+            flexDirection: {xs:"column",md:'column'},
+            alignItems: { xs: "center", md: "flex-start" },
+            justifyContent: { xs: "center", md: "flex-end" },
             gap: 3,
+            py: { xs: "20px", md: "80px" },
           }}
         >
           <Typography
@@ -45,19 +46,23 @@ const Banner = ({ bgUrl, subTitle = false, mainTitle }: BannerPropsTypes) => {
             sx={{
               fontWeight: "700",
               color: "white !important",
-              position: { xs: "unset", lg: "absolute" },
-              bottom: "180px",
+              // position: { xs: "unset", lg: "absolute" },
+              // bottom: "180px",
+              marginTop:"50px"
             }}
           >
-            {subTitle && "Services"}
+            {subTitle && subTitle}
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: "40px", lg: "6.25rem !important" },
+              maxWidth:"800px",
+              fontSize: { xs: "40px", lg: "6rem !important" },
               fontWeight: "700",
               color: "white !important",
-              position: { xs: "unset", lg: "absolute" },
-              bottom: "100px",
+              // position: { xs: "unset", lg: "absolute" },
+              top: "380px",
+              lineHeight:{xs:"50px !important",lg:"110px !important"},
+              textWrap:"wrap"
             }}
           >
             {mainTitle.toUpperCase()}
