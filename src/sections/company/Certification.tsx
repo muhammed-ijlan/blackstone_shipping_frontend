@@ -34,9 +34,9 @@ const Certification = ({
           {data.page.companyPageCertifications.certificationContent2}
         </Typography>
 
-        <Grid container justifyContent={"space-between"} rowGap={4}>
+        <Grid container justifyContent={"center"}  rowGap={4}>
           {data.certifications.nodes.map((item, index) => (
-            <Grid>
+            <Grid size={{xs:12,lg:4}}  justifyItems={"center"} >
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",
@@ -71,7 +71,7 @@ const Certification = ({
 
          <Grid container justifyContent={"space-between"} rowGap={4}>
           {data.partners.nodes.map((item, index) => (
-            <Grid>
+             <Grid size={{xs:12,lg:4}} justifyItems={"center"}>
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",

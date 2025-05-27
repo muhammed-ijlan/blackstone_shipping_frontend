@@ -130,13 +130,13 @@ const Testimonial = () => {
                     alt="quote icon"
                     />
                   <Typography
-                    variant="body2"
                     fontWeight={400}
                     sx={{
+                      textAlign:"left !important",
                       fontWeight: 500,
                       lineHeight: "28px",
-                      letterSpacing: "3%",
                       textTransform: "capitalize",
+                      typography:{xs:"body1",lg:"body2"}
                     }}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(item.content),

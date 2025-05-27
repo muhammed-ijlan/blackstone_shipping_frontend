@@ -8,7 +8,8 @@ const WhoWeAre = ({ data }: { data: GetCompanyWhoWeAreResponse }) => {
       <Stack
         sx={{
           background: "rgba(45, 55, 72, 1)",
-          padding: "50px",
+          px: {xs:"10px",lg:"50px"},
+          py: {xs:"30px",lg:"50px"},
           borderRadius: "8px",
           alignItems: "center",
           color: "white",
@@ -46,7 +47,7 @@ const WhoWeAre = ({ data }: { data: GetCompanyWhoWeAreResponse }) => {
                 {data.page.companyPageWhoWeAreSection.ourPurposeTitle.toUpperCase()}
               </Typography>
             </Stack>
-            <Typography variant="body1">
+            <Typography variant="body1"  sx={{textAlign:"left !important"}}>
               {data.page.companyPageWhoWeAreSection.ourPurposeContent}
             </Typography>
           </Stack>
@@ -64,18 +65,18 @@ const WhoWeAre = ({ data }: { data: GetCompanyWhoWeAreResponse }) => {
             <Stack direction={"row"} alignItems={"center"} gap={2}>
               <img
                 src={
-                  data.page.companyPageWhoWeAreSection.ourPurposeIcon.node
+                  data.page.companyPageWhoWeAreSection.ourVisionIcon.node
                     .sourceUrl
                 }
                 alt=""
                 width="40px"
               />
               <Typography variant="h4">
-                {data.page.companyPageWhoWeAreSection.ourPurposeTitle.toUpperCase()}
+                {data.page.companyPageWhoWeAreSection.ourVisionTitle.toUpperCase()}
               </Typography>
             </Stack>
-            <Typography variant="body1">
-              {data.page.companyPageWhoWeAreSection.ourPurposeContent}
+            <Typography variant="body1" sx={{textAlign:"left !important"}}>
+              {data.page.companyPageWhoWeAreSection.ourVisionContent}
             </Typography>
           </Stack>
         </Stack>

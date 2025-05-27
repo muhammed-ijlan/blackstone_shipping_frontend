@@ -127,18 +127,20 @@ const Sustainability = () => {
                   lineHeight: "34px",
                   letterSpacing: "3%",
                   textTransform: "capitalize",
+                  typography:{xs:"h4",lg:"h5"}
                 }}
               >
                 {card.title}
               </Typography>
               <Typography
-                variant="body2"
                 sx={{
+                  textAlign:"left !important",
                   fontWeight: 600,
                   fontSize: "14px",
                   lineHeight: "26px",
                   letterSpacing: "3%",
                   textTransform: "capitalize",
+                  typography:{xs:"body1",lg:"body2"}
                 }}
                 color="rgba(109, 110, 113, 1)"
                 dangerouslySetInnerHTML={{ __html: card.content }}

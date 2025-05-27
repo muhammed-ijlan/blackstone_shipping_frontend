@@ -416,3 +416,263 @@ query GetCompanyOfficeLocations {
   }
 }
 `;
+
+export const GET_SERVICES_PAGE = gql`
+query GetServicePage {
+  page(id: "services", idType: URI) {
+    servicesPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+      pageContent
+    }
+    servicePageOtherTopicsSection {
+      otherTopicsMainTitle
+      topic1Title
+      topic1Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic1Link {
+        nodes {
+          uri
+        }
+      }
+      topic2Title
+      topic2Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic2Link {
+        nodes {
+          uri
+        }
+      }
+      topic3Title
+      topic3Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic3Link {
+        nodes {
+          uri
+        }
+      }
+    }
+  }
+  services(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      uri
+      id
+    }
+  }
+}
+`;
+
+
+export const GET_SERVICE_WITH_SUBSERVICES = gql`
+  query GetServiceWithSubServices($id: ID!) {
+    service(id: $id, idType: ID) {
+      title
+      servicesPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      servicePageOtherTopicsSection {
+        otherTopicsMainTitle
+        topic1Title
+        topic1Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic1Link {
+          nodes {
+            uri
+          }
+        }
+        topic2Title
+        topic2Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic2Link {
+          nodes {
+            uri
+          }
+        }
+        topic3Title
+        topic3Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic3Link {
+          nodes {
+            uri
+          }
+        }
+      }
+    }
+    subServices: services(where: { parentIn: [$id] }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SOLUTIONS_PAGE = gql`
+query GetSolutionsPage {
+  page(id: "solutions", idType: URI) {
+    solutionsPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+      pageContent
+    }
+    solutionsPageOtherTopicsSection {
+      otherTopicsMainTitle
+      topic1Title
+      topic1Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic1Link {
+        nodes {
+          uri
+        }
+      }
+      topic2Title
+      topic2Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic2Link {
+        nodes {
+          uri
+        }
+      }
+      topic3Title
+      topic3Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic3Link {
+        nodes {
+          uri
+        }
+      }
+    }
+  }
+  solutions(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      uri
+      id
+    }
+  }
+}
+`;
+
+export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
+  query GetSolutionsWithSubSolutions($id: ID!) {
+    solution(id: $id, idType: ID) {
+      title
+      solutionsSinglePageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      solutionsPageOtherTopicsSection {
+        otherTopicsMainTitle
+        topic1Title
+        topic1Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic1Link {
+          nodes {
+            uri
+          }
+        }
+        topic2Title
+        topic2Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic2Link {
+          nodes {
+            uri
+          }
+        }
+        topic3Title
+        topic3Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic3Link {
+          nodes {
+            uri
+          }
+        }
+      }
+    }
+
+    subSolutions: solutions(where: { parentIn: [$id] }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        uri
+        id
+      }
+    }
+  }
+`;

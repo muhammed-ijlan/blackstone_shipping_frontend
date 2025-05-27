@@ -1,13 +1,17 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import {  GetCompanyPageResponse } from "src/types/graphql/types/company.types";
 
+interface BannerPropsTypes {
+  bgUrl: string;
+  subTitle?: string;
+  mainTitle: string;
+}
 
-const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
+const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
   return (
     <Stack
       sx={{
-        backgroundImage: `url(${data.page.companyPageBannerSection.bannerImage.node.sourceUrl})`,
+        backgroundImage: `url(${bgUrl})`,
         height: 600,
         width: "100%",
         backgroundSize: "cover",
@@ -23,23 +27,48 @@ const Banner = ({ data }: { data: GetCompanyPageResponse }) => {
           position: "absolute",
           top: 0,
           left: 0,
-        }}>
-          <Container maxWidth="xl">
-
-
-      <Typography
-        sx={{
-          fontSize: "100px !important",
-          fontWeight: "700",
-          color: "white !important",
-          position: "absolute",
-          bottom: "50px",
         }}
+      >
+        <Container
+          maxWidth="xl"
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: {xs:"column",md:'column'},
+            alignItems: { xs: "center", md: "flex-start" },
+            justifyContent: { xs: "center", md: "flex-end" },
+            gap: 3,
+            py: { xs: "20px", md: "80px" },
+          }}
         >
-        {data.page.companyPageBannerSection.bannerTitle}
-      </Typography>
-          </Container>
-        </Stack>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "700",
+              color: "white !important",
+              // position: { xs: "unset", lg: "absolute" },
+              // bottom: "180px",
+              marginTop:"50px"
+            }}
+          >
+            {subTitle && subTitle}
+          </Typography>
+          <Typography
+            sx={{
+              maxWidth:"800px",
+              fontSize: { xs: "40px", lg: "6rem !important" },
+              fontWeight: "700",
+              color: "white !important",
+              // position: { xs: "unset", lg: "absolute" },
+              top: "380px",
+              lineHeight:{xs:"50px !important",lg:"110px !important"},
+              textWrap:"wrap"
+            }}
+          >
+            {mainTitle.toUpperCase()}
+          </Typography>
+        </Container>
+      </Stack>
     </Stack>
   );
 };

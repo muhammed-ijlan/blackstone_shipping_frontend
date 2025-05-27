@@ -4,7 +4,7 @@ import { GetCompanyGlobalNetworkResponse } from 'src/types/graphql/types/company
 
 const OurNetworkCards = ({data}:{data:GetCompanyGlobalNetworkResponse}) => {
   return (
-    <Stack direction={"row"} justifyContent={"space-between"}>
+    <Stack direction={"row"} flexWrap={"wrap"} gap={{xs:3,lg:0}} justifyContent={"space-between"}>
             <Stack
               sx={{
                 background: "rgba(45, 55, 72, 1)",

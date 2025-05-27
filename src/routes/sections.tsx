@@ -14,7 +14,11 @@ import { DashboardLayout } from "../layouts/dashboard";
 // ----------------------------------------------------------------------
 
 export const HomePage = lazy(() => import("../pages/home"));
-export const CompanyPage = lazy(() => import("../pages/company" ));
+export const CompanyPage = lazy(() => import("../pages/company"));
+export const ServicesPage = lazy(() => import("../pages/services"));
+export const ServiceDetailPage = lazy(() => import("../pages/serviceDetail"));
+export const SolutionsPage = lazy(() => import("../pages/solutions"));
+export const SolutionDetailPage = lazy(() => import("../pages/solutionDetail"));
 
 const renderFallback = () => (
   <Box
@@ -51,7 +55,7 @@ export const routesSection: RouteObject[] = [
         index: true,
         element: (
           <Suspense fallback={renderFallback()}>
-             <HomePage />
+            <HomePage />
           </Suspense>
         ),
       },
@@ -59,20 +63,44 @@ export const routesSection: RouteObject[] = [
         path: "company",
         element: (
           <Suspense fallback={renderFallback()}>
-             <CompanyPage />
+            <CompanyPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "services",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <ServicesPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "services/:serviceId",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <ServiceDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "solutions",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <SolutionsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "solutions/:solutionId",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <SolutionDetailPage />
           </Suspense>
         ),
       },
     ],
   },
-  // {
-  //     path: '/',
-  //     element: (
-  //       <Suspense fallback={renderFallback()}>
-  //         <HomePage />
-  //       </Suspense>
-  //     ),
-  // }
 
   // {
   //   path: '404',
