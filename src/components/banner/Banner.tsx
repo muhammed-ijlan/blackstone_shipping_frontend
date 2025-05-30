@@ -65,7 +65,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
               textWrap:"wrap"
             }}
           >
-            {mainTitle.toUpperCase()}
+            {mainTitle?.toUpperCase()}
           </Typography>
         </Container>
       </Stack>

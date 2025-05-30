@@ -676,3 +676,70 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
     }
   }
 `;
+
+export const GET_RESOURSES_PAGE = gql`
+query GetResourcesPage {
+  page(id: "resources", idType: URI) {
+    resourcesPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+    }
+    resourcesPageNewsSection {
+      newsSectionTitle
+      newsSectionContent
+    }
+    resourcesPageCaseStudyFAQSections {
+      caseStudiesTitle
+      faqTitle
+    }
+    resourcesPageDownloadsSection {
+      downloadsSectionTitle
+      downloadSectionContent
+      brochureTitle
+      brochureContent
+      brochureFile {
+        node {
+          sourceUrl
+        }
+      }
+      serviceGuidesTitle
+      serviceGuidesContent
+      serviceGuidesFile {
+        node {
+          sourceUrl
+        }
+      }
+      whitePapersTitle
+      whitePapersContent
+      whitePapersFile {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_RECENT_NEWS = gql`
+query GetRecentPosts($count: Int) {
+  posts(first: $count, where: { orderby: { field: DATE, order: DESC } }) {
+    nodes {
+      id
+      title
+      excerpt
+      date
+      uri
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
