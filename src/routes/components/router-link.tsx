@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 interface RouterLinkProps extends Omit<LinkProps, 'to'> {
   href: string;
-  ref?: React.RefObject<HTMLAnchorElement | null>;
+  ref?: React.Ref<HTMLAnchorElement>;
 }
 
 export function RouterLink({ href, ref, ...other }: RouterLinkProps) {
