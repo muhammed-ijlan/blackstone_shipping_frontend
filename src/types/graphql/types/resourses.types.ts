@@ -64,3 +64,47 @@ export interface RecentPostsData {
 export interface RecentPostsVars {
   count: number;
 }
+
+export interface NewsCategoriesData {
+  categories: {
+    nodes: {
+      id: string;
+      name: string;
+      slug: string;
+      uri: string;
+      description: string;
+    }[];
+  };
+}
+
+
+export interface PostNode {
+  id: string;
+  title: string;
+  excerpt: string;
+  uri: string;
+  date: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    } | null;
+  } | null;
+}
+
+export interface PageInfo {
+  hasNextPage: boolean;
+  endCursor: string | null;
+}
+
+export interface GetPostsByCategorySlugData {
+  posts: {
+    pageInfo: PageInfo;
+    nodes: PostNode[];
+  };
+}
+
+export interface GetPostsByCategorySlugVars {
+  slug: string;
+  count: number;
+  after?: string | null;
+}

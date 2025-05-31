@@ -743,3 +743,64 @@ query GetRecentPosts($count: Int) {
   }
 }
 `;
+
+export const GET_NEWS_CATEGORIES = gql`query GetPostCategories {
+  categories {
+    nodes {
+      id
+      name
+      slug
+      uri
+      description
+    }
+  }
+}
+`
+
+export const GET_NEWS_BY_CATEGORY = gql`
+query GetPostsByCategorySlug($slug: String!, $count: Int!, $after: String) {
+  posts(
+    first: $count
+    after: $after
+    where: {
+      categoryName: $slug
+      orderby: { field: DATE, order: DESC }
+    }
+  ) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      id
+      title
+      excerpt
+      uri
+      date
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
+
+export const SEARCH_NEWS = gql`
+query SearchPosts($searchTerm: String!) {
+  posts(where: { search: $searchTerm }) {
+    nodes {
+      title
+      excerpt
+      uri
+      date
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`
