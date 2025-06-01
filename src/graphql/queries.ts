@@ -804,3 +804,28 @@ query SearchPosts($searchTerm: String!) {
   }
 }
 `
+
+export const GET_CASE_STUDIES =gql`
+query GetCaseStudies($count: Int) {
+  caseStudies(first: $count) {
+    nodes {
+      id
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      caseStudiesOptions {
+        caseStudyPersonName
+        caseStudyPersonDesignation
+        caseStudyPersonImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+}
+`;

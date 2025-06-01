@@ -27,10 +27,11 @@ const CustomArrowButton: React.FC<CustomArrowButtonProps> = ({ name, onClick,sx 
         borderColor: "rgba(32, 189, 103, 1)",
         borderRadius: "4px",
         color: "rgba(45, 55, 72, 1)",
+        // color: "red ",
       }}
     >
       <Stack gap={1} direction="row" alignItems="center">
-        <Typography variant="body1" fontSize={"16px"} fontWeight={700} color="rgba(45, 55, 72, 1)">
+        <Typography variant="body1" fontSize={"16px"} fontWeight={700} color="rgba(45, 55, 72, 1)" sx={{...sx}}>
           {name}
         </Typography>
         <Box component={"img"} alt='arrow' width={"24px"} height={"24px"} src={arrow} />

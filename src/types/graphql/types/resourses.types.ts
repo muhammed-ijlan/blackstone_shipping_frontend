@@ -108,3 +108,30 @@ export interface GetPostsByCategorySlugVars {
   count: number;
   after?: string | null;
 }
+
+
+export interface CaseStudiesData {
+  caseStudies: {
+    nodes: CaseStudy[];
+  };
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  } | null;
+  content?:string;
+  caseStudiesOptions: {
+    caseStudyPersonName: string;
+    caseStudyPersonDesignation: string;
+    caseStudyPersonImage: {
+      node: {
+        sourceUrl: string;
+      };
+    } | null;
+  } | null;
+}

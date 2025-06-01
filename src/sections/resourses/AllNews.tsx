@@ -18,7 +18,7 @@ import { NewsCategoriesData } from "src/types/graphql/types/resourses.types";
 const AllNews = () => {
   const { data } = useQuery<NewsCategoriesData>(GET_NEWS_CATEGORIES);
 
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("");
 
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug);
@@ -44,8 +44,8 @@ const AllNews = () => {
           >
             <CategoryBox
               label="All"
-              isActive={activeCategory === "all"}
-              onClick={() => handleCategoryClick("all")}
+              isActive={activeCategory === ""}
+              onClick={() => handleCategoryClick("")}
             />
 
             {data?.categories.nodes.map((item) => (
