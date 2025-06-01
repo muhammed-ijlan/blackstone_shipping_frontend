@@ -829,3 +829,14 @@ query GetCaseStudies($count: Int) {
   }
 }
 `;
+
+export const GET_FAQS = gql`
+query GetFAQs {
+  faqs {
+    nodes {
+      title
+      content
+    }
+  }
+}
+`;

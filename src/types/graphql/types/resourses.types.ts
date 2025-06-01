@@ -135,3 +135,15 @@ export interface CaseStudy {
     } | null;
   } | null;
 }
+
+
+export interface FaqsData {
+  faqs: {
+    nodes: FAQ[];
+  };
+}
+
+export interface FAQ {
+  title: string;
+  content: string;
+}
