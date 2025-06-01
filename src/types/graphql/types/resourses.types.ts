@@ -126,6 +126,7 @@ export interface CaseStudy {
   } | null;
   content?:string;
   caseStudiesOptions: {
+    companyDescription:string;
     caseStudyPersonName: string;
     caseStudyPersonDesignation: string;
     caseStudyPersonImage: {
@@ -137,13 +138,24 @@ export interface CaseStudy {
 }
 
 
+export interface Faq {
+  title: string;
+  content: string;
+}
+
 export interface FaqsData {
   faqs: {
-    nodes: FAQ[];
+    nodes: Faq[];
   };
 }
 
-export interface FAQ {
-  title: string;
-  content: string;
+export interface FaqsVariables {
+  search: string;
+}
+
+export interface GetNewsByCategoryVariables {
+  slug: string;
+  count: number;
+  after?: string | null;
+  search?: string;
 }

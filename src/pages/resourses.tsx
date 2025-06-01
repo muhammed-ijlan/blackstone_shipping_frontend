@@ -37,8 +37,8 @@ const Page = () => {
           />
           <NewsSection data={pageData.page.resourcesPageNewsSection} />
           {caseStudiesData && <CaseStudies data={caseStudiesData}/>}
-          {faqData && <FaqSection data={faqData}/>}  
-          <Downloads/>
+          <FaqSection/>  
+          <Downloads data={pageData}/>
         </>
       )}
     </>

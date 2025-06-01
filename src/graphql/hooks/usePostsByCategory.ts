@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useApolloClient, gql } from '@apollo/client';
+import { GET_NEWS_BY_CATEGORY } from '../queries';
 
 const GET_POSTS_BY_CATEGORY = gql`
   query GetPostsByCategorySlug($slug: String!, $count: Int!, $after: String) {
@@ -41,7 +42,11 @@ export interface Post {
   featuredImage: FeaturedImage | null;
 }
 
-export const usePostsByCategory = (slug: string, count: number = 3) => {
+export const usePostsByCategory = (
+  slug: string,
+  count: number = 3,
+  search: string = ""
+) => {
   const [pageCursors, setPageCursors] = useState<(string | null)[]>([null]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsByPage, setPostsByPage] = useState<Record<number, Post[]>>({});
@@ -53,15 +58,12 @@ export const usePostsByCategory = (slug: string, count: number = 3) => {
   const fetchPage = async (page: number) => {
     try {
       setLoading(true);
-
-      // For page 1, always after = null (reset)
-      // For page > 1, get cursor from pageCursors
       const after = page === 1 ? null : pageCursors[page - 1] || null;
 
       const { data } = await client.query({
-        query: GET_POSTS_BY_CATEGORY,
-        variables: { slug, count, after },
-        fetchPolicy: 'network-only',
+        query: GET_NEWS_BY_CATEGORY,
+        variables: { slug, count, after, search },
+        fetchPolicy: "network-only",
       });
 
       const newPosts: Post[] = data?.posts?.nodes || [];
@@ -71,11 +73,9 @@ export const usePostsByCategory = (slug: string, count: number = 3) => {
       setPostsByPage((prev) => ({ ...prev, [page]: newPosts }));
       setHasNextPage(nextHasNextPage);
 
-      // Only update cursor for next page, if we got posts and nextCursor is new
       if (newPosts.length > 0) {
         setPageCursors((prev) => {
           const updated = [...prev];
-          // Set cursor for next page index (page)
           if (updated[page] !== nextCursor) {
             updated[page] = nextCursor;
           }
@@ -90,19 +90,15 @@ export const usePostsByCategory = (slug: string, count: number = 3) => {
   };
 
   useEffect(() => {
-    // Reset everything when slug changes
     setPageCursors([null]);
     setPostsByPage({});
     setCurrentPage(1);
     setHasNextPage(false);
     setError(null);
-
-    // Fetch first page right away for new slug
     fetchPage(1);
-  }, [slug]);
+  }, [slug, search]);
 
   useEffect(() => {
-    // On page change, fetch page if not first page (first page fetched in slug effect)
     if (currentPage !== 1) {
       fetchPage(currentPage);
     }
@@ -124,12 +120,10 @@ export const usePostsByCategory = (slug: string, count: number = 3) => {
     const loadedPages = Object.keys(postsByPage).length;
     const lastLoadedPagePosts = postsByPage[loadedPages] || [];
 
-    // If last page has fewer posts than count, it's the last page
     if (lastLoadedPagePosts.length < count) {
       return loadedPages;
     }
 
-    // If last page is full and backend says more pages exist, add 1
     if (lastLoadedPagePosts.length === count && hasNextPage) {
       return loadedPages + 1;
     }
@@ -138,7 +132,6 @@ export const usePostsByCategory = (slug: string, count: number = 3) => {
   };
 
   const totalPages = getTotalPages();
-
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);

@@ -758,52 +758,44 @@ export const GET_NEWS_CATEGORIES = gql`query GetPostCategories {
 `
 
 export const GET_NEWS_BY_CATEGORY = gql`
-query GetPostsByCategorySlug($slug: String!, $count: Int!, $after: String) {
-  posts(
-    first: $count
-    after: $after
-    where: {
-      categoryName: $slug
-      orderby: { field: DATE, order: DESC }
-    }
+  query GetPostsByCategorySlug(
+    $slug: String!
+    $count: Int!
+    $after: String
+    $search: String
   ) {
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
-    nodes {
-      id
-      title
-      excerpt
-      uri
-      date
-      featuredImage {
-        node {
-          sourceUrl
+    posts(
+      first: $count
+      after: $after
+      where: {
+        categoryName: $slug
+        search: $search
+        orderby: { field: DATE, order: DESC }
+      }
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        title
+        excerpt
+        uri
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
         }
       }
     }
   }
-}
 `;
 
-export const SEARCH_NEWS = gql`
-query SearchPosts($searchTerm: String!) {
-  posts(where: { search: $searchTerm }) {
-    nodes {
-      title
-      excerpt
-      uri
-      date
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-    }
-  }
-}
-`
+
+
+
 
 export const GET_CASE_STUDIES =gql`
 query GetCaseStudies($count: Int) {
@@ -817,6 +809,7 @@ query GetCaseStudies($count: Int) {
         }
       }
       caseStudiesOptions {
+        companyDescription
         caseStudyPersonName
         caseStudyPersonDesignation
         caseStudyPersonImage {
@@ -831,12 +824,13 @@ query GetCaseStudies($count: Int) {
 `;
 
 export const GET_FAQS = gql`
-query GetFAQs {
-  faqs {
-    nodes {
-      title
-      content
+  query SearchFAQs($search: String!) {
+    faqs(where: { search: $search }) {
+      nodes {
+        title
+        content
+      }
     }
   }
-}
+
 `;

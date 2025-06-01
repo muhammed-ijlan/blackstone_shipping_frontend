@@ -17,9 +17,10 @@ import CustomArrowButton from "../CustomArrowButton";
 interface Props {
   slug: string;
   count?: number;
+  search: string;
 }
 
-const PostsByCategory: React.FC<Props> = ({ slug, count = 3 }) => {
+const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
   const {
     posts,
     loading,
@@ -30,7 +31,8 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3 }) => {
     goToPrevPage,
     hasNextPage,
     totalPages,
-  } = usePostsByCategory(slug, count);
+  } = usePostsByCategory(slug, count, search);
+
 
   if (loading && posts.length === 0) return <CircularProgress />;
   if (error) return <p>Error: {error.message}</p>;
@@ -92,7 +94,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3 }) => {
             spacing={5}
             key={post.id || post.title}
           >
-            <Stack sx={{ maxWidth: "400px" }}>
+            <Stack sx={{ maxWidth: {xs:"100%",md:"400px"} }}>
               <Box
                 component={"img"}
                 alt={post?.title}

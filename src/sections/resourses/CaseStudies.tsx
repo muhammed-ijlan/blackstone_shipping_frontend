@@ -23,7 +23,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
       const child = container.children[0] as HTMLElement;
       if (!child) return;
 
-      const itemWidth = child.offsetWidth + 16; // item width + gap
+      const itemWidth = child.offsetWidth + 16; 
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };
@@ -79,6 +79,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                             WebkitBoxOrient: "vertical",
                             WebkitLineClamp: "2",
                             overflow: "hidden",
+                            textAlign:"left !important"
                           }}
                         >
                           {item.title}
@@ -88,13 +89,12 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                           sx={{
                             display: "-webkit-box",
                             WebkitBoxOrient: "vertical",
-                            WebkitLineClamp: "4",
+                            WebkitLineClamp: "3",
                             overflow: "hidden",
                           }}
                           dangerouslySetInnerHTML={{
                             __html:
-                              item?.content ??
-                              "NovaMart collaborated with Blackstone Shipping to s.",
+                              item.caseStudiesOptions?.companyDescription ?? ""
                           }}
                         />
                       </Stack>
@@ -149,7 +149,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
           </CustomSlider2>
 
           <Stack width={"100%"} alignItems={"flex-end"} justifyContent={"flex-end"} >
-            <Stack direction={"row"} width={"55%"} justifyContent={"space-between"}>
+            <Stack direction={"row"} width={{xs:"100%",md:"55%"}} justifyContent={"space-between"}>
               <SliderButton2 scrollRef={scrollRef} />
               <SliderProgress
               sx={{color:"white"}}

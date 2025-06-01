@@ -17,8 +17,8 @@ import { NewsCategoriesData } from "src/types/graphql/types/resourses.types";
 
 const AllNews = () => {
   const { data } = useQuery<NewsCategoriesData>(GET_NEWS_CATEGORIES);
-
   const [activeCategory, setActiveCategory] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug);
@@ -38,6 +38,7 @@ const AllNews = () => {
           <Stack
             width="100%"
             maxWidth={600}
+            mb={{xs:3,md:0}}
             gap={2}
             direction="row"
             flexWrap="wrap"
@@ -57,12 +58,14 @@ const AllNews = () => {
               />
             ))}
           </Stack>
-          <Stack>
+          <Stack width={{xs:"100%",sm:"auto"}}>
             <TextField
               name="search"
               placeholder="Search"
               size="small"
               variant="outlined"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -94,13 +97,13 @@ const AllNews = () => {
             />
           </Stack>
         </Stack>
-       
-       <PostsByCategory slug={activeCategory} count={6}/>
-            
+
+        <PostsByCategory slug={activeCategory} count={6} search={searchQuery} />
       </Stack>
     </Container>
   );
 };
+
 
 interface CategoryBoxProps {
   label: string;
