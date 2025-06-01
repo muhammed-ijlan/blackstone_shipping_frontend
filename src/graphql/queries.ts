@@ -743,3 +743,94 @@ query GetRecentPosts($count: Int) {
   }
 }
 `;
+
+export const GET_NEWS_CATEGORIES = gql`query GetPostCategories {
+  categories {
+    nodes {
+      id
+      name
+      slug
+      uri
+      description
+    }
+  }
+}
+`
+
+export const GET_NEWS_BY_CATEGORY = gql`
+  query GetPostsByCategorySlug(
+    $slug: String!
+    $count: Int!
+    $after: String
+    $search: String
+  ) {
+    posts(
+      first: $count
+      after: $after
+      where: {
+        categoryName: $slug
+        search: $search
+        orderby: { field: DATE, order: DESC }
+      }
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        title
+        excerpt
+        uri
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+
+
+
+export const GET_CASE_STUDIES =gql`
+query GetCaseStudies($count: Int) {
+  caseStudies(first: $count) {
+    nodes {
+      id
+      title
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      caseStudiesOptions {
+        companyDescription
+        caseStudyPersonName
+        caseStudyPersonDesignation
+        caseStudyPersonImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_FAQS = gql`
+  query SearchFAQs($search: String!) {
+    faqs(where: { search: $search }) {
+      nodes {
+        title
+        content
+      }
+    }
+  }
+
+`;
