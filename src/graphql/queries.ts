@@ -832,5 +832,90 @@ export const GET_FAQS = gql`
       }
     }
   }
+`;
 
+export const GET_NEWS_DETAIL = gql`
+query GetPostDetailsByID($id: ID!) {
+  post(id: $id, idType: ID) {
+    title
+    content
+    date
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+}
+`
+
+
+export const GET_RELATED_POSTS_BY_ID = gql`
+  query GetRelatedPostsByID($categorySlug: String!, $excludePostId: ID!) {
+    posts(
+      where: {
+        categoryName: $categorySlug
+        notIn: [$excludePostId]
+      }
+      first: 3
+    ) {
+      nodes {
+        title
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        uri
+      }
+    }
+  }
+`;
+
+
+export const GET_SINGLE_CASE_STUDY = gql`
+  query GetSingleCaseStudy($id: ID!) {
+    caseStudy(id: $id, idType: ID) {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      caseStudiesOptions {
+        caseStudyImage {
+          node {
+            sourceUrl
+          }
+        }
+        companyName
+        companyLogo {
+          node {
+            sourceUrl
+          }
+        }
+        companyLocation
+        companyDescription
+        challenges
+        solutions
+        results
+        caseStudyPersonName
+        caseStudyPersonDesignation
+        caseStudyPersonImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
 `;
