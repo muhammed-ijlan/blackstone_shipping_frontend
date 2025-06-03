@@ -20,6 +20,9 @@ export const ServiceDetailPage = lazy(() => import("../pages/serviceDetail"));
 export const SolutionsPage = lazy(() => import("../pages/solutions"));
 export const SolutionDetailPage = lazy(() => import("../pages/solutionDetail"));
 export const ResoursesPage = lazy(()=>import("../pages/resourses"))
+export const NewsDetailPage = lazy(()=>import("../pages/newsDetail"))
+export const CaseStudyDetailPage = lazy(()=>import("../pages/caseStudyDetail"))
+export const TechnologyPage = lazy(() => import("../pages/technology"));
 
 const renderFallback = () => (
   <Box
@@ -105,6 +108,30 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <ResoursesPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "resourses/news/:postId",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <NewsDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "resourses/case-study/:id",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <CaseStudyDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "technology",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <TechnologyPage />
           </Suspense>
         ),
       },

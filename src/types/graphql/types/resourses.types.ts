@@ -159,3 +159,148 @@ export interface GetNewsByCategoryVariables {
   after?: string | null;
   search?: string;
 }
+
+export interface GetPostDetailsByIDVariables {
+  id: string;
+}
+
+export interface GetPostDetailsByIDData {
+  post: {
+    title: string;
+    content: string;
+    date: string;
+    featuredImage: {
+      node: {
+        sourceUrl: string;
+      } | null;
+    } | null;
+    categories: {
+      nodes: { 
+        id: string;
+        name: string;
+        slug: string;
+      }[];
+    };
+  } | null;
+}
+
+
+export interface RelatedPost {
+  title: string;
+  excerpt: string;
+  uri: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    } | null;
+  } | null;
+}
+
+export interface GetRelatedPostsByIDData {
+  posts: {
+    nodes: RelatedPost[];
+  };
+}
+
+export interface GetRelatedPostsByIDVariables {
+  categorySlug: string;
+  excludePostId: string;
+}
+
+
+export interface MediaNode {
+  node: {
+    sourceUrl: string;
+  };
+}
+
+export interface CaseStudiesOptions {
+  caseStudyImage: MediaNode | null;
+  companyName: string | null;
+  companyLogo: MediaNode | null;
+  companyLocation: string | null;
+  companyDescription: string | null;
+  challenges: string | null;
+  solutions: string | null;
+  results: string | null;
+  caseStudyPersonName: string | null;
+  caseStudyPersonDesignation: string | null;
+  caseStudyPersonImage: MediaNode | null;
+}
+
+export interface CaseStudyData {
+  caseStudy: {
+    title: string;
+    content: string;
+    featuredImage: MediaNode | null;
+    caseStudiesOptions: CaseStudiesOptions | null;
+  };
+}
+
+export interface CaseStudyVars {
+  id: string; 
+}
+
+
+export interface GetTechnologyPageResponse {
+  page: {
+    technologyPageBannerSection: {
+      bannerImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      bannerTitle: string;
+      pageContent: string;
+    };
+    technologyPageOtherTopicsSection: {
+      otherTopicsMainTitle: string;
+      topic1Title: string;
+      topic1Image: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      topic1Link: {
+        nodes: {
+          uri: string;
+        }[];
+      };
+      topic2Title: string;
+      topic2Image: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      topic2Link: {
+        nodes: {
+          uri: string;
+        }[];
+      };
+      topic3Title: string;
+      topic3Image: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      topic3Link: {
+        nodes: {
+          uri: string;
+        }[];
+      };
+    };
+  };
+  technologies: {
+    nodes: {
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      uri: string;
+      id: string;
+    }[];
+  };
+}

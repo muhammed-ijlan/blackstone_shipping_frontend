@@ -832,5 +832,155 @@ export const GET_FAQS = gql`
       }
     }
   }
+`;
 
+export const GET_NEWS_DETAIL = gql`
+query GetPostDetailsByID($id: ID!) {
+  post(id: $id, idType: ID) {
+    title
+    content
+    date
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+}
+`
+
+
+export const GET_RELATED_POSTS_BY_ID = gql`
+  query GetRelatedPostsByID($categorySlug: String!, $excludePostId: ID!) {
+    posts(
+      where: {
+        categoryName: $categorySlug
+        notIn: [$excludePostId]
+      }
+      first: 3
+    ) {
+      nodes {
+        title
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        uri
+      }
+    }
+  }
+`;
+
+
+export const GET_SINGLE_CASE_STUDY = gql`
+  query GetSingleCaseStudy($id: ID!) {
+    caseStudy(id: $id, idType: ID) {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      caseStudiesOptions {
+        caseStudyImage {
+          node {
+            sourceUrl
+          }
+        }
+        companyName
+        companyLogo {
+          node {
+            sourceUrl
+          }
+        }
+        companyLocation
+        companyDescription
+        challenges
+        solutions
+        results
+        caseStudyPersonName
+        caseStudyPersonDesignation
+        caseStudyPersonImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_TECHNOLOGY_PAGE = gql`
+query GetTechnologyPage {
+  page(id: "technology", idType: URI) {
+    technologyPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+      pageContent
+    }
+    technologyPageOtherTopicsSection {
+      otherTopicsMainTitle
+      topic1Title
+      topic1Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic1Link {
+        nodes {
+          uri
+        }
+      }
+      topic2Title
+      topic2Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic2Link {
+        nodes {
+          uri
+        }
+      }
+      topic3Title
+      topic3Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic3Link {
+        nodes {
+          uri
+        }
+      }
+    }
+  }
+  technologies(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      uri
+      id
+    }
+  }
+}
 `;
