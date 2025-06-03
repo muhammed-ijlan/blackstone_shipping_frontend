@@ -25,18 +25,21 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
           borderRadius: "8px 8px 0px 0px",
         }}
       />
-      <Stack p={"15px"} justifyContent={"space-between"} sx={{ height: "100%" }}>
+      <Stack p={"15px"} justifyContent={"space-between"} sx={{ height: "100%" }} gap={1}>
         <Stack>
           <Typography sx={{color:"rgba(11, 19, 40, 1) !important",textAlign:{xs:"left"}}} variant="h4">{data.title.toUpperCase()}</Typography>
           <Typography
             variant="body2"
-            sx={{ color: "rgba(45, 55, 72, 1) !important" }}
+            sx={{ color: "rgba(45, 55, 72, 1) !important",  display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 3,
+                overflow: "hidden", }}
             dangerouslySetInnerHTML={{ __html: data.content }}
           />
         </Stack>
         <CustomArrowButton
           name="Read More"
-          sx={{ width: "160px", height: "50px" }}
+          // sx={{ width: "160px", height: "50px" }}
         />
       </Stack>
     </Stack>

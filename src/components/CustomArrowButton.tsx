@@ -24,13 +24,13 @@ const CustomArrowButton: React.FC<CustomArrowButtonProps> = ({ name, onClick,sx 
       variant="outlined"
       sx={{
         ...sx,
+        alignItems:"center",
         borderColor: "rgba(32, 189, 103, 1)",
         borderRadius: "4px",
         color: "rgba(45, 55, 72, 1)",
-        // color: "red ",
       }}
     >
-      <Stack gap={1} direction="row" alignItems="center">
+      <Stack gap={1} direction="row" alignItems="center" justifyContent={"center"}>
         <Typography variant="body1" fontSize={"16px"} fontWeight={700} color="rgba(45, 55, 72, 1)" sx={{...sx}}>
           {name}
         </Typography>
