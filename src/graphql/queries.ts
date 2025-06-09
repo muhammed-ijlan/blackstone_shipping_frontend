@@ -1035,3 +1035,90 @@ export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
     }
   }
 `;
+
+
+export const GET_CAREERS_PAGE = gql`
+query GetCareersPage {
+  page(id: "careers", idType: URI) {
+    careersPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+    }
+    careersPageSection1 {
+      mainTitle
+      subTitle
+      content
+      image {
+        node {
+          sourceUrl
+        }
+      }
+    }
+    careersPageMeetOur {
+      meetOurPeopleTitle
+      meetOurPeopleContent
+    }
+    careersPageJobsSection {
+      jobSectionMainTitle
+      jobSectionSubTitle
+      jobSectionBottomContent
+    }
+    careersPageFind {
+      openPositionTitle
+    }
+    careersPageWhyJoinUsSection {
+      whyJoinUsTitle
+      whyJoinUsContent
+    }
+    careersPageWeAreLookingForSection {
+      title
+      number1
+      number2
+      number3
+      number4
+      number5
+      rightSideContent
+    }
+  }
+  peoples(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      peoplesOptions {
+        videoUrl
+      }
+    }
+  }
+  jobCategories {
+    nodes {
+      name
+      description
+    }
+  }
+  jobLocations {
+    nodes {
+      name
+    }
+  }
+  careerAdvantages(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`
