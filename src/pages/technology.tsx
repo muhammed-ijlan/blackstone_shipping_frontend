@@ -5,7 +5,7 @@ import { GET_TECHNOLOGY_PAGE } from "src/graphql/queries";
 import BannerContent from "src/sections/services/BannerContent";
 import OtherTopics from "src/sections/services/OtherTopics";
 import ServiceCards from "src/sections/services/ServiceCards";
-import { GetTechnologyPageResponse } from "src/types/graphql/types/resourses.types";
+import { GetTechnologyPageResponse } from "src/types/graphql/types/technology.types";
 
 const Page = () => {
   const {

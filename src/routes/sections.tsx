@@ -23,6 +23,7 @@ export const ResoursesPage = lazy(()=>import("../pages/resourses"))
 export const NewsDetailPage = lazy(()=>import("../pages/newsDetail"))
 export const CaseStudyDetailPage = lazy(()=>import("../pages/caseStudyDetail"))
 export const TechnologyPage = lazy(() => import("../pages/technology"));
+export const TechnologyDetailPage = lazy(() => import("../pages/technologyDetail"));
 
 const renderFallback = () => (
   <Box
@@ -132,6 +133,22 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <TechnologyPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "technology/:id",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <TechnologyDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "careers",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <TechnologyDetailPage />
           </Suspense>
         ),
       },

@@ -984,3 +984,54 @@ query GetTechnologyPage {
   }
 }
 `;
+
+export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
+  query GetTechnologyDetailsByID($id: ID!) {
+    technology(id: $id, idType: ID) {
+      ... on Technology {
+        title
+        content
+        technologySinglePageBannerSection {
+          bannerImage {
+            node {
+              sourceUrl
+            }
+          }
+          bannerTitle
+        }
+        technologySinglePageOptions {
+          subTitle
+        }
+        children {
+          nodes {
+            ... on Technology {
+              id
+              title
+              content
+              technologySinglePageOptions {
+                subTitle
+              }
+              children {
+                nodes {
+                  ... on Technology {
+                    id
+                    title
+                    content
+                    technologySinglePageOptions {
+                      subTitle
+                    }
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
