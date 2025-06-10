@@ -27,7 +27,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
   const isSelfHosted = videoUrl?.match(/\.(mp4|webm)$/i);
 
   const videoJsOptions: VideoJsPlayerOptions = {
-    autoplay: true,
+    autoplay: false,
     controls: false,
     responsive: true,
     fluid: true,
@@ -60,7 +60,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
 
   return (
     <Stack gap={1}>
-      <Box sx={{ maxWidth: 400, width: '100%', borderRadius: 2, overflow: 'hidden' }}>
+      <Box sx={{ width: 400, borderRadius: 2, overflow: 'hidden' }}>
         {videoUrl ? (
           <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
         ) : (

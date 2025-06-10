@@ -1122,3 +1122,27 @@ query GetCareersPage {
   }
 }
 `
+
+export const GET_JOB_OPENINGS = gql`
+query GetJobOpenings {
+  jobOpenings(
+    where: {
+      parentIn: [0]
+      orderby: { field: DATE, order: ASC }
+    }
+  ) {
+    nodes {
+      title
+      id
+      date
+      jobOpeningsOptions {
+        jobLocation {
+          nodes {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+`

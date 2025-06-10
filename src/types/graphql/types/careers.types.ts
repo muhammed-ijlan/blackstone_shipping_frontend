@@ -81,3 +81,26 @@ export interface GetCareersPageData {
         }[];
     };
 }
+
+export interface JobOpening {
+  title: string;
+  id: string;
+  date: string;
+  jobOpeningsOptions: JobOpeningsOptions;
+}
+
+export interface JobOpeningsOptions {
+  jobLocation: {
+    nodes: JobLocation[];
+  };
+}
+
+ export interface JobLocation {
+  name: string;
+}
+
+export interface JobOpeningsResponse {
+  jobOpenings: {
+    nodes: JobOpening[];
+  };
+}
