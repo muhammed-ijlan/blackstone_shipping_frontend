@@ -1146,3 +1146,31 @@ query GetJobOpenings {
   }
 }
 `
+
+export const GET_JOB_POST_DETAILS_BY_ID = gql`
+  query GetJobPostDetailsByID($id: ID!) {
+    jobOpening(id: $id, idType: ID) {
+      title
+      jobOpeningsOptions {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        jobLocation {
+          nodes {
+            name
+          }
+        }
+        jobCategory {
+          nodes {
+            name
+          }
+        }
+        keyResponsibilities
+        requirements
+        applicationEmail
+      }
+    }
+  }
+`;

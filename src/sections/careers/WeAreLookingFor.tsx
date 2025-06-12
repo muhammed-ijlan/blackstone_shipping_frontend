@@ -6,7 +6,7 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData })  => {
   return (
    <Stack my={3} gap={3}>
     <Typography variant='h2' color="rgba(133, 137, 147, 1)">{data.page.careersPageWeAreLookingForSection.title}</Typography>
-    <Stack direction={"row"} gap={4} >
+    <Stack direction={{xs:"column",lg:"row"}} gap={4} >
     <Stack gap={2} width={"100%"}>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
            <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)",borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
@@ -44,7 +44,7 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData })  => {
            <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number5}</Typography>
         </Stack>
     </Stack>
-    <Stack width={"70%"} sx={{bgcolor:"rgba(45, 55, 72, 1)",borderRadius:"8px",color:"white",p:3}}>
+    <Stack width={{xs:"100%",lg:"70%"}} sx={{bgcolor:"rgba(45, 55, 72, 1)",borderRadius:"8px",color:"white",p:3}}>
         <Box sx={{fontSize:32,lineHeight:"40px"}} component={"div"} dangerouslySetInnerHTML={{__html:data.page.careersPageWeAreLookingForSection.rightSideContent}}/>
     </Stack>
     </Stack>

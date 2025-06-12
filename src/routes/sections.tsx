@@ -25,6 +25,7 @@ export const CaseStudyDetailPage = lazy(()=>import("../pages/caseStudyDetail"))
 export const TechnologyPage = lazy(() => import("../pages/technology"));
 export const TechnologyDetailPage = lazy(() => import("../pages/technologyDetail"));
 export const CareersPage = lazy(() => import("../pages/careers"));
+export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
 
 const renderFallback = () => (
   <Box
@@ -150,6 +151,14 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <CareersPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "careers/:id",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <CareerDetailPage />
           </Suspense>
         ),
       },

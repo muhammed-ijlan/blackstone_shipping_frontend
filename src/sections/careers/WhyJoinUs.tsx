@@ -23,7 +23,7 @@ const WhyJoinUs = ({ data }: { data: GetCareersPageData }) => {
           </Typography>
           <Grid container spacing={4}>
             {data.careerAdvantages.nodes.map((item) => (
-              <Grid size={{ xs: 12, md: 4 }}>
+              <Grid size={{ xs: 12,sm:6, md: 4 }}>
                 <JoinUsCard data={item} />
               </Grid>
             ))}

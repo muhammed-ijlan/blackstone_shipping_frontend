@@ -104,3 +104,37 @@ export interface JobOpeningsResponse {
     nodes: JobOpening[];
   };
 }
+
+
+
+export interface JobOpeningDetails {
+  title: string;
+  jobOpeningsOptions: {
+    bannerImage?: {
+      node: {
+        sourceUrl: string;
+      };
+    };
+    jobLocation: {
+      nodes: Array<{
+        name: string;
+      }>;
+    };
+    jobCategory: {
+      nodes: Array<{
+        name: string;
+      }>;
+    };
+    keyResponsibilities?: string;
+    requirements?: string;
+    applicationEmail?: string;
+  };
+}
+
+export interface GetJobPostDetailsResponse {
+  jobOpening: JobOpeningDetails;
+}
+
+export interface GetJobPostDetailsVariables {
+  id: string;
+}
