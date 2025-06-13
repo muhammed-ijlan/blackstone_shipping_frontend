@@ -4,7 +4,7 @@ import React from 'react'
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const BannerBottom: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <Container maxWidth="xl" sx={{my:10}}>
+    <Container maxWidth="xl" sx={{my:5}}>
       {children}
     </Container>
   );

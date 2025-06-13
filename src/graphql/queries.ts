@@ -1174,3 +1174,78 @@ export const GET_JOB_POST_DETAILS_BY_ID = gql`
     }
   }
 `;
+
+export const GET_SUPPORT_PAGE = gql`
+  query GetSupportPage {
+    page(id: "support", idType: URI) {
+      supportPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      supportPageContentSection {
+        mainTitle
+        content
+        image {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      supportPageContactFormSection {
+        generalInquiriesFormTitle
+        generalInquiriesFormEmail
+        quoteRequestFormTitle
+        quoteRequestFormEmail
+      }
+    }
+  }
+`;
+
+
+export const GET_OFFICE_LOCATIONS = gql`
+  query GetOfficeLocations($count: Int!, $after: String, $search: String) {
+    officeLocations(
+      first: $count
+      after: $after
+      where: {
+        search: $search
+        orderby: { field: DATE, order: ASC }
+      }
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        title
+        officeLocationsOptions {
+          address
+          phoneNumber
+          emailAddress
+          latitude
+          longitude
+          country {
+            nodes {
+              id
+              name
+              ... on Country {
+                countriesOptions {
+                  countryFlag {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
