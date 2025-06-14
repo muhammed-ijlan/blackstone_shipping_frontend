@@ -66,3 +66,62 @@ export interface OfficeLocationsVars {
   after?: string | null;
   search?: string;
 }
+
+
+
+
+
+export interface CountryPageData {
+  country: {
+    name: string;
+    countriesOptions?: {
+      countryBannerImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      countryBannerCaption: string;
+      countryMainAddress: string;
+      countryMainEmailAddress: string;
+      countryMainPhoneNumber: string;
+      countryImage1: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      countryImage2: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      countryImage3: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    };
+    services: {
+      nodes: {
+        id: string;
+        title: string;
+        uri: string;
+      }[];
+    };
+  };
+  officeLocations: {
+    nodes: {
+      id: string;
+      title: string;
+      countries: {
+        nodes: {
+          id: string;
+          name: string;
+        }[];
+      };
+    }[];
+  };
+}
+
+export interface CountryPageVars {
+  id: string;
+}

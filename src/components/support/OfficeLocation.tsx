@@ -1,31 +1,21 @@
-import { Search } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, Search } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Container,
-  Divider,
-  InputAdornment,
   Stack,
   TextField,
   Typography,
+  Pagination,
+  PaginationItem,
+  CircularProgress,
+  InputAdornment,
 } from "@mui/material";
-import React from "react";
-import { OfficeLocationsData } from "src/types/graphql/types/support.types";
-
-import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import { useOfficeLocations } from "src/graphql/hooks/useOfficeLocation";
 
-const cellStyle = {
-  border: "1px solid rgba(255, 255, 255, 0.2)",
-  padding: "12px",
-  color: "white",
-  verticalAlign: "top",
-};
-const cellStyle1 = {
-  borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-  padding: "12px",
-  color: "white",
-  verticalAlign: "top",
-};
 const baseCellStyle = {
   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
   padding: "12px",
@@ -34,7 +24,67 @@ const baseCellStyle = {
   fontSize: "14px",
 };
 
-const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
+const OfficeLocation: React.FC = () => {
+  const [search, setSearch] = useState("");
+  const {
+    locations,
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    hasNextPage,
+    goToNextPage,
+    goToPrevPage,
+    goToPage,
+  } = useOfficeLocations(3, search);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  // if (loading && locations.length === 0) return <CircularProgress />;
+  if (error) return <Typography color="error">Error: {error.message}</Typography>;
+
+  const renderPageNumbers = () => (
+    <Pagination
+      count={totalPages}
+      page={currentPage}
+      onChange={(e, value) => goToPage(value)}
+      showFirstButton={false}
+      showLastButton={false}
+      siblingCount={1}
+      boundaryCount={1}
+      renderItem={(item) => {
+        if (item.type === "page") {
+          return (
+            <PaginationItem
+              {...item}
+              sx={{
+                border: "1px solid rgba(109, 110, 113, 0.13)",
+                color: "rgba(217, 217, 217, 1)",
+                "&:hover": {
+                  backgroundColor: "rgba(11, 19, 40, 0.1)",
+                },
+                "&.Mui-selected": {
+                  color: "rgba(45, 55, 72, 1)",
+                  backgroundColor: "rgba(255, 255, 255, 1)",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "rgba(11, 19, 40, 0.8)",
+                    fontWeight: "bold",
+                    color: "white",
+                  },
+                },
+              }}
+            />
+          );
+        }
+        return null;
+      }}
+      shape="rounded"
+    />
+  );
+
   return (
     <Stack
       sx={{
@@ -55,10 +105,13 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
             </Typography>
             <Stack width={{ xs: "100%", sm: "auto" }}>
               <TextField
+              fullWidth
                 name="search"
                 placeholder="Search"
                 size="small"
                 variant="outlined"
+                value={search}
+                onChange={handleSearchChange}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -78,6 +131,8 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
                     "&.Mui-focused fieldset": {
                       borderColor: "rgba(217, 217, 217, 1)",
                     },
+                    color:"white",
+                    height:56
                   },
                 }}
                 inputProps={{
@@ -96,7 +151,9 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
             sx={{
               border: "none",
               borderRadius: "6px",
-              overflow: "hidden",
+              // overflow: "hidden",
+              overflowX: "auto",
+
             }}
           >
             <Table
@@ -163,14 +220,16 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
                   </Th>
                 </Tr>
               </Thead>
-
+              <Stack my={0.5} />
               <Tbody style={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
-                {data.officeLocations.nodes.map((item) => (
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {locations.map((item:any) => (
                   <Tr key={item.id}>
                     <Td
                       style={{
                         ...baseCellStyle,
                         borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderTop: "1px solid rgba(217, 217, 217, 1)",
                       }}
                     >
                       <Stack direction="row" alignItems="center" gap={1}>
@@ -191,6 +250,7 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
                       style={{
                         ...baseCellStyle,
                         borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderTop: "1px solid rgba(217, 217, 217, 1)",
                       }}
                     >
                       {item.title}
@@ -199,22 +259,35 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
                       style={{
                         ...baseCellStyle,
                         borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderTop: "1px solid rgba(217, 217, 217, 1)",
                       }}
                     >
-                      {item.officeLocationsOptions.address?.replace(
-                        /\r?\n/g,
-                        "<br />"
-                      )}
+                      <Box
+                        component={"div"}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            item.officeLocationsOptions.address?.replace(
+                              /\r?\n/g,
+                              "<br/>"
+                            ) || "",
+                        }}
+                      />
                     </Td>
                     <Td
                       style={{
                         ...baseCellStyle,
                         borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderTop: "1px solid rgba(217, 217, 217, 1)",
                       }}
                     >
                       {item.officeLocationsOptions.phoneNumber}
                     </Td>
-                    <Td style={baseCellStyle}>
+                    <Td
+                      style={{
+                        ...baseCellStyle,
+                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                      }}
+                    >
                       {item.officeLocationsOptions.emailAddress}
                     </Td>
                   </Tr>
@@ -222,6 +295,21 @@ const OfficeLocation = ({ data }: { data: OfficeLocationsData }) => {
               </Tbody>
             </Table>
           </Box>
+
+          {totalPages > 1 && (
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              mt={6}
+              sx={{ width: "100%" }}
+            >
+            
+              {renderPageNumbers()}
+
+              
+            </Stack>
+          )}
         </Stack>
       </Container>
     </Stack>

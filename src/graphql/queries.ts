@@ -1249,3 +1249,60 @@ export const GET_OFFICE_LOCATIONS = gql`
     }
   }
 `;
+
+
+
+export const GET_COUNTRY_PAGE = gql`
+  query GetCountryPage($id: ID!) {
+    country(id: $id, idType: ID) {
+      name
+      ... on Country {
+        countriesOptions {
+          countryBannerImage {
+            node {
+              sourceUrl
+            }
+          }
+          countryBannerCaption
+          countryMainAddress
+          countryMainEmailAddress
+          countryMainPhoneNumber
+          countryImage1 {
+            node {
+              sourceUrl
+            }
+          }
+          countryImage2 {
+            node {
+              sourceUrl
+            }
+          }
+          countryImage3 {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+      services {
+        nodes {
+          id
+          title
+          uri
+        }
+      }
+    }
+    officeLocations(first: 100) {
+      nodes {
+        id
+        title
+        countries {
+          nodes {
+            name
+            id
+          }
+        }
+      }
+    }
+  }
+`;

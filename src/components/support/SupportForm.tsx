@@ -10,7 +10,7 @@ const SupportForm = () => {
   };
   return (
     <Stack gap={5}>
-      <Stack direction={"row"} gap={3}>
+      <Stack direction={"row"} gap={3} alignItems={{xs:"center", sm:"flex-start"}} justifyContent={{xs:"center", sm:"flex-start"}} flexWrap="wrap">
         <Button
         onClick={()=>handleButtonState("general")}
           sx={{

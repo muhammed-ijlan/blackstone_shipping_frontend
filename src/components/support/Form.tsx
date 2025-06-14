@@ -115,7 +115,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
           <Stack gap={2} pb={7}>
             <Grid container spacing={3}>
               <Grid size={{xs:12,md:6}}>
-                <Typography ml={0.5}>Name</Typography>
+                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Name</Typography>
                 <TextField
                   name="name"
                   fullWidth
@@ -128,7 +128,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
               </Grid>
 
               <Grid size={{xs:12,md:6}}>
-                <Typography ml={0.5}>Company Name</Typography>
+                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Company Name</Typography>
                 <TextField
                   name="companyName"
                   fullWidth
@@ -141,7 +141,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
               </Grid>
 
               <Grid size={{xs:12,md:6}}>
-                <Typography ml={0.5}>Email Address</Typography>
+                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Email Address</Typography>
                 <TextField
                   name="email"
                   fullWidth
@@ -154,9 +154,9 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
               </Grid>
 
               <Grid size={{xs:12,md:6}}>
-                <Typography ml={0.5}>Phone Number</Typography>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid size={{xs:12,md:3}}>
+                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Phone Number</Typography>
+                <Grid container spacing={2} alignItems="center" justifyContent={"center"}>
+                  <Grid size={{xs:4,md:2.5}}>
                     <Select
                       value={country.code}
                       onChange={(e) => {
@@ -168,7 +168,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                       fullWidth
                       displayEmpty
                       variant="outlined"
-                      sx={{ height: 56 }}
+                      sx={{ height: {xs:50,sm:56} }}
                       renderValue={() => (
                         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                           <Avatar
@@ -196,7 +196,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                       ))}
                     </Select>
                   </Grid>
-                  <Grid size={{xs:12,md:9}}>
+                  <Grid size={{xs:8,md:9.5}}>
                     <TextField
                       name="phoneNumber"
                       autoComplete="off"
@@ -206,7 +206,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                       onChange={handleChange}
                       error={Boolean(touched.phoneNumber && errors.phoneNumber)}
                       helperText={touched.phoneNumber && errors.phoneNumber}
-                      sx={{ height: 56 }}
+                      sx={{ height: {xs:50,sm:56} }}
                     />
                   </Grid>
                 </Grid>
@@ -215,7 +215,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
               {state === "quote" && (
                 <>
                   <Grid size={{xs:12,md:6}}>
-                    <Typography ml={0.5}>
+                    <Typography ml={0.5} sx={{textAlign:"left !important"}}>
                       Port of Loading & Port of Discharge
                     </Typography>
                     <TextField
@@ -230,7 +230,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                   </Grid>
 
                   <Grid size={{xs:12,md:6}}>
-                    <Typography ml={0.5}>Weight & Dimensions</Typography>
+                    <Typography ml={0.5} sx={{textAlign:"left !important"}}>Weight & Dimensions</Typography>
                     <TextField
                       name="weight"
                       fullWidth
@@ -243,7 +243,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                   </Grid>
 
                   <Grid size={{xs:12,md:6}}>
-                    <Typography ml={0.5}>Type of Goods</Typography>
+                    <Typography ml={0.5} sx={{textAlign:"left !important"}}>Type of Goods</Typography>
                     <TextField
                       name="typeOfGoods"
                       fullWidth
@@ -256,7 +256,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                   </Grid>
 
                   <Grid size={{xs:12,md:6}} >
-                    <Typography ml={0.5}>Preferred Shipping Method</Typography>
+                    <Typography ml={0.5} sx={{textAlign:"left !important"}}>Preferred Shipping Method</Typography>
                     <StyledToggleButtonGroup
                       exclusive
                       fullWidth
@@ -287,7 +287,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
                   </Grid>
 
                   <Grid size={{xs:12}}>
-                    <Typography ml={0.5}>Additional Notes</Typography>
+                    <Typography ml={0.5} sx={{textAlign:"left !important"}}>Additional Notes</Typography>
                     <TextField
                       placeholder="Include any timeframes, service needs, or special instructions."
                       name="additionalNote"
@@ -306,7 +306,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 
               {state === "general" && (
                 <Grid size={{xs:12}}>
-                  <Typography ml={0.5}>Your Message</Typography>
+                  <Typography ml={0.5} sx={{textAlign:"left !important"}}>Your Message</Typography>
                   <TextField
                     placeholder="Let us know how we can assist you."
                     name="message"
@@ -323,8 +323,8 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
               )}
 
               <Grid size={{xs:12}}>
-                <Stack alignItems={"flex-end"}>
-                  <Stack direction={"row"} gap={2}>
+                <Stack alignItems={{xs:"center",sm:"flex-end"}} >
+                  <Stack direction={"row"} gap={1}>
                     <Button variant="outlined" size="large" type="reset">
                       Cancel
                     </Button>
