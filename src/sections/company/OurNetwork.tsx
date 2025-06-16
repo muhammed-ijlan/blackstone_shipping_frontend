@@ -24,7 +24,7 @@ const OurNetwork = ({ data }: { data: GetCompanyGlobalNetworkResponse }) => {
           </Typography>
 
         <OurNetworkCards data={data}/>
-        <Location/>
+        <Location header={true}/>
         </Stack>
       </Container>
     </Stack>
