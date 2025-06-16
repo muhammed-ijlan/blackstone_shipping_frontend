@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -21,22 +21,21 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import { layoutClasses } from "./classes";
 import { useLocation } from "react-router-dom";
-
 import searchIcon from "src/assets/icons/search.png";
 import trackingIcon from "src/assets/icons/track.png";
 import myBBXIcon from "src/assets/icons/box.png";
 import contactIcon from "src/assets/icons/mail.png";
 import { useRouter } from "src/routes/hooks";
+import { MenuItem } from "src/types/graphql/types/menu.types";
 
 const NavBar = styled("div")(({ theme }) => ({
   display: "flex",
-  // flexWrap: "nowrap",
+  flexWrap: "nowrap",
   gap: theme.spacing(3),
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),
   alignItems: "center",
-  overflowX:"auto", 
-  maxWidth:"100%"
+  maxWidth: "100%"
 }));
 
 const NavItem = styled("div", {
@@ -44,16 +43,15 @@ const NavItem = styled("div", {
 })<{ isLastItem?: boolean }>(({ theme, isLastItem }) => ({
   position: "relative",
   display: "inline-block",
-
 }));
 
 const NavLink = styled(MuiLink, {
   shouldForwardProp: (prop) => prop !== "isActive",
 })<{ isActive?: boolean }>(({ theme, isActive }) => ({
-  fontSize: "15px !important",
+  fontSize: "15.5px !important",
   fontWeight: 600,
   cursor: "pointer",
-  textWrap:"nowrap",
+  textWrap: "nowrap",
   color: isActive ? "rgba(45, 55, 72, 1)" : "rgba(109, 110, 113, 1)",
   textDecoration: "none",
   "&:hover": {
@@ -80,7 +78,7 @@ const SubMenu = styled(Box, {
         easing: theme.transitions.easing.easeIn,
       }
     ),
-    zIndex: 1000,
+    zIndex: 10000,
     width: "100%",
     minWidth: "900px",
     borderTop: `2px solid ${theme.palette.primary.main}`,
@@ -96,6 +94,7 @@ const SubMenuContent = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
   flexWrap: "wrap",
   padding: theme.spacing(0, 12),
+  
 }));
 
 const SubMenuCategory = styled(Box)(({ theme }) => ({
@@ -103,12 +102,18 @@ const SubMenuCategory = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(0.5),
   minWidth: "200px",
+   borderRight: `1px solid ${theme.palette.divider}`,
+  paddingRight: theme.spacing(2),
+  "&:last-of-type": {
+    borderRight: "none",
+    paddingRight: 0,
+  },
 }));
 
 const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
   fontSize: 16,
   fontWeight: 700,
-  color: "#003087",
+  color: "rgba(26, 86, 219, 1)",
   marginBottom: theme.spacing(1),
   textDecoration: "none",
   "&:hover": {
@@ -119,12 +124,13 @@ const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
 const SubMenuItem = styled(MuiLink)(({ theme }) => ({
   fontSize: 14,
   cursor: "pointer",
-  color: "#6D6E71",
+  color: "rgba(45, 55, 72, 1)",
   lineHeight: "1.5",
   textDecoration: "none",
   "&:hover": {
     color: theme.palette.primary.main,
   },
+  marginTop:6
 }));
 
 export type HeaderSectionProps = AppBarProps & {
@@ -145,15 +151,6 @@ export type HeaderSectionProps = AppBarProps & {
   data: MenuItem[];
 };
 
-interface MenuItem {
-  id: string;
-  label: string;
-  url: string;
-  childItems?: {
-    nodes: MenuItem[];
-  };
-}
-
 export function HeaderSection({
   sx,
   slots,
@@ -170,19 +167,30 @@ export function HeaderSection({
   const router = useRouter();
   const location = useLocation();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
 
   const handleMouseEnter = (label: string) => {
-    setOpenSubmenu(label);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setOpenSubmenu(label);
+    }, 200);
   };
 
   const handleMouseLeave = () => {
-    setOpenSubmenu(null);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setOpenSubmenu(null);
+    }, 200);
   };
 
   const renderSubcategories = (subcategories: MenuItem[]) => {
     const hasNestedItems = subcategories.some(
-      (subItem) =>
-        subItem.childItems?.nodes && subItem.childItems.nodes.length > 0
+      (subItem) => subItem.children && subItem.children.length > 0
     );
 
     if (!hasNestedItems) {
@@ -192,7 +200,8 @@ export function HeaderSection({
             {subcategories.map((subItem) => (
               <SubMenuItem
                 key={subItem.id}
-                href={subItem.url !== "#" ? subItem.url : undefined}
+                href={subItem.uri !== "#" ? subItem.uri : undefined}
+                onClick={() => subItem.uri !== "#" && router.push(subItem.uri)}
               >
                 {subItem.label}
               </SubMenuItem>
@@ -207,14 +216,16 @@ export function HeaderSection({
         {subcategories.map((category) => (
           <SubMenuCategory key={category.id}>
             <SubMenuCategoryTitle
-              href={category.url !== "#" ? category.url : undefined}
+              href={category.uri !== "#" ? category.uri : undefined}
+              onClick={() => category.uri !== "#" && router.push(category.uri)}
             >
               {category.label}
             </SubMenuCategoryTitle>
-            {category.childItems?.nodes.map((item) => (
+            {category.children?.map((item) => (
               <SubMenuItem
                 key={item.id}
-                href={item.url !== "#" ? item.url : undefined}
+                href={item.uri !== "#" ? item.uri : undefined}
+                onClick={() => item.uri !== "#" && router.push(item.uri)}
               >
                 {item.label}
               </SubMenuItem>
@@ -237,7 +248,7 @@ export function HeaderSection({
         (theme) => ({
           ...(isOffset && {
             "--color": `var(--offset-color, ${theme.vars.palette.text.primary})`,
-          }),
+        }),
           bgcolor: "white",
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -357,35 +368,33 @@ export function HeaderSection({
                       key={item.id}
                       style={{ paddingBottom: "15px" }}
                       onMouseEnter={() =>
-                        (item?.childItems?.nodes?.length ?? 0) > 0 &&
-                        handleMouseEnter(item.label)
+                        item.children && item.children.length > 0 && handleMouseEnter(item.label)
                       }
                       onMouseLeave={() =>
-                        (item?.childItems?.nodes?.length ?? 0) > 0 &&
-                        handleMouseLeave()
+                        item.children && item.children.length > 0 && handleMouseLeave()
                       }
                     >
                       <NavItem isLastItem={index >= data.length - 3}>
                         <NavLink
-                          href={item.url !== "#" ? item.url : undefined}
+                          href={item.uri !== "#" ? item.uri : undefined}
                           isActive={
-                            (item.url === "/" || item.url === "") 
+                            (item.uri === "/" || item.uri === "")
                               ? location.pathname === "/"
-                              : location.pathname === item.url
+                              : location.pathname === item.uri
                           }
+                          onClick={() => item.uri !== "#" && router.push(item.uri)}
                         >
                           {item.label}
                         </NavLink>
                       </NavItem>
-                      {item.childItems?.nodes &&
-                        item.childItems.nodes.length > 0 && (
-                          <SubMenu
-                            isOpen={openSubmenu === item.label}
-                            isLastItem={index >= data.length - 2}
-                          >
-                            {renderSubcategories(item.childItems.nodes)}
-                          </SubMenu>
-                        )}
+                      {item.children && item.children.length > 0 && (
+                        <SubMenu
+                          isOpen={openSubmenu === item.label}
+                          isLastItem={index >= data.length - 2}
+                        >
+                          {renderSubcategories(item.children)}
+                        </SubMenu>
+                      )}
                     </div>
                   ))
                 )}

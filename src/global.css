@@ -70,3 +70,11 @@ input[type='number']::-webkit-inner-spin-button {
 .carousel .slide iframe {
 margin:  0 !important;
 } 
+
+@media screen and (max-width: 40em) {
+    .responsiveTable tbody tr {
+        border: 1px solid white !important;
+        padding: .25em;
+    }
+}
+

@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import { GET_COMPANY_LOCATION } from 'src/graphql/queries';
 import { GetCompanyOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
 
-const LocationMap = () => {
+const LocationMap = ({header = true}:{header:boolean}) => {
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const { data } = useQuery<GetCompanyOfficeLocationsResponse>(GET_COMPANY_LOCATION);
 
@@ -25,9 +25,12 @@ const LocationMap = () => {
   console.log(defaultCenter)
   return (
     <Stack>
+      {
+        header &&
       <Typography variant="h3" my={4}>
         {data?.page.companyPageOfficeLocationSection.officeLocationsTitle.toUpperCase()}
       </Typography>
+      }
 
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
         <div style={{ height: '100vh', width: '100%' }}>

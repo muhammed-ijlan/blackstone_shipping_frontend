@@ -984,3 +984,345 @@ query GetTechnologyPage {
   }
 }
 `;
+
+export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
+  query GetTechnologyDetailsByID($id: ID!) {
+    technology(id: $id, idType: ID) {
+      ... on Technology {
+        title
+        content
+        technologySinglePageBannerSection {
+          bannerImage {
+            node {
+              sourceUrl
+            }
+          }
+          bannerTitle
+        }
+        technologySinglePageOptions {
+          subTitle
+        }
+        children {
+          nodes {
+            ... on Technology {
+              id
+              title
+              content
+              technologySinglePageOptions {
+                subTitle
+              }
+              children {
+                nodes {
+                  ... on Technology {
+                    id
+                    title
+                    content
+                    technologySinglePageOptions {
+                      subTitle
+                    }
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+export const GET_CAREERS_PAGE = gql`
+query GetCareersPage {
+  page(id: "careers", idType: URI) {
+    careersPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
+        }
+      }
+      bannerTitle
+    }
+    careersPageSection1 {
+      mainTitle
+      subTitle
+      content
+      image {
+        node {
+          sourceUrl
+        }
+      }
+    }
+    careersPageMeetOur {
+      meetOurPeopleTitle
+      meetOurPeopleContent
+    }
+    careersPageJobsSection {
+      jobSectionMainTitle
+      jobSectionSubTitle
+      jobSectionBottomContent
+    }
+    careersPageFind {
+      openPositionTitle
+    }
+    careersPageWhyJoinUsSection {
+      whyJoinUsTitle
+      whyJoinUsContent
+    }
+    careersPageWeAreLookingForSection {
+      title
+      number1
+      number2
+      number3
+      number4
+      number5
+      rightSideContent
+    }
+  }
+  peoples(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      peoplesOptions {
+        videoUrl
+      }
+    }
+  }
+  jobCategories {
+    nodes {
+      name
+      description
+    }
+  }
+  jobLocations {
+    nodes {
+      name
+    }
+  }
+  careerAdvantages(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`
+
+export const GET_JOB_OPENINGS = gql`
+query GetJobOpenings {
+  jobOpenings(
+    where: {
+      parentIn: [0]
+      orderby: { field: DATE, order: ASC }
+    }
+  ) {
+    nodes {
+      title
+      id
+      date
+      jobOpeningsOptions {
+        jobLocation {
+          nodes {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+export const GET_JOB_POST_DETAILS_BY_ID = gql`
+  query GetJobPostDetailsByID($id: ID!) {
+    jobOpening(id: $id, idType: ID) {
+      title
+      jobOpeningsOptions {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        jobLocation {
+          nodes {
+            name
+          }
+        }
+        jobCategory {
+          nodes {
+            name
+          }
+        }
+        keyResponsibilities
+        requirements
+        applicationEmail
+      }
+    }
+  }
+`;
+
+export const GET_SUPPORT_PAGE = gql`
+  query GetSupportPage {
+    page(id: "support", idType: URI) {
+      supportPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      supportPageContentSection {
+        mainTitle
+        content
+        image {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      supportPageContactFormSection {
+        generalInquiriesFormTitle
+        generalInquiriesFormEmail
+        quoteRequestFormTitle
+        quoteRequestFormEmail
+      }
+    }
+  }
+`;
+
+
+export const GET_OFFICE_LOCATIONS = gql`
+  query GetOfficeLocations($count: Int!, $after: String, $search: String) {
+    officeLocations(
+      first: $count
+      after: $after
+      where: {
+        search: $search
+        orderby: { field: DATE, order: ASC }
+      }
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        title
+        officeLocationsOptions {
+          address
+          phoneNumber
+          emailAddress
+          latitude
+          longitude
+          country {
+            nodes {
+              id
+              name
+              ... on Country {
+                countriesOptions {
+                  countryFlag {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+
+export const GET_COUNTRY_PAGE = gql`
+  query GetCountryPage($id: ID!) {
+    country(id: $id, idType: ID) {
+      name
+      ... on Country {
+        countriesOptions {
+          countryBannerImage {
+            node {
+              sourceUrl
+            }
+          }
+          countryBannerCaption
+          countryMainAddress
+          countryMainEmailAddress
+          countryMainPhoneNumber
+          countryImage1 {
+            node {
+              sourceUrl
+            }
+          }
+          countryImage2 {
+            node {
+              sourceUrl
+            }
+          }
+          countryImage3 {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+      services {
+        nodes {
+          id
+          title
+          uri
+        }
+      }
+    }
+    officeLocations(first: 100) {
+      nodes {
+        id
+        title
+        countries {
+          nodes {
+            name
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+export const GET_MENU_ITEMS = gql`
+  query GetMenuItemsByMenuId {
+    menu(id: "Main Navigation", idType: NAME) {
+      id
+      name
+      menuItems(first: 999) {
+        nodes {
+          id
+          label
+          url
+          uri
+          parentId
+          order
+        }
+      }
+    }
+  }
+`;

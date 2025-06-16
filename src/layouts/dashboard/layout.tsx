@@ -5,7 +5,6 @@ import { useBoolean } from 'minimal-shared/hooks';
 
 import { useTheme } from '@mui/material/styles';
 
-
 import { NavMobile } from './nav';
 import { layoutClasses } from '../core/classes';
 import { dashboardLayoutVars } from './css-vars';
@@ -21,9 +20,10 @@ import type { LayoutSectionProps } from '../core/layout-section';
 import Footer from 'src/sections/footer/Footer';
 import { Box, Stack } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
-import logo from "src/assets/logo/navlogo.png"
+import logo from 'src/assets/logo/navlogo.png';
 import { useQuery } from '@apollo/client';
-import { GET_HEADER_MENU } from 'src/graphql/queries';
+import { GET_MENU_ITEMS } from 'src/graphql/queries';
+import { MenuItem, MenuData } from 'src/types/graphql/types/menu.types';
 
 // ----------------------------------------------------------------------
 
@@ -37,21 +37,33 @@ export type DashboardLayoutProps = LayoutBaseProps & {
   };
 };
 
-interface MenuItem {
-  id: string;
-  label: string;
-  url: string;
-  childItems?: {
-    nodes: MenuItem[];
-  };
-}
+function buildNestedMenu(menuItems: MenuItem[]): MenuItem[] {
+  const map: { [key: string]: MenuItem } = {};
+  const tree: MenuItem[] = [];
 
- interface GetHeaderMenuData {
-  menu: {
-    menuItems: {
-      nodes: MenuItem[];
-    };
+  menuItems.forEach(item => {
+    map[item.id] = { ...item, children: [] };
+  });
+
+  menuItems.forEach(item => {
+    if (item.parentId && map[item.parentId]) {
+      map[item.parentId].children!.push(map[item.id]);
+    } else {
+      tree.push(map[item.id]);
+    }
+  });
+
+  const sortByOrder = (items: MenuItem[]) => {
+    items.sort((a, b) => a.order - b.order);
+    items.forEach(item => {
+      if (item.children && item.children.length > 0) {
+        sortByOrder(item.children);
+      }
+    });
   };
+
+  sortByOrder(tree);
+  return tree;
 }
 
 export function DashboardLayout({
@@ -62,10 +74,15 @@ export function DashboardLayout({
   layoutQuery = 'lg',
 }: DashboardLayoutProps) {
   const theme = useTheme();
-  const {data,loading,error}  = useQuery<GetHeaderMenuData>(GET_HEADER_MENU);
-
+  const { data, loading, error } = useQuery<MenuData>(GET_MENU_ITEMS);
 
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
+
+  // Transform flat menu items to nested structure
+  const nestedMenuItems = data?.menu?.menuItems?.nodes
+    ? buildNestedMenu(data.menu.menuItems.nodes)
+    : [];
+
 
   const renderHeader = () => {
     const headerSlotProps: HeaderSectionProps['slotProps'] = {
@@ -75,20 +92,29 @@ export function DashboardLayout({
     };
 
     const headerSlots: HeaderSectionProps['slots'] = {
-
       leftArea: (
-      <Box component={"img"} sx={{[theme.breakpoints.up(layoutQuery)]: { display: 'none' }}} width={"70px"} src={logo} />
+        <Box
+          component="img"
+          sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } }}
+          width="70px"
+          src={logo}
+        />
       ),
 
       rightArea: (
-        <Stack alignItems={"flex-end"} sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } }}>
-          {/** @slot Nav mobile */}
-          <Iconify width={30}  icon={"heroicons-outline:menu-alt-1"}  onClick={onOpen}
-            sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } ,color:"redrgba(45, 55, 72, 1)"}}/>
-          <NavMobile data={[
-            
-             ]}
-            open={open} onClose={onClose} workspaces={_workspaces} />
+        <Stack alignItems="flex-end" sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' } }}>
+          <Iconify
+            width={30}
+            icon="heroicons-outline:menu-alt-1"
+            onClick={onOpen}
+            sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'none' }, color: 'rgba(45, 55, 72, 1)' }}
+          />
+          <NavMobile
+            data={nestedMenuItems}
+            open={open}
+            onClose={onClose}
+            workspaces={_workspaces}
+          />
         </Stack>
       ),
     };
@@ -101,29 +127,18 @@ export function DashboardLayout({
         slots={{ ...headerSlots, ...slotProps?.header?.slots }}
         slotProps={merge(headerSlotProps, slotProps?.header?.slotProps ?? {})}
         sx={slotProps?.header?.sx}
-        data={data?.menu.menuItems.nodes ?? []}
+        data={nestedMenuItems}
       />
     );
   };
 
-  const renderFooter = () => (<Footer />);
+  const renderFooter = () => <Footer />;
 
   const renderMain = () => <MainSection {...slotProps?.main}>{children}</MainSection>;
 
   return (
     <LayoutSection
-      /** **************************************
-       * @Header
-       *************************************** */
       headerSection={renderHeader()}
-
-      /** **************************************
-       * @Footer
-       *************************************** */
-      // footerSection={renderFooter()}
-      /** **************************************
-       * @Styles
-       *************************************** */
       cssVars={{ ...dashboardLayoutVars(theme), ...cssVars }}
       sx={[
         {
@@ -136,7 +151,6 @@ export function DashboardLayout({
               }),
             },
           },
-         
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
