@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router";
 
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { varAlpha } from "minimal-shared/utils";
 
 import Box from "@mui/material/Box";
@@ -12,7 +13,7 @@ import LinearProgress, {
 import { DashboardLayout } from "../layouts/dashboard";
 
 // ----------------------------------------------------------------------
-
+import { NotFoundView } from "../sections/error/index";
 export const HomePage = lazy(() => import("../pages/home"));
 export const CompanyPage = lazy(() => import("../pages/company"));
 export const ServicesPage = lazy(() => import("../pages/services"));
@@ -28,7 +29,6 @@ export const CareersPage = lazy(() => import("../pages/careers"));
 export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
 export const SupportPage = lazy(() => import("../pages/support"));
 export const CountrySpecificPage = lazy(() => import("../pages/countrySpecific"));
-
 
 const renderFallback = () => (
   <Box
@@ -63,6 +63,7 @@ export const routesSection: RouteObject[] = [
     children: [
       {
         index: true,
+        path:"home",
         element: (
           <Suspense fallback={renderFallback()}>
             <HomePage />
@@ -110,7 +111,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "resourses",
+        path: "resources",
         element: (
           <Suspense fallback={renderFallback()}>
             <ResoursesPage />
@@ -118,7 +119,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "resourses/news/:postId",
+        path: "resources/news/:postId",
         element: (
           <Suspense fallback={renderFallback()}>
             <NewsDetailPage />
@@ -126,7 +127,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "resourses/case-study/:id",
+        path: "resources/case-study/:id",
         element: (
           <Suspense fallback={renderFallback()}>
             <CaseStudyDetailPage />
@@ -184,9 +185,15 @@ export const routesSection: RouteObject[] = [
     ],
   },
 
-  // {
-  //   path: '404',
-  //   element: <Page404 />,
-  // },
-  // { path: '*', element: <Page404 /> },
+  {
+        path: "",
+        element: <Navigate to="/home" replace />,
+      },
+
+
+  {
+    path: '404',
+    element: <NotFoundView />,
+  },
+  { path: '*', element: <NotFoundView /> },
 ];

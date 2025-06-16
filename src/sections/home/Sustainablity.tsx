@@ -120,6 +120,11 @@ const Sustainability = () => {
               />
               <Typography
                 sx={{
+                   display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                      WebkitLineClamp: 2,
+                      overflow: "hidden",
+                      height:"65px",
                   borderBottom: "2px solid rgba(14, 159, 110, 1)",
                   pb: 2,
                   fontWeight: 600,
@@ -134,6 +139,7 @@ const Sustainability = () => {
               </Typography>
               <Typography
                 sx={{
+                  
                   textAlign:"left !important",
                   fontWeight: 600,
                   fontSize: "14px",

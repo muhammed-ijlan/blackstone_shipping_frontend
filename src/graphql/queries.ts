@@ -1306,3 +1306,23 @@ export const GET_COUNTRY_PAGE = gql`
     }
   }
 `;
+
+
+export const GET_MENU_ITEMS = gql`
+  query GetMenuItemsByMenuId {
+    menu(id: "Main Navigation", idType: NAME) {
+      id
+      name
+      menuItems(first: 999) {
+        nodes {
+          id
+          label
+          url
+          uri
+          parentId
+          order
+        }
+      }
+    }
+  }
+`;

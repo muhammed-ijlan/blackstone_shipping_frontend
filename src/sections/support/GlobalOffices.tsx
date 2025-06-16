@@ -43,7 +43,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
               </Typography>
             </Box>
 
-                 <Typography variant="h4" sx={{textAlign:"left !important"}}>
+                 <Typography  variant="h4" sx={{display:{xs:"flex",sm:"none"},textAlign:"left !important"}}>
                               • &nbsp;&nbsp;{office.title}
                             </Typography>
           </>
