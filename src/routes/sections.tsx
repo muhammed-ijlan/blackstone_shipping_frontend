@@ -87,7 +87,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "services/:serviceId",
+        path: "service/:serviceId",
         element: (
           <Suspense fallback={renderFallback()}>
             <ServiceDetailPage />
@@ -191,9 +191,9 @@ export const routesSection: RouteObject[] = [
       },
 
 
-  {
-    path: '404',
-    element: <NotFoundView />,
-  },
-  { path: '*', element: <NotFoundView /> },
+  // {
+  //   path: '404',
+  //   element: <NotFoundView />,
+  // },
+  // { path: '*', element: <NotFoundView /> },
 ];

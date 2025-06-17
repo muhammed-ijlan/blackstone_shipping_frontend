@@ -25,14 +25,14 @@ const Page = () => {
         <>
           <Banner
             bgUrl={
-              data?.service.servicesPageBannerSection.bannerImage.node.sourceUrl
+              data?.service?.servicesPageBannerSection.bannerImage.node.sourceUrl
             }
-            mainTitle={data?.service.servicesPageBannerSection.bannerTitle}
+            mainTitle={data?.service?.servicesPageBannerSection.bannerTitle}
             subTitle={"Services"}
           />
-          <OtherServices data={data.subServices.nodes} />
+          <OtherServices data={data?.subServices.nodes} />
           <ContactUsCard />
-          <OtherTopics data={data?.service.servicePageOtherTopicsSection} />
+          <OtherTopics data={data?.service?.servicePageOtherTopicsSection} />
         </>
       )}
     </>

@@ -2,8 +2,10 @@ import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import { ServiceNode } from "src/types/graphql/types/services.types";
 import CustomArrowButton from "../CustomArrowButton";
+import { useRouter } from "src/routes/hooks";
 
 const ServiceCard = ({ data }: { data: ServiceNode }) => {
+  const router = useRouter();
   return (
     <Stack
       sx={{
@@ -37,7 +39,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
             dangerouslySetInnerHTML={{ __html: data.content }}
           />
         </Stack>
-        <CustomArrowButton
+        <CustomArrowButton onClick={()=>router.push(`/service/${data.id}`)}
           name="Read More"
           // sx={{ width: "160px", height: "50px" }}
         />

@@ -22,7 +22,7 @@ const LocationMap = ({header = true}:{header:boolean}) => {
     lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'), 
     lng: parseFloat(data?.locations.nodes[0].locationsOptions.longitude ?? '0'),
   };
-  console.log(defaultCenter)
+  
   return (
     <Stack>
       {

@@ -13,35 +13,35 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData })  => {
             <Typography color='rgba(45, 55, 72, 1)' variant='h4'>01</Typography>
            </Stack>
 
-           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number1}</Typography>
+           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important",textAlign:"left !important"}}>{data.page.careersPageWeAreLookingForSection.number1}</Typography>
         </Stack>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
            <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)",borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
             <Typography color='rgba(45, 55, 72, 1)' variant='h4'>02</Typography>
            </Stack>
 
-           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number2}</Typography>
+           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important",textAlign:"left !important"}}>{data.page.careersPageWeAreLookingForSection.number2}</Typography>
         </Stack>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
-           <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)",borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
+           <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)", borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
             <Typography color='rgba(45, 55, 72, 1)' variant='h4'>03</Typography>
            </Stack>
 
-           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number3}</Typography>
+           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important",textAlign:"left !important"}}>{data.page.careersPageWeAreLookingForSection.number3}</Typography>
         </Stack>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
            <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)",borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
             <Typography color='rgba(45, 55, 72, 1)' variant='h4'>04</Typography>
            </Stack>
 
-           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number4}</Typography>
+           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important",textAlign:"left !important"}}>{data.page.careersPageWeAreLookingForSection.number4}</Typography>
         </Stack>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
            <Stack sx={{border:"1px solid rgba(45, 55, 72, 1)",borderRadius:"50px",width:"82px",height:"60px",alignItems:"center",justifyContent:"center"}} >
             <Typography color='rgba(45, 55, 72, 1)' variant='h4'>05</Typography>
            </Stack>
 
-           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important"}}>{data.page.careersPageWeAreLookingForSection.number5}</Typography>
+           <Typography variant='h4' sx={{textTransform:"uppercase !important",fontWeight:"700 !important",textAlign:"left !important"}}>{data.page.careersPageWeAreLookingForSection.number5}</Typography>
         </Stack>
     </Stack>
     <Stack width={{xs:"100%",lg:"70%"}} sx={{bgcolor:"rgba(45, 55, 72, 1)",borderRadius:"8px",color:"white",p:3}}>
