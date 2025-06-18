@@ -5,25 +5,24 @@ import { useBoolean } from 'minimal-shared/hooks';
 
 import { useTheme } from '@mui/material/styles';
 
-import { NavMobile } from './nav';
 import { layoutClasses } from '../core/classes';
-import { dashboardLayoutVars } from './css-vars';
-import { MainSection } from '../core/main-section';
-import { _workspaces } from '../nav-config-workspace';
-import { MenuButton } from '../components/menu-button';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
+import { MainSection } from '../core/main-section';
+import { _workspaces } from '../nav-config-workspace';
+import { dashboardLayoutVars } from './css-vars';
+import { NavMobile } from './nav';
 
-import type { MainSectionProps } from '../core/main-section';
+import { useQuery } from '@apollo/client';
+import { Box, Stack } from '@mui/material';
+import logo from 'src/assets/logo/navlogo.png';
+import { Iconify } from 'src/components/iconify';
+import { GET_MENU_ITEMS } from 'src/graphql/queries';
+import Footer from 'src/sections/footer/Footer';
+import { MenuData, MenuItem } from 'src/types/graphql/types/menu.types';
 import type { HeaderSectionProps } from '../core/header-section';
 import type { LayoutSectionProps } from '../core/layout-section';
-import Footer from 'src/sections/footer/Footer';
-import { Box, Stack } from '@mui/material';
-import { Iconify } from 'src/components/iconify';
-import logo from 'src/assets/logo/navlogo.png';
-import { useQuery } from '@apollo/client';
-import { GET_MENU_ITEMS } from 'src/graphql/queries';
-import { MenuItem, MenuData } from 'src/types/graphql/types/menu.types';
+import type { MainSectionProps } from '../core/main-section';
 
 // ----------------------------------------------------------------------
 
@@ -78,7 +77,6 @@ export function DashboardLayout({
 
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
 
-  // Transform flat menu items to nested structure
   const nestedMenuItems = data?.menu?.menuItems?.nodes
     ? buildNestedMenu(data.menu.menuItems.nodes)
     : [];

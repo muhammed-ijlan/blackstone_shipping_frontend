@@ -378,8 +378,8 @@ export function HeaderSection({
                         <NavLink
                           href={item.uri !== "#" ? item.uri : undefined}
                           isActive={
-                            (item.uri === "/" || item.uri === "")
-                              ? location.pathname === "/"
+                            (item.uri === "/home" || item.uri === "")
+                              ? location.pathname === "/home"
                               : location.pathname === item.uri
                           }
                           onClick={() => item.uri !== "#" && router.push(item.uri)}

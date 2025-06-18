@@ -29,6 +29,7 @@ export const CareersPage = lazy(() => import("../pages/careers"));
 export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
 export const SupportPage = lazy(() => import("../pages/support"));
 export const CountrySpecificPage = lazy(() => import("../pages/countrySpecific"));
+export const QualitySustainabilityPage = lazy(() => import("../pages/qualitySustainablity"));
 
 const renderFallback = () => (
   <Box
@@ -179,6 +180,14 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <CountrySpecificPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "quality-sustainability",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <QualitySustainabilityPage />
           </Suspense>
         ),
       },
