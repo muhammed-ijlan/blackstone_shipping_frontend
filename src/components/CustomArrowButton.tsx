@@ -10,12 +10,11 @@ type CustomArrowButtonProps = {
 };
 
 const CustomArrowButton: React.FC<CustomArrowButtonProps> = ({ name, onClick,sx }) => {
-  const router = useRouter();
+  
   const handleClick = () => {
     if (onClick) {
       onClick();
     }
-    router.push(`/${name}`);
   };
   return (
     <Button

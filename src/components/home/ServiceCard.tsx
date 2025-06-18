@@ -15,7 +15,7 @@ const ServiceCard = ({
       onMouseLeave={() => setHovered(false)}
       sx={{
         border: "1px solid rgba(45, 55, 72, 1)",
-        width: "295px",
+        width: "295px ",
         height: "100%",
         borderRadius: "8px",
         p: 3,

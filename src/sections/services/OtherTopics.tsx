@@ -9,7 +9,7 @@ const OtherTopics = ({data}:{data:OtherTopicsSection}) => {
     <Container maxWidth="xl" sx={{my:5}}>
         <Stack gap={4}>
             <Typography variant='h2' >
-                {data.otherTopicsMainTitle}
+                {data?.otherTopicsMainTitle}
             </Typography>
 
             <Grid container size={{xs:12,lg:4}} spacing={3} justifyContent={"space-between"}>

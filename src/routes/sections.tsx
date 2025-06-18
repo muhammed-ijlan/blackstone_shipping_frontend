@@ -29,6 +29,7 @@ export const CareersPage = lazy(() => import("../pages/careers"));
 export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
 export const SupportPage = lazy(() => import("../pages/support"));
 export const CountrySpecificPage = lazy(() => import("../pages/countrySpecific"));
+export const QualitySustainabilityPage = lazy(() => import("../pages/qualitySustainablity"));
 
 const renderFallback = () => (
   <Box
@@ -87,7 +88,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "services/:serviceId",
+        path: "service/:serviceId",
         element: (
           <Suspense fallback={renderFallback()}>
             <ServiceDetailPage />
@@ -182,6 +183,14 @@ export const routesSection: RouteObject[] = [
           </Suspense>
         ),
       },
+      {
+        path: "quality-sustainability",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <QualitySustainabilityPage />
+          </Suspense>
+        ),
+      },
     ],
   },
 
@@ -191,9 +200,9 @@ export const routesSection: RouteObject[] = [
       },
 
 
-  {
-    path: '404',
-    element: <NotFoundView />,
-  },
-  { path: '*', element: <NotFoundView /> },
+  // {
+  //   path: '404',
+  //   element: <NotFoundView />,
+  // },
+  // { path: '*', element: <NotFoundView /> },
 ];

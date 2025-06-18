@@ -104,7 +104,7 @@ export const GET_INDUSTRY_COVERAGE = gql`
  }
  `
 
- export const GET_SERVICES = gql`
+export const GET_SERVICES = gql`
   query {
     page(id: "home", idType: URI) {
       title
@@ -338,7 +338,7 @@ export const GET_COMPANY_KEY_FACTS = gql`query GetCompanyPage {
     }
   }
 }
-`;  
+`;
 
 export const GET_COMPANY_GLOBAL_NETWORK = gql`
 query GetCompanyPage {
@@ -797,7 +797,7 @@ export const GET_NEWS_BY_CATEGORY = gql`
 
 
 
-export const GET_CASE_STUDIES =gql`
+export const GET_CASE_STUDIES = gql`
 query GetCaseStudies($count: Int) {
   caseStudies(first: $count) {
     nodes {
@@ -1325,4 +1325,237 @@ export const GET_MENU_ITEMS = gql`
       }
     }
   }
+`;
+
+
+export const GET_QUALITY_AND_SUSTAINABILITY_PAGE = gql`
+  query GetQualityAndSustainabilityPage {
+    pageBy(uri: "quality-sustainability") {
+      title
+      qualityandsustainabilityPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      qualitySustainabilityPageQualitySections {
+        qualitySectionMainTitle
+        qualitySectionSubTitle1
+        qualitySectionContent1
+        qualitySectionImage1 {
+          node {
+            sourceUrl
+          }
+        }
+        qualitySectionSubTitle2
+        qualitySectionContent2
+        qualitySectionImage2 {
+          node {
+            sourceUrl
+          }
+        }
+        qualitySectionBottomContent
+        qualitySection2Title
+        qualitySection3Title
+        qualitySection3ListPoints
+      }
+      qualitySustainabilityPageSustainabilitySection {
+        sustainabilitySectionMainTitle
+        sustainabilitySectionSubTitle1
+        sustainabilitySectionContent1
+        sustainabilitySectionImage1 {
+          node {
+            sourceUrl
+          }
+        }
+        sustainabilitySectionSubTitle2
+        sustainabilitySectionContent2
+        sustainabilitySectionImage2 {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      qualitySustainabilityPageAreasofCommitment {
+        areasOfCommitmentSectionMainTitle
+        areasOfCommitmentSectionSubTitle1
+        areasOfCommitmentSectionContent1
+        areasOfCommitmentSection1MainImage {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSectionSubImage1 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection1SubImage2 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection1SubImage3 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection1SubImage4 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection2SubTitle
+        areasOfCommitmentSection2Content
+        areasOfCommitmentSection2MainImage {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection2SubImage1 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection2SubImage2 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection2SubImage3 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection2SubImage4 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection3SubTitle
+        areasOfCommitmentSection3Content
+        areasOfCommitmentSection3MainImage {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection3SubImage1 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection3SubImage2 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection3SubImage3 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection3SubImage4 {
+          node {
+            sourceUrl
+          }
+        }
+        areasOfCommitmentSection4SubTitle
+        areasOfCommitmentSection4Content
+        areasOfCommitmentSection4MainImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      qualitySustainabilityPageCalculatorSection {
+        calculatorSectionTitle
+        calculatorSectionImage {
+          node {
+            sourceUrl
+          }
+        }
+        calculatorSectionContent
+      }
+      qualitySustainabilityPageOurReportingSection {
+        ourReportingSectionTitle
+        ourReportingSectionContent
+        ourReportingSectionImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      qualitySustainabilityPageEsgCodeOfConductSection {
+        codeOfConductTitle
+        codeOfConductContent
+        codeOfConductImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+    qualities(first: 100, where: { orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+    sustainabilities(first: 100, where: { orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CSR_YEARS = gql`
+query GetCsrYears {
+  csrYears {
+    nodes {
+      name
+      slug
+      id
+    }
+  }
+}`;
+
+export const GET_CSR_BY_YEAR = gql`
+query GetCSRByYear($yearSlug: [String]) {
+  csrs(
+    where: {
+      taxQuery: {
+        taxArray: [
+          {
+            taxonomy: CSRYEAR
+            field: SLUG
+            terms: $yearSlug
+          }
+        ]
+      }
+    }
+  ) {
+    nodes {
+      title
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
 `;
