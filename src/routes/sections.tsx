@@ -20,16 +20,27 @@ export const ServicesPage = lazy(() => import("../pages/services"));
 export const ServiceDetailPage = lazy(() => import("../pages/serviceDetail"));
 export const SolutionsPage = lazy(() => import("../pages/solutions"));
 export const SolutionDetailPage = lazy(() => import("../pages/solutionDetail"));
-export const ResoursesPage = lazy(()=>import("../pages/resourses"))
-export const NewsDetailPage = lazy(()=>import("../pages/newsDetail"))
-export const CaseStudyDetailPage = lazy(()=>import("../pages/caseStudyDetail"))
+export const ResoursesPage = lazy(() => import("../pages/resourses"));
+export const NewsDetailPage = lazy(() => import("../pages/newsDetail"));
+export const CaseStudyDetailPage = lazy(
+  () => import("../pages/caseStudyDetail")
+);
 export const TechnologyPage = lazy(() => import("../pages/technology"));
-export const TechnologyDetailPage = lazy(() => import("../pages/technologyDetail"));
+export const TechnologyDetailPage = lazy(
+  () => import("../pages/technologyDetail")
+);
 export const CareersPage = lazy(() => import("../pages/careers"));
 export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
 export const SupportPage = lazy(() => import("../pages/support"));
-export const CountrySpecificPage = lazy(() => import("../pages/countrySpecific"));
-export const QualitySustainabilityPage = lazy(() => import("../pages/qualitySustainablity"));
+export const CountrySpecificPage = lazy(
+  () => import("../pages/countrySpecific")
+);
+export const QualitySustainabilityPage = lazy(
+  () => import("../pages/qualitySustainablity")
+);
+export const MyBlackboxFrightPage = lazy(
+  () => import("../pages/MyBlackBoxFright")
+);
 
 const renderFallback = () => (
   <Box
@@ -64,7 +75,7 @@ export const routesSection: RouteObject[] = [
     children: [
       {
         index: true,
-        path:"home",
+        path: "home",
         element: (
           <Suspense fallback={renderFallback()}>
             <HomePage />
@@ -191,14 +202,21 @@ export const routesSection: RouteObject[] = [
           </Suspense>
         ),
       },
+      {
+        path: "my-blackbox-freight",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <MyBlackboxFrightPage />
+          </Suspense>
+        ),
+      },
     ],
   },
 
   {
-        path: "",
-        element: <Navigate to="/home" replace />,
-      },
-
+    path: "",
+    element: <Navigate to="/home" replace />,
+  },
 
   // {
   //   path: '404',
