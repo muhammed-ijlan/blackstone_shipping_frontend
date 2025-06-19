@@ -138,22 +138,20 @@ const HomeBanner: React.FC = () => {
                     position: "relative",
                   }}
                   display="flex"
-                  alignItems={{sm:"center",lg:"flex-start"}}
+                  alignItems={{ sm: "center", lg: "flex-start" }}
                   unselectable="on"
                   onMouseDown={(e) => e.preventDefault()}
-
                 >
                   <Stack
-                    width={{sm:"600px",lg:"700px"}}
+                    width={{ sm: "600px", lg: "700px" }}
                     display="flex"
                     flexDirection="column"
                     gap={2}
-                    textAlign={{sm:"center",lg:"left"}}
-                     alignItems={{sm:"center",lg:"flex-start"}}
+                    textAlign={{ sm: "center", lg: "left" }}
+                    alignItems={{ sm: "center", lg: "flex-start" }}
                   >
                     <Stack
                       direction="row"
-                     
                       gap={1}
                       borderBottom={2}
                       borderColor="rgba(32, 189, 103, 1)"
@@ -178,9 +176,11 @@ const HomeBanner: React.FC = () => {
                       {slide.sliderFields.sliderMainHeading.toUpperCase()}
                     </Typography>
 
-                    <Typography variant="h5" color="white" fontWeight={400} 
-                    textAlign={{sm:"center",lg:"left"}}
-                    
+                    <Typography
+                      variant="h5"
+                      color="white"
+                      fontWeight={400}
+                      textAlign={{ sm: "center", lg: "left" }}
                     >
                       {slide.sliderFields.shortDescription}
                     </Typography>
@@ -191,7 +191,14 @@ const HomeBanner: React.FC = () => {
                           router.push(slide.sliderFields.button1Link)
                         }
                         variant="contained"
-                        endIcon={<Box component={"img"} src={arrow} width="36px" height={"36px"}/>}
+                        endIcon={
+                          <Box
+                            component={"img"}
+                            src={arrow}
+                            width="36px"
+                            height={"36px"}
+                          />
+                        }
                         sx={{
                           backgroundColor: "#0061f2",
                           borderRadius: "4px",
@@ -211,15 +218,13 @@ const HomeBanner: React.FC = () => {
                         {slide.sliderFields.button1Text}
                       </Button>
                       <Button
-                        onClick={() =>
-                          router.push(slide.sliderFields.button2Link)
-                        }
+                        onClick={() => router.push("/services")}
                         variant="contained"
                         sx={{
                           backgroundColor: "#28a745",
                           textTransform: "none",
                           borderRadius: "4px",
-                           height: "60px",
+                          height: "60px",
                           fontWeight: 600,
                           fontSize: "16px",
                           lineHeight: "100%",
@@ -339,8 +344,7 @@ const HomeBanner: React.FC = () => {
                           "&:hover": {
                             backgroundColor: "#0052cc",
                           },
-                          height:"45px"
-
+                          height: "45px",
                         }}
                       >
                         {slide.sliderFields.button1Text}
@@ -360,8 +364,7 @@ const HomeBanner: React.FC = () => {
                           "&:hover": {
                             backgroundColor: "#218838",
                           },
-                                                   height:"45px"
-
+                          height: "45px",
                         }}
                       >
                         {slide.sliderFields.button2Text}

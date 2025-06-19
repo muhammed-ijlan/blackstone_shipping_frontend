@@ -20,12 +20,15 @@ const Services = ({ data }: { data: CountryPageData }) => {
         <Typography
           variant="h2"
           color="rgba(11, 19, 40, 0.6)"
-          sx={{ textTransform: "capitalize !important",textAlign:"left !important" }}
+          sx={{
+            textTransform: "capitalize !important",
+            textAlign: "left !important",
+          }}
         >
           Services
         </Typography>
         <Stack style={{ padding: "10px", listStyleType: "unset", margin: 0 }}>
-          {data.country?.services?.nodes.map((service) => (
+          {data.country?.services?.nodes?.map((service) => (
             <Box
               key={service.id}
               sx={{
@@ -45,7 +48,7 @@ const Services = ({ data }: { data: CountryPageData }) => {
                   background: "rgba(255, 255, 255, 1)",
                 }}
               >
-                <Typography variant="h4" sx={{textAlign:"left !important"}}>
+                <Typography variant="h4" sx={{ textAlign: "left !important" }}>
                   • &nbsp;&nbsp;{service.title}
                 </Typography>
               </a>
@@ -54,29 +57,29 @@ const Services = ({ data }: { data: CountryPageData }) => {
         </Stack>
       </Stack>
 
-      <Stack direction={"row"}  gap={{xs:1,sm:2}}>
+      <Stack direction={"row"} gap={{ xs: 1, sm: 2 }}>
         <Stack flex={1}>
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
-            height={{xs:"100%",md:"524px"}}
-            src={data.country.countriesOptions?.countryImage1.node.sourceUrl}
+            height={{ xs: "100%", md: "524px" }}
+            src={data.country?.countriesOptions?.countryImage1?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
         </Stack>
-        <Stack flex={1}  gap={{xs:1,sm:3}}>
+        <Stack flex={1} gap={{ xs: 1, sm: 3 }}>
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
-              height={{xs:"100%",md:"243px"}}
-            src={data.country.countriesOptions?.countryImage2.node.sourceUrl}
+            height={{ xs: "100%", md: "243px" }}
+            src={data.country.countriesOptions?.countryImage2?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", sm: "376px" }}
-              height={{xs:"100%",sm:"243px"}}
-            src={data.country.countriesOptions?.countryImage3.node.sourceUrl}
+            height={{ xs: "100%", sm: "243px" }}
+            src={data.country.countriesOptions?.countryImage3.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
         </Stack>

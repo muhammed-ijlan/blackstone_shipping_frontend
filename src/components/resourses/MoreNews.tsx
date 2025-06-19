@@ -10,7 +10,7 @@ import {
 const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
   const router = useRouter();
   return (
-    <Stack gap={3}  >
+    <Stack gap={3}>
       <Typography
         variant="h2"
         sx={{
@@ -21,10 +21,17 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
       >
         More News
       </Typography>
-      <Stack direction={"row"} flexWrap={"wrap"} gap={4} alignItems={"center"} justifyItems={"center"}>
+      <Stack
+        direction={"row"}
+        flexWrap={"wrap"}
+        gap={4}
+        alignItems={"center"}
+        justifyItems={"center"}
+      >
         {data.posts.nodes.map((item, idx) => (
           <Stack
-            onClick={() => router.push(item.uri)}
+            // TODO : API UPDATE
+            onClick={() => router.push(`/resources/news/${item.uri}`)}
             sx={{ cursor: "pointer", width: "231px" }}
           >
             <Box
@@ -39,23 +46,22 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
               }}
             />
             <Stack p={0.5}>
-
-            {/* <Typography>{moment(item.date)}</Typography> */}
-            <Typography
-              variant="body1"
-              sx={{
-                fontWeight: "700",
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 2,
-                overflow: "hidden",
-              }}
+              {/* <Typography>{moment(item.date)}</Typography> */}
+              <Typography
+                variant="body1"
+                sx={{
+                  fontWeight: "700",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  overflow: "hidden",
+                }}
               >
-              {item.title}
-            </Typography>
-            {/* <Box component={"div"} dangerouslySetInnerHTML={{__html:item.expert}}/> */}
+                {item.title}
+              </Typography>
+              {/* <Box component={"div"} dangerouslySetInnerHTML={{__html:item.expert}}/> */}
+            </Stack>
           </Stack>
-        </Stack>
         ))}
       </Stack>
     </Stack>

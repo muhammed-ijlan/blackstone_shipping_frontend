@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { useOfficeLocations } from "src/graphql/hooks/useOfficeLocation";
+import { useRouter } from "src/routes/hooks";
 
 const baseCellStyle = {
   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -25,6 +26,7 @@ const baseCellStyle = {
 };
 
 const OfficeLocation: React.FC = () => {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const {
     locations,
@@ -43,7 +45,8 @@ const OfficeLocation: React.FC = () => {
   };
 
   // if (loading && locations.length === 0) return <CircularProgress />;
-  if (error) return <Typography color="error">Error: {error.message}</Typography>;
+  if (error)
+    return <Typography color="error">Error: {error.message}</Typography>;
 
   const renderPageNumbers = () => (
     <Pagination
@@ -105,7 +108,7 @@ const OfficeLocation: React.FC = () => {
             </Typography>
             <Stack width={{ xs: "100%", sm: "auto" }}>
               <TextField
-              fullWidth
+                fullWidth
                 name="search"
                 placeholder="Search"
                 size="small"
@@ -131,8 +134,8 @@ const OfficeLocation: React.FC = () => {
                     "&.Mui-focused fieldset": {
                       borderColor: "rgba(217, 217, 217, 1)",
                     },
-                    color:"white",
-                    height:56
+                    color: "white",
+                    height: 56,
                   },
                 }}
                 inputProps={{
@@ -153,7 +156,6 @@ const OfficeLocation: React.FC = () => {
               borderRadius: "6px",
               // overflow: "hidden",
               overflowX: "auto",
-
             }}
           >
             <Table
@@ -223,7 +225,7 @@ const OfficeLocation: React.FC = () => {
               <Stack my={0.5} />
               <Tbody style={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {locations.map((item:any) => (
+                {locations.map((item: any) => (
                   <Tr key={item.id}>
                     <Td
                       style={{
@@ -232,11 +234,23 @@ const OfficeLocation: React.FC = () => {
                         borderTop: "1px solid rgba(217, 217, 217, 1)",
                       }}
                     >
-                      <Stack direction="row" alignItems="center" gap={1}>
+                      <Stack
+                        direction="row"
+                        alignItems="center"
+                        gap={1}
+                        sx={{ cursor: "pointer" }}
+                        component={"div"}
+                        // TODO: API ID Confusion
+                        onClick={() =>
+                          router.push(
+                            `/support/${item.officeLocationsOptions.country.nodes[0].id}`
+                          )
+                        }
+                      >
                         <img
                           src={
                             item.officeLocationsOptions.country.nodes[0]
-                              .countriesOptions?.countryFlag?.node?.sourceUrl
+                              ?.countriesOptions?.countryFlag?.node?.sourceUrl
                           }
                           alt="flag"
                           width={20}
@@ -304,10 +318,7 @@ const OfficeLocation: React.FC = () => {
               mt={6}
               sx={{ width: "100%" }}
             >
-            
               {renderPageNumbers()}
-
-              
             </Stack>
           )}
         </Stack>

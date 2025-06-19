@@ -35,7 +35,7 @@ const NavBar = styled("div")(({ theme }) => ({
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),
   alignItems: "center",
-  maxWidth: "100%"
+  maxWidth: "100%",
 }));
 
 const NavItem = styled("div", {
@@ -94,7 +94,6 @@ const SubMenuContent = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
   flexWrap: "wrap",
   padding: theme.spacing(0, 12),
-  
 }));
 
 const SubMenuCategory = styled(Box)(({ theme }) => ({
@@ -102,7 +101,7 @@ const SubMenuCategory = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(0.5),
   minWidth: "200px",
-   borderRight: `1px solid ${theme.palette.divider}`,
+  borderRight: `1px solid ${theme.palette.divider}`,
   paddingRight: theme.spacing(2),
   "&:last-of-type": {
     borderRight: "none",
@@ -130,7 +129,7 @@ const SubMenuItem = styled(MuiLink)(({ theme }) => ({
   "&:hover": {
     color: theme.palette.primary.main,
   },
-  marginTop:6
+  marginTop: 6,
 }));
 
 export type HeaderSectionProps = AppBarProps & {
@@ -168,7 +167,6 @@ export function HeaderSection({
   const location = useLocation();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
 
   const handleMouseEnter = (label: string) => {
     if (hoverTimeoutRef.current) {
@@ -248,7 +246,7 @@ export function HeaderSection({
         (theme) => ({
           ...(isOffset && {
             "--color": `var(--offset-color, ${theme.vars.palette.text.primary})`,
-        }),
+          }),
           bgcolor: "white",
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -368,21 +366,27 @@ export function HeaderSection({
                       key={item.id}
                       style={{ paddingBottom: "15px" }}
                       onMouseEnter={() =>
-                        item.children && item.children.length > 0 && handleMouseEnter(item.label)
+                        item.children &&
+                        item.children.length > 0 &&
+                        handleMouseEnter(item.label)
                       }
                       onMouseLeave={() =>
-                        item.children && item.children.length > 0 && handleMouseLeave()
+                        item.children &&
+                        item.children.length > 0 &&
+                        handleMouseLeave()
                       }
                     >
                       <NavItem isLastItem={index >= data.length - 3}>
                         <NavLink
                           href={item.uri !== "#" ? item.uri : undefined}
                           isActive={
-                            (item.uri === "/home" || item.uri === "")
-                              ? location.pathname === "/home"
+                            item.uri === "/" || item.uri === ""
+                              ? location.pathname === "/"
                               : location.pathname === item.uri
                           }
-                          onClick={() => item.uri !== "#" && router.push(item.uri)}
+                          onClick={() =>
+                            item.uri !== "#" && router.push(item.uri)
+                          }
                         >
                           {item.label}
                         </NavLink>

@@ -34,14 +34,15 @@ const Certification = ({
           {data.page.companyPageCertifications.certificationContent2}
         </Typography>
 
-        <Grid container justifyContent={"center"}  rowGap={4}>
+        <Grid container spacing={4}>
           {data.certifications.nodes.map((item, index) => (
-            <Grid size={{xs:12,lg:4}}  justifyItems={"center"} >
+            <Grid size={{ xs: 12, sm: 4, lg: 3 }}>
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",
-                  width:"300px",
-                  height:"156px"
+                  width: "100%",
+                  height: "156px",
+                  borderRadius: "8px",
                 }}
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -51,14 +52,14 @@ const Certification = ({
                   alt={item.title}
                   src={item.featuredImage.node.sourceUrl}
                   width={"100px"}
-                  sx={{objectFit:"contain"}}
+                  sx={{ objectFit: "contain" }}
                 />
               </Stack>
             </Grid>
           ))}
         </Grid>
 
-       <Typography variant="h4">
+        <Typography variant="h4">
           {data.page.companyPageCertifications.certificationSubTitle3.toUpperCase()}
         </Typography>
         <Typography
@@ -69,14 +70,15 @@ const Certification = ({
           {data.page.companyPageCertifications.certificationContent3}
         </Typography>
 
-         <Grid container justifyContent={"space-between"} rowGap={4}>
+        <Grid container spacing={4}>
           {data.partners.nodes.map((item, index) => (
-             <Grid size={{xs:12,lg:4}} justifyItems={"center"}>
+            <Grid size={{ xs: 12, sm: 4, lg: 3 }}>
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",
-                  width:"300px",
-                  height:"156px"
+                  width: "100%",
+                  height: "156px",
+                  borderRadius: "8px",
                 }}
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -86,7 +88,7 @@ const Certification = ({
                   alt={item.title}
                   src={item.featuredImage.node.sourceUrl}
                   width={"100px"}
-                  sx={{objectFit:"contain"}}
+                  sx={{ objectFit: "contain" }}
                 />
               </Stack>
             </Grid>

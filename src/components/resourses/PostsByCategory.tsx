@@ -13,6 +13,7 @@ import {
 import moment from "moment";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import CustomArrowButton from "../CustomArrowButton";
+import { useRouter } from "src/routes/hooks";
 
 interface Props {
   slug: string;
@@ -33,11 +34,11 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
     totalPages,
   } = usePostsByCategory(slug, count, search);
 
+  const router = useRouter();
 
   if (loading && posts.length === 0) return <CircularProgress />;
   if (error) return <p>Error: {error.message}</p>;
 
- 
   const renderPageNumbers = () => (
     <Pagination
       count={totalPages}
@@ -80,7 +81,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
   );
 
   return (
-    <Stack >
+    <Stack>
       <Grid
         container
         alignItems={"center"}
@@ -94,7 +95,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
             spacing={5}
             key={post.id || post.title}
           >
-            <Stack sx={{ maxWidth: {xs:"100%",md:"400px"} }}>
+            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }}>
               <Box
                 component={"img"}
                 alt={post?.title}
@@ -128,12 +129,19 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                       WebkitBoxOrient: "vertical",
                       WebkitLineClamp: 3,
                       overflow: "hidden",
+                      "& p": {
+                        m: 0,
+                      },
                     }}
                     dangerouslySetInnerHTML={{ __html: post.excerpt }}
                   />
                 </Stack>
                 <Stack height={"100%"} alignItems={"flex-end"}>
-                  <CustomArrowButton name="Read More" sx={{border:"none"}}/>
+                  <CustomArrowButton
+                    name="Read More"
+                    sx={{ border: "none" }}
+                    onClick={() => router.push(`/resources/news/${post.id}`)}
+                  />
                 </Stack>
               </Stack>
             </Stack>

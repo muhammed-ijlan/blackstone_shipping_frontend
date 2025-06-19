@@ -121,30 +121,30 @@ const Testimonial = () => {
                   gap={2}
                   justifyContent={{ xs: "normal", sm: "space-between" }}
                 >
-                  <Stack justifyContent={{ xs: "normal", sm: "space-between" }} gap={2}>
-
-                  <Box
-                    component={"img"}
-                    src={quote}
-                    width={"83px"}
-                    alt="quote icon"
+                  <Stack
+                    justifyContent={{ xs: "normal", sm: "space-between" }}
+                    gap={2}
+                  >
+                    <Box
+                      component={"img"}
+                      src={quote}
+                      width={"83px"}
+                      alt="quote icon"
                     />
-                  <Typography
-                    fontWeight={400}
-                    sx={{
-                      textAlign:"left !important",
-                      fontWeight: 500,
-                      lineHeight: "28px",
-                      textTransform: "capitalize",
-                      typography:{xs:"body1",lg:"body2"}
-                    }}
-                    dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(item.content),
-                    }}
+                    <Box
+                      component={"div"}
+                      fontWeight={400}
+                      sx={{
+                        "& p": {
+                          typography: "body1",
+                          textWrap: "wrap",
+                        },
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(item.content),
+                      }}
                     />
-
-
-                    </Stack>
+                  </Stack>
 
                   <Stack direction={"row"} gap={3}>
                     <Box
@@ -163,7 +163,7 @@ const Testimonial = () => {
                       <Typography
                         sx={{
                           fontWeight: 400,
-                          fontSize: {xs:"10px",sm:"16px"},
+                          fontSize: { xs: "10px", sm: "16px" },
                           lineHeight: "26px",
                           letterSpacing: "3%",
                           textTransform: "capitalize",
@@ -178,7 +178,7 @@ const Testimonial = () => {
                       <Typography
                         sx={{
                           fontWeight: 400,
-                        fontSize: {xs:"10px",sm:"16px"},
+                          fontSize: { xs: "10px", sm: "16px" },
                           lineHeight: "26px",
                           letterSpacing: "3%",
                           textTransform: "capitalize",

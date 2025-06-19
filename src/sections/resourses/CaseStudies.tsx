@@ -4,12 +4,15 @@ import CustomArrowButton from "src/components/CustomArrowButton";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
 import SliderProgress from "src/components/customSlider/SliderProgress";
+import { useRouter } from "src/routes/hooks";
 import { CaseStudiesData } from "src/types/graphql/types/resourses.types";
 
 const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
   const scrollRef = useRef<HTMLDivElement>(
     null
   ) as React.RefObject<HTMLDivElement>;
+  const router = useRouter();
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const items = data.caseStudies.nodes;
@@ -23,7 +26,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
       const child = container.children[0] as HTMLElement;
       if (!child) return;
 
-      const itemWidth = child.offsetWidth + 16; 
+      const itemWidth = child.offsetWidth + 16;
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };
@@ -79,7 +82,8 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                             WebkitBoxOrient: "vertical",
                             WebkitLineClamp: "2",
                             overflow: "hidden",
-                            textAlign:"left !important"
+                            textAlign: "left !important",
+                            textWrap: "wrap",
                           }}
                         >
                           {item.title}
@@ -91,21 +95,25 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                             WebkitBoxOrient: "vertical",
                             WebkitLineClamp: "3",
                             overflow: "hidden",
+                            textWrap: "wrap",
                           }}
                           dangerouslySetInnerHTML={{
                             __html:
-                              item.caseStudiesOptions?.companyDescription ?? ""
+                              item.caseStudiesOptions?.companyDescription ?? "",
                           }}
                         />
                       </Stack>
                     </Stack>
                     <Stack alignItems={"flex-end"}>
                       <CustomArrowButton
+                        onClick={() =>
+                          router.push(`/resources/case-study/${item.id}`)
+                        }
                         name="Read More"
                         sx={{
                           border: "none",
-                          color: "rgba(26, 86, 219, 1) !important",
                         }}
+                        textColor="rgba(26, 86, 219, 1)"
                       />
                     </Stack>
                     <Stack gap={2}>
@@ -148,11 +156,19 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
             ))}
           </CustomSlider2>
 
-          <Stack width={"100%"} alignItems={"flex-end"} justifyContent={"flex-end"} >
-            <Stack direction={"row"} width={{xs:"100%",md:"55%"}} justifyContent={"space-between"}>
+          <Stack
+            width={"100%"}
+            alignItems={"flex-end"}
+            justifyContent={"flex-end"}
+          >
+            <Stack
+              direction={"row"}
+              width={{ xs: "100%", md: "55%" }}
+              justifyContent={"space-between"}
+            >
               <SliderButton2 scrollRef={scrollRef} />
               <SliderProgress
-              sx={{color:"white"}}
+                sx={{ color: "white" }}
                 currentIndex={currentIndex}
                 totalItems={mockMoreItems.length}
               />
