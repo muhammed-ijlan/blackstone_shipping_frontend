@@ -4,11 +4,13 @@ import location from "src/assets/icons/location.png";
 import arrow from "src/assets/icons/arrowWhite.png";
 import { JobOpening } from "src/types/graphql/types/careers.types";
 import moment from "moment";
+import { useRouter } from "src/routes/hooks";
 
-const JobCard = ({data}:{data:JobOpening}) => {
+const JobCard = ({ data }: { data: JobOpening }) => {
+  const router = useRouter();
   return (
     <Stack
-    py={2}
+      py={2}
       direction={"row"}
       flexWrap={"wrap"}
       justifyContent={"space-between"}
@@ -19,12 +21,7 @@ const JobCard = ({data}:{data:JobOpening}) => {
         <Typography color="rgba(109, 110, 113, 1)" variant="body2">
           {`Posted ${moment(data.date).fromNow()}`}
         </Typography>
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          mt={1}
-          gap={1}
-        >
+        <Stack direction={"row"} alignItems={"center"} mt={1} gap={1}>
           <Box
             component={"img"}
             src={location}
@@ -32,7 +29,9 @@ const JobCard = ({data}:{data:JobOpening}) => {
             width="24px"
             alignItems={"center"}
           />
-          <Typography variant="h6">{data.jobOpeningsOptions.jobLocation.nodes[0].name}</Typography>
+          <Typography variant="h6">
+            {data.jobOpeningsOptions.jobLocation.nodes[0].name}
+          </Typography>
         </Stack>
       </Stack>
       <Button
@@ -53,6 +52,7 @@ const JobCard = ({data}:{data:JobOpening}) => {
             alignItems={"center"}
           />
         }
+        onClick={() => router.push(`/careers/${data.id}`)}
       >
         Submit Application
       </Button>

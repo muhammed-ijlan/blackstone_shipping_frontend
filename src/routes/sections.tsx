@@ -39,7 +39,7 @@ export const QualitySustainabilityPage = lazy(
   () => import("../pages/qualitySustainablity")
 );
 export const MyBlackboxFrightPage = lazy(
-  () => import("../pages/MyBlackBoxFright")
+  () => import("../pages/myBlackBoxFright")
 );
 
 const renderFallback = () => (

@@ -44,16 +44,13 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
             sx={{
               "& p": {
                 marginBottom: 2,
-                fontSize: "1rem",
+                typography: "body1",
               },
               "& strong": {
-                fontWeight: 700,
-                fontSize: "1.25rem",
-                marginTop: 2,
+                typography: "h4",
               },
               "& h3": {
                 typography: "h4",
-                color: "rgba(133, 137, 147, 1)",
               },
               color: "rgba(45, 55, 72, 1)",
             }}

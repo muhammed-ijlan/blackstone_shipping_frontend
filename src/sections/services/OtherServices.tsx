@@ -5,11 +5,11 @@ import { SubService } from "src/types/graphql/types/services.types";
 
 const OtherServices = ({ data }: { data: SubService[] }) => {
   return (
-    <Container maxWidth={"xl"} sx={{ my: {xs:4,lg:10} }}>
-      <Grid container justifyContent={"space-between"} spacing={4}>
+    <Container maxWidth={"xl"} sx={{ my: { xs: 4, lg: 10 } }}>
+      <Grid container rowGap={6} spacing={4}>
         {data.map((service, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }}   key={index} >
-            <OtherServiceCard data={service}/>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={index}>
+            <OtherServiceCard data={service} />
           </Grid>
         ))}
       </Grid>

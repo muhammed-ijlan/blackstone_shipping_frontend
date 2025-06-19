@@ -14,7 +14,7 @@ const Page = () => {
     GET_SERVICE_WITH_SUBSERVICES,
     {
       variables: {
-        id: serviceId,
+        uri: `service/${serviceId}`,
       },
     }
   );
@@ -25,7 +25,8 @@ const Page = () => {
         <>
           <Banner
             bgUrl={
-              data?.service?.servicesPageBannerSection.bannerImage.node.sourceUrl
+              data?.service?.servicesPageBannerSection.bannerImage.node
+                .sourceUrl
             }
             mainTitle={data?.service?.servicesPageBannerSection.bannerTitle}
             subTitle={"Services"}

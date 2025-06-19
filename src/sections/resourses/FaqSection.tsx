@@ -65,7 +65,7 @@ const FaqSection = () => {
       <Stack gap={3}>
         <Typography variant="h2">FAQ</Typography>
         <TextField
-          sx={{ width:{xs:"100%",md: "400px"} }}
+          sx={{ width: { xs: "100%", md: "400px" } }}
           name="search"
           placeholder="Search"
           size="small"
@@ -157,7 +157,12 @@ const FaqSection = () => {
                   <AccordionDetails sx={{ padding: "0px 0px 16px 22px" }}>
                     <Typography
                       component="div"
-                      sx={{ fontSize: "16px", color: "rgba(45, 55, 72, 1)" }}
+                      sx={{
+                        fontSize: "16px",
+                        color: "rgba(45, 55, 72, 1)",
+                        typography: "body1",
+                        margin: 0,
+                      }}
                       dangerouslySetInnerHTML={{ __html: faq.content }}
                     />
                   </AccordionDetails>

@@ -12,19 +12,15 @@ const OurNetwork = ({ data }: { data: GetCompanyGlobalNetworkResponse }) => {
           <Typography variant="h3">
             {data?.page?.companyPageOurGlobalNetworkSection?.ourGlobalNetworkTitle.toUpperCase()}
           </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontWeight: "500 !important" }}
-            color={"rgba(45, 55, 72, 0.8)"}
-          >
+          <Typography variant="body1" color={"rgba(45, 55, 72, 0.8)"}>
             {
               data?.page?.companyPageOurGlobalNetworkSection
                 ?.ourGlobalNetworkContent
             }
           </Typography>
 
-        <OurNetworkCards data={data}/>
-        <Location header={true}/>
+          <OurNetworkCards data={data} />
+          <Location header={true} />
         </Stack>
       </Container>
     </Stack>
