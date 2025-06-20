@@ -1564,3 +1564,105 @@ query GetCSRByYear($yearSlug: [String]) {
   }
 }
 `;
+
+export const GET_MY_BLACKBOX_FREIGHT_PAGE = gql`
+  query GetMyBlackboxFreightPage {
+    pageBy(uri: "my-blackbox-freight") {
+      title
+      blackboxFreightPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      shipmentManagementSection {
+        smSubTitle
+        smMainTitleFirstPart
+        smMainTitleSecondPart
+        smContent
+        smImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      controlTowerSection {
+        ctTitle
+        ctContent
+      }
+      shipmentVisibilitySection {
+        svTitle
+        svContent
+      }
+      eDocsSection {
+        edTitle
+        edContent
+        edImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      supplyChainIntegrationSection {
+        sciTitle
+        sciContent
+      }
+      freightIndexTrendsSection {
+        fitTitle
+        fitContent
+        fitImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      toolsReportsAnalyticsSection {
+        traTitle
+        traContent
+        traImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    shipmentVisibilities(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    freightIndexTrends(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    toolsReports(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
