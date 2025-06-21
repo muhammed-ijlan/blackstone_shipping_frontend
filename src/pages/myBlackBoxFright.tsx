@@ -4,8 +4,10 @@ import React from "react";
 import Banner from "src/components/banner/Banner";
 import { GET_MY_BLACKBOX_FREIGHT_PAGE } from "src/graphql/queries";
 import ControlTower from "src/sections/myBbx/ControlTower";
+import Edocs from "src/sections/myBbx/Edocs";
 import ShipmentManagement from "src/sections/myBbx/ShipmentManagement";
 import ShipmentVisiblity from "src/sections/myBbx/ShipmentVisiblity";
+import SupplyChain from "src/sections/myBbx/SupplyChain";
 import { GetMyBlackboxFreightPageData } from "src/types/graphql/types/myBbx.types";
 
 const Page = () => {
@@ -30,6 +32,15 @@ const Page = () => {
             <ShipmentVisiblity
               data={data.pageBy.shipmentVisibilitySection}
               featuredContent={data.shipmentVisibilities.nodes}
+            />
+            <Divider />
+            <Edocs data={data.pageBy.eDocsSection} />
+            <SupplyChain
+              data={data.pageBy.supplyChainIntegrationSection}
+              frightIndex={data.freightIndexTrends.nodes}
+              tools={data.toolsReports.nodes}
+              fitSection={data.pageBy.freightIndexTrendsSection}
+              traSection={data.pageBy.toolsReportsAnalyticsSection}
             />
           </Container>
         </>

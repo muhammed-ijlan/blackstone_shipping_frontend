@@ -12,7 +12,7 @@ interface Data {
 
 const ShipmentManagement = ({ data }: { data: Data }) => {
   return (
-    <Stack direction={"row"} my={6} gap={0}>
+    <Stack direction={{ xs: "column", md: "row" }} my={6} gap={0}>
       <Stack flex={1}>
         <Typography variant="h3" sx={{ fontWeight: "700 !important" }}>
           {data.smSubTitle}
@@ -39,7 +39,7 @@ const ShipmentManagement = ({ data }: { data: Data }) => {
           component={"img"}
           src={data.smImage.node.sourceUrl}
           alt={data.smSubTitle}
-          sx={{ maxWidth: "500px" }}
+          sx={{ maxWidth: { xs: "100%", md: "500px" } }}
         />
       </Stack>
     </Stack>

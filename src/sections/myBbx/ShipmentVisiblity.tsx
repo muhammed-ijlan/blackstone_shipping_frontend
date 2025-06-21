@@ -23,6 +23,7 @@ const ShipmentVisiblity = ({
         color: "white",
       }}
       gap={5}
+      mb={5}
     >
       <Stack gap={1}>
         <Typography sx={{ textAlign: "center !important" }} variant="h2">
