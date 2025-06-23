@@ -1,12 +1,13 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
-import { TechnologyData } from "src/types/graphql/types/technology.types";
+import { GetTechnologyDetailsByURIData } from "src/types/graphql/types/technology.types";
 import TechnologyCard from "./TechnologyCard";
 
-const TechnologyCards = ({ data }: { data: TechnologyData }) => {
+const TechnologyCards = ({ data }: { data: GetTechnologyDetailsByURIData }) => {
   return (
     <Stack gap={3} my={3}>
-      {data.technology.children.nodes.map((item, index) => (
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {data.technology.children.nodes.map((item: any, index: number) => (
         <Stack key={index} gap={3}>
           <Divider />
 
@@ -26,7 +27,8 @@ const TechnologyCards = ({ data }: { data: TechnologyData }) => {
               dangerouslySetInnerHTML={{ __html: item.content }}
             />
           </Stack>
-          {item.children.nodes.map((subItem, idx) => (
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {item.children.nodes.map((subItem: any, idx: number) => (
             <TechnologyCard key={idx} data={subItem} />
           ))}
         </Stack>

@@ -1,9 +1,9 @@
 import { Container, Grid } from "@mui/material";
 import React from "react";
 import OtherServiceCard from "src/components/services/OtherServiceCard";
-import { SubService } from "src/types/graphql/types/services.types";
+import { ServiceChild } from "src/types/graphql/types/services.types";
 
-const OtherServices = ({ data }: { data: SubService[] }) => {
+const OtherServices = ({ data }: { data: ServiceChild[] }) => {
   return (
     <Container maxWidth={"xl"} sx={{ my: { xs: 4, lg: 10 } }}>
       <Grid container rowGap={6} spacing={4}>
