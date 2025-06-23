@@ -37,8 +37,8 @@ const Page = () => {
             }
           />
           <Container maxWidth="xl">
-            {/* <Parasgraphs data={data} />
-            <TechnologyCards data={data} /> */}
+            <Parasgraphs data={data} />
+            <TechnologyCards data={data} />
           </Container>
         </>
       )}
