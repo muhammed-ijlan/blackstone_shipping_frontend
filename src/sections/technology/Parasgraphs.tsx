@@ -1,14 +1,24 @@
-// import { Box, Stack, Typography } from '@mui/material'
-// import React from 'react'
-// import { TechnologyData } from 'src/types/graphql/types/technology.types'
+import { Box, Stack, Typography } from "@mui/material";
+import React from "react";
 
-// const Parasgraphs = ({data}:{data:TechnologyData}) => {
-//   return (
-//     <Stack sx={{my:5}}>
-//         {/* <Typography variant='h1'sx={{textTransform:"capitalize !important"}}>{data.technology.title} : {data.technology.technologySinglePageOptions?.subTitle}</Typography>
-//        <Box component={"div"} dangerouslySetInnerHTML={{__html:data.technology.content}}/> */}
-//     </Stack>
-//   )
-// }
+interface Data {
+  title: string;
+  subTitle: string;
+  content: string;
+}
 
-// export default Parasgraphs
+const Parasgraphs = ({ data }: { data: Data }) => {
+  return (
+    <Stack sx={{ my: 5 }}>
+      <Typography variant="h1" sx={{ textTransform: "capitalize !important" }}>
+        {data.title} :<br /> {data?.subTitle}
+      </Typography>
+      <Box
+        component={"div"}
+        dangerouslySetInnerHTML={{ __html: data.content }}
+      />
+    </Stack>
+  );
+};
+
+export default Parasgraphs;

@@ -86,15 +86,6 @@ export interface TechnologyChildNode {
   featuredImage?: Media | null;
 }
 
-export interface TechnologyNode {
-  id: string;
-  title: string;
-  content: string;
-  technologySinglePageOptions: TechnologyOptions | null;
-  children: {
-    nodes: TechnologyChildNode[];
-  };
-}
 
 export interface ImageNode {
   node: {
@@ -112,6 +103,19 @@ export interface TechnologyChild {
   featuredImage: ImageNode | null;
 }
 
+export interface TechnologyNode {
+  id: string;
+  title: string;
+  content: string;
+  technologySinglePageOptions: {
+    subTitle: string;
+  };
+  featuredImage: ImageNode | null;
+  children?: {
+    nodes: TechnologyNode[];
+  };
+}
+
 export interface GetTechnologyDetailsByURIData {
   technology: {
     title: string;
@@ -124,7 +128,7 @@ export interface GetTechnologyDetailsByURIData {
       subTitle: string;
     };
     children: {
-      nodes: TechnologyChild[];
+      nodes: TechnologyNode[];
     };
   };
 }

@@ -21,6 +21,11 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
         src={data.featuredImage?.node?.sourceUrl}
         alt={data.title}
         sx={{
+          "& img": {
+            width: "400px",
+            height: "180px !important",
+            objectFit: "cover",
+          },
           width: "400px",
           height: "180px !important",
           objectFit: "cover",

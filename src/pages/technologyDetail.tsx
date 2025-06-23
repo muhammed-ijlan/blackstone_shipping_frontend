@@ -4,8 +4,8 @@ import React from "react";
 import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
 import { GET_TECHNOLOGY_DETAILS_BY_URI } from "src/graphql/queries";
-// import Parasgraphs from "src/sections/technology/Parasgraphs";
-// import TechnologyCards from "src/sections/technology/TechnologyCards";
+import Parasgraphs from "src/sections/technology/Parasgraphs";
+import TechnologyCards from "src/sections/technology/TechnologyCards";
 import {
   GetTechnologyDetailsByURIData,
   GetTechnologyDetailsByURIVars,
@@ -37,8 +37,14 @@ const Page = () => {
             }
           />
           <Container maxWidth="xl">
-            {/* <Parasgraphs data={data} /> */}
-            {/* <TechnologyCards data={data} /> */}
+            <Parasgraphs
+              data={{
+                title: data.technology.title,
+                subTitle: data.technology.technologySinglePageOptions.subTitle,
+                content: data.technology.content,
+              }}
+            />
+            <TechnologyCards data={data.technology.children.nodes} />
           </Container>
         </>
       )}
