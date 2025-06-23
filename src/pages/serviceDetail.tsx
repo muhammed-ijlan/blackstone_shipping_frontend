@@ -6,11 +6,11 @@ import ContactUsCard from "src/components/ContactUsCard";
 import { GET_SERVICE_WITH_SUBSERVICES } from "src/graphql/queries";
 import OtherServices from "src/sections/services/OtherServices";
 import OtherTopics from "src/sections/services/OtherTopics";
-import { ServiceData } from "src/types/graphql/types/services.types";
+import { GetServiceWithSubServicesData } from "src/types/graphql/types/services.types";
 
 const Page = () => {
   const { serviceId } = useParams();
-  const { data, loading, error } = useQuery<ServiceData>(
+  const { data, loading, error } = useQuery<GetServiceWithSubServicesData>(
     GET_SERVICE_WITH_SUBSERVICES,
     {
       variables: {
@@ -31,7 +31,7 @@ const Page = () => {
             mainTitle={data?.service?.servicesPageBannerSection.bannerTitle}
             subTitle={"Services"}
           />
-          <OtherServices data={data?.subServices.nodes} />
+          <OtherServices data={data?.service.children.nodes} />
           <ContactUsCard />
           <OtherTopics data={data?.service?.servicePageOtherTopicsSection} />
         </>

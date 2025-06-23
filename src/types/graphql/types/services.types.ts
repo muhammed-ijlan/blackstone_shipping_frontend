@@ -90,19 +90,47 @@ export interface ServicesPageBannerSection {
   bannerTitle: string;
 }
 
-export interface ServiceData {
+export interface UriNode {
+  uri: string;
+}
+
+export interface ServiceChild {
+  id: string;
+  title: string;
+  content: string;
+  uri: string;
+  featuredImage: ImageNode | null;
+}
+
+export interface GetServiceWithSubServicesData {
   service: {
+    id: string;
     title: string;
-    servicesPageBannerSection: ServicesPageBannerSection;
-    servicePageOtherTopicsSection: OtherTopicsSection;
-  };
-  subServices: {
-    nodes: SubService[];
+    servicesPageBannerSection: {
+      bannerImage: ImageNode;
+      bannerTitle: string;
+    };
+    servicePageOtherTopicsSection: {
+      otherTopicsMainTitle: string;
+
+      topic1Title: string;
+      topic1Image: ImageNode;
+      topic1Link: { nodes: UriNode[] };
+
+      topic2Title: string;
+      topic2Image: ImageNode;
+      topic2Link: { nodes: UriNode[] };
+
+      topic3Title: string;
+      topic3Image: ImageNode;
+      topic3Link: { nodes: UriNode[] };
+    };
+    children: {
+      nodes: ServiceChild[];
+    };
   };
 }
 
-export interface SubService {
-  title: string;
-  content: string;
-  featuredImage: ImageNode;
+export interface GetServiceWithSubServicesVars {
+  uri: string;
 }

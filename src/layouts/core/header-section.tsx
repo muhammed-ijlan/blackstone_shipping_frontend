@@ -302,6 +302,7 @@ export function HeaderSection({
                     p: "10px 16px",
                     gap: 0.5,
                   }}
+                  onClick={() => router.push("/tracking")}
                 >
                   <Box component={"img"} width={"16px"} src={trackingIcon} />
                   <Typography

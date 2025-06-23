@@ -485,71 +485,75 @@ query GetServicePage {
 
 export const GET_SERVICE_WITH_SUBSERVICES = gql`
   query GetServiceWithSubServices($uri: ID!) {
-  service(id: $uri, idType: URI) {
-    id
-    title
-    content
-    databaseId
-    uri
-    servicesPageBannerSection {
-      bannerImage {
-        node {
-          sourceUrl
-        }
-      }
-      bannerTitle
-    }
-    servicePageOtherTopicsSection {
-      otherTopicsMainTitle
-      topic1Title
-      topic1Image {
-        node {
-          sourceUrl
-        }
-      }
-      topic1Link {
-        nodes {
-          uri
-        }
-      }
-      topic2Title
-      topic2Image {
-        node {
-          sourceUrl
-        }
-      }
-      topic2Link {
-        nodes {
-          uri
-        }
-      }
-      topic3Title
-      topic3Image {
-        node {
-          sourceUrl
-        }
-      }
-      topic3Link {
-        nodes {
-          uri
-        }
-      }
-    }
-  }
-  subServices: services(where: { parent: $uri }) {
-    nodes {
+    service(id: $uri, idType: URI) {
+      id
       title
-      content
-      featuredImage {
-        node {
-          sourceUrl
+      servicesPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      servicePageOtherTopicsSection {
+        otherTopicsMainTitle
+
+        topic1Title
+        topic1Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic1Link {
+          nodes {
+            uri
+          }
+        }
+
+        topic2Title
+        topic2Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic2Link {
+          nodes {
+            uri
+          }
+        }
+
+        topic3Title
+        topic3Image {
+          node {
+            sourceUrl
+          }
+        }
+        topic3Link {
+          nodes {
+            uri
+          }
         }
       }
-      uri
+      children {
+        nodes {
+          ... on Service {
+            id
+            title
+            content
+            uri
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
     }
   }
-}
 `;
+
 
 export const GET_SOLUTIONS_PAGE = gql`
 query GetSolutionsPage {
@@ -617,8 +621,9 @@ query GetSolutionsPage {
 `;
 
 export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
-  query GetSolutionsWithSubSolutions($id: ID!) {
-    solution(id: $id, idType: ID) {
+  query GetSolutionsWithSubSolutions($uri: ID!) {
+    solution(id: $uri, idType: URI) {
+      id
       title
       solutionsSinglePageBannerSection {
         bannerImage {
@@ -630,6 +635,7 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
       }
       solutionsPageOtherTopicsSection {
         otherTopicsMainTitle
+
         topic1Title
         topic1Image {
           node {
@@ -641,6 +647,7 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
             uri
           }
         }
+
         topic2Title
         topic2Image {
           node {
@@ -652,6 +659,7 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
             uri
           }
         }
+
         topic3Title
         topic3Image {
           node {
@@ -664,23 +672,25 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
           }
         }
       }
-    }
-
-    subSolutions: solutions(where: { parentIn: [$id] }) {
-      nodes {
-        title
-        content
-        featuredImage {
-          node {
-            sourceUrl
+      children {
+        nodes {
+          ... on Solution {
+            id
+            title
+            content
+            uri
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
           }
         }
-        uri
-        id
       }
     }
   }
 `;
+
 
 export const GET_RESOURSES_PAGE = gql`
 query GetResourcesPage {
@@ -990,9 +1000,9 @@ query GetTechnologyPage {
 }
 `;
 
-export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
-  query GetTechnologyDetailsByID($id: ID!) {
-    technology(id: $id, idType: ID) {
+export const GET_TECHNOLOGY_DETAILS_BY_URI = gql`
+  query GetTechnologyDetailsByURI($uri: ID!) {
+    technology(id: $uri, idType: URI) {
       ... on Technology {
         title
         content
@@ -1016,21 +1026,9 @@ export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
               technologySinglePageOptions {
                 subTitle
               }
-              children {
-                nodes {
-                  ... on Technology {
-                    id
-                    title
-                    content
-                    technologySinglePageOptions {
-                      subTitle
-                    }
-                    featuredImage {
-                      node {
-                        sourceUrl
-                      }
-                    }
-                  }
+              featuredImage {
+                node {
+                  sourceUrl
                 }
               }
             }
@@ -1040,6 +1038,7 @@ export const GET_TECHNOLOGY_DETAILS_BY_ID = gql`
     }
   }
 `;
+
 
 
 export const GET_CAREERS_PAGE = gql`
@@ -1563,4 +1562,106 @@ query GetCSRByYear($yearSlug: [String]) {
     }
   }
 }
+`;
+
+export const GET_MY_BLACKBOX_FREIGHT_PAGE = gql`
+  query GetMyBlackboxFreightPage {
+    pageBy(uri: "my-blackbox-freight") {
+      title
+      blackboxFreightPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      shipmentManagementSection {
+        smSubTitle
+        smMainTitleFirstPart
+        smMainTitleSecondPart
+        smContent
+        smImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      controlTowerSection {
+        ctTitle
+        ctContent
+      }
+      shipmentVisibilitySection {
+        svTitle
+        svContent
+      }
+      eDocsSection {
+        edTitle
+        edContent
+        edImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      supplyChainIntegrationSection {
+        sciTitle
+        sciContent
+      }
+      freightIndexTrendsSection {
+        fitTitle
+        fitContent
+        fitImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      toolsReportsAnalyticsSection {
+        traTitle
+        traContent
+        traImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    shipmentVisibilities(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    freightIndexTrends(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    toolsReports(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
 `;

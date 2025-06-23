@@ -19,6 +19,7 @@
     "@mui/material": "^7.1.0",
     "@types/google.maps": "^3.58.1",
     "@vis.gl/react-google-maps": "^1.5.2",
+    "axios": "^1.10.0",
     "change-case": "^5.4.4",
     "dompurify": "^3.2.5",
     "flag-icon-css": "^4.1.7",
