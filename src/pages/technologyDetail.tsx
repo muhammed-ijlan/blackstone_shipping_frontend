@@ -3,25 +3,24 @@ import { Container } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
-import { GET_TECHNOLOGY_DETAILS_BY_ID } from "src/graphql/queries";
+import { GET_TECHNOLOGY_DETAILS_BY_URI } from "src/graphql/queries";
 import Parasgraphs from "src/sections/technology/Parasgraphs";
 import TechnologyCards from "src/sections/technology/TechnologyCards";
 import {
-  TechnologyData,
-  TechnologyVars,
+  GetTechnologyDetailsByURIData,
+  GetTechnologyDetailsByURIVars,
 } from "src/types/graphql/types/technology.types";
 
 const Page = () => {
   const { id } = useParams();
-  const { data, loading, error } = useQuery<TechnologyData, TechnologyVars>(
-    GET_TECHNOLOGY_DETAILS_BY_ID,
-    {
-      variables: {
-        id: id || "",
-      },
-      skip: !id,
-    }
-  );
+  const { data, loading, error } = useQuery<
+    GetTechnologyDetailsByURIData,
+    GetTechnologyDetailsByURIVars
+  >(GET_TECHNOLOGY_DETAILS_BY_URI, {
+    variables: { uri: `technology/${id}` },
+    skip: !id,
+  });
+
   return (
     <>
       {data && (
@@ -38,8 +37,8 @@ const Page = () => {
             }
           />
           <Container maxWidth="xl">
-            <Parasgraphs data={data}/>
-            <TechnologyCards data={data}/>
+            {/* <Parasgraphs data={data} />
+            <TechnologyCards data={data} /> */}
           </Container>
         </>
       )}

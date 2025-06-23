@@ -41,6 +41,7 @@ export const QualitySustainabilityPage = lazy(
 export const MyBlackboxFrightPage = lazy(
   () => import("../pages/myBlackBoxFright")
 );
+export const TrackingPage = lazy(() => import("../pages/tracking"));
 
 const renderFallback = () => (
   <Box
@@ -115,7 +116,7 @@ export const routesSection: RouteObject[] = [
         ),
       },
       {
-        path: "solutions/:solutionId",
+        path: "solution/:solutionId",
         element: (
           <Suspense fallback={renderFallback()}>
             <SolutionDetailPage />
@@ -207,6 +208,14 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <MyBlackboxFrightPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "tracking",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <TrackingPage />
           </Suspense>
         ),
       },

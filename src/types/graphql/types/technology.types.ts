@@ -96,18 +96,39 @@ export interface TechnologyNode {
   };
 }
 
-export interface TechnologyData {
+export interface ImageNode {
+  node: {
+    sourceUrl: string;
+  };
+}
+
+export interface TechnologyChild {
+  id: string;
+  title: string;
+  content: string;
+  technologySinglePageOptions: {
+    subTitle: string;
+  };
+  featuredImage: ImageNode | null;
+}
+
+export interface GetTechnologyDetailsByURIData {
   technology: {
     title: string;
     content: string;
-    technologySinglePageBannerSection: TechnologyPageBanner | null;
-    technologySinglePageOptions: TechnologyOptions | null;
+    technologySinglePageBannerSection: {
+      bannerImage: ImageNode;
+      bannerTitle: string;
+    };
+    technologySinglePageOptions: {
+      subTitle: string;
+    };
     children: {
-      nodes: TechnologyNode[];
+      nodes: TechnologyChild[];
     };
   };
 }
 
-export interface TechnologyVars {
-  id: string;
+export interface GetTechnologyDetailsByURIVars {
+  uri: string;
 }
