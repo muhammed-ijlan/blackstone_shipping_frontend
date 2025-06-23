@@ -99,19 +99,13 @@ export const typography: TypographyVariantsOptions = {
       textAlign: 'left',
     },
     [defaultMuiTheme.breakpoints.up('md')]: {
-      fontSize: '22px',
-      lineHeight: '24px',
+      fontSize: '32px',
+      lineHeight: '45px',
       letterSpacing: '3%',
       textTransform: 'uppercase',
       textAlign: 'left',
     },
-    [defaultMuiTheme.breakpoints.up('lg')]: {
-      fontSize: '24px',
-      lineHeight: '36px',
-      letterSpacing: '3%',
-      textTransform: 'uppercase',
-      textAlign: 'left',
-    },
+
   },
   h4: {
     fontWeight: 600,
