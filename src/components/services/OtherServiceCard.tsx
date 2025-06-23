@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import { SubService } from "src/types/graphql/types/services.types";
+import { ServiceChild } from "src/types/graphql/types/services.types";
 
-const OtherServiceCard = ({ data }: { data: SubService }) => {
+const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
   return (
     <Stack gap={2}>
       <Box
