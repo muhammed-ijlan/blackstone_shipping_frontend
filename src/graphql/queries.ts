@@ -104,16 +104,15 @@ export const GET_INDUSTRY_COVERAGE = gql`
  }
  `
 
-export const GET_SERVICES = gql`
-  query {
+export const GET_HOME_PAGE_SERVICES = gql`
+  query GetHomePageServices {
     page(id: "home", idType: URI) {
       title
       homePageFieldsOurServices {
         ourServicesMainHeading
       }
     }
-
-    services {
+    services(where: { parentIn: [0], orderby: { field: DATE, order: ASC } }) {
       nodes {
         title
         featuredImage {

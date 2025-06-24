@@ -2,7 +2,7 @@ import { Button, Container, Stack, Grid, Box } from "@mui/material";
 import ServiceCard from "src/components/home/ServiceCard";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { useQuery } from "@apollo/client";
-import { GET_SERVICES } from "src/graphql/queries";
+import { GET_HOME_PAGE_SERVICES } from "src/graphql/queries";
 import CustomArrowButton from "src/components/CustomArrowButton";
 import { useRouter } from "src/routes/hooks";
 import LoadingFallback from "src/components/LoadingFallback";
@@ -31,7 +31,9 @@ export interface HomePageData {
 }
 
 const Serivces = () => {
-  const { data, loading, error } = useQuery<HomePageData>(GET_SERVICES);
+  const { data, loading, error } = useQuery<HomePageData>(
+    GET_HOME_PAGE_SERVICES
+  );
 
   const router = useRouter();
 
