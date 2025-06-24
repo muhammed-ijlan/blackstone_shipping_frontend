@@ -84,7 +84,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
     <Stack>
       <Grid
         container
-        alignItems={"center"}
+        // alignItems={"center"}
         justifyContent={"space-between"}
         justifyItems={"center"}
         spacing={3}
@@ -101,10 +101,12 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                 alt={post?.title}
                 src={post.featuredImage?.node?.sourceUrl}
                 width={"100%"}
+                height={"283px"}
+                sx={{ objectFit: "cover" }}
                 borderRadius={"8px"}
               />
               <Stack sx={{ height: "100%" }} justifyContent={"space-between"}>
-                <Stack>
+                <Stack gap={1}>
                   <Typography
                     mt={1}
                     variant="caption"
@@ -114,9 +116,17 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     {moment(post.date).format("DD MMM YYYY")}
                   </Typography>
                   <Typography
-                    sx={{ textAlign: "left !important" }}
+                    sx={{
+                      textAlign: "left !important",
+                      display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                      WebkitLineClamp: 2,
+                      overflow: "hidden",
+                      height: "60px",
+                    }}
                     variant="h4"
                     fontWeight={"bold"}
+                    color="rgba(45, 55, 72, 1)"
                   >
                     {post.title}
                   </Typography>
@@ -124,6 +134,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     variant="body2"
                     mt={1}
                     mb={2}
+                    color="rgba(45, 55, 72, 1)"
                     sx={{
                       display: "-webkit-box",
                       WebkitBoxOrient: "vertical",
@@ -131,6 +142,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                       overflow: "hidden",
                       "& p": {
                         m: 0,
+                        fontWeight: "600",
                       },
                     }}
                     dangerouslySetInnerHTML={{ __html: post.excerpt }}

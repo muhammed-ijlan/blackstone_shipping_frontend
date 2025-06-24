@@ -6,8 +6,8 @@ import arrowLeft from "src/assets/icons/arrowLeft.png";
 interface SliderButton2Props {
   scrollRef: RefObject<HTMLDivElement>;
   scrollAmount?: number;
-  setCurrentIndex: (index: number) => void;
-  totalItems: number;
+  setCurrentIndex?: (index: number) => void;
+  totalItems?: number;
 }
 
 const SliderButton2: React.FC<SliderButton2Props> = ({
@@ -27,11 +27,16 @@ const SliderButton2: React.FC<SliderButton2Props> = ({
       setCanScrollRight(scrollLeft + clientWidth < scrollWidth - tolerance);
 
       // Update currentIndex based on scrollLeft
-      const child = scrollRef.current.children[0] as HTMLElement;
+      const child = scrollRef.current?.querySelector(
+        ":scope > *"
+      ) as HTMLElement;
+
       if (child) {
         const itemWidth = child.offsetWidth + 16; // 16px gap (gap={2})
         const index = Math.round(scrollLeft / itemWidth);
-        // setCurrentIndex(index);
+        if (setCurrentIndex) {
+          setCurrentIndex(index);
+        }
       }
     }
   };
@@ -61,7 +66,9 @@ const SliderButton2: React.FC<SliderButton2Props> = ({
 
         const itemWidth = child.offsetWidth + 16; // 16px gap
         const index = Math.round(container.scrollLeft / itemWidth);
-        setCurrentIndex(index);
+        if (setCurrentIndex) {
+          setCurrentIndex(index);
+        }
         checkScrollPosition(); // ensure arrows update too
       }, 300); // delay must match scroll duration
     }

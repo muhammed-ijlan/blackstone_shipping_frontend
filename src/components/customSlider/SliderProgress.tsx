@@ -16,7 +16,7 @@ const SliderProgress: React.FC<SliderProgressProps> = ({
 
   return (
     <Box sx={{ width: "200px" }}>
-      <Typography variant="body1" sx={{ ...sx }}>
+      <Typography variant="body1" color="white" sx={{ ...sx }}>
         {String(currentIndex + 1).padStart(2, "0")} /{" "}
         {String(totalItems).padStart(2, "0")}
       </Typography>
@@ -26,7 +26,7 @@ const SliderProgress: React.FC<SliderProgressProps> = ({
         value={progress}
         sx={{
           height: "4px",
-          color: "white",
+          color: "white !important",
           backgroundColor: "rgba(109, 110, 113, 1)",
           borderRadius: "4px",
           mt: 1,

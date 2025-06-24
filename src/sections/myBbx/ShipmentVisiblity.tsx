@@ -19,11 +19,13 @@ const ShipmentVisiblity = ({
       sx={{
         background: "linear-gradient(360deg, #2D3748 0%, #1A202C 100%)",
         borderRadius: "8px",
-        p: 3,
+        py: 6,
+        px: 3,
         color: "white",
       }}
       gap={5}
       mb={5}
+      py={5}
     >
       <Stack gap={1}>
         <Typography sx={{ textAlign: "center !important" }} variant="h2">
@@ -82,7 +84,7 @@ const ShipmentVisiblity = ({
               </Stack>
               <Typography
                 mt={1}
-                variant="h3"
+                variant="h6"
                 sx={{ textTransform: "capitalize !important" }}
               >
                 {item.title}

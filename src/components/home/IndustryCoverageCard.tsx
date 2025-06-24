@@ -53,7 +53,7 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
               height: "50px",
               backgroundColor: item.industriesFieldOptions.colorCode,
               position: "absolute",
-              top: "50px",
+              top: "38px",
               left: 0,
               zIndex: 1,
             }}
@@ -65,14 +65,13 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             height="60px"
           />
           <Typography
-         
             sx={{
-              typography:{xs:"h4",lg:"h5"},
+              typography: { xs: "h4", lg: "h5" },
               fontWeight: 600,
               fontSize: "20px",
               lineHeight: "44px",
               letterSpacing: "3%",
-              textAlign:"left !important"
+              textAlign: "left !important",
             }}
             color="white"
           >
@@ -94,7 +93,10 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             borderBottom: "1px solid rgba(249, 250, 251, 1)",
           }}
         >
-          <Typography sx={{typography: { xs: "body1", lg: "body2" },}} color="white">
+          <Typography
+            sx={{ typography: { xs: "body1", lg: "body2" } }}
+            color="white"
+          >
             {item.content
               ? item.content.replace(/<[^>]+>/g, "")
               : "No description available."}

@@ -51,8 +51,9 @@ const Certification = ({
                   component={"img"}
                   alt={item.title}
                   src={item.featuredImage.node.sourceUrl}
-                  width={"100px"}
-                  sx={{ objectFit: "contain" }}
+                  width={"auto"}
+                  height={"80px"}
+                  sx={{ objectFit: "cover" }}
                 />
               </Stack>
             </Grid>
@@ -87,8 +88,9 @@ const Certification = ({
                   component={"img"}
                   alt={item.title}
                   src={item.featuredImage.node.sourceUrl}
-                  width={"100px"}
-                  sx={{ objectFit: "contain" }}
+                  width={"150px"}
+                  // height={"50px"}
+                  sx={{ objectFit: "scale-down" }}
                 />
               </Stack>
             </Grid>

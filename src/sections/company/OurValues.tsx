@@ -19,14 +19,16 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   const values = data?.values.nodes || [];
-  const image1 = data?.page?.companyPageOurValuesSection.ourValuesImage1?.node?.sourceUrl;
-  const image2 = data?.page?.companyPageOurValuesSection.ourValuesImage2?.node?.sourceUrl;
+  const image1 =
+    data?.page?.companyPageOurValuesSection.ourValuesImage1?.node?.sourceUrl;
+  const image2 =
+    data?.page?.companyPageOurValuesSection.ourValuesImage2?.node?.sourceUrl;
 
   // Common styles for text boxes
   const textBoxStyles = {
     border: "1px solid rgba(109, 110, 113, 1)",
     borderRadius: "8px",
-    p: {xs:2,lg:4},
+    p: { xs: 2, lg: 4 },
     backgroundColor: "#fff",
     height: "100%",
   };
@@ -43,11 +45,11 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
   };
 
   const items = [
-    { type: "value", value: values[0], xs: 12, md: 8 }, 
-    { type: "value", value: values[1], xs: 12, md: 4 }, 
+    { type: "value", value: values[0], xs: 12, md: 8 },
+    { type: "value", value: values[1], xs: 12, md: 4 },
     { type: "value", value: values[2], xs: 12, md: 4 },
     { type: "value", value: values[3], xs: 12, md: 4 },
-    { type: "value", value: values[4], xs: 12, md: 4, }, 
+    { type: "value", value: values[4], xs: 12, md: 4 },
     { type: "image", src: image1, alt: "Our Values Image 1", xs: 12, md: 4 },
     { type: "value", value: values[5], xs: 12, md: 4 },
     { type: "image", src: image2, alt: "Our Values Image 2", xs: 12, md: 4 },
@@ -56,14 +58,15 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
   return (
     <Stack sx={{ background: "rgba(245, 247, 251, 1)" }}>
       <Container maxWidth="xl">
-        <Box sx={{ p: {xs:2,lg:4}, position: "relative", minHeight: "600px" }}>
+        <Box sx={{ my: 6, position: "relative", minHeight: "600px" }}>
           <Typography variant="h3" fontWeight="bold" mb={5}>
             {data?.page?.companyPageOurValuesSection.ourValuesTitle.toUpperCase()}
           </Typography>
 
           <Grid container spacing={5}>
             {items.map((item, index) => (
-              <Grid size={{xs:item.xs,md:item.md}}
+              <Grid
+                size={{ xs: item.xs, md: item.md }}
                 key={index}
                 sx={{
                   display: "flex",
@@ -87,14 +90,18 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
                           loading="lazy"
                         />
                       </Box>
-                      <Typography variant="h4" fontWeight="bold" sx={{textAlign:"left !important" }}>
+                      <Typography
+                        variant="h4"
+                        fontWeight="bold"
+                        sx={{ textAlign: "left !important" }}
+                      >
                         {item.value?.title.toUpperCase()}
                       </Typography>
                     </Stack>
                     <Typography
                       variant="body1"
                       color="rgba(109, 110, 113, 1)"
-                      sx={{ mt: 2,textAlign:"left !important" }}
+                      sx={{ mt: 2, textAlign: "left !important" }}
                       dangerouslySetInnerHTML={{ __html: item.value?.content }}
                     />
                   </Box>
@@ -105,7 +112,11 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
                       src={item.src}
                       alt={item.alt}
                       loading="lazy"
-                      style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
                     />
                   )
                 )}

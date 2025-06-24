@@ -13,8 +13,14 @@ interface Data {
 const ShipmentManagement = ({ data }: { data: Data }) => {
   return (
     <Stack direction={{ xs: "column", md: "row" }} my={6} gap={0}>
-      <Stack flex={1}>
-        <Typography variant="h3" sx={{ fontWeight: "700 !important" }}>
+      <Stack flex={1} gap={1}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: "700 !important",
+            textTransform: "uppercase !important",
+          }}
+        >
           {data.smSubTitle}
         </Typography>
         <Typography
@@ -34,7 +40,7 @@ const ShipmentManagement = ({ data }: { data: Data }) => {
           dangerouslySetInnerHTML={{ __html: data.smContent }}
         />
       </Stack>
-      <Stack flex={1} alignItems={"center"} justifyContent={"center"}>
+      <Stack flex={1} alignItems={"flex-end"} justifyContent={"center"}>
         <Box
           component={"img"}
           src={data.smImage.node.sourceUrl}

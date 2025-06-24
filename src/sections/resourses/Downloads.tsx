@@ -11,9 +11,9 @@ import React from "react";
 import { Iconify } from "src/components/iconify";
 import { ResourcesPageData } from "src/types/graphql/types/resourses.types";
 
-import brochure from "src/assets/icons/brochure.png"
-import service from "src/assets/icons/service.png"
-import whitepapper from "src/assets/icons/whitepapper.png"
+import brochure from "src/assets/icons/brochure.png";
+import service from "src/assets/icons/service.png";
+import whitepapper from "src/assets/icons/whitepapper.png";
 
 const Downloads = ({ data }: { data: ResourcesPageData }) => {
   const resourseData = data.page.resourcesPageDownloadsSection;
@@ -24,8 +24,13 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
         <Typography variant="h2">
           {resourseData.downloadsSectionTitle}
         </Typography>
-        <Typography
-          variant="body1"
+        <Box
+          component={"div"}
+          sx={{
+            "& p": {
+              margin: "0",
+            },
+          }}
           dangerouslySetInnerHTML={{
             __html: resourseData.downloadSectionContent,
           }}
@@ -64,19 +69,21 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                 sx={{
                   width: "100%",
                   height: "60px",
+                  backgroundColor: "rgba(26, 86, 219, 1) !important",
+                  color: "white",
                 }}
                 fullWidth
-                variant="contained"
                 aria-label="Button group with a nested menu"
               >
                 <Button
                   target="_blank"
                   href={resourseData.brochureFile?.node?.sourceUrl}
+                  sx={{ color: "white" }}
                 >
                   Download
                 </Button>
                 <Button
-                  sx={{ width: "60px" }}
+                  sx={{ width: "60px", color: "white" }}
                   size="small"
                   aria-label="select merge strategy"
                   aria-haspopup="menu"
@@ -105,7 +112,7 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                     src={service}
                     component={"img"}
                     alt="img"
-                                       height="32px"
+                    height="32px"
                   />
                   <Typography sx={{ fontSize: "32px !important" }}>
                     {resourseData.serviceGuidesTitle}
@@ -120,19 +127,21 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                 sx={{
                   width: "100%",
                   height: "60px",
+                  backgroundColor: "rgba(26, 86, 219, 1) !important",
+                  color: "white",
                 }}
                 fullWidth
-                variant="contained"
                 aria-label="Button group with a nested menu"
               >
                 <Button
                   target="_blank"
                   href={resourseData.serviceGuidesFile?.node?.sourceUrl}
+                  sx={{ color: "white" }}
                 >
                   Download
                 </Button>
                 <Button
-                  sx={{ width: "60px" }}
+                  sx={{ width: "60px", color: "white" }}
                   size="small"
                   aria-label="select merge strategy"
                   aria-haspopup="menu"
@@ -177,19 +186,21 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                 sx={{
                   width: "100%",
                   height: "60px",
+                  backgroundColor: "rgba(26, 86, 219, 1) !important",
+                  color: "white",
                 }}
                 fullWidth
-                variant="contained"
                 aria-label="Button group with a nested menu"
               >
                 <Button
+                  sx={{ color: "white" }}
                   target="_blank"
                   href={resourseData.whitePapersFile?.node?.sourceUrl}
                 >
                   Download
                 </Button>
                 <Button
-                  sx={{ width: "60px" }}
+                  sx={{ width: "60px", color: "white" }}
                   size="small"
                   aria-label="select merge strategy"
                   aria-haspopup="menu"

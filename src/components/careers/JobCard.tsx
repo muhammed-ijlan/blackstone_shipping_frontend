@@ -42,6 +42,9 @@ const JobCard = ({ data }: { data: JobOpening }) => {
           fontWeight: "600 !important",
           height: "65px",
           px: 3,
+          ":hover": {
+            bgcolor: "rgba(10, 120, 85, 1)",
+          },
         }}
         endIcon={
           <Box

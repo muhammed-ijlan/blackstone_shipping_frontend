@@ -187,14 +187,14 @@ export const typography: TypographyVariantsOptions = {
     },
     [defaultMuiTheme.breakpoints.up('md')]: {
       fontSize: '24px',
-      lineHeight: '28px',
+      lineHeight: '34px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
     },
     [defaultMuiTheme.breakpoints.up('lg')]: {
       fontSize: '24px',
-      lineHeight: '28px',
+      lineHeight: '35px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',

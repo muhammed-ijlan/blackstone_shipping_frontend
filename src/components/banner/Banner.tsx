@@ -1,5 +1,6 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "src/routes/hooks";
 
 interface BannerPropsTypes {
   bgUrl: string;
@@ -8,6 +9,7 @@ interface BannerPropsTypes {
 }
 
 const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
+  const router = useRouter();
   return (
     <Stack
       sx={{
@@ -34,7 +36,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
           sx={{
             height: "100%",
             display: "flex",
-            flexDirection: {xs:"column",md:'column'},
+            flexDirection: { xs: "column", md: "column" },
             alignItems: { xs: "center", md: "flex-start" },
             justifyContent: { xs: "center", md: "flex-end" },
             gap: 3,
@@ -42,27 +44,29 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
           }}
         >
           <Typography
+            onClick={() => router.push(`/${subTitle.toLowerCase()}`)}
             variant="body1"
             sx={{
               fontWeight: "700",
               color: "white !important",
               // position: { xs: "unset", lg: "absolute" },
               // bottom: "180px",
-              marginTop:"50px"
+              marginTop: "50px",
+              cursor: "pointer",
             }}
           >
             {subTitle && subTitle}
           </Typography>
           <Typography
             sx={{
-              maxWidth:"800px",
+              maxWidth: "100%",
               fontSize: { xs: "40px", lg: "6rem !important" },
               fontWeight: "700",
               color: "white !important",
               // position: { xs: "unset", lg: "absolute" },
               top: "380px",
-              lineHeight:{xs:"50px !important",lg:"110px !important"},
-              textWrap:"wrap"
+              lineHeight: { xs: "50px !important", lg: "110px !important" },
+              textWrap: "wrap",
             }}
           >
             {mainTitle?.toUpperCase()}

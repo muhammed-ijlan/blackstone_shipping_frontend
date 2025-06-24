@@ -5,24 +5,31 @@ import {
   JobOpeningDetails,
 } from "src/types/graphql/types/careers.types";
 
-import location from "src/assets/icons/location-white.png"
+import location from "src/assets/icons/location-white.png";
+import { useRouter } from "src/routes/hooks";
 
 const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
+  const router = useRouter();
   return (
-    <Stack gap={3}  >
+    <Stack gap={3}>
       <Stack direction={"row"}>
-        <Typography sx={{ color: "rgba(109, 110, 113, 1)" }}>
+        <Typography
+          onClick={() => router.push(`/careers`)}
+          sx={{ color: "rgba(109, 110, 113, 1)", cursor: "pointer" }}
+        >
           Careers /&nbsp;
         </Typography>
         <Typography> Submit Application</Typography>
       </Stack>
 
-      <Stack borderRadius={"8px"} color={"white"}
+      <Stack
+        borderRadius={"8px"}
+        color={"white"}
         sx={{
           backgroundImage: `url(${data.jobOpening.jobOpeningsOptions.bannerImage?.node.sourceUrl})`,
           height: 600,
           width: "100%",
-          borderRadius:"8px !important",
+          borderRadius: "8px !important",
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
@@ -30,7 +37,7 @@ const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
       >
         <Stack
           sx={{
-            borderRadius:"8px",
+            borderRadius: "8px",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             height: "100%",
             width: "100%",
