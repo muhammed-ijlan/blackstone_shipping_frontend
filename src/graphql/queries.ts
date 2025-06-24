@@ -1680,3 +1680,39 @@ export const GET_MY_BLACKBOX_FREIGHT_PAGE = gql`
     }
   }
 `;
+
+
+export const GET_FOOTER_MENU_ITEMS = gql`
+  query GetFooterMenuItems {
+    menu(id: "Footer Menu", idType: NAME) {
+      id
+      name
+      menuItems(first: 999) {
+        nodes {
+          id
+          label
+          url
+          uri
+          parentId
+          order
+        }
+      }
+    }
+  }
+`;
+export const GET_GENERAL_PAGES = gql`
+  query GetGeneralPages($uri: String!) {
+    pageBy(uri: $uri) {
+      title
+      blackboxFreightPageBannerSection {
+        bannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        bannerTitle
+      }
+      content
+    }
+  }
+`;
