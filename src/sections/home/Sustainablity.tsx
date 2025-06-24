@@ -13,6 +13,7 @@ import CustomArrowButton from "src/components/CustomArrowButton";
 import CustomSlider from "src/components/customSlider/CustomSlider";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
+import LoadingFallback from "src/components/LoadingFallback";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { GET_SUSTAINABILITY } from "src/graphql/queries";
 import { useRouter } from "src/routes/hooks";
@@ -57,7 +58,7 @@ const Sustainability = () => {
         <CircularProgress />
       </Stack>
     );
-  if (error || !data) return <Typography>Error loading data.</Typography>;
+  if (error || !data) return <LoadingFallback />;
 
   const commitments = data.sustainabilityCommitments.nodes;
   const heading = data.page.homePageFieldsSustainabilityCommitment;

@@ -5,6 +5,7 @@ import SectionHead from "src/components/sectionHead/SectionHead";
 import IndustryCoverageCard from "../../components/home/IndustryCoverageCard";
 import { useQuery } from "@apollo/client";
 import { GET_INDUSTRY_COVERAGE } from "src/graphql/queries";
+import LoadingFallback from "src/components/LoadingFallback";
 
 export interface GetIndustryCoverageData {
   page: {
@@ -35,7 +36,7 @@ const IndustryCoverage = () => {
     GET_INDUSTRY_COVERAGE
   );
 
-  if (loading) return <Typography color="white">Loading...</Typography>;
+  if (loading) return <LoadingFallback />;
   if (error)
     return <Typography color="error">Error: {error.message}</Typography>;
 
@@ -66,9 +67,9 @@ const IndustryCoverage = () => {
         >
           {data?.industries?.nodes?.map((item, index) => (
             <>
-            <Grid size={{ xs: 12, sm: 6,md:4 }} mt={3} key={index} p={0}>
-              <IndustryCoverageCard item={item} />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} mt={3} key={index} p={0}>
+                <IndustryCoverageCard item={item} />
+              </Grid>
             </>
           ))}
         </Grid>

@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_SERVICES } from "src/graphql/queries";
 import CustomArrowButton from "src/components/CustomArrowButton";
 import { useRouter } from "src/routes/hooks";
+import LoadingFallback from "src/components/LoadingFallback";
 
 export interface ServiceItem {
   title: string;
@@ -34,7 +35,7 @@ const Serivces = () => {
 
   const router = useRouter();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingFallback />;
   if (error) return <p>Error loading services.</p>;
 
   const heading =
