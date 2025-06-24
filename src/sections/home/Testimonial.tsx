@@ -53,7 +53,7 @@ const Testimonial = () => {
       const child = container.children[0] as HTMLElement;
       if (!child) return;
 
-      const itemWidth = child.offsetWidth + 16; // item width + gap
+      const itemWidth = child.offsetWidth + 16;
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };

@@ -52,12 +52,7 @@ const Sustainability = () => {
 
   const router = useRouter();
 
-  if (loading)
-    return (
-      <Stack alignItems="center" py={10}>
-        <CircularProgress />
-      </Stack>
-    );
+  if (loading) return <LoadingFallback />;
   if (error || !data) return <LoadingFallback />;
 
   const commitments = data.sustainabilityCommitments.nodes;

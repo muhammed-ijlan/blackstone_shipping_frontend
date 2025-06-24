@@ -20,8 +20,10 @@ const JobCategoryCard = ({ data }: { data: CategoryCard }) => {
     >
       <Typography
         sx={{
-          fontWeight: "700",
+          fontWeight: "600",
           height: "60px",
+          lineHeight: "30px !important",
+          textTransform: "uppercase !important",
           fontSize: "24px !important",
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
