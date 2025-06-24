@@ -42,6 +42,9 @@ export const MyBlackboxFrightPage = lazy(
   () => import("../pages/myBlackBoxFright")
 );
 export const TrackingPage = lazy(() => import("../pages/tracking"));
+export const PrivacyPolicyPage = lazy(() => import("../pages/general"));
+// export const TermsOfServicePage = lazy(() => import("../pages/termsOfService"));
+// export const CookiePolicyPage = lazy(() => import("../pages/cookiePolicy"));
 
 const renderFallback = () => (
   <Box
@@ -220,6 +223,14 @@ export const routesSection: RouteObject[] = [
           </Suspense>
         ),
       },
+      {
+        path: "general/:uri",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <PrivacyPolicyPage />
+          </Suspense>
+        ),
+      },
     ],
   },
 
@@ -228,9 +239,9 @@ export const routesSection: RouteObject[] = [
     element: <Navigate to="/home" replace />,
   },
 
-  // {
-  //   path: '404',
-  //   element: <NotFoundView />,
-  // },
-  // { path: '*', element: <NotFoundView /> },
+  {
+    path: "404",
+    element: <NotFoundView />,
+  },
+  { path: "*", element: <NotFoundView /> },
 ];
