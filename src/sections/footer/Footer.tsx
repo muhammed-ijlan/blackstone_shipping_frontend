@@ -17,6 +17,7 @@ import { useQuery } from "@apollo/client";
 import { GetFooterMenuItemsData } from "src/types/graphql/types/common.types";
 import { GET_FOOTER_MENU_ITEMS } from "src/graphql/queries";
 import { useRouter } from "src/routes/hooks";
+import LoadingFallback from "src/components/LoadingFallback";
 
 interface MenuItem {
   id: string;
@@ -29,8 +30,12 @@ interface MenuItem {
 }
 
 const Footer = () => {
-  const { data } = useQuery<GetFooterMenuItemsData>(GET_FOOTER_MENU_ITEMS);
+  const { data, loading } = useQuery<GetFooterMenuItemsData>(
+    GET_FOOTER_MENU_ITEMS
+  );
   const router = useRouter();
+
+  if (loading) return <LoadingFallback />;
 
   function buildNestedMenu(menuItems: MenuItem[]): MenuItem[] {
     const map: { [key: string]: MenuItem } = {};

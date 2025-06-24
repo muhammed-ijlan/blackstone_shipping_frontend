@@ -38,7 +38,7 @@ const AllNews = () => {
           <Stack
             width="100%"
             maxWidth={600}
-            mb={{xs:3,md:0}}
+            mb={{ xs: 3, md: 3 }}
             gap={2}
             direction="row"
             flexWrap="wrap"
@@ -58,7 +58,7 @@ const AllNews = () => {
               />
             ))}
           </Stack>
-          <Stack width={{xs:"100%",sm:"auto"}}>
+          <Stack width={{ xs: "100%", sm: "auto" }}>
             <TextField
               name="search"
               placeholder="Search"
@@ -103,7 +103,6 @@ const AllNews = () => {
     </Container>
   );
 };
-
 
 interface CategoryBoxProps {
   label: string;

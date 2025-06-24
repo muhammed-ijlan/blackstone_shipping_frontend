@@ -11,7 +11,7 @@ const SimplifyCard = ({ method }: { method: ShippingMethodNode }) => {
         background: "rgba(45, 55, 72, 0.05)",
         border: "1px solid rgba(45, 55, 72, 0.5)",
         borderRadius: "8px",
-        padding: 2,
+        padding: 1,
       }}
       gap={2}
     >
@@ -23,19 +23,20 @@ const SimplifyCard = ({ method }: { method: ShippingMethodNode }) => {
         alt="method"
         borderRadius={"4px"}
       />
-      <Typography variant="h4">{method.title.toUpperCase()}</Typography>
+      <Typography variant="h6">{method.title.toUpperCase()}</Typography>
       <Box
         component="div"
         sx={{
           "& p": {
             typography: "body2",
+            fontWeight: "500",
             margin: "0",
           },
         }}
         dangerouslySetInnerHTML={{
           __html: method.content,
         }}
-        // color="rgba(109, 110, 113, 1)"
+        color="rgba(109, 110, 113, 1)"
       />
     </Stack>
   );

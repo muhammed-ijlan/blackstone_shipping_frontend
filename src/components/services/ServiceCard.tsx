@@ -22,7 +22,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
         alt={data.title}
         sx={{
           width: "400px",
-          height: "180px !important",
+          height: "244px !important",
           objectFit: "cover",
           borderRadius: "8px 8px 0px 0px",
         }}
@@ -38,6 +38,10 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
             sx={{
               color: "rgba(11, 19, 40, 1) !important",
               textAlign: { xs: "left" },
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 1,
+              overflow: "hidden",
             }}
             variant="h4"
           >

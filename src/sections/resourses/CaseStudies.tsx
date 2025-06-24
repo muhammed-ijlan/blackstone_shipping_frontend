@@ -23,10 +23,10 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
     if (!container) return;
 
     const handleScroll = () => {
-      const child = container.children[0] as HTMLElement;
-      if (!child) return;
+      const firstChild = container.querySelector(":scope > *") as HTMLElement;
+      if (!firstChild) return;
 
-      const itemWidth = child.offsetWidth + 16;
+      const itemWidth = firstChild.offsetWidth + 16; // 16px = theme.spacing(2) gap
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };
@@ -42,16 +42,19 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
           <Typography variant="h2" color="white">
             Case Studies
           </Typography>
+
           <CustomSlider2 scrollRef={scrollRef}>
-            {mockMoreItems.map((item) => (
+            {mockMoreItems.map((item, index) => (
               <>
                 <Stack
+                  key={index}
                   sx={{
                     background: "rgba(11, 19, 40, 1)",
-                    width: "711px",
+                    width: "850px",
                     borderRadius: "8px",
-                    minWidth: "711px",
-                    maxWidth: "711px",
+                    // minWidth: "911px",
+                    // maxWidth: "911px",
+                    flexShrink: 0,
                   }}
                   padding={2}
                   direction={"row"}
@@ -166,9 +169,12 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
               width={{ xs: "100%", md: "55%" }}
               justifyContent={"space-between"}
             >
-              <SliderButton2 scrollRef={scrollRef} />
+              <SliderButton2
+                scrollRef={scrollRef}
+                setCurrentIndex={setCurrentIndex}
+                totalItems={mockMoreItems.length}
+              />
               <SliderProgress
-                sx={{ color: "white" }}
                 currentIndex={currentIndex}
                 totalItems={mockMoreItems.length}
               />

@@ -13,11 +13,16 @@ const NewsSection = ({
     <Container maxWidth="xl" sx={{ my: 10 }}>
       <Stack gap={5}>
         <Stack gap={3}>
-          <Typography variant="h2" sx={{ fontSize: "50px!important" }}>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "60px!important" }}
+            color="rgba(45, 55, 72, 1)"
+          >
             {data.newsSectionTitle}
           </Typography>
           <Typography
             variant="h4"
+            color="rgba(45, 55, 72, 1)"
             sx={{ lineHeight: { xs: "auto", lg: "10px !important" } }}
             dangerouslySetInnerHTML={{ __html: data.newsSectionContent }}
           />

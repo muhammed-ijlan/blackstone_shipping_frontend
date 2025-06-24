@@ -48,9 +48,7 @@ const FaqSection = () => {
   });
 
   useEffect(() => {
-    if (searchTerm.trim() !== "") {
-      fetchFaqs({ variables: { search: searchTerm } });
-    }
+    fetchFaqs({ variables: { search: searchTerm } });
   }, [searchTerm, fetchFaqs]);
 
   const handleChange =
@@ -70,7 +68,7 @@ const FaqSection = () => {
           placeholder="Search"
           size="small"
           variant="outlined"
-          value={searchTerm.trim() === " " ? "" : searchTerm} // Show empty input if single space
+          value={searchTerm.trim() === " " ? "" : searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           InputProps={{
             startAdornment: (

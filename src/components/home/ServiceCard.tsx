@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import icon1 from "src/assets/icons/icon1.png";
+import { useRouter } from "src/routes/hooks";
 
 const ServiceCard = ({
   item,
@@ -8,9 +9,11 @@ const ServiceCard = ({
   item: { title: string; image: string; link: string };
 }) => {
   const [hovered, setHovered] = useState(false);
-
+  const router = useRouter();
   return (
     <Stack
+      component={"div"}
+      onClick={() => router.push(item.link)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       sx={{
@@ -69,8 +72,8 @@ const ServiceCard = ({
             lineHeight: "32px",
             letterSpacing: "3%",
             textTransform: "capitalize",
-            textAlign:"left",
-            typography:{xs:"h4",lg:"h5"}
+            textAlign: "left",
+            typography: { xs: "h4", lg: "h5" },
           }}
         >
           {item.title}

@@ -26,7 +26,7 @@ const RecentNews = () => {
   return (
     <Stack gap={3}>
       <Typography variant="h2">Recently Added</Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {posts[2] && (
           <Grid size={{ xs: 12, lg: 5 }}>
             <Stack gap={1}>
@@ -82,12 +82,12 @@ const RecentNews = () => {
 
         {/* Right: 2 Smaller Posts */}
         <Grid size={{ xs: 12, lg: 7 }}>
-          <Grid container direction="column" spacing={3}>
+          <Grid container direction="column" gap={4}>
             {[1, 0].map(
               (i) =>
                 posts[i] && (
                   <Grid key={posts[i].id}>
-                    <Stack gap={1} direction={{ xs: "column", md: "row" }}>
+                    <Stack gap={3} direction={{ xs: "column", md: "row" }}>
                       <Box
                         component={"img"}
                         alt={posts[i].title}
@@ -122,7 +122,7 @@ const RecentNews = () => {
                             sx={{
                               display: "-webkit-box",
                               WebkitBoxOrient: "vertical",
-                              WebkitLineClamp: "3",
+                              WebkitLineClamp: 3,
                               overflow: "hidden",
                               "& p": {
                                 m: 0,

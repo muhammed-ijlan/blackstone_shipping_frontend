@@ -110,14 +110,15 @@ const WhatWeOffer = () => {
           >
             <Typography
               bottom={20}
-              left={40}
-              width={"50%"}
+              left={20}
+              width={"40%"}
               color="white"
               sx={{
                 fontSize: {
                   xs: "20px",
                   sm: "20px",
                   textAlign: "left !important",
+                  textWrap: "wrap",
                 },
               }}
               fontWeight={600}
@@ -131,7 +132,7 @@ const WhatWeOffer = () => {
               src={card.featuredImage?.node?.sourceUrl}
               width="100%"
               height={"270px"}
-              sx={{ filter: "brightness(80%)" }}
+              sx={{ filter: "brightness(70%)" }}
               borderRadius="7px"
               alt={card.title}
             />

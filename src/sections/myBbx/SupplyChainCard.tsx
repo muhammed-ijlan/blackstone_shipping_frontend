@@ -38,7 +38,9 @@ const SupplyChainCard = ({
       >
         <Box component={"img"} src={data.img.node.sourceUrl} width="32px" />
       </Stack>
-      <Typography variant="h2">{data.title}</Typography>
+      <Typography variant="h3" sx={{ textTransform: "capitalize !important" }}>
+        {data.title}
+      </Typography>
       <Box
         component={"div"}
         dangerouslySetInnerHTML={{ __html: data.content }}

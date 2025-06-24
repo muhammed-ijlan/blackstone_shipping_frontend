@@ -10,40 +10,47 @@ const SupportForm = () => {
   };
   return (
     <Stack gap={5}>
-      <Stack direction={"row"} gap={3} alignItems={{xs:"center", sm:"flex-start"}} justifyContent={{xs:"center", sm:"flex-start"}} flexWrap="wrap">
+      <Stack
+        direction={"row"}
+        gap={1.5}
+        alignItems={{ xs: "center", sm: "flex-start" }}
+        justifyContent={{ xs: "center", sm: "flex-start" }}
+        flexWrap="wrap"
+      >
         <Button
-        onClick={()=>handleButtonState("general")}
+          onClick={() => handleButtonState("general")}
           sx={{
             width: "159px",
             height: "50px",
             borderRadius: "4px",
             fontSize: "1rem !important",
             fontWeight: 600,
-              color: buttonState === "general" ? "white":"rgba(45, 55, 72, 1)",
-            bgcolor: buttonState === "general" ?"rgba(45, 55, 72, 1)": "white",
+            color: buttonState === "general" ? "white" : "rgba(45, 55, 72, 1)",
+            bgcolor:
+              buttonState === "general" ? "rgba(45, 55, 72, 1)" : "white",
             border: "1px solid rgba(45, 55, 72, 0.2)",
           }}
         >
           General Inquiries
         </Button>
         <Button
-           onClick={()=>handleButtonState("quote")}
+          onClick={() => handleButtonState("quote")}
           sx={{
             width: "159px",
             height: "50px",
             borderRadius: "4px",
             fontSize: "1rem !important",
             fontWeight: 600,
-            color: buttonState === "quote" ? "white":"rgba(45, 55, 72, 1)",
-            bgcolor: buttonState === "quote" ?"rgba(45, 55, 72, 1)": "white",
+            color: buttonState === "quote" ? "white" : "rgba(45, 55, 72, 1)",
+            bgcolor: buttonState === "quote" ? "rgba(45, 55, 72, 1)" : "white",
             border: "1px solid rgba(45, 55, 72, 0.2)",
           }}
         >
           Quote Requests
         </Button>
       </Stack>
-      
-        <Form state={buttonState}/>
+
+      <Form state={buttonState} />
     </Stack>
   );
 };
