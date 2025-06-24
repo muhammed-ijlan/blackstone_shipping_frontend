@@ -48,7 +48,7 @@ const NavItem = styled("div", {
 const NavLink = styled(MuiLink, {
   shouldForwardProp: (prop) => prop !== "isActive",
 })<{ isActive?: boolean }>(({ theme, isActive }) => ({
-  fontSize: "15.5px !important",
+  fontSize: "16px !important",
   fontWeight: 600,
   cursor: "pointer",
   textWrap: "nowrap",
@@ -64,10 +64,10 @@ const SubMenu = styled(Box, {
 })<{ isOpen: boolean; isLastItem?: boolean }>(
   ({ theme, isOpen, isLastItem }) => ({
     position: "absolute",
-    top: "135px",
+    top: "115px",
     left: "0px",
     backgroundColor: "#fff",
-    padding: theme.spacing(2, 4),
+    padding: "0 10px 40px 10px",
     opacity: isOpen ? 1 : 0,
     visibility: isOpen ? "visible" : "hidden",
     transform: isOpen ? "translateY(10px)" : "translateY(0px)",
@@ -81,7 +81,6 @@ const SubMenu = styled(Box, {
     zIndex: 10000,
     width: "100%",
     minWidth: "900px",
-    borderTop: `2px solid ${theme.palette.primary.main}`,
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
@@ -91,16 +90,16 @@ const SubMenu = styled(Box, {
 const SubMenuContent = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  gap: theme.spacing(4),
-  flexWrap: "wrap",
-  padding: theme.spacing(0, 12),
+  gap: theme.spacing(1.5),
+  // flexWrap: "wrap",
+  // padding: theme.spacing(0, 12),
 }));
 
 const SubMenuCategory = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(0.5),
-  minWidth: "200px",
+  // minWidth: "200px",
   borderRight: `1px solid ${theme.palette.divider}`,
   paddingRight: theme.spacing(2),
   "&:last-of-type": {
@@ -193,44 +192,69 @@ export function HeaderSection({
 
     if (!hasNestedItems) {
       return (
-        <SubMenuContent>
-          <SubMenuCategory>
-            {subcategories.map((subItem) => (
-              <SubMenuItem
-                key={subItem.id}
-                href={subItem.uri !== "#" ? subItem.uri : undefined}
-                onClick={() => subItem.uri !== "#" && router.push(subItem.uri)}
-              >
-                {subItem.label}
-              </SubMenuItem>
-            ))}
-          </SubMenuCategory>
-        </SubMenuContent>
+        <Stack>
+          <Divider
+            sx={{
+              width: "100%",
+              borderBottomWidth: 1,
+              borderColor: "rgba(45, 55, 72, 1)",
+              mb: 3,
+            }}
+          />
+
+          <SubMenuContent>
+            <SubMenuCategory>
+              {subcategories.map((subItem) => (
+                <SubMenuItem
+                  key={subItem.id}
+                  href={subItem.uri !== "#" ? subItem.uri : undefined}
+                  onClick={() =>
+                    subItem.uri !== "#" && router.push(subItem.uri)
+                  }
+                >
+                  {subItem.label}
+                </SubMenuItem>
+              ))}
+            </SubMenuCategory>
+          </SubMenuContent>
+        </Stack>
       );
     }
 
     return (
-      <SubMenuContent>
-        {subcategories.map((category) => (
-          <SubMenuCategory key={category.id}>
-            <SubMenuCategoryTitle
-              href={category.uri !== "#" ? category.uri : undefined}
-              onClick={() => category.uri !== "#" && router.push(category.uri)}
-            >
-              {category.label}
-            </SubMenuCategoryTitle>
-            {category.children?.map((item) => (
-              <SubMenuItem
-                key={item.id}
-                href={item.uri !== "#" ? item.uri : undefined}
-                onClick={() => item.uri !== "#" && router.push(item.uri)}
+      <Stack>
+        <Divider
+          sx={{
+            width: "100%",
+            borderBottomWidth: 1,
+            borderColor: "rgba(45, 55, 72, 1)",
+            mb: 3,
+          }}
+        />
+        <SubMenuContent>
+          {subcategories.map((category) => (
+            <SubMenuCategory key={category.id}>
+              <SubMenuCategoryTitle
+                href={category.uri !== "#" ? category.uri : undefined}
+                onClick={() =>
+                  category.uri !== "#" && router.push(category.uri)
+                }
               >
-                {item.label}
-              </SubMenuItem>
-            ))}
-          </SubMenuCategory>
-        ))}
-      </SubMenuContent>
+                {category.label}
+              </SubMenuCategoryTitle>
+              {category.children?.map((item) => (
+                <SubMenuItem
+                  key={item.id}
+                  href={item.uri !== "#" ? item.uri : undefined}
+                  onClick={() => item.uri !== "#" && router.push(item.uri)}
+                >
+                  {item.label}
+                </SubMenuItem>
+              ))}
+            </SubMenuCategory>
+          ))}
+        </SubMenuContent>
+      </Stack>
     );
   };
 
@@ -421,7 +445,9 @@ export function HeaderSection({
                           isOpen={openSubmenu === item.label}
                           isLastItem={index >= data.length - 2}
                         >
-                          {renderSubcategories(item.children)}
+                          <Container maxWidth="xl">
+                            {renderSubcategories(item.children)}
+                          </Container>
                         </SubMenu>
                       )}
                     </div>
@@ -507,10 +533,10 @@ const HeaderContainer = styled(Container, {
     alignItems: "center",
     justifyContent: "center",
     color: "var(--color)",
-    height: "auto !important",
-    padding: theme.spacing(2, 0),
+    // height: "auto !important",
+    // padding: theme.spacing(0, 0),
     [theme.breakpoints.up(layoutQuery)]: {
-      height: "var(--layout-header-desktop-height)",
+      // height: "var(--layout-header-desktop-height)",
     },
     [theme.breakpoints.down(layoutQuery)]: {
       justifyContent: "space-between",

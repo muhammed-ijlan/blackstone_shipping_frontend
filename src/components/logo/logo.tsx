@@ -1,15 +1,15 @@
-import type { LinkProps } from '@mui/material/Link';
+import type { LinkProps } from "@mui/material/Link";
 
-import { useId } from 'react';
-import { mergeClasses } from 'minimal-shared/utils';
-import {Box} from "@mui/material"
+import { useId } from "react";
+import { mergeClasses } from "minimal-shared/utils";
+import { Box } from "@mui/material";
 
-import Link from '@mui/material/Link';
-import { styled, useTheme } from '@mui/material/styles';
+import Link from "@mui/material/Link";
+import { styled, useTheme } from "@mui/material/styles";
 
-import { RouterLink } from '../../routes/components';
+import { RouterLink } from "../../routes/components";
 
-import { logoClasses } from './classes';
+import { logoClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ export function Logo({
   sx,
   disabled,
   className,
-  href = '/',
+  href = "/",
   onScroll,
   isSingle = true,
   ...other
@@ -36,8 +36,6 @@ export function Logo({
   const PRIMARY_MAIN = theme.vars.palette.primary.main;
   const PRIMARY_DARKER = theme.vars.palette.primary.dark;
 
-  
-
   return (
     <LogoRoot
       component={RouterLink}
@@ -47,13 +45,14 @@ export function Logo({
       className={mergeClasses([logoClasses.root, className])}
       sx={[
         {
-          width: 147,
+          width: 137,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       {...other}
     >
-      <Box component={"img"}
+      <Box
+        component={"img"}
         src={href}
         alt="Logo"
         sx={{
@@ -69,7 +68,7 @@ export function Logo({
 
 const LogoRoot = styled(Link)(() => ({
   flexShrink: 0,
-  color: 'transparent',
-  display: 'inline-flex',
-  verticalAlign: 'middle',
+  color: "transparent",
+  display: "inline-flex",
+  verticalAlign: "middle",
 }));

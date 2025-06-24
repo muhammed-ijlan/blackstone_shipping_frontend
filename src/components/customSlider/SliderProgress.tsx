@@ -1,5 +1,5 @@
-import { Box, LinearProgress, Typography } from '@mui/material';
-import React from 'react';
+import { Box, LinearProgress, Typography } from "@mui/material";
+import React from "react";
 
 interface SliderProgressProps {
   currentIndex: number;
@@ -7,14 +7,18 @@ interface SliderProgressProps {
   sx?: object;
 }
 
-const SliderProgress: React.FC<SliderProgressProps> = ({ currentIndex, totalItems,sx }) => {
+const SliderProgress: React.FC<SliderProgressProps> = ({
+  currentIndex,
+  totalItems,
+  sx,
+}) => {
   const progress = ((currentIndex + 1) / totalItems) * 100;
-
 
   return (
     <Box sx={{ width: "200px" }}>
-      <Typography variant="body1" sx={{...sx}}>
-        {String(currentIndex + 1).padStart(2, '0')} / {String(totalItems).padStart(2, '0')}
+      <Typography variant="body1" sx={{ ...sx }}>
+        {String(currentIndex + 1).padStart(2, "0")} /{" "}
+        {String(totalItems).padStart(2, "0")}
       </Typography>
       <LinearProgress
         color="inherit"
