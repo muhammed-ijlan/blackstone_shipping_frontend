@@ -5,10 +5,10 @@ import DOMPurify from "dompurify";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
-import quote from "src/assets/icons/testimonial.png";
 import { GET_TESTIMONIALS } from "src/graphql/queries";
 import SliderProgress from "src/components/customSlider/SliderProgress";
 import LoadingFallback from "src/components/LoadingFallback";
+import TestimonialCard from "src/components/home/TestimonialCard";
 
 interface TestimonialNode {
   title: string;
@@ -99,7 +99,11 @@ const Testimonial = () => {
               gap={3}
               alignItems={{ xs: "center", lg: "flex-start" }}
             >
-              <SliderButton2 scrollRef={scrollRef} />
+              <SliderButton2
+                scrollRef={scrollRef}
+                setCurrentIndex={setCurrentIndex}
+                totalItems={testimonialsList.length}
+              />
               <SliderProgress
                 currentIndex={currentIndex}
                 totalItems={testimonialsList.length}
@@ -110,90 +114,7 @@ const Testimonial = () => {
           <Stack mt={{ xs: 0, lg: 10 }} width={{ xs: "100%", lg: "60%" }}>
             <CustomSlider2 scrollRef={scrollRef}>
               {testimonialsList.map((item, index) => (
-                <Stack
-                  key={index}
-                  sx={{
-                    minWidth: { xs: "100%", sm: "590px" },
-                    border: "2px solid rgba(109, 110, 113, 1)",
-                    borderRadius: "8px",
-                    p: 4,
-                    height: { xs: "auto", lg: "auto" },
-                  }}
-                  gap={2}
-                  justifyContent={{ xs: "normal", sm: "space-between" }}
-                >
-                  <Stack
-                    justifyContent={{ xs: "normal", sm: "space-between" }}
-                    gap={2}
-                  >
-                    <Box
-                      component={"img"}
-                      src={quote}
-                      width={"83px"}
-                      alt="quote icon"
-                    />
-                    <Box
-                      component={"div"}
-                      fontWeight={400}
-                      sx={{
-                        "& p": {
-                          typography: "body1",
-                          textWrap: "wrap",
-                        },
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(item.content),
-                      }}
-                    />
-                  </Stack>
-
-                  <Stack direction={"row"} gap={3}>
-                    <Box
-                      component={"img"}
-                      src={item.featuredImage?.node.sourceUrl}
-                      width={"84px"}
-                      height={"84px"}
-                      sx={{ objectFit: "cover" }}
-                      borderRadius={"4px"}
-                      alt={item.title}
-                    />
-                    <Stack>
-                      <Typography variant="h4" fontWeight={600}>
-                        {item.title}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: 400,
-                          fontSize: { xs: "10px", sm: "16px" },
-                          lineHeight: "26px",
-                          letterSpacing: "3%",
-                          textTransform: "capitalize",
-                        }}
-                        color="rgba(249, 250, 251, 0.5)"
-                      >
-                        {
-                          item.testimonialsFieldOptions
-                            .testimonialAuthorDesignation
-                        }
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: 400,
-                          fontSize: { xs: "10px", sm: "16px" },
-                          lineHeight: "26px",
-                          letterSpacing: "3%",
-                          textTransform: "capitalize",
-                        }}
-                        color="rgba(249, 250, 251, 0.5)"
-                      >
-                        {
-                          item.testimonialsFieldOptions
-                            .testimonialAuthorDesignation
-                        }
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Stack>
+                <TestimonialCard item={item} />
               ))}
             </CustomSlider2>
           </Stack>
@@ -202,7 +123,11 @@ const Testimonial = () => {
             gap={3}
             alignItems={{ xs: "center", lg: "flex-start" }}
           >
-            <SliderButton2 scrollRef={scrollRef} />
+            <SliderButton2
+              scrollRef={scrollRef}
+              setCurrentIndex={setCurrentIndex}
+              totalItems={testimonialsList.length}
+            />
             <SliderProgress
               currentIndex={currentIndex}
               totalItems={testimonialsList.length}

@@ -20,7 +20,12 @@ const SectionHead: React.FC<SectionHeadProps> = ({
 }) => {
   return (
     <Stack gap={3} mt={10} mb={5} textAlign={{ xs: "center", md: "left" }}>
-      <Typography variant="h3" textAlign={{xs:"center",md:"left"}} fontWeight={600} color={titleColor}>
+      <Typography
+        variant="h6"
+        textAlign={{ xs: "center", md: "left" }}
+        fontWeight={600}
+        color={titleColor}
+      >
         {title.toUpperCase()}
       </Typography>
 
@@ -37,7 +42,7 @@ const SectionHead: React.FC<SectionHeadProps> = ({
 
       {content && (
         <Typography
-        variant="body1"
+          variant="body1"
           maxWidth={900}
           sx={{
             fontWeight: 500,
