@@ -8,15 +8,32 @@ interface CategoryCard {
 
 const JobCategoryCard = ({ data }: { data: CategoryCard }) => {
   return (
-    <Stack sx={{width:"100%",bgcolor:"rgba(45, 55, 72, 1)",height:"100%",borderRadius:"8px"}} p={3 } gap={1}>
-        <Typography sx={{    fontWeight: "700",
-        height:"70px",
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 2,
-                overflow: "hidden"}} variant="h3" color="rgba(255, 255, 255, 1)">{data.name}</Typography>
-        <Divider/>
-        <Typography color="rgba(255, 255, 255, 1)">{data.description}</Typography>
+    <Stack
+      sx={{
+        width: "100%",
+        bgcolor: "rgba(45, 55, 72, 1)",
+        height: "100%",
+        borderRadius: "8px",
+      }}
+      p={3}
+      gap={1}
+    >
+      <Typography
+        sx={{
+          fontWeight: "700",
+          height: "60px",
+          fontSize: "24px !important",
+          display: "-webkit-box",
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 2,
+          overflow: "hidden",
+        }}
+        color="rgba(255, 255, 255, 1)"
+      >
+        {data.name}
+      </Typography>
+      <Divider />
+      <Typography color="rgba(255, 255, 255, 1)">{data.description}</Typography>
     </Stack>
   );
 };
