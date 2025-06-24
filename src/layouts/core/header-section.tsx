@@ -234,6 +234,37 @@ export function HeaderSection({
     );
   };
 
+  const normalizePath = (path: string = "") => {
+    if (!path) return "";
+    return path.replace(/\/+$/, "").toLowerCase();
+  };
+
+  const isNavItemActive = (item: MenuItem, currentPath: string): boolean => {
+    const normalizedCurrent = normalizePath(currentPath);
+    const normalizedItem = normalizePath(item.uri);
+
+    // Direct match
+    if (normalizedCurrent === normalizedItem) return true;
+
+    // Special handling for parent-child sections
+    const childPrefixes = CHILD_URI_GROUPS[normalizedItem];
+    if (childPrefixes) {
+      return childPrefixes.some((prefix) =>
+        normalizedCurrent.startsWith(prefix)
+      );
+    }
+
+    return false;
+  };
+
+  const CHILD_URI_GROUPS: Record<string, string[]> = {
+    "/services": ["/service"],
+    "/solutions": ["/solution"],
+    "/technology": ["/technology"],
+    "/careers": ["/careers"],
+    "/resources": ["/resources/news", "/resources/case-study"],
+  };
+
   return (
     <HeaderRoot
       position="sticky"
@@ -380,14 +411,7 @@ export function HeaderSection({
                       <NavItem isLastItem={index >= data.length - 3}>
                         <NavLink
                           href={item.uri !== "#" ? item.uri : undefined}
-                          isActive={
-                            item.uri === "/" || item.uri === ""
-                              ? location.pathname === "/"
-                              : location.pathname === item.uri
-                          }
-                          onClick={() =>
-                            item.uri !== "#" && router.push(item.uri)
-                          }
+                          isActive={isNavItemActive(item, location.pathname)}
                         >
                           {item.label}
                         </NavLink>

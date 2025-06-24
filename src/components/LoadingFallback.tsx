@@ -8,7 +8,7 @@ const LoadingFallback = () => (
       flex: "1 1 auto",
       alignItems: "center",
       justifyContent: "center",
-      height:"60vh"
+      height: "70vh",
     }}
   >
     <LinearProgress

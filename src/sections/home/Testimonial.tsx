@@ -8,6 +8,7 @@ import SliderButton2 from "src/components/customSlider/SliderButton2";
 import quote from "src/assets/icons/testimonial.png";
 import { GET_TESTIMONIALS } from "src/graphql/queries";
 import SliderProgress from "src/components/customSlider/SliderProgress";
+import LoadingFallback from "src/components/LoadingFallback";
 
 interface TestimonialNode {
   title: string;
@@ -61,7 +62,7 @@ const Testimonial = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (loading) return null;
+  if (loading) return <LoadingFallback />;
   if (error || !data)
     return <Typography color="error">Error loading testimonials.</Typography>;
 

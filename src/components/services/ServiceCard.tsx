@@ -21,11 +21,6 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
         src={data.featuredImage?.node?.sourceUrl}
         alt={data.title}
         sx={{
-          "& img": {
-            width: "400px",
-            height: "180px !important",
-            objectFit: "cover",
-          },
           width: "400px",
           height: "180px !important",
           objectFit: "cover",
@@ -38,7 +33,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
         sx={{ height: "100%" }}
         gap={1}
       >
-        <Stack>
+        <Stack sx={{ height: "auto" }}>
           <Typography
             sx={{
               color: "rgba(11, 19, 40, 1) !important",

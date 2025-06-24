@@ -18,6 +18,7 @@ import MobileBanner from "./MobileBanner";
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from "video.js";
 import VideoJS from "../VideoJs";
 import arrow from "src/assets/icons/arrowcircle.png";
+import LoadingFallback from "../LoadingFallback";
 
 interface SliderNode {
   title: string;
@@ -48,7 +49,7 @@ const HomeBanner: React.FC = () => {
   const router = useRouter();
   const playerRef = useRef<VideoJsPlayer | null>(null);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingFallback />;
   if (error) return <p>Error: {error.message}</p>;
 
   const videoJsOptions: VideoJsPlayerOptions = {
@@ -71,7 +72,6 @@ const HomeBanner: React.FC = () => {
   const handlePlayerReady = (player: VideoJsPlayer) => {
     playerRef.current = player;
 
-    // You can handle player events here
     player.on("waiting", () => {
       videojs.log("player is waiting");
     });

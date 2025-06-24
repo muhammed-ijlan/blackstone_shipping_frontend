@@ -7,6 +7,7 @@ import { GET_WHAT_WE_OFFER } from "src/graphql/queries";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
 import CustomArrowButton from "src/components/CustomArrowButton";
+import LoadingFallback from "src/components/LoadingFallback";
 
 export interface GetWhatWeOfferData {
   page: {
@@ -33,10 +34,12 @@ const WhatWeOffer = () => {
   const scrollRef = useRef<HTMLDivElement>(
     null
   ) as React.RefObject<HTMLDivElement>;
-  const { data, loading, error } =
-    useQuery<GetWhatWeOfferData>(GET_WHAT_WE_OFFER);
+  const { data, loading, error } = useQuery<GetWhatWeOfferData>(
+    GET_WHAT_WE_OFFER,
+    {}
+  );
 
-  if (loading) return <Typography>Loading...</Typography>;
+  if (loading) return <LoadingFallback />;
   if (error) return <Typography>Error loading data</Typography>;
 
   const headingData = data?.page?.homePageFieldsWhatWeOffer;
@@ -88,7 +91,7 @@ const WhatWeOffer = () => {
         </Stack>
         <CustomArrowButton
           name="View All"
-          sx={{ px: "24px", py: "12px", width: { xs: "100%",sm:"50%" } }}
+          sx={{ px: "24px", py: "12px", width: { xs: "100%", sm: "50%" } }}
         />
       </Stack>
       <CustomSlider2 scrollRef={scrollRef}>
@@ -110,7 +113,13 @@ const WhatWeOffer = () => {
               left={40}
               width={"50%"}
               color="white"
-              sx={{fontSize:{xs:"20px",sm:"20px",textAlign:"left !important"}}}
+              sx={{
+                fontSize: {
+                  xs: "20px",
+                  sm: "20px",
+                  textAlign: "left !important",
+                },
+              }}
               fontWeight={600}
               position="absolute"
               zIndex={888}
