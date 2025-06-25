@@ -6,6 +6,7 @@ import { GET_SERVICES_PAGE } from "src/graphql/queries";
 import BannerContent from "src/sections/services/BannerContent";
 import OtherTopics from "src/sections/services/OtherTopics";
 import ServiceCards from "src/sections/services/ServiceCards";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GetServicePageData } from "src/types/graphql/types/services.types";
 
 const Page = () => {
@@ -14,6 +15,9 @@ const Page = () => {
     loading: serviceLoading,
     error: serviceError,
   } = useQuery<GetServicePageData>(GET_SERVICES_PAGE);
+
+  if (serviceLoading) return <LoadingFallback />;
+
   return (
     <>
       {serviceData && (
@@ -27,9 +31,11 @@ const Page = () => {
               serviceData?.page?.servicesPageBannerSection?.bannerTitle
             }
           />
-          <BannerContent content={serviceData?.page?.servicesPageBannerSection?.pageContent} />
-          <ServiceCards data={serviceData?.services.nodes}/>
-          <OtherTopics data={serviceData.page.servicePageOtherTopicsSection}/>
+          <BannerContent
+            content={serviceData?.page?.servicesPageBannerSection?.pageContent}
+          />
+          <ServiceCards data={serviceData?.services.nodes} />
+          <OtherTopics data={serviceData.page.servicePageOtherTopicsSection} />
           <Outlet />
         </>
       )}

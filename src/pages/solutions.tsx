@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { Outlet } from "react-router";
 import Banner from "src/components/banner/Banner";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GET_SERVICES_PAGE, GET_SOLUTIONS_PAGE } from "src/graphql/queries";
 import BannerContent from "src/sections/services/BannerContent";
 import OtherTopics from "src/sections/services/OtherTopics";
@@ -14,6 +15,8 @@ const Page = () => {
     loading: solutionLoading,
     error: solutionError,
   } = useQuery<GetSolutionsPageResponse>(GET_SOLUTIONS_PAGE);
+
+  if (solutionLoading) return <LoadingFallback />;
   return (
     <>
       {solutionData && (
@@ -27,9 +30,15 @@ const Page = () => {
               solutionData?.page?.solutionsPageBannerSection?.bannerTitle
             }
           />
-          <BannerContent content={solutionData?.page?.solutionsPageBannerSection?.pageContent} />
-          <ServiceCards data={solutionData?.solutions.nodes}/>
-          <OtherTopics data={solutionData.page.solutionsPageOtherTopicsSection}/>
+          <BannerContent
+            content={
+              solutionData?.page?.solutionsPageBannerSection?.pageContent
+            }
+          />
+          <ServiceCards data={solutionData?.solutions.nodes} />
+          <OtherTopics
+            data={solutionData.page.solutionsPageOtherTopicsSection}
+          />
           <Outlet />
         </>
       )}

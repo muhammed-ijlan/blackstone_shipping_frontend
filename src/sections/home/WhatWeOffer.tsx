@@ -8,6 +8,7 @@ import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
 import CustomArrowButton from "src/components/CustomArrowButton";
 import LoadingFallback from "src/components/LoadingFallback";
+import { useRouter } from "src/routes/hooks";
 
 export interface GetWhatWeOfferData {
   page: {
@@ -38,6 +39,8 @@ const WhatWeOffer = () => {
     GET_WHAT_WE_OFFER,
     {}
   );
+
+  const router = useRouter();
 
   if (loading) return <LoadingFallback />;
   if (error) return <Typography>Error loading data</Typography>;
@@ -71,6 +74,7 @@ const WhatWeOffer = () => {
             <SliderButton2 scrollRef={scrollRef} />
           </Stack>
           <CustomArrowButton
+            onClick={() => router.push("/solutions")}
             name="View All"
             sx={{ px: "24px", py: "12px", width: { xs: "100%" } }}
           />

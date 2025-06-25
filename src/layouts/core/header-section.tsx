@@ -4,7 +4,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Divider, Stack, useTheme, Link as MuiLink } from "@mui/material";
+import {
+  Divider,
+  Stack,
+  useTheme,
+  Link as MuiLink,
+  LinearProgress,
+} from "@mui/material";
 import { Logo } from "../../components/logo";
 import logo from "../../assets/logo/medium.png";
 import type { AppBarProps } from "@mui/material/AppBar";
@@ -27,6 +33,7 @@ import myBBXIcon from "src/assets/icons/box.png";
 import contactIcon from "src/assets/icons/mail.png";
 import { useRouter } from "src/routes/hooks";
 import { MenuItem } from "src/types/graphql/types/menu.types";
+import LoadingFallback from "src/components/LoadingFallback";
 
 const NavBar = styled("div")(({ theme }) => ({
   display: "flex",
@@ -326,7 +333,7 @@ export function HeaderSection({
               <Logo onClick={() => router.push("/")} href={logo} />
             </Stack>
 
-            <Stack gap={1} alignItems="flex-end" sx={{ height: "100%" }}>
+            <Stack gap={1} alignItems="flex-end">
               <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
                 <IconButton
                   size="small"
@@ -415,7 +422,7 @@ export function HeaderSection({
 
               <NavBar>
                 {data.length === 0 ? (
-                  <></>
+                  <>loading..</>
                 ) : (
                   data.map((item, index) => (
                     <div
@@ -434,7 +441,11 @@ export function HeaderSection({
                     >
                       <NavItem isLastItem={index >= data.length - 3}>
                         <NavLink
-                          href={item.uri !== "#" ? item.uri : undefined}
+                          // href={item.uri !== "#" ? item.uri : undefined}
+                          onClick={() => {
+                            handleMouseLeave();
+                            router.push(item.uri);
+                          }}
                           isActive={isNavItemActive(item, location.pathname)}
                         >
                           {item.label}
@@ -534,10 +545,15 @@ const HeaderContainer = styled(Container, {
     justifyContent: "center",
     color: "var(--color)",
     // height: "auto !important",
-    // padding: theme.spacing(0, 0),
-    [theme.breakpoints.up(layoutQuery)]: {
-      // height: "var(--layout-header-desktop-height)",
+
+    padding: theme.spacing(2, 0),
+
+    // Override padding for medium (md) and up
+    [theme.breakpoints.up("md")]: {
+      padding: theme.spacing(0, 0),
     },
+
+    [theme.breakpoints.up(layoutQuery)]: {},
     [theme.breakpoints.down(layoutQuery)]: {
       justifyContent: "space-between",
     },

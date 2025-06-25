@@ -3,6 +3,7 @@ import React from "react";
 import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
 import ContactUsCard from "src/components/ContactUsCard";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GET_SERVICE_WITH_SUBSERVICES } from "src/graphql/queries";
 import OtherServices from "src/sections/services/OtherServices";
 import OtherTopics from "src/sections/services/OtherTopics";
@@ -18,6 +19,8 @@ const Page = () => {
       },
     }
   );
+
+  if (loading) return <LoadingFallback />;
 
   return (
     <>

@@ -33,7 +33,7 @@ const OtherTopics = ({ data }: { data: OtherTopicsSection }) => {
               >
                 <Box
                   component={"img"}
-                  src={data.topic1Image.node.sourceUrl}
+                  src={data?.topic1Image?.node?.sourceUrl ?? ""}
                   alt={"picture"}
                   width="100%"
                   height={"100%"}
@@ -66,7 +66,7 @@ const OtherTopics = ({ data }: { data: OtherTopicsSection }) => {
               >
                 <Box
                   component={"img"}
-                  src={data.topic2Image.node.sourceUrl}
+                  src={data?.topic2Image?.node.sourceUrl ?? ""}
                   alt={"picture"}
                   width="100%"
                   height={"100%"}
@@ -99,7 +99,7 @@ const OtherTopics = ({ data }: { data: OtherTopicsSection }) => {
               >
                 <Box
                   component={"img"}
-                  src={data.topic3Image.node.sourceUrl}
+                  src={data.topic3Image?.node?.sourceUrl ?? ""}
                   alt={"picture"}
                   width="100%"
                   height={"100%"}

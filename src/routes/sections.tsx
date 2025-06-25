@@ -43,8 +43,6 @@ export const MyBlackboxFrightPage = lazy(
 );
 export const TrackingPage = lazy(() => import("../pages/tracking"));
 export const PrivacyPolicyPage = lazy(() => import("../pages/general"));
-// export const TermsOfServicePage = lazy(() => import("../pages/termsOfService"));
-// export const CookiePolicyPage = lazy(() => import("../pages/cookiePolicy"));
 
 const renderFallback = () => (
   <Box

@@ -23,6 +23,7 @@ import { MenuData, MenuItem } from "src/types/graphql/types/menu.types";
 import type { HeaderSectionProps } from "../core/header-section";
 import type { LayoutSectionProps } from "../core/layout-section";
 import type { MainSectionProps } from "../core/main-section";
+import { useRouter } from "src/routes/hooks";
 
 // ----------------------------------------------------------------------
 
@@ -73,6 +74,7 @@ export function DashboardLayout({
   layoutQuery = "lg",
 }: DashboardLayoutProps) {
   const theme = useTheme();
+  const router = useRouter();
   const { data, loading, error } = useQuery<MenuData>(GET_MENU_ITEMS);
 
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
@@ -80,8 +82,6 @@ export function DashboardLayout({
   const nestedMenuItems = data?.menu?.menuItems?.nodes
     ? buildNestedMenu(data.menu.menuItems.nodes)
     : [];
-
-  console.log(nestedMenuItems);
 
   const renderHeader = () => {
     const headerSlotProps: HeaderSectionProps["slotProps"] = {
@@ -93,6 +93,7 @@ export function DashboardLayout({
     const headerSlots: HeaderSectionProps["slots"] = {
       leftArea: (
         <Box
+          onClick={() => router.push("/home")}
           component="img"
           sx={{ [theme.breakpoints.up(layoutQuery)]: { display: "none" } }}
           width="70px"

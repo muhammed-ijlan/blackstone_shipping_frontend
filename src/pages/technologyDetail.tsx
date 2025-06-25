@@ -3,6 +3,7 @@ import { Container } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GET_TECHNOLOGY_DETAILS_BY_URI } from "src/graphql/queries";
 import Parasgraphs from "src/sections/technology/Parasgraphs";
 import TechnologyCards from "src/sections/technology/TechnologyCards";
@@ -20,6 +21,8 @@ const Page = () => {
     variables: { uri: `technology/${id}` },
     skip: !id,
   });
+
+  if (loading) return <LoadingFallback />;
 
   return (
     <>
