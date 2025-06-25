@@ -1,12 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { capitalCase } from "change-case";
-import {
-  CaseStudyData
-} from "src/types/graphql/types/resourses.types";
+import { CaseStudyData } from "src/types/graphql/types/resourses.types";
 
 const CaseStudyDetail = ({ data }: { data: CaseStudyData }) => {
   return (
-    <Stack gap={2} sx={{textAlign:"left !important"}}>
+    <Stack gap={2} sx={{ textAlign: "left !important" }}>
       <Stack direction={"row"}>
         <Typography color="rgba(109, 110, 113, 1)">
           Resourses / &nbsp;
@@ -17,12 +15,17 @@ const CaseStudyDetail = ({ data }: { data: CaseStudyData }) => {
         <Box
           component={"img"}
           src={data.caseStudy.featuredImage?.node.sourceUrl}
-          sx={{ width: "100%", height: "595px", objectFit: "cover" }}
+          sx={{
+            width: "100%",
+            height: { xs: "400px", md: "595px" },
+            objectFit: "cover",
+          }}
         />
         <Typography
           sx={{
             textTransform: "unset !important",
             fontWeight: "600 !important",
+            mt: { xs: 2, md: 1 },
           }}
           variant="h1"
           color="rgba(45, 55, 72, 1)"
@@ -34,7 +37,7 @@ const CaseStudyDetail = ({ data }: { data: CaseStudyData }) => {
           dangerouslySetInnerHTML={{ __html: data.caseStudy?.content ?? "" }}
         />
 
-        <Stack gap={3}>
+        <Stack gap={3} mb={5}>
           <Stack gap={2}>
             <Typography
               variant="h5"

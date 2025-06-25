@@ -48,7 +48,11 @@ const NewsDetail = ({ data }: { data: GetPostDetailsByIDData }) => {
         <Box
           component={"img"}
           src={data.post?.featuredImage?.node?.sourceUrl}
-          sx={{ width: "100%", height: "595px", objectFit: "cover" }}
+          sx={{
+            width: "100%",
+            height: { xs: 400, md: "595px" },
+            objectFit: "cover",
+          }}
         />
         <Typography color="rgba(109, 110, 113, 1)">
           {moment(data.post?.date).format("DD MMMM yyyy")}

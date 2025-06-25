@@ -15,8 +15,9 @@ const JobCard = ({ data }: { data: JobOpening }) => {
       flexWrap={"wrap"}
       justifyContent={"space-between"}
       alignItems={"center"}
+      gap={{ xs: 2 }}
     >
-      <Stack>
+      <Stack gap={1}>
         <Typography variant="h4">{data.title}</Typography>
         <Typography color="rgba(109, 110, 113, 1)" variant="body2">
           {`Posted ${moment(data.date).fromNow()}`}
@@ -29,7 +30,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
             width="24px"
             alignItems={"center"}
           />
-          <Typography variant="h6">
+          <Typography sx={{ typography: { xs: "h5", md: "h6" } }}>
             {data.jobOpeningsOptions.jobLocation.nodes[0].name}
           </Typography>
         </Stack>
@@ -38,9 +39,10 @@ const JobCard = ({ data }: { data: JobOpening }) => {
         sx={{
           bgcolor: "rgba(14, 159, 110, 1)",
           color: "white",
-          fontSize: "18px !important",
+          // fontSize: "18px !important",
+          typography: "h4",
           fontWeight: "600 !important",
-          height: "65px",
+          height: { xs: "50px", sm: "65px" },
           px: 3,
           ":hover": {
             bgcolor: "rgba(10, 120, 85, 1)",

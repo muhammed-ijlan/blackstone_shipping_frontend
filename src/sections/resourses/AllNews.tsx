@@ -9,6 +9,8 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import PostsByCategory from "src/components/resourses/PostsByCategory";
@@ -19,6 +21,7 @@ const AllNews = () => {
   const { data } = useQuery<NewsCategoriesData>(GET_NEWS_CATEGORIES);
   const [activeCategory, setActiveCategory] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const theme = useTheme();
 
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug);
@@ -39,7 +42,7 @@ const AllNews = () => {
             width="100%"
             maxWidth={600}
             mb={{ xs: 3, md: 3 }}
-            gap={2}
+            gap={{ xs: 1, md: 2 }}
             direction="row"
             flexWrap="wrap"
           >
@@ -62,7 +65,9 @@ const AllNews = () => {
             <TextField
               name="search"
               placeholder="Search"
-              size="small"
+              size={
+                useMediaQuery(theme.breakpoints.down("sm")) ? "medium" : "small"
+              }
               variant="outlined"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

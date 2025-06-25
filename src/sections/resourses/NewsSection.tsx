@@ -11,11 +11,11 @@ const NewsSection = ({
 }) => {
   return (
     <Container maxWidth="xl" sx={{ my: 10 }}>
-      <Stack gap={5}>
-        <Stack gap={3}>
+      <Stack gap={{ xs: 2, md: 5 }}>
+        <Stack gap={{ xs: 1, md: 3 }}>
           <Typography
             variant="h2"
-            sx={{ fontSize: "60px!important" }}
+            sx={{ fontSize: { xs: "35px", lg: "60px!important" } }}
             color="rgba(45, 55, 72, 1)"
           >
             {data.newsSectionTitle}

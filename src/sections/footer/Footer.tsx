@@ -74,7 +74,7 @@ function MenuItemRenderer({
             pr: 1.5,
             gap: 2,
             borderRadius: 0.75,
-            typography: "h4",
+            typography: "h5",
             textAlign: "left !important",
             fontWeight: "500 !important",
             letterSpacing: "0%",

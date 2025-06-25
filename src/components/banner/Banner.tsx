@@ -14,7 +14,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
     <Stack
       sx={{
         backgroundImage: `url(${bgUrl || "/default.jpg"})`,
-        height: 600,
+        height: { xs: 500, sm: 600 },
         width: "100%",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -43,20 +43,22 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
             py: { xs: "20px", md: "80px" },
           }}
         >
-          <Typography
-            onClick={() => router.push(`/${subTitle.toLowerCase()}`)}
-            variant="body1"
-            sx={{
-              fontWeight: "700",
-              color: "white !important",
-              // position: { xs: "unset", lg: "absolute" },
-              // bottom: "180px",
-              marginTop: "50px",
-              cursor: "pointer",
-            }}
-          >
-            {subTitle && subTitle}
-          </Typography>
+          {subTitle && (
+            <Typography
+              onClick={() => router.push(`/${subTitle.toLowerCase()}`)}
+              variant="body1"
+              sx={{
+                fontWeight: "700",
+                color: "white !important",
+                // position: { xs: "unset", lg: "absolute" },
+                // bottom: "180px",
+                marginTop: "50px",
+                cursor: "pointer",
+              }}
+            >
+              {subTitle && subTitle}
+            </Typography>
+          )}
           <Typography
             sx={{
               maxWidth: "100%",
@@ -64,9 +66,10 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
               fontWeight: "700",
               color: "white !important",
               // position: { xs: "unset", lg: "absolute" },
-              top: "380px",
+              top: { xs: "0", sm: "380px" },
               lineHeight: { xs: "50px !important", lg: "110px !important" },
               textWrap: "wrap",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             {mainTitle?.toUpperCase()}

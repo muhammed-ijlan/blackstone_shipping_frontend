@@ -27,7 +27,7 @@ const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
         color={"white"}
         sx={{
           backgroundImage: `url(${data.jobOpening.jobOpeningsOptions.bannerImage?.node.sourceUrl})`,
-          height: 600,
+          height: { xs: 500, md: 600 },
           width: "100%",
           borderRadius: "8px !important",
           backgroundSize: "cover",
@@ -66,6 +66,7 @@ const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
                 color: "white !important",
                 top: "380px",
                 textWrap: "wrap",
+                textAlign: { xs: "center", lg: "left" },
               }}
             >
               {data.jobOpening.title}

@@ -28,7 +28,7 @@ const SimplifyCard = ({ method }: { method: ShippingMethodNode }) => {
         component="div"
         sx={{
           "& p": {
-            typography: "body2",
+            typography: { xs: "body1", sm: "body2" },
             fontWeight: "500",
             margin: "0",
           },

@@ -9,6 +9,8 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
@@ -43,6 +45,8 @@ const FaqSection = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const theme = useTheme();
+
   const [fetchFaqs, { loading, data }] = useLazyQuery<FaqsData>(SEARCH_FAQS, {
     fetchPolicy: "network-only",
   });
@@ -66,7 +70,9 @@ const FaqSection = () => {
           sx={{ width: { xs: "100%", md: "400px" } }}
           name="search"
           placeholder="Search"
-          size="small"
+          size={
+            useMediaQuery(theme.breakpoints.down("sm")) ? "medium" : "small"
+          }
           variant="outlined"
           value={searchTerm.trim() === " " ? "" : searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
