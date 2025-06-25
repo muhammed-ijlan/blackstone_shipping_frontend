@@ -56,14 +56,23 @@ const ApplyNowForm = () => {
         console.log("Form Submitted", values);
       }}
     >
-      {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+      }) => (
         <Form onSubmit={handleSubmit}>
           <Stack gap={2} pb={7}>
             <Typography variant="h2">Apply Now</Typography>
 
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 1.5, sm: 3 }}>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Name</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Name
+                </Typography>
                 <TextField
                   name="name"
                   fullWidth
@@ -75,7 +84,9 @@ const ApplyNowForm = () => {
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Email Address</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Email Address
+                </Typography>
                 <TextField
                   name="email"
                   fullWidth
@@ -87,7 +98,9 @@ const ApplyNowForm = () => {
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Phone Number</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Phone Number
+                </Typography>
                 <Grid container spacing={2} alignItems="center">
                   <Grid size={{ xs: 12, sm: 2.5 }}>
                     <Select
@@ -119,7 +132,11 @@ const ApplyNowForm = () => {
                       {countries.map((c) => (
                         <MenuItem key={c.code} value={c.code}>
                           <Box
-                            sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
                           >
                             <Avatar
                               src={getFlagUrl(c.iso)}
@@ -150,7 +167,9 @@ const ApplyNowForm = () => {
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Address</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Address
+                </Typography>
                 <TextField
                   name="address"
                   fullWidth
@@ -162,7 +181,9 @@ const ApplyNowForm = () => {
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Your Message</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Your Message
+                </Typography>
                 <TextField
                   name="message"
                   multiline
@@ -177,7 +198,9 @@ const ApplyNowForm = () => {
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography ml={0.5} sx={{textAlign:"left !important"}}>Attach Resume</Typography>
+                <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
+                  Attach Resume
+                </Typography>
                 <Box>
                   <Box
                     onClick={() => fileInputRef.current?.click()}

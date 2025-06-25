@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import search from "src/assets/icons/searchWhite.png";
-import { GetCareersPageData, JobOpeningsResponse } from "src/types/graphql/types/careers.types";
+import {
+  GetCareersPageData,
+  JobOpeningsResponse,
+} from "src/types/graphql/types/careers.types";
 import JobCard from "./JobCard";
 import { useQuery } from "@apollo/client";
 import { GET_JOB_OPENINGS } from "src/graphql/queries";
@@ -22,8 +25,8 @@ type FormState = {
 };
 
 const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
-
-    const {data:jobOpeningsData} = useQuery<JobOpeningsResponse>(GET_JOB_OPENINGS);
+  const { data: jobOpeningsData } =
+    useQuery<JobOpeningsResponse>(GET_JOB_OPENINGS);
 
   const [formState, setFormState] = useState<FormState>({
     category: "",
@@ -42,7 +45,7 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
 
   return (
     <Stack gap={4}>
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 1.5, md: 3 }}>
         <Grid size={{ xs: 12, lg: 4 }}>
           <TextField
             sx={{
@@ -93,8 +96,9 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
         <Grid size={{ xs: 12, lg: 2.5 }}>
           <Button
             sx={{
-              height: "100%",
-              fontSize: "18px !important",
+              height: { xs: "50px", md: "100%" },
+              // fontSize: "18px !important",
+              typography: "h4",
               fontWeight: "600 !important",
               letterSpacing: "3% !important",
             }}
@@ -122,17 +126,14 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
         }}
         gap={3}
       >
-        {
-            jobOpeningsData?.jobOpenings.nodes.map((jobCard,index) =>(
-                <React.Fragment key={index}>
+        {jobOpeningsData?.jobOpenings.nodes.map((jobCard, index) => (
+          <React.Fragment key={index}>
             <JobCard data={jobCard} />
-            {/* Add divider if not the last item */}
             {index !== jobOpeningsData?.jobOpenings.nodes.length - 1 && (
               <Divider sx={{ borderColor: "rgba(206, 208, 212, 1)" }} />
             )}
           </React.Fragment>
-            ))
-        }
+        ))}
       </Stack>
     </Stack>
   );

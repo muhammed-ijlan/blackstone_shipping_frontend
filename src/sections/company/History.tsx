@@ -20,7 +20,7 @@ const History = ({ data }: { data: GetCompanyHistoryResponse }) => {
           <Typography
             flex={0.4}
             sx={{
-              textAlign: { xs: "center", lg: "justify" },
+              textAlign: { xs: "left", lg: "justify" },
               textTransform: "uppercase !important",
             }}
             fontWeight={600}
@@ -36,7 +36,7 @@ const History = ({ data }: { data: GetCompanyHistoryResponse }) => {
             sx={{
               flex: 1,
               textAlign: {
-                xs: "center",
+                xs: "left",
                 lg: "justify",
                 color: "rgba(45, 55, 72, 1)",
               },

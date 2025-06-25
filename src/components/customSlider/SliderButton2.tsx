@@ -55,25 +55,23 @@ const SliderButton2: React.FC<SliderButton2Props> = ({
   }, [scrollRef]);
 
   const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const amount = direction === "left" ? -scrollAmount : scrollAmount;
-      scrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
+    const container = scrollRef.current;
+    if (!container) return;
 
-      setTimeout(() => {
-        const container = scrollRef.current!;
-        const child = container.children[0] as HTMLElement;
-        if (!child) return;
+    // Detect item width dynamically
+    const child = container.querySelector(":scope > *") as HTMLElement;
+    const itemWidth = child ? child.offsetWidth + 16 : scrollAmount; // fallback to scrollAmount
 
-        const itemWidth = child.offsetWidth + 16; // 16px gap
-        const index = Math.round(container.scrollLeft / itemWidth);
-        if (setCurrentIndex) {
-          setCurrentIndex(index);
-        }
-        checkScrollPosition(); // ensure arrows update too
-      }, 300); // delay must match scroll duration
-    }
+    const amount = direction === "left" ? -itemWidth : itemWidth;
+
+    container.scrollBy({ left: amount, behavior: "smooth" });
+
+    setTimeout(() => {
+      const index = Math.round(container.scrollLeft / itemWidth);
+      setCurrentIndex?.(index);
+      checkScrollPosition();
+    }, 300);
   };
-
   return (
     <Stack
       direction="row"

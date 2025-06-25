@@ -15,12 +15,12 @@ const SupportForm = () => {
         gap={1.5}
         alignItems={{ xs: "center", sm: "flex-start" }}
         justifyContent={{ xs: "center", sm: "flex-start" }}
-        flexWrap="wrap"
+        sx={{ flexWrap: { xs: "nowrap", sm: "wrap" } }}
       >
         <Button
           onClick={() => handleButtonState("general")}
           sx={{
-            width: "159px",
+            width: { xs: "100%", sm: "159px" },
             height: "50px",
             borderRadius: "4px",
             fontSize: "1rem !important",
@@ -36,7 +36,7 @@ const SupportForm = () => {
         <Button
           onClick={() => handleButtonState("quote")}
           sx={{
-            width: "159px",
+            width: { xs: "100%", sm: "159px" },
             height: "50px",
             borderRadius: "4px",
             fontSize: "1rem !important",

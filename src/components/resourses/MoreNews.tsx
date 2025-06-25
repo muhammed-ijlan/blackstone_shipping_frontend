@@ -30,18 +30,19 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
       >
         {data.posts.nodes.map((item, idx) => (
           <Stack
-            // TODO : API UPDATE
-            onClick={() => router.push(`/resources/news/${item.uri}`)}
-            sx={{ cursor: "pointer", width: "231px" }}
+            onClick={() => router.push(`/resources/news${item.uri}`)}
+            sx={{ cursor: "pointer", width: { xs: "100%", sm: "231px" } }}
+            direction={{ xs: "row", sm: "column" }}
+            gap={{ xs: 1, sm: 0 }}
           >
             <Box
               component={"img"}
               src={item.featuredImage?.node?.sourceUrl}
               alt={item.title}
               sx={{
-                maxWidth: "100%",
+                maxWidth: { xs: "150px", sm: "100%" },
                 objectFit: "cover",
-                height: "167px",
+                height: { xs: "auto", sm: "167px" },
                 borderRadius: "8px",
               }}
             />
@@ -53,7 +54,7 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
                   fontWeight: "700",
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 2,
+                  WebkitLineClamp: { xs: 3, sm: 2 },
                   overflow: "hidden",
                 }}
               >

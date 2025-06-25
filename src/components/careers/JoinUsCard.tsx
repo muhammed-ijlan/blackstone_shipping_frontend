@@ -28,12 +28,24 @@ const JoinUsCard = ({ data }: { data: JoinUsCardInterface }) => {
         width="40px"
         src={data.featuredImage.node.sourceUrl}
       />
-      <Typography variant="h4" sx={{ textTransform: "uppercase !important" }}>
+      <Typography
+        variant="h4"
+        sx={{
+          textTransform: "uppercase !important",
+          textAlign: { xs: "center ", sm: "left" },
+        }}
+      >
         {data.title}
       </Typography>
       <Box
         component={"div"}
-        sx={{ " & p": { typography: "body1", m: 0 } }}
+        sx={{
+          " & p": {
+            typography: "body1",
+            m: 0,
+            textAlign: { xs: "center ", sm: "left" },
+          },
+        }}
         dangerouslySetInnerHTML={{ __html: data.content }}
       />
     </Stack>

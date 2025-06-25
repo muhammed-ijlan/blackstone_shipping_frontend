@@ -123,7 +123,7 @@ const Sustainability = () => {
                   WebkitBoxOrient: "vertical",
                   WebkitLineClamp: 2,
                   overflow: "hidden",
-                  height: "65px",
+                  height: { xs: "50px", md: "65px" },
                   borderBottom: "2px solid rgba(14, 159, 110, 1)",
                   pb: 2,
                   fontWeight: 600,
