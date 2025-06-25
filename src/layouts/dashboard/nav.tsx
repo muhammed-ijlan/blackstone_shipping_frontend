@@ -121,7 +121,7 @@ function MenuItemRenderer({
             fontWeight: "600",
             color: "rgba(11, 19, 40, 0.7)",
             minHeight: 44,
-            m:"5px 0",
+            m: "5px 0",
             ...(isActive && {
               fontWeight: "fontWeightSemiBold",
               color: "rgba(26, 32, 44, 1)",
@@ -151,9 +151,9 @@ function MenuItemRenderer({
                 ...(isActive && {
                   color: "rgba(26, 32, 44, 1)",
                 }),
-                  ...(isChildWithChildren && {
-              color: "rgba(26, 86, 219, 1)",
-            }),
+                ...(isChildWithChildren && {
+                  color: "rgba(26, 86, 219, 1)",
+                }),
               }}
             />
           )}
@@ -190,7 +190,6 @@ function MenuItemRenderer({
     </Box>
   );
 }
-
 
 export function NavContent({
   data,
@@ -246,9 +245,7 @@ export function NavContent({
         />
       </Stack>
       <Divider />
-
       {slots?.topArea}
-
       <Scrollbar fillContent>
         <Box
           component="nav"
@@ -276,7 +273,6 @@ export function NavContent({
           </List>
         </Box>
       </Scrollbar>
-
       {slots?.bottomArea}
     </>
   );

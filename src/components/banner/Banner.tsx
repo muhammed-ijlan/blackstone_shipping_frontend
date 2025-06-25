@@ -13,7 +13,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
   return (
     <Stack
       sx={{
-        backgroundImage: `url(${bgUrl})`,
+        backgroundImage: `url(${bgUrl || "/default.jpg"})`,
         height: 600,
         width: "100%",
         backgroundSize: "cover",

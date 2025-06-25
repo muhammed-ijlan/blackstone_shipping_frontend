@@ -6,6 +6,7 @@ import Banner from "src/components/banner/Banner";
 import ApplyNowForm from "src/components/careers/ApplyNowForm";
 import CareerBanner from "src/components/careers/CareerBanner";
 import JobDetails from "src/components/careers/JobDetails";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GET_JOB_POST_DETAILS_BY_ID } from "src/graphql/queries";
 import {
   GetJobPostDetailsResponse,
@@ -15,7 +16,7 @@ import {
 const Page = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data } = useQuery<
+  const { data, loading } = useQuery<
     GetJobPostDetailsResponse,
     GetJobPostDetailsVariables
   >(GET_JOB_POST_DETAILS_BY_ID, {
@@ -23,17 +24,19 @@ const Page = () => {
     skip: !id,
   });
 
+  if (loading) return <LoadingFallback />;
+
   if (!id) {
     return null;
   }
 
   return (
-    <Container maxWidth={"xl"} >
+    <Container maxWidth={"xl"}>
       {data && (
         <Stack gap={6}>
           <CareerBanner data={data} />
-          <JobDetails data={data}/>
-          <ApplyNowForm/>
+          <JobDetails data={data} />
+          <ApplyNowForm />
         </Stack>
       )}
     </Container>

@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Container, Divider } from "@mui/material";
 import React from "react";
 import Banner from "src/components/banner/Banner";
+import LoadingFallback from "src/components/LoadingFallback";
 import {
   GET_CSR_YEARS,
   GET_QUALITY_AND_SUSTAINABILITY_PAGE,
@@ -19,9 +20,11 @@ import {
 } from "src/types/graphql/types/quality.types";
 
 const QualitySustainablity = () => {
-  const { data } = useQuery<GetQualityAndSustainabilityPageData>(
+  const { data, loading } = useQuery<GetQualityAndSustainabilityPageData>(
     GET_QUALITY_AND_SUSTAINABILITY_PAGE
   );
+
+  if (loading) return <LoadingFallback />;
 
   return (
     <>

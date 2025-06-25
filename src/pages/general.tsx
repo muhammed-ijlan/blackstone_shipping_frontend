@@ -3,6 +3,7 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
+import LoadingFallback from "src/components/LoadingFallback";
 import { GET_GENERAL_PAGES } from "src/graphql/queries";
 import {
   GetGeneralPagesData,
@@ -12,13 +13,15 @@ import {
 const Page = () => {
   const { uri } = useParams();
 
-  const { data } = useQuery<GetGeneralPagesData, GetGeneralPagesVars>(
+  const { data, loading } = useQuery<GetGeneralPagesData, GetGeneralPagesVars>(
     GET_GENERAL_PAGES,
     {
       variables: { uri: uri ?? "" },
       skip: !uri,
     }
   );
+
+  if (loading) return <LoadingFallback />;
 
   return (
     <Stack>

@@ -38,44 +38,34 @@ import {
 } from "src/types/graphql/types/company.types";
 
 const Page = () => {
-  const {
-    data: companyBannerData,
-    error: companyBannerError,
-    loading: companyBannerLoading,
-  } = useQuery<GetCompanyPageResponse>(GET_COMPANY_BANNER);
-  const {
-    data: aboutData,
-    loading: aboutLoading,
-    error: aboutError,
-  } = useQuery<GetCompanyAboutResponse>(GET_COMPANY_ABOUT);
+  const { data: companyBannerData, loading: companyBannerLoading } =
+    useQuery<GetCompanyPageResponse>(GET_COMPANY_BANNER);
 
-  const { data: companyHistoryData } =
+  const { data: aboutData, loading: aboutLoading } =
+    useQuery<GetCompanyAboutResponse>(GET_COMPANY_ABOUT);
+
+  const { data: companyHistoryData, loading: historyLoading } =
     useQuery<GetCompanyHistoryResponse>(GET_COMPANY_HISTORY);
 
-  const {
-    data: visionData,
-    loading: visionLoading,
-    error: visionError,
-  } = useQuery<GetCompanyVisionResponse>(GET_COMPANY_VISION);
+  const { data: visionData, loading: visionLoading } =
+    useQuery<GetCompanyVisionResponse>(GET_COMPANY_VISION);
 
-  const { data: simplifyShippingData } = useQuery<GetCompanyShippingResponse>(
-    GET_COMPANY_SIMPLIFY_SHIPPING
-  );
+  const { data: simplifyShippingData, loading: simplifyShippingLoading } =
+    useQuery<GetCompanyShippingResponse>(GET_COMPANY_SIMPLIFY_SHIPPING);
 
-  const { data: whoWeAreData } = useQuery<GetCompanyWhoWeAreResponse>(
-    GET_COMPANY_WHO_WE_ARE
-  );
-  const { data: ourValueData } = useQuery<OurValuesSectionData>(
-    GET_COMPANY_OUR_VALUES
-  );
-  const { data: keyFactsData } = useQuery<GetCompanyKeyFactsResponse>(
-    GET_COMPANY_KEY_FACTS
-  );
-  const { data: ourNetworkData } = useQuery<GetCompanyGlobalNetworkResponse>(
-    GET_COMPANY_GLOBAL_NETWORK
-  );
+  const { data: whoWeAreData, loading: whoWeAreLoading } =
+    useQuery<GetCompanyWhoWeAreResponse>(GET_COMPANY_WHO_WE_ARE);
 
-  const { data: ourCertificationData } =
+  const { data: ourValueData, loading: ourValueLoading } =
+    useQuery<OurValuesSectionData>(GET_COMPANY_OUR_VALUES);
+
+  const { data: keyFactsData, loading: keyFactsLoading } =
+    useQuery<GetCompanyKeyFactsResponse>(GET_COMPANY_KEY_FACTS);
+
+  const { data: ourNetworkData, loading: ourNetworkLoading } =
+    useQuery<GetCompanyGlobalNetworkResponse>(GET_COMPANY_GLOBAL_NETWORK);
+
+  const { data: ourCertificationData, loading: ourCertificationLoading } =
     useQuery<GetCompanyCertificationsResponse>(GET_COMPANY_CERTIFICATION);
 
   return (
@@ -95,17 +85,62 @@ const Page = () => {
           />
         )
       )}
+
       <BannerBottom>
-        {aboutData && <ConnectingWorld data={aboutData} />}
+        {aboutLoading ? (
+          <LoadingFallback />
+        ) : (
+          aboutData && <ConnectingWorld data={aboutData} />
+        )}
       </BannerBottom>
-      {companyHistoryData && <History data={companyHistoryData} />}
-      {visionData && <Vision data={visionData} />}
-      {simplifyShippingData && <SimplifyShipping data={simplifyShippingData} />}
-      {whoWeAreData && <WhoWeAre data={whoWeAreData} />}
-      {ourValueData && <OurValues data={ourValueData} />}
-      {keyFactsData && <KeyFacts data={keyFactsData} />}
-      {ourNetworkData && <OurNetwork data={ourNetworkData} />}
-      {ourCertificationData && <Certification data={ourCertificationData} />}
+
+      {historyLoading ? (
+        <LoadingFallback />
+      ) : (
+        companyHistoryData && <History data={companyHistoryData} />
+      )}
+
+      {visionLoading ? (
+        <LoadingFallback />
+      ) : (
+        visionData && <Vision data={visionData} />
+      )}
+
+      {simplifyShippingLoading ? (
+        <LoadingFallback />
+      ) : (
+        simplifyShippingData && <SimplifyShipping data={simplifyShippingData} />
+      )}
+
+      {whoWeAreLoading ? (
+        <LoadingFallback />
+      ) : (
+        whoWeAreData && <WhoWeAre data={whoWeAreData} />
+      )}
+
+      {ourValueLoading ? (
+        <LoadingFallback />
+      ) : (
+        ourValueData && <OurValues data={ourValueData} />
+      )}
+
+      {keyFactsLoading ? (
+        <LoadingFallback />
+      ) : (
+        keyFactsData && <KeyFacts data={keyFactsData} />
+      )}
+
+      {ourNetworkLoading ? (
+        <LoadingFallback />
+      ) : (
+        ourNetworkData && <OurNetwork data={ourNetworkData} />
+      )}
+
+      {ourCertificationLoading ? (
+        <LoadingFallback />
+      ) : (
+        ourCertificationData && <Certification data={ourCertificationData} />
+      )}
     </>
   );
 };
