@@ -138,34 +138,49 @@ const FaqSection = () => {
                         src={expanded === index ? collapse : expand}
                         alt="toggle icon"
                         sx={{
-                          width: 24,
-                          height: 24,
+                          width: "24px !important",
+                          height: "24px !important",
                           transition: "transform 0.2s ease-in-out",
+                          "& img": {
+                            width: "100% !important",
+                            height: "24px !important",
+                          },
                         }}
                       />
                     }
-                    sx={{ padding: "22px 0px", minHeight: "unset" }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "100%",
+                      gap:1,
+                      padding: {xs:"10px 0px", md:"22px 0px"},
+                      minHeight: "unset",
+                    }}
                   >
                     <Typography
                       sx={{
-                        fontWeight: 600,
-                        fontSize: "20px !important",
+                        typography: { xs: "h4", md: "h4 " },
                         color: isActive ? "#2D3748" : "#4A5568",
                         display: "flex",
                         alignItems: "center",
+                        gap: 1,
+                        width: "100%",
                       }}
                     >
                       • &nbsp;{faq.title}
                     </Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{ padding: "0px 0px 16px 22px" }}>
+                  <AccordionDetails sx={{ padding: {xs:"0", md:"0px 0px 16px 22px" }}}>
                     <Typography
                       component="div"
                       sx={{
                         fontSize: "16px",
                         color: "rgba(45, 55, 72, 1)",
                         typography: "body1",
-                        margin: 0,
+                        "& p": {
+                          margin:{xs:"20",md:"unset"},
+                        }
                       }}
                       dangerouslySetInnerHTML={{ __html: faq.content }}
                     />

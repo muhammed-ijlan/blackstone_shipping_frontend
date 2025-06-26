@@ -87,6 +87,7 @@ function MenuItemRenderer({
             }),
             ...(depth !== 0 && {
               color: "rgba(249, 250, 251, 1)",
+              paddingLeft: 2.5,
             }),
           })}
         >

@@ -26,7 +26,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
       const firstChild = container.querySelector(":scope > *") as HTMLElement;
       if (!firstChild) return;
 
-      const itemWidth = firstChild.offsetWidth + 16; // 16px = theme.spacing(2) gap
+      const itemWidth = firstChild.offsetWidth + 16; 
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };
@@ -50,14 +50,12 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                   key={index}
                   sx={{
                     background: "rgba(11, 19, 40, 1)",
-                    width: "850px",
+                    width: { xs: "100%", md: "850px" },
                     borderRadius: "8px",
-                    // minWidth: "911px",
-                    // maxWidth: "911px",
                     flexShrink: 0,
                   }}
                   padding={2}
-                  direction={"row"}
+                  direction={{ xs: "column", md: "row" }}
                   gap={4}
                 >
                   <Box
@@ -66,8 +64,8 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                     src={item.featuredImage?.node.sourceUrl}
                     sx={{
                       borderRadius: "4px",
-                      width: "250px",
-                      height: "308px",
+                      width: { xs: "100%", md: "250px" },
+                      height: { xs: "217px", md: "308px" },
                       objectFit: "cover",
                     }}
                   />
@@ -92,8 +90,9 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                           {item.title}
                         </Typography>
                         <Typography
-                          variant="body2"
+                          
                           sx={{
+                            typography: { xs: "body1", md: "body2" },
                             display: "-webkit-box",
                             WebkitBoxOrient: "vertical",
                             WebkitLineClamp: "3",

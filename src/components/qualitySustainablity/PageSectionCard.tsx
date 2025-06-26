@@ -25,7 +25,7 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
         spacing={2}
         sx={{
           justifyContent: "space-between",
-          my: 4,
+          my: { xs: 2, sm: 4 },
         }}
       >
         <Stack
@@ -76,3 +76,4 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
 };
 
 export default PageSectionCard;
+// Hello! I see you've provided a React component file but haven't given specific instructions for what code to generate.
