@@ -10,12 +10,20 @@ import {
   PaginationItem,
   CircularProgress,
   InputAdornment,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { useOfficeLocations } from "src/graphql/hooks/useOfficeLocation";
 import { useRouter } from "src/routes/hooks";
+import OfficeLocationMobile from "./OfficeLocationMobile";
+import LoadingFallback from "../LoadingFallback";
 
 const baseCellStyle = {
   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -27,6 +35,9 @@ const baseCellStyle = {
 
 const OfficeLocation: React.FC = () => {
   const router = useRouter();
+
+
+
   const [search, setSearch] = useState("");
   const {
     locations,
@@ -40,11 +51,13 @@ const OfficeLocation: React.FC = () => {
     goToPage,
   } = useOfficeLocations(3, search);
 
+
+
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  // if (loading && locations.length === 0) return <CircularProgress />;
   if (error)
     return <Typography color="error">Error: {error.message}</Typography>;
 
@@ -88,6 +101,10 @@ const OfficeLocation: React.FC = () => {
     />
   );
 
+
+
+
+
   return (
     <Stack
       sx={{
@@ -96,7 +113,8 @@ const OfficeLocation: React.FC = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack gap={5} color={"white"}>
+
+        <Stack gap={{ xs: 0, md: 5 }} color={"white"} >
           <Stack
             direction={"row"}
             justifyContent={"space-between"}
@@ -106,7 +124,7 @@ const OfficeLocation: React.FC = () => {
             <Typography variant="h2" color="white">
               Office Locations
             </Typography>
-            <Stack width={{ xs: "100%", sm: "auto" }}>
+            <Stack width={{ xs: "100%", sm: "auto" }} display={{ xs: "none", md: "block" }}>
               <TextField
                 fullWidth
                 name="search"
@@ -147,171 +165,183 @@ const OfficeLocation: React.FC = () => {
                   },
                 }}
               />
+
             </Stack>
           </Stack>
-
-          <Box
-            sx={{
-              border: "none",
-              borderRadius: "6px",
-              // overflow: "hidden",
-              overflowX: "auto",
-            }}
-          >
-            <Table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
+          {/* Desktop View */}
+          {
+            loading ? (
+             
+                <LoadingFallback />
+              
+            ) : (
+              <Box
+              sx={{
+                display: { xs: "none", md: "block" },
+                border: "none",
+                borderRadius: "6px",
+                // overflow: "hidden",
+                overflowX: "auto",
               }}
             >
-              <Thead>
-                <Tr
-                  style={{
-                    backgroundColor: "rgba(54, 66, 86, 1)",
-                    color: "white",
-                  }}
-                >
-                  <Th
+              <Table
+                style={{
+                  width: "100%",
+                  borderCollapse: "collapse",
+                }}
+              >
+                <Thead>
+                  <Tr
                     style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                      padding: "12px",
+                      backgroundColor: "rgba(54, 66, 86, 1)",
                       color: "white",
-                      verticalAlign: "top",
                     }}
                   >
-                    Country
-                  </Th>
-                  <Th
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                      padding: "12px",
-                      color: "white",
-                      verticalAlign: "top",
-                    }}
-                  >
-                    City
-                  </Th>
-                  <Th
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                      padding: "12px",
-                      color: "white",
-                      verticalAlign: "top",
-                    }}
-                  >
-                    Address
-                  </Th>
-                  <Th
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                      padding: "12px",
-                      color: "white",
-                      verticalAlign: "top",
-                    }}
-                  >
-                    Phone
-                  </Th>
-                  <Th
-                    style={{
-                      padding: "12px",
-                      color: "white",
-                      verticalAlign: "top",
-                    }}
-                  >
-                    Email
-                  </Th>
-                </Tr>
-              </Thead>
-              <Stack my={0.5} />
-              <Tbody style={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {locations.map((item: any) => (
-                  <Tr key={item.id}>
-                    <Td
+                    <Th
                       style={{
-                        ...baseCellStyle,
-                        borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                        padding: "12px",
+                        color: "white",
+                        verticalAlign: "top",
                       }}
                     >
-                      <Stack
-                        direction="row"
-                        alignItems="center"
-                        gap={1}
-                        sx={{ cursor: "pointer" }}
-                        component={"div"}
-                        // TODO: API ID Confusion
-                        onClick={() =>
-                          router.push(
-                            `/support/${item.officeLocationsOptions.country.nodes[0].id}`
-                          )
-                        }
-                      >
-                        <img
-                          src={
-                            item.officeLocationsOptions.country.nodes[0]
-                              ?.countriesOptions?.countryFlag?.node?.sourceUrl
-                          }
-                          alt="flag"
-                          width={20}
-                          height={14}
-                          style={{ objectFit: "cover" }}
-                        />
-                        {item.officeLocationsOptions.country.nodes[0].name}
-                      </Stack>
-                    </Td>
-                    <Td
+                      Country
+                    </Th>
+                    <Th
                       style={{
-                        ...baseCellStyle,
-                        borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                        padding: "12px",
+                        color: "white",
+                        verticalAlign: "top",
                       }}
                     >
-                      {item.title}
-                    </Td>
-                    <Td
+                      City
+                    </Th>
+                    <Th
                       style={{
-                        ...baseCellStyle,
-                        borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                        padding: "12px",
+                        color: "white",
+                        verticalAlign: "top",
                       }}
                     >
-                      <Box
-                        component={"div"}
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            item.officeLocationsOptions.address?.replace(
-                              /\r?\n/g,
-                              "<br/>"
-                            ) || "",
-                        }}
-                      />
-                    </Td>
-                    <Td
+                      Address
+                    </Th>
+                    <Th
                       style={{
-                        ...baseCellStyle,
-                        borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                        padding: "12px",
+                        color: "white",
+                        verticalAlign: "top",
                       }}
                     >
-                      {item.officeLocationsOptions.phoneNumber}
-                    </Td>
-                    <Td
+                      Phone
+                    </Th>
+                    <Th
                       style={{
-                        ...baseCellStyle,
-                        borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        padding: "12px",
+                        color: "white",
+                        verticalAlign: "top",
                       }}
                     >
-                      {item.officeLocationsOptions.emailAddress}
-                    </Td>
+                      Email
+                    </Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </Box>
+                </Thead>
+                <Stack my={0.5} />
+                <Tbody style={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {locations.map((item: any) => (
+                    <Tr key={item.id}>
+                      <Td
+                        style={{
+                          ...baseCellStyle,
+                          borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        }}
+                      >
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          gap={1}
+                          sx={{ cursor: "pointer" }}
+                          component={"div"}
+                          // TODO: API ID Confusion
+                          onClick={() =>
+                            router.push(
+                              `/support/${item.officeLocationsOptions.country.nodes[0].id}`
+                            )
+                          }
+                        >
+                          <img
+                            src={
+                              item.officeLocationsOptions.country.nodes[0]
+                                ?.countriesOptions?.countryFlag?.node?.sourceUrl
+                            }
+                            alt="flag"
+                            width={20}
+                            height={14}
+                            style={{ objectFit: "cover" }}
+                          />
+                          {item.officeLocationsOptions.country.nodes[0].name}
+                        </Stack>
+                      </Td>
+                      <Td
+                        style={{
+                          ...baseCellStyle,
+                          borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        }}
+                      >
+                        {item.title}
+                      </Td>
+                      <Td
+                        style={{
+                          ...baseCellStyle,
+                          borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        }}
+                      >
+                        <Box
+                          component={"div"}
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              item.officeLocationsOptions.address?.replace(
+                                /\r?\n/g,
+                                "<br/>"
+                              ) || "",
+                          }}
+                        />
+                      </Td>
+                      <Td
+                        style={{
+                          ...baseCellStyle,
+                          borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        }}
+                      >
+                        {item.officeLocationsOptions.phoneNumber}
+                      </Td>
+                      <Td
+                        style={{
+                          ...baseCellStyle,
+                          borderTop: "1px solid rgba(217, 217, 217, 1)",
+                        }}
+                      >
+                        {item.officeLocationsOptions.emailAddress}
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
+            )
+          }
+        
 
           {totalPages > 1 && (
             <Stack
+              display={{ xs: "none", md: "flex" }}
               direction="row"
               alignItems="center"
               justifyContent="center"
@@ -320,10 +350,14 @@ const OfficeLocation: React.FC = () => {
             >
               {renderPageNumbers()}
             </Stack>
+
           )}
-        </Stack>
-      </Container>
-    </Stack>
+          {/* Mobile View */}
+          <OfficeLocationMobile />
+        </Stack >
+
+      </Container >
+    </Stack >
   );
 };
 
