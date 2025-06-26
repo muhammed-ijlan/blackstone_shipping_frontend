@@ -47,20 +47,21 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
                 typography: "body1",
               },
               "& strong": {
+
                 typography: "h4",
               },
-              "& h3": {
-                typography: "h4",
+              "& h3": { 
+                typography: "h4 ",
               },
               color: "rgba(45, 55, 72, 1)",
             }}
           />
-        </Stack>
+        </Stack> 
         <Stack>
           <img
             src={imageUrl}
             alt={subTitle}
-            style={{
+            style={{  
               width: "100%",
               maxWidth: 505,
               height: "auto",
@@ -76,4 +77,3 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
 };
 
 export default PageSectionCard;
-// Hello! I see you've provided a React component file but haven't given specific instructions for what code to generate.

@@ -29,6 +29,8 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
           sx={{
             "& p": {
               margin: "0",
+              fontWeight:"600 !important",
+              color:"rgba(45, 55, 72, 1)"
             },
           }}
           dangerouslySetInnerHTML={{

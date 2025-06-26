@@ -71,7 +71,7 @@ const MuiContainer: Components<Theme>["MuiContainer"] = {
       },
       // Large Devices / Desktops (1200px–1535px)
       "@media (min-width: 1350px) and (max-width: 1801px)": {
-        maxWidth: "1380px",
+        maxWidth: "1350px",
       },
 
       

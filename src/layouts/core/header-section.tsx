@@ -33,12 +33,14 @@ import myBBXIcon from "src/assets/icons/box.png";
 import contactIcon from "src/assets/icons/mail.png";
 import { useRouter } from "src/routes/hooks";
 import { MenuItem } from "src/types/graphql/types/menu.types";
-import LoadingFallback from "src/components/LoadingFallback";
 
 const NavBar = styled("div")(({ theme }) => ({
   display: "flex",
   flexWrap: "nowrap",
-  gap: theme.spacing(3),
+  gap: theme.spacing(2),
+  [theme.breakpoints.up("xl")]: {
+    gap: theme.spacing(3.5),
+  },
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),
   alignItems: "center",
@@ -57,6 +59,8 @@ const NavLink = styled(MuiLink, {
 })<{ isActive?: boolean }>(({ theme, isActive }) => ({
   fontSize: "16px !important",
   fontWeight: 600,
+  lineHeight:"100%",
+  letterSpacing:"3%",
   cursor: "pointer",
   textWrap: "nowrap",
   color: isActive ? "rgba(45, 55, 72, 1)" : "rgba(109, 110, 113, 1)",
@@ -333,7 +337,7 @@ export function HeaderSection({
               <Logo onClick={() => router.push("/")} href={logo} />
             </Stack>
 
-            <Stack gap={1} alignItems="flex-end">
+            <Stack gap={1} alignItems="flex-end" mr={{lg:"55px"}}>
               <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
                 <IconButton
                   size="small"

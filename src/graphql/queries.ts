@@ -1716,3 +1716,49 @@ export const GET_GENERAL_PAGES = gql`
     }
   }
 `;
+
+
+export const GET_COUNTRIES = gql`
+  query GetCountries {
+    countries {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
+export const GET_OFFICE_LOCATIONS_BY_COUNTRY = gql`
+  query GetOfficeLocationsByCountry($slug: [String]) {
+    officeLocations(
+      where: {
+        taxQuery: {
+          taxArray: [
+            { taxonomy: COUNTRY, field: SLUG, terms: $slug }
+          ]
+        }
+      }
+    ) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+  }
+`;
+
+export const GET_OFFICE_LOCATION_BY_URI = gql`
+  query GetOfficeLocationByURI($uri: ID!) {
+    officeLocation(id: $uri, idType: URI) {
+      title
+      officeLocationsOptions {
+        address
+        phoneNumber
+        emailAddress
+      }
+    }
+  }
+`;

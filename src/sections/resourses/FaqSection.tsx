@@ -158,6 +158,19 @@ const FaqSection = () => {
                       minHeight: "unset",
                     }}
                   >
+                    <Stack direction="row"  gap={1}>
+
+                    <Typography
+                      sx={{
+                        typography: { xs: "h4", md: "h4 " },
+                        color: isActive ? "#2D3748" : "#4A5568",
+                        display: "flex",
+                        // alignItems: "center",
+                        gap: 1,
+                      }}
+                    >
+                      •
+                    </Typography>
                     <Typography
                       sx={{
                         typography: { xs: "h4", md: "h4 " },
@@ -167,11 +180,13 @@ const FaqSection = () => {
                         gap: 1,
                         width: "100%",
                       }}
-                    >
-                      • &nbsp;{faq.title}
+                      >
+                      {faq.title}
                     </Typography>
+                      </Stack>
                   </AccordionSummary>
                   <AccordionDetails sx={{ padding: {xs:"0", md:"0px 0px 16px 22px" }}}>
+                  
                     <Typography
                       component="div"
                       sx={{
@@ -180,6 +195,7 @@ const FaqSection = () => {
                         typography: "body1",
                         "& p": {
                           margin:{xs:"20",md:"unset"},
+                          ml:{xs:"20px",md:"unset"},
                         }
                       }}
                       dangerouslySetInnerHTML={{ __html: faq.content }}
