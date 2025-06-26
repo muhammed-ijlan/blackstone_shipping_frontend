@@ -5,7 +5,7 @@ import { GetCompanyShippingResponse } from 'src/types/graphql/types/company.type
 
 const SimplifyShipping = ({data}:{data:GetCompanyShippingResponse}) => {
   return (
-    <Container maxWidth="xl" sx={{my:10}}>
+    <Container maxWidth="xl" sx={{my:8}}>
 <Stack gap={4}>
     <Typography variant='h3'>{data.page.companyPageSimply.simplifyShippingTitle}</Typography>
     <Grid container justifyContent={"center"}  spacing={5}>

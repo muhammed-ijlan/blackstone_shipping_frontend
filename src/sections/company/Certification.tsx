@@ -9,25 +9,23 @@ const Certification = ({
 }) => {
   return (
     <Container maxWidth="xl" sx={{ my: 5 }}>
-      <Stack gap={2}>
-        <Typography variant="h3">
+      <Stack gap={3}>
+        <Typography variant="h2" sx={{fontWeight:"700 !important"}}>
           {data.page.companyPageCertifications.certificationMainTitle.toUpperCase()}
         </Typography>
-        <Typography variant="h4">
+        <Typography variant="h6" sx={{fontWeight:"600 !important"}}>
           {data.page.companyPageCertifications.certificationSubTitle1.toUpperCase()}
         </Typography>
-        <Typography
-          variant="body1"
+        <Typography variant="h6" sx={{fontWeight:"500 !important"}}
           color="rgba(45, 55, 72, 0.8)"
           fontWeight={500}
         >
           {data.page.companyPageCertifications.certificationContent1}
         </Typography>
-        <Typography variant="h4">
+        <Typography variant="h6" sx={{fontWeight:"600 !important"}}>
           {data.page.companyPageCertifications.certificationSubTitle2.toUpperCase()}
         </Typography>
-        <Typography
-          variant="body1"
+        <Typography variant="h6" sx={{fontWeight:"500 !important"}}
           color="rgba(45, 55, 72, 0.8)"
           fontWeight={500}
         >
@@ -60,11 +58,10 @@ const Certification = ({
           ))}
         </Grid>
 
-        <Typography variant="h4">
+        <Typography variant="h6" sx={{fontWeight:"600 !important"}}>
           {data.page.companyPageCertifications.certificationSubTitle3.toUpperCase()}
         </Typography>
-        <Typography
-          variant="body1"
+        <Typography variant="h6" sx={{fontWeight:"500 !important"}}
           color="rgba(45, 55, 72, 0.8)"
           fontWeight={500}
         >

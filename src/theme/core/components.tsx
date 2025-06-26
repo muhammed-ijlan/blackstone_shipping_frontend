@@ -121,16 +121,16 @@ const MuiContainer: Components<Theme>["MuiContainer"] = {
 
       // Large Devices / Desktops (1200px–1535px)
       "@media (min-width: 1380px) and (max-width: 1535px)": {
-        maxWidth: "1350px",
+        maxWidth: "1240px",
       },
 
       // Extra Large Devices / Monitors (1536px–2499px)
       "@media (min-width: 1536px) and (max-width: 1800px)": {
-        maxWidth: "1238px",
+        maxWidth: "1240px",
       },
 
       "@media (min-width: 1801px) and (max-width: 2499px)": {
-        maxWidth: "1438px",
+        maxWidth: "1240px",
       },
 
       // Ultra-wide Screens (≥ 2500px)

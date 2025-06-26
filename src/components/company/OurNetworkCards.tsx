@@ -22,7 +22,7 @@ const OurNetworkCards = ({data}:{data:GetCompanyGlobalNetworkResponse}) => {
                     .ourGlobalNetworkBox1Text1
                 }
               </Typography>
-              <Typography variant="h4" color={"white"}>
+              <Typography variant="h6" color={"white"}>
                 {
                   data.page.companyPageOurGlobalNetworkSection
                     .ourGlobalNetworkBox1Text2
@@ -46,7 +46,7 @@ const OurNetworkCards = ({data}:{data:GetCompanyGlobalNetworkResponse}) => {
                     .ourGlobalNetworkBox2Text1
                 }
               </Typography>
-              <Typography variant="h4" color={"white"}>
+              <Typography variant="h6" color={"white"}>
                 {
                   data.page.companyPageOurGlobalNetworkSection
                     .ourGlobalNetworkBox2Text2
@@ -57,7 +57,7 @@ const OurNetworkCards = ({data}:{data:GetCompanyGlobalNetworkResponse}) => {
               sx={{
                 background: "rgba(45, 55, 72, 1)",
                 borderRadius: "8px",
-                p: 2,
+                p: 8,
               }}
               alignItems={"center"}
               justifyContent={"center"}
@@ -70,7 +70,7 @@ const OurNetworkCards = ({data}:{data:GetCompanyGlobalNetworkResponse}) => {
                     .ourGlobalNetworkBox3Text1
                 }
               </Typography>
-              <Typography variant="h3" color={"white"} textAlign={"center"}>
+              <Typography variant="h3" color={"white"} sx={{textAlign:"center !important"}}>
                 {
                   data.page.companyPageOurGlobalNetworkSection
                     .ourGlobalNetworkBox3Text2

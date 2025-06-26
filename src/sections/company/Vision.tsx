@@ -7,7 +7,7 @@ const Vision = ({ data }: { data: GetCompanyVisionResponse }) => {
   return (
     <Stack sx={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
       <Container maxWidth="xl">
-        <Stack my={10} color="white">
+        <Stack my={8} color="white">
           <Typography variant="h3">
             {data.page.companyPageVisionSection.visionTitle.toUpperCase()}
           </Typography>
@@ -16,11 +16,10 @@ const Vision = ({ data }: { data: GetCompanyVisionResponse }) => {
               __html: data.page.companyPageVisionSection.visionContent,
             }}
             sx={{
-              fontWeight: 500,
-              // fontSize: "17px !important",
+              fontWeight: "500 !important",
               lineHeight: "32px",
-              letterSpacing: "3%",
-              typography:{xs:"body1",lg:"body1"}
+              letterSpacing: "3% !important",
+              typography:{xs:"body1",lg:"h4"}
             }}
           />
 

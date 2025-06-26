@@ -1717,7 +1717,6 @@ export const GET_GENERAL_PAGES = gql`
   }
 `;
 
-
 export const GET_COUNTRIES = gql`
   query GetCountries {
     countries {
@@ -1725,10 +1724,18 @@ export const GET_COUNTRIES = gql`
         id
         name
         slug
+        countriesOptions {
+          countryFlag {
+            node {
+              sourceUrl
+            }
+          }  
+        }
       }
     }
   }
 `;
+
 
 export const GET_OFFICE_LOCATIONS_BY_COUNTRY = gql`
   query GetOfficeLocationsByCountry($slug: [String]) {

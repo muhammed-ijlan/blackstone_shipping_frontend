@@ -6,6 +6,7 @@ const ConnectingWorld = ({ data }: { data: GetCompanyAboutResponse }) => {
   console.log(data);
   return (
     <Stack
+    my={8}
       direction={{ xs: "column", lg: "row" }}
       spacing={1}
       justifyContent={"space-between"}
@@ -14,7 +15,7 @@ const ConnectingWorld = ({ data }: { data: GetCompanyAboutResponse }) => {
       <Box
         component={"img"}
         alt="about"
-        width={{ xs: "100%", lg: "422px" }}
+        width={{ xs: "100%", lg: "402px" }}
         borderRadius={"8px"}
         height={"421px"}
         src={data.page.companyPageAboutSection.aboutUsImage.node.sourceUrl}

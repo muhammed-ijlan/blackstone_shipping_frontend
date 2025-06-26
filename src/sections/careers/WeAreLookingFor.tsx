@@ -14,9 +14,9 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
             <Stack
               sx={{
                 border: "1px solid rgba(45, 55, 72, 1)",
-                borderRadius: { xs: "50%", sm: "50px" },
-                width: "82px !important",
-                height: "60px !important",
+                borderRadius: { xs: "50px", sm: "50px" },
+                width: "82px!important",
+                height: {xs:"50px !important",sm:"60px !important"},
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -42,9 +42,9 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
             <Stack
               sx={{
                 border: "1px solid rgba(45, 55, 72, 1)",
-                borderRadius: { xs: "50%", sm: "50px" },
+                borderRadius: { xs: "50px", sm: "50px" },
                 width: "82px !important",
-                height: "60px !important",
+                  height: {xs:"50px !important",sm:"60px !important"},
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -70,9 +70,9 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
             <Stack
               sx={{
                 border: "1px solid rgba(45, 55, 72, 1)",
-                borderRadius: { xs: "50%", sm: "50px" },
+                borderRadius: { xs: "50px", sm: "50px" },
                 width: "82px !important",
-                height: "60px !important",
+                  height: {xs:"50px !important",sm:"60px !important"},
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -98,9 +98,9 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
             <Stack
               sx={{
                 border: "1px solid rgba(45, 55, 72, 1)",
-                borderRadius: { xs: "50%", sm: "50px" },
+                borderRadius: { xs: "50px", sm: "50px" },
                 width: "82px !important",
-                height: "60px !important",
+                  height: {xs:"50px !important",sm:"60px !important"},
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -126,9 +126,9 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
             <Stack
               sx={{
                 border: "1px solid rgba(45, 55, 72, 1)",
-                borderRadius: { xs: "50%", sm: "50px" },
+                borderRadius: { xs: "50px", sm: "50px" },
                 width: "82px !important",
-                height: "60px !important",
+                  height: {xs:"50px !important",sm:"60px !important"},
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -161,7 +161,7 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
           }}
         >
           <Box
-            sx={{ "& p": { typography: "h6" } }}
+            sx={{ "& p": { typography: "h6",textAlign:{xs:"center !important",sm:"left !important"} } }}
             component={"div"}
             dangerouslySetInnerHTML={{
               __html:
