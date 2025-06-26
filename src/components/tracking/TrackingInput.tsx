@@ -43,7 +43,7 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
               },
             },
             "& .MuiInputBase-input": {
-              typography: "h6",
+              typography: "h5",
               fontWeight: 500,
               color: "rgba(109, 110, 113, 1)",
             },

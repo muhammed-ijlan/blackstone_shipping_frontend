@@ -8,9 +8,9 @@ const SustainablityList = ({ data }: { data: SustainabilityNode[] }) => {
       <Typography variant="h2">
         SDGs INLINE WITH OUR RESPONSIBLE PRACTICES & OUR COMMITMENT TO MEET THEM{" "}
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         {data.map((item, index) => (
-          <Grid size={{ xs: 12, sm: 4, md: 4, lg: 3 }} key={index}>
+          <Grid size={{ xs: 6, sm: 4, md: 4, lg: 3 }} key={index}>
             <Stack
               sx={{
                 background: "linear-gradient(180deg, #2D3748 0%, #0B1328 100%)",

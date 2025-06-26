@@ -91,22 +91,22 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
       >
         {posts?.map((post) => (
           <Grid
-            size={{ xs: 12, lg: 4 }}
+            size={{ xs: 12,md: 6,lg: 4 }}
             spacing={5}
             key={post.id || post.title}
           >
-            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }}>
+            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{xs: "row", md: "column"}} gap={{xs:1,md:0}}>
               <Box
                 component={"img"}
                 alt={post?.title}
                 src={post.featuredImage?.node?.sourceUrl}
-                width={"100%"}
-                height={"283px"}
+                width={{xs:"150px",md:"100%"}}
+                height={{xs:"92px",md:"283px"}}
                 sx={{ objectFit: "cover" }}
                 borderRadius={"8px"}
               />
               <Stack sx={{ height: "100%" }} justifyContent={"space-between"}>
-                <Stack gap={1}>
+                <Stack gap={{xs:0,md:1}} direction={{xs:"column-reverse",md:"column"}}>
                   <Typography
                     mt={1}
                     variant="caption"
@@ -118,11 +118,11 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                   <Typography
                     sx={{
                       textAlign: "left !important",
-                      display: "-webkit-box",
+                      display: {xs:"unset",md:"-webkit-box"},
                       WebkitBoxOrient: "vertical",
-                      WebkitLineClamp: 2,
-                      overflow: "hidden",
-                      height: "60px",
+                      WebkitLineClamp: {xs:2,md:2},
+                      overflow: {xs:"unset",md:"hidden"},
+                      height: {xs:"unset",md:"60px"},
                     }}
                     variant="h4"
                     fontWeight={"bold"}
@@ -136,7 +136,8 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     mb={2}
                     color="rgba(45, 55, 72, 1)"
                     sx={{
-                      display: "-webkit-box",
+                      
+                      display: {xs:"none",md:"-webkit-box"},
                       WebkitBoxOrient: "vertical",
                       WebkitLineClamp: 3,
                       overflow: "hidden",
@@ -148,7 +149,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     dangerouslySetInnerHTML={{ __html: post.excerpt }}
                   />
                 </Stack>
-                <Stack height={"100%"} alignItems={"flex-end"}>
+                <Stack height={"100%"} alignItems={"flex-end"} sx={{display:{xs:"none",md:"flex"}}}>
                   <CustomArrowButton
                     name="Read More"
                     sx={{ border: "none" }}
@@ -161,7 +162,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
         ))}
       </Grid>
 
-      {totalPages > 1 && (
+     
         <Stack
           direction="row"
           alignItems="center"
@@ -209,7 +210,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
             Next
           </Button>
         </Stack>
-      )}
+      
     </Stack>
   );
 };

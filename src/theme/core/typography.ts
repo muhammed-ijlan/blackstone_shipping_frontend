@@ -162,7 +162,7 @@ export const typography: TypographyVariantsOptions = {
       textAlign: 'left',
     },
     [defaultMuiTheme.breakpoints.up('lg')]: {
-      fontSize: '20px',
+      fontSize: '18px',
       lineHeight: '30px',
       letterSpacing: '3%',
       textTransform: 'capitalize',

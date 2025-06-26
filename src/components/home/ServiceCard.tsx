@@ -19,7 +19,7 @@ const ServiceCard = ({
       sx={{
         border: "1px solid rgba(45, 55, 72, 1)",
         width: "100% ",
-        height: "100%",
+        height: { xs: "100%", md: "100%" },
         borderRadius: "8px",
         p: 3,
         overflow: "hidden",
@@ -92,7 +92,7 @@ const ServiceCard = ({
           component={"img"}
           src={item.image}
           width={"100%"}
-          height={"255px"}
+          height={{ xs: "355px", md: "255px" }}
           sx={{ objectFit: "cover" }}
           borderRadius={"4px"}
         />

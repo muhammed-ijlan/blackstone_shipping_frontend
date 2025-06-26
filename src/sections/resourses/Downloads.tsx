@@ -56,7 +56,7 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                     alt="img"
                     width={"32px"}
                   />
-                  <Typography sx={{ fontSize: "32px !important" }}>
+                  <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
                     {resourseData.brochureTitle}
                   </Typography>
                 </Stack>
@@ -114,7 +114,7 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                     alt="img"
                     height="32px"
                   />
-                  <Typography sx={{ fontSize: "32px !important" }}>
+                 <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
                     {resourseData.serviceGuidesTitle}
                   </Typography>
                 </Stack>
@@ -173,7 +173,7 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
                     width={"32px"}
                     height="32px"
                   />
-                  <Typography sx={{ fontSize: "32px !important" }}>
+                 <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
                     {resourseData.whitePapersTitle}
                   </Typography>
                 </Stack>
