@@ -8,6 +8,7 @@ interface SectionHeadProps {
   titleColor?: string;
   subTitleColor?: string;
   contentColor?: string;
+  variant?: "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 const SectionHead: React.FC<SectionHeadProps> = ({
@@ -17,6 +18,7 @@ const SectionHead: React.FC<SectionHeadProps> = ({
   titleColor = "rgba(33, 52, 72, 1)",
   subTitleColor = "rgba(33, 52, 72, 0.8)",
   contentColor = "rgba(33, 52, 72, 0.6)",
+  variant = "h2",
 }) => {
   return (
     <Stack gap={3} mt={10} mb={5} textAlign={{ xs: "center", md: "left" }}>
@@ -32,7 +34,11 @@ const SectionHead: React.FC<SectionHeadProps> = ({
       {subTitle && (
         <Typography
           maxWidth={900}
-          variant="h2"
+          variant={variant}
+          sx={{
+            textTransform:"capitalize !important",
+          }}
+
           fontWeight={600}
           color={subTitleColor}
         >

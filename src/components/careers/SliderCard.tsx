@@ -60,8 +60,8 @@ const SliderCard = ({ data }: { data: CardData }) => {
   };
 
   return (
-    <Stack gap={1}>
-      <Box sx={{ width: 400, borderRadius: 2, overflow: "hidden" }}>
+    <Stack gap={1} sx={{width:{xs:370,md:400}}}>
+      <Box sx={{ width: {xs:370,md:400}, borderRadius: 2, overflow: "hidden" }}>
         {videoUrl ? (
           <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
         ) : (
@@ -88,7 +88,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
 
       <Box
         component="div"
-        sx={{ "& p": { typography: "body1", margin: 0 } }}
+        sx={{ "& p": { typography: "body1", margin: 0 ,textWrap:"wrap"} }}
         dangerouslySetInnerHTML={{ __html: data.content }}
       />
     </Stack>

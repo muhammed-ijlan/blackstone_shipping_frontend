@@ -59,7 +59,7 @@ const OurValues = ({ data }: { data: OurValuesSectionData }) => {
     <Stack sx={{ background: "rgba(245, 247, 251, 1)" }}>
       <Container maxWidth="xl">
         <Box sx={{ my: 6, position: "relative", minHeight: "600px" }}>
-          <Typography variant="h3" fontWeight="bold" mb={5}>
+          <Typography variant="h2" sx={{fontWeight:"700 !important"}} mb={5}>
             {data?.page?.companyPageOurValuesSection.ourValuesTitle.toUpperCase()}
           </Typography>
 

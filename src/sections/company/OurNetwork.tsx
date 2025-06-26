@@ -9,10 +9,10 @@ const OurNetwork = ({ data }: { data: GetCompanyGlobalNetworkResponse }) => {
     <Stack sx={{ background: "rgba(245, 247, 251, 1)", py: 10 }}>
       <Container maxWidth="xl">
         <Stack gap={3}>
-          <Typography variant="h3">
+          <Typography variant="h2" sx={{fontWeight:"700 !important"}}>
             {data?.page?.companyPageOurGlobalNetworkSection?.ourGlobalNetworkTitle.toUpperCase()}
           </Typography>
-          <Typography variant="body1" color={"rgba(45, 55, 72, 0.8)"}>
+          <Typography variant="h6" sx={{fontWeight:"500 !important"}} color={"rgba(45, 55, 72, 0.8)"}>
             {
               data?.page?.companyPageOurGlobalNetworkSection
                 ?.ourGlobalNetworkContent

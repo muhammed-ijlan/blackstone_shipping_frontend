@@ -5,9 +5,9 @@ import { GetCompanyHistoryResponse } from "src/types/graphql/types/company.types
 const History = ({ data }: { data: GetCompanyHistoryResponse }) => {
   return (
     <Container maxWidth={"xl"} sx={{ pb: 5 }}>
-      <Stack gap={3}>
-        <Typography variant="h2">
-          {data.page.companyPageHistorySection.historySectionMainTitle}
+      <Stack gap={5}>
+        <Typography variant="h2" sx={{fontWeight:"700 !important"}}>
+          {data.page.companyPageHistorySection.historySectionMainTitle?.toUpperCase()}
         </Typography>
         <Divider />
         <Stack
@@ -15,12 +15,12 @@ const History = ({ data }: { data: GetCompanyHistoryResponse }) => {
           spacing={{ xs: 4, lg: 10 }}
           justifyContent={"space-between"}
           alignItems={{ xs: "center", lg: "flex-start" }}
-          sx={{ mt: 1 }}
+         
         >
           <Typography
             flex={0.4}
             sx={{
-              textAlign: { xs: "left", lg: "justify" },
+              textAlign: { xs: "left", lg: "left" },
               textTransform: "uppercase !important",
             }}
             fontWeight={600}
@@ -37,7 +37,7 @@ const History = ({ data }: { data: GetCompanyHistoryResponse }) => {
               flex: 1,
               textAlign: {
                 xs: "left",
-                lg: "justify",
+                lg: "left",
                 color: "rgba(45, 55, 72, 1)",
               },
             }}

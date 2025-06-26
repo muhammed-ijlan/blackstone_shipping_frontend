@@ -9,7 +9,7 @@ const AllJobjsSection = ({data}:{data:GetCareersPageData}) => {
     <Divider/>
     <Stack gap={3}>
         <Typography variant='h2' sx={{color:"rgba(45, 55, 72, 1)"}}>{data.page.careersPageJobsSection.jobSectionMainTitle}</Typography>
-        <Typography variant='h4' sx={{color:"rgba(45, 55, 72, 1)",fontWeight:"700 !important"}}>{data.page.careersPageJobsSection.jobSectionSubTitle}</Typography>
+        <Typography variant='h4' sx={{color:"rgba(45, 55, 72, 1)",fontWeight:"700 !important",textTransform:"uppercase !important"}}>{data.page.careersPageJobsSection.jobSectionSubTitle}</Typography>
 
         <Grid container rowGap={4} columnSpacing={4} sx={{mt:2}}>
           {

@@ -41,6 +41,7 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
             "& p": {
               margin: "0",
               typography: "body1",
+              fontWeight:"500",
             },
             "& ul": {
               typography: "body1",

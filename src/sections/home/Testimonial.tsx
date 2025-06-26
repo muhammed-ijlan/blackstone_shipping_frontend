@@ -82,7 +82,7 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={{ xs: "column", lg: "row" }} gap={2}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={{xs:1,md:7}}>
           <Stack
             width={{ xs: "100%", lg: "40%" }}
             gap={{ xs: 0, sm: 3 }}
@@ -93,6 +93,7 @@ const Testimonial = () => {
               titleColor="rgba(255, 255, 255, 0.5)"
               subTitleColor="rgba(249, 250, 251, 1)"
               subTitle={testimonialsMainHeading}
+              variant="h3"
             />
             <Stack
               display={{ xs: "none", lg: "flex" }}
@@ -107,6 +108,7 @@ const Testimonial = () => {
               <SliderProgress
                 currentIndex={currentIndex}
                 totalItems={testimonialsList.length}
+                sx={{color:"white",background:"rgba(109, 110, 113, 1)"}}
               />
             </Stack>
           </Stack>

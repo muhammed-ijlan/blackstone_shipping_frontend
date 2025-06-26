@@ -132,7 +132,7 @@ export const typography: TypographyVariantsOptions = {
     },
     [defaultMuiTheme.breakpoints.up('lg')]: {
       fontSize: '20px',
-      lineHeight: '30px',
+      lineHeight: '34px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
@@ -173,14 +173,14 @@ export const typography: TypographyVariantsOptions = {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
       fontSize: '20px',
-      lineHeight: '28px',
+      lineHeight: '30px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
     },
     [defaultMuiTheme.breakpoints.up('sm')]: {
       fontSize: '20px',
-      lineHeight: '24px',
+      lineHeight: '28px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',
@@ -194,7 +194,7 @@ export const typography: TypographyVariantsOptions = {
     },
     [defaultMuiTheme.breakpoints.up('lg')]: {
       fontSize: '24px',
-      lineHeight: '35px',
+      lineHeight: '36px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',

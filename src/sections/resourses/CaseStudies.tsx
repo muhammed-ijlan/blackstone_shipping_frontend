@@ -176,6 +176,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
               <SliderProgress
                 currentIndex={currentIndex}
                 totalItems={mockMoreItems.length}
+                sx={{color:"rgba(249, 250, 251, 1)",background:"rgba(109, 110, 113, 1)"}}
               />
             </Stack>
           </Stack>

@@ -41,8 +41,8 @@ const NavBar = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("xl")]: {
     gap: theme.spacing(3.5),
   },
-  paddingTop: theme.spacing(1),
-  paddingBottom: theme.spacing(1),
+  // paddingTop: theme.spacing(1),
+  // paddingBottom: theme.spacing(1),
   alignItems: "center",
   maxWidth: "100%",
 }));
@@ -75,7 +75,7 @@ const SubMenu = styled(Box, {
 })<{ isOpen: boolean; isLastItem?: boolean }>(
   ({ theme, isOpen, isLastItem }) => ({
     position: "absolute",
-    top: "115px",
+    top: "105px",
     left: "0px",
     backgroundColor: "#fff",
     padding: "0 10px 40px 10px",
@@ -132,6 +132,7 @@ const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
 
 const SubMenuItem = styled(MuiLink)(({ theme }) => ({
   fontSize: 14,
+  fontWeight:"600",
   cursor: "pointer",
   color: "rgba(45, 55, 72, 1)",
   lineHeight: "1.5",
@@ -210,6 +211,7 @@ export function HeaderSection({
               borderBottomWidth: 1,
               borderColor: "rgba(45, 55, 72, 1)",
               mb: 3,
+            pt:2,
             }}
           />
 
@@ -240,6 +242,7 @@ export function HeaderSection({
             borderBottomWidth: 1,
             borderColor: "rgba(45, 55, 72, 1)",
             mb: 3,
+            pt:2,
           }}
         />
         <SubMenuContent>
@@ -404,6 +407,7 @@ export function HeaderSection({
                 </IconButton>
 
                 <Button
+                  onClick={() => router.push("/support")}
                   size="small"
                   variant="contained"
                   color="success"
@@ -418,9 +422,11 @@ export function HeaderSection({
 
               <Divider
                 sx={{
+                  marginBottom:"5px",
                   width: "100%",
                   borderBottomWidth: 1,
                   borderColor: "rgba(109, 110, 113, 1)",
+                  color:"rgba(109, 110, 113, 1)"
                 }}
               />
 
@@ -431,7 +437,7 @@ export function HeaderSection({
                   data.map((item, index) => (
                     <div
                       key={item.id}
-                      style={{ paddingBottom: "15px" }}
+                      style={{ paddingBottom: "0" }}
                       onMouseEnter={() =>
                         item.children &&
                         item.children.length > 0 &&
@@ -548,9 +554,11 @@ const HeaderContainer = styled(Container, {
     alignItems: "center",
     justifyContent: "center",
     color: "var(--color)",
-    // height: "auto !important",
-
-    padding: theme.spacing(2, 0),
+    height: "127px !important",
+    [theme.breakpoints.down("md")]: {
+      height: "100px !important",
+    },
+    padding: theme.spacing(2, 0), 
 
     // Override padding for medium (md) and up
     [theme.breakpoints.up("md")]: {

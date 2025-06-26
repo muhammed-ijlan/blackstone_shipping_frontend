@@ -10,19 +10,24 @@ const JobCard = ({ data }: { data: JobOpening }) => {
   const router = useRouter();
   return (
     <Stack
-      py={2}
+      p={2}
       direction={"row"}
       flexWrap={"wrap"}
       justifyContent={"space-between"}
       alignItems={"center"}
       gap={{ xs: 2 }}
+      sx={{
+        border:"1px solid rgba(206, 208, 212, 1)",
+        borderRadius:"8px",
+        padding:"10px",
+      }}
     >
       <Stack gap={1}>
         <Typography variant="h4">{data.title}</Typography>
         <Typography color="rgba(109, 110, 113, 1)" variant="body2">
           {`Posted ${moment(data.date).fromNow()}`}
         </Typography>
-        <Stack direction={"row"} alignItems={"center"} mt={1} gap={1}>
+        <Stack direction={"row"} alignItems={"center"} mt={{xs:0, sm:1}} gap={1}>
           <Box
             component={"img"}
             src={location}
@@ -37,6 +42,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
       </Stack>
       <Button
         sx={{
+          width:{xs:"100%",sm:"auto"},
           bgcolor: "rgba(14, 159, 110, 1)",
           color: "white",
           // fontSize: "18px !important",

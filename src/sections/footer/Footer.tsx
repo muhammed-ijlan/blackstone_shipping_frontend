@@ -152,7 +152,7 @@ const Footer = () => {
     }));
   };
 
-  if (loading) return <LoadingFallback />;
+  // if (loading) return <LoadingFallback />;
 
   function buildNestedMenu(menuItems: MenuItem[]): MenuItem[] {
     const map: { [key: string]: MenuItem } = {};

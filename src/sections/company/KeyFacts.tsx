@@ -41,7 +41,7 @@ const KeyFacts = ({ data }: { data: GetCompanyKeyFactsResponse }) => {
                   width: "295px",
                   height: "184px",
                   color: "rgba(33, 52, 72, 1)",
-                  background: "white",
+                  background: "rgba(245, 247, 251, 1)",
                   borderRadius: "8px",
                   p: 3,
                 }}

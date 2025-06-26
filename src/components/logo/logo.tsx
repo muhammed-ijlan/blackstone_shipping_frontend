@@ -45,7 +45,7 @@ export function Logo({
       className={mergeClasses([logoClasses.root, className])}
       sx={[
         {
-          width: 137,
+          width: 147,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

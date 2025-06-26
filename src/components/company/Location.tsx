@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { APIProvider, Map, Marker, InfoWindow } from '@vis.gl/react-google-maps';
-import { Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Paper, Stack, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { GET_COMPANY_LOCATION } from 'src/graphql/queries';
 import { GetCompanyOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
 
-const LocationMap = ({header = true}:{header:boolean}) => {
+const LocationMap = ({ header = true }: { header: boolean }) => {
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const { data } = useQuery<GetCompanyOfficeLocationsResponse>(GET_COMPANY_LOCATION);
 
@@ -19,24 +19,24 @@ const LocationMap = ({header = true}:{header:boolean}) => {
   } | null>(null);
 
   const defaultCenter = {
-    lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'), 
+    lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'),
     lng: parseFloat(data?.locations.nodes[0].locationsOptions.longitude ?? '0'),
   };
-  
+
   return (
     <Stack>
       {
         header &&
-      <Typography variant="h3" my={4}>
-        {data?.page.companyPageOfficeLocationSection.officeLocationsTitle.toUpperCase()}
-      </Typography>
+        <Typography variant="h6" my={4}>
+          {data?.page.companyPageOfficeLocationSection.officeLocationsTitle.toUpperCase()}
+        </Typography>
       }
 
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '90vh', width: '100%' }}>
           <Map
             center={defaultCenter}
-            defaultZoom={4}
+            defaultZoom={2}
             gestureHandling="cooperative"
             disableDefaultUI={true}
             zoomControl
@@ -77,28 +77,45 @@ const LocationMap = ({header = true}:{header:boolean}) => {
             })}
 
             {selectedLocation && (
-              <InfoWindow
-                position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
-                onCloseClick={() => setSelectedLocation(null)}
-              >
-                <div>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
-                    {selectedLocation.name}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {selectedLocation.address}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Phone:</strong> {selectedLocation.phone}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Email:</strong> {selectedLocation.email}
-                  </Typography>
-                </div>
-              </InfoWindow>
+              <Stack  className="custom-info-window"  sx={{display:{xs:"none",md:"flex"},flexDirection:"column",}}>
+                <Typography variant="h4" fontWeight="bold" gutterBottom>
+                  {selectedLocation.name}
+                </Typography>
+                <Divider sx={{my:1}}/>
+                <Typography variant="body2" gutterBottom color='rgba(45, 55, 72, 0.8)'>
+                  {selectedLocation.address}
+                </Typography>
+                <Divider sx={{my:1}}/>
+                <Typography variant="body2">
+                  <strong>Phone:</strong> {selectedLocation.phone}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Email:</strong> {selectedLocation.email}
+                </Typography>
+              </Stack>
+            )}
+        {selectedLocation && (
+              <Stack  className="custom-info-window"  sx={{display:{xs:"flex",md:"none"},flexDirection:"column",}}>
+                <Typography variant="h4" fontWeight="bold" gutterBottom color='rgba(11, 19, 40, 1)'>
+                  {selectedLocation.name}
+                </Typography>
+                <Divider sx={{my:1}}/>
+                <Typography variant="body2" gutterBottom color='rgba(45, 55, 72, 0.8)'>
+                  {selectedLocation.address}
+                </Typography>
+                <Divider sx={{my:1}}/>
+                <Typography variant="body2">
+                  <strong>Phone:</strong> {selectedLocation.phone}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Email:</strong> {selectedLocation.email}
+                </Typography>
+              </Stack>
             )}
           </Map>
         </div>
+
+
       </APIProvider>
     </Stack>
   );

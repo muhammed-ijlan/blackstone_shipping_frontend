@@ -101,6 +101,11 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
               typography: "h4",
               fontWeight: "600 !important",
               letterSpacing: "3% !important",
+              background:"rgba(26, 86, 219, 1)",
+              "&:hover": {
+                background:"rgba(26, 86, 219, 0.9)",
+              },  
+
             }}
             fullWidth
             variant="contained"
@@ -121,8 +126,8 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
       <Stack
         sx={{
           borderRadius: "8px",
-          border: "1px solid rgba(206, 208, 212, 1)",
-          padding: 3,
+          border:{xs:"none",sm: "1px solid rgba(206, 208, 212, 1)"},
+          padding: {xs:0,sm:3},
         }}
         gap={3}
       >
@@ -130,7 +135,7 @@ const OpenedJobs = ({ data }: { data: GetCareersPageData }) => {
           <React.Fragment key={index}>
             <JobCard data={jobCard} />
             {index !== jobOpeningsData?.jobOpenings.nodes.length - 1 && (
-              <Divider sx={{ borderColor: "rgba(206, 208, 212, 1)" }} />
+              <Divider sx={{   borderColor: "rgba(206, 208, 212, 1)",display:{xs:"none",sm:"block"} }} />
             )}
           </React.Fragment>
         ))}

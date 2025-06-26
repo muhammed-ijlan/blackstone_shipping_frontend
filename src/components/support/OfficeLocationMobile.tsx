@@ -20,7 +20,15 @@ interface Country {
   id: string;
   name: string;
   slug: string;
+  countriesOptions?: {
+    countryFlag?: {
+      node?: {
+        sourceUrl: string;
+      };
+    };
+  };
 }
+
 
 interface OfficeLocation {
   id: string;
@@ -105,7 +113,7 @@ const OfficeLocationMobile = () => {
                <MenuItem key={country.id} value={country.slug}>
                <Box display="flex" alignItems="center" gap={1}>
                  <img
-                   src={"country.flagUrl"} 
+                   src={country.countriesOptions?.countryFlag?.node?.sourceUrl} 
                    alt={country.name}
                    style={{
                      width: 20,
