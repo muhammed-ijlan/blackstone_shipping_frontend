@@ -9,6 +9,7 @@ import {
   Box,
   Pagination,
   PaginationItem,
+  Skeleton,
 } from "@mui/material";
 import moment from "moment";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
@@ -36,7 +37,57 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
 
   const router = useRouter();
 
-  if (loading && posts.length === 0) return <CircularProgress />;
+  if (loading && posts.length === 0) {
+    return (
+      <Grid container spacing={3}>
+        {[...Array(count)].map((_, i) => (
+          <Grid key={i} size={{ xs: 12,md: 6,lg: 4 }}>
+            <Stack
+              sx={{ maxWidth: { xs: "100%", md: "400px" } }}
+              direction={{ xs: "row", md: "column" }}
+              gap={{ xs: 1, md: 0 }}
+            >
+              <Box
+                sx={{
+                  width: { xs: "150px", md: "100%" },
+                  height: { xs: "92px", md: "283px" },
+                  flexShrink: 0,
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="100%"
+                  height="100%"
+                  sx={{ borderRadius: "8px" }}
+                />
+              </Box>
+              <Stack
+                sx={{ height: "100%", width: "100%" }}
+                justifyContent="space-between"
+                flex={1}
+              >
+                <Stack gap={{ xs: 0.5, md: 1 }} direction="column">
+                  <Skeleton width="40%" height={20} />
+                  <Skeleton width="100%" height={28} />
+                  <Skeleton width="90%" height={20} sx={{ display: { xs: "none", md: "block" } }} />
+                  <Skeleton width="95%" height={20} sx={{ display: { xs: "none", md: "block" } }} />
+                  <Skeleton width="85%" height={20} sx={{ display: { xs: "none", md: "block" } }} />
+                </Stack>
+                <Stack
+                  alignItems="flex-end"
+                  sx={{ display: { xs: "none", md: "flex" } }}
+                >
+                  <Skeleton variant="rectangular" width={100} height={36} />
+                </Stack>
+              </Stack>
+            </Stack>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+  
+
   if (error) return <p>Error: {error.message}</p>;
 
   const renderPageNumbers = () => (
@@ -95,7 +146,8 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
             spacing={5}
             key={post.id || post.title}
           >
-            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{xs: "row", md: "column"}} gap={{xs:1,md:0}}  onClick={() => router.push(`/resources/news/${post.id}`)}>
+            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{xs: "row", md: "column"}} gap={{xs:1,md:0}} 
+             onClick={() => router.push(`/resources/news/${post.id}`)}>
               <Box
                 component={"img"}
                 alt={post?.title}

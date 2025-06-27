@@ -35,7 +35,8 @@ const ShipmentVisiblity = ({
           component={"div"}
           sx={{
             "& p": {
-              textAlign: "center",
+              typography:"h4",
+              textAlign: "center !important",
               m: "0",
             },
           }}

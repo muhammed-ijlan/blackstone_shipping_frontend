@@ -172,8 +172,8 @@ export const typography: TypographyVariantsOptions = {
   h6: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '20px',
-      lineHeight: '30px',
+      fontSize: '16px',
+      lineHeight: '25px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       textAlign: 'left',

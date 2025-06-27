@@ -37,6 +37,7 @@ const Page = () => {
             />
             <Divider />
             <Edocs data={data.pageBy.eDocsSection} />
+            <Divider sx={{my:4}}/>
             <SupplyChain
               data={data.pageBy.supplyChainIntegrationSection}
               frightIndex={data.freightIndexTrends.nodes}

@@ -55,7 +55,7 @@ const Page = () => {
           </Container>
           <OfficeLocation />
           <Container maxWidth="xl" sx={{ my: 7 }}>
-            <Location header={false} />
+            <Location  />
           </Container>
         </Stack>
       )}
