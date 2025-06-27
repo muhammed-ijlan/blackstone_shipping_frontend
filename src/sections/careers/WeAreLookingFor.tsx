@@ -8,7 +8,7 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
       <Typography variant="h2" color="rgba(133, 137, 147, 1)">
         {data.page.careersPageWeAreLookingForSection.title}
       </Typography>
-      <Stack direction={{ xs: "column", lg: "row" }} gap={4}>
+      <Stack direction={{ xs: "column", lg: "row" }} gap={4} alignItems={"center"}>
         <Stack gap={2} width={"100%"}>
           <Stack direction={"row"} alignItems={"center"} gap={2}>
             <Stack
@@ -161,7 +161,7 @@ const WeAreLookingFor = ({ data }: { data: GetCareersPageData }) => {
           }}
         >
           <Box
-            sx={{ "& p": { typography: "h6",textAlign:{xs:"center !important",sm:"left !important"} } }}
+            sx={{ "& p": { margin:"0",typography:{xs:"h6",sm: "h3"},textAlign:{xs:"center !important",sm:"left !important"} },textTransform:"capitalize !important" ,}}
             component={"div"}
             dangerouslySetInnerHTML={{
               __html:

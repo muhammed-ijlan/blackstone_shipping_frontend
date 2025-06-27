@@ -201,6 +201,7 @@ const HomeBanner: React.FC = () => {
                         }
                         sx={{
                           backgroundColor: "#0061f2",
+                          width: {xs:"auto",md:"227px"},
                           borderRadius: "4px",
                           px: 3,
                           py: 1.5,
@@ -213,6 +214,7 @@ const HomeBanner: React.FC = () => {
                           "&:hover": {
                             backgroundColor: "#0052cc",
                           },
+                          typography:"body1"
                         }}
                       >
                         {slide.sliderFields.button1Text}
@@ -234,6 +236,7 @@ const HomeBanner: React.FC = () => {
                           "&:hover": {
                             backgroundColor: "#218838",
                           },
+                          typography:"body1"
                         }}
                       >
                         {slide.sliderFields.button2Text}

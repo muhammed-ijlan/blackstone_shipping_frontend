@@ -16,7 +16,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
       backgroundImage: `url(${bgUrl || "/default.jpg"})`,
       height: { xs: 500, sm: "664px" },
       width: "100%",
-      backgroundSize: "cover", // fill container, may crop
+      backgroundSize: "cover", 
       backgroundPosition: "center 0%",
       backgroundRepeat: "no-repeat",
       position: "relative",
@@ -24,7 +24,7 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
     >
       <Stack
         sx={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           height: "100%",
           width: "100%",
           position: "absolute",

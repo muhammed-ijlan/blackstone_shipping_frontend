@@ -43,6 +43,7 @@ const SupplyChain = ({
           sx={{
             "& p": {
               typography: "body1",
+              fontWeight:"600"
             },
           }}
         />

@@ -44,7 +44,7 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
             sx={{
               "& p": {
                 marginBottom: 2,
-                typography: "body1",
+                typography:"body1 ",
               },
               "& strong": {
 

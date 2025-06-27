@@ -13,6 +13,11 @@ const ControlTower = ({ data }: { data: Data }) => {
       <Typography variant="h2">{data.ctTitle}</Typography>
       <Box
         component={"div"}
+        sx={{
+          "& p": {
+            fontWeight:"600",
+          }
+        }}
         dangerouslySetInnerHTML={{ __html: data.ctContent }}
       />
     </Stack>
