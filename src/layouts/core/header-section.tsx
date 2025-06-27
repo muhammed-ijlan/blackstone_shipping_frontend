@@ -41,6 +41,9 @@ const NavBar = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("xl")]: {
     gap: theme.spacing(3.5),
   },
+  [theme.breakpoints.only("lg")]: {
+    gap: theme.spacing(3.5),
+  },
   // paddingTop: theme.spacing(1),
   // paddingBottom: theme.spacing(1),
   alignItems: "center",
@@ -340,7 +343,7 @@ export function HeaderSection({
               <Logo onClick={() => router.push("/")} href={logo} />
             </Stack>
 
-            <Stack gap={1} alignItems="flex-end" mr={{lg:"55px"}}>
+            <Stack gap={1} alignItems="flex-end" mr={{xs:"0px",lg:"55px"}}>
               <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
                 <IconButton
                   size="small"
