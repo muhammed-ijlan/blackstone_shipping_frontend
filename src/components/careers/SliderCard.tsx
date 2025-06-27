@@ -28,7 +28,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
   const isSelfHosted = videoUrl?.match(/\.(mp4|webm)$/i);
 
   const videoJsOptions: VideoJsPlayerOptions = {
-    autoplay: false,
+    autoplay: true,
     controls: false,
     responsive: true,
     fluid: true,

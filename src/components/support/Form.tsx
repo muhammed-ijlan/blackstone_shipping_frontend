@@ -374,9 +374,10 @@ const Form = ({ state }: { state: string }) => {
                     <Button
                       fullWidth
                       variant="outlined"
+                      color="inherit"
                       size="large"
                       type="reset"
-                      sx={{ width: "150px" }}
+                      sx={{ width: "150px" ,color:"rgba(45, 55, 72, 1)"}}
                     >
                       Cancel
                     </Button>
@@ -386,6 +387,9 @@ const Form = ({ state }: { state: string }) => {
                       sx={{
                         width: { xs: "200px", sm: "300px" },
                         background: "rgba(26, 86, 219, 1)",
+                        "&:hover": {
+                          background: "rgba(26, 86, 219, 0.9)",
+                        },
                       }}
                       size="large"
                       variant="contained"

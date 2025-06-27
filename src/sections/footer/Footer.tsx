@@ -207,19 +207,19 @@ const Footer = () => {
                 component={"img"}
                 src={fb}
                 width={{ xs: "40px", sm: "60px" }}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
                 component={"img"}
                 src={linkedin}
                 width={{ xs: "40px", sm: "60px" }}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
                 component={"img"}
                 src={insta}
                 width={{ xs: "40px", sm: "60px" }}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
             </Stack>
           </Stack>

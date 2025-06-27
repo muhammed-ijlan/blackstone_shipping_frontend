@@ -209,7 +209,6 @@ export function NavContent({
   };
 
   useEffect(() => {
-    // Initialize open sections based on the current pathname
     const initializeOpenSections = (items: MenuItem[], parentId?: string) => {
       items.forEach((item) => {
         if (

@@ -12,14 +12,15 @@ const Banner = ({ bgUrl, subTitle = "", mainTitle }: BannerPropsTypes) => {
   const router = useRouter();
   return (
     <Stack
-      sx={{
-        backgroundImage: `url(${bgUrl || "/default.jpg"})`,
-        height: { xs: 500, sm: 600 },
-        width: "100%",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
-      }}
+    sx={{
+      backgroundImage: `url(${bgUrl || "/default.jpg"})`,
+      height: { xs: 500, sm: "664px" },
+      width: "100%",
+      backgroundSize: "cover", // fill container, may crop
+      backgroundPosition: "center 0%",
+      backgroundRepeat: "no-repeat",
+      position: "relative",
+    }}
     >
       <Stack
         sx={{
