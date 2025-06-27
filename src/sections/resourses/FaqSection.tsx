@@ -138,12 +138,13 @@ const FaqSection = () => {
                         src={expanded === index ? collapse : expand}
                         alt="toggle icon"
                         sx={{
-                          width: "24px !important",
-                          height: "24px !important",
+                              width: "24px !important",
+                              height: {xs:"none",md:"24px !important"},
                           transition: "transform 0.2s ease-in-out",
                           "& img": {
-                            width: "100% !important",
-                            height: "24px !important",
+                            // width: "30px !important",
+                            // height: "24px !important",
+                            maxWidth:"auto !important",
                           },
                         }}
                       />

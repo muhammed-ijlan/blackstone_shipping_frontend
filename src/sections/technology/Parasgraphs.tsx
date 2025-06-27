@@ -15,6 +15,14 @@ const Parasgraphs = ({ data }: { data: Data }) => {
       </Typography>
       <Box
         component={"div"}
+        sx={{
+          "& p": {
+            fontWeight:"600",
+            typography:"h4",
+            lineHeight:"34px",
+          }
+        }}
+
         dangerouslySetInnerHTML={{ __html: data.content }}
       />
     </Stack>

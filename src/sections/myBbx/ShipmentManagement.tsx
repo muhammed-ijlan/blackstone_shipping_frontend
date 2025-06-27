@@ -35,6 +35,7 @@ const ShipmentManagement = ({ data }: { data: Data }) => {
           sx={{
             "& p": {
               typography: "body1",
+              fontWeight:"600"
             },
           }}
           dangerouslySetInnerHTML={{ __html: data.smContent }}

@@ -38,7 +38,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
                 borderRadius: "8px",
               }}
             >
-              <Typography variant="body1" color="rgba(11, 19, 40, 1)">
+              <Typography variant="body1" sx={{fontWeight:"600"}} color="rgba(11, 19, 40, 1)">
                 {office.title}
               </Typography>
             </Box>

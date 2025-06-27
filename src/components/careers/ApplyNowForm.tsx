@@ -268,10 +268,10 @@ const ApplyNowForm = () => {
               <Grid size={{ xs: 12, md: 12 }}>
                 <Stack alignItems={"flex-end"}>
                   <Stack direction={"row"} gap={2}>
-                    <Button variant="outlined" size="large" type="reset">
+                    <Button sx={{color:"rgba(45, 55, 72, 1) !important",typography:"body1"}} color="inherit" variant="outlined" size="large" type="reset">
                       Cancel
                     </Button>
-                    <Button size="large" variant="contained" type="submit">
+                    <Button sx={{backgroundColor:"rgba(26, 86, 219, 1) !important",typography:"body1","&:hover":{backgroundColor:"rgba(26, 86, 219, 0.9) !important"}}} size="large" variant="contained" type="submit">
                       Submit Application
                     </Button>
                   </Stack>

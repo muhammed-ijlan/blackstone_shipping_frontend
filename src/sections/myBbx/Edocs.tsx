@@ -28,6 +28,7 @@ const Edocs = ({ data }: { data: Data }) => {
             "& p": {
               typography: "body1",
               textWrap: "wrap",
+              fontWeight:"600"
             },
             "& ul": {
               display: "flex",
@@ -35,9 +36,11 @@ const Edocs = ({ data }: { data: Data }) => {
               gap: 2,
               flexWrap: "wrap",
               width: { xs: "100%", md: "500px" },
+
             },
             "& li": {
               listStyle: "inside",
+              fontWeight:"600"
             },
           }}
         />

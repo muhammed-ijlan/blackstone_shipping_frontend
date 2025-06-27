@@ -19,7 +19,7 @@ const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
         >
           Careers /&nbsp;
         </Typography>
-        <Typography> Submit Application</Typography>
+        <Typography sx={{fontWeight:"600 !important"}}> Submit Application</Typography>
       </Stack>
 
       <Stack
@@ -62,7 +62,7 @@ const CareerBanner = ({ data }: { data: GetJobPostDetailsResponse }) => {
               variant="h2"
               sx={{
                 maxWidth: "800px",
-                fontWeight: "700",
+                fontWeight: "700 !important",
                 color: "white !important",
                 top: "380px",
                 textWrap: "wrap",

@@ -17,7 +17,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
       alignItems={"center"}
       gap={{ xs: 2 }}
       sx={{
-        border:"1px solid rgba(206, 208, 212, 1)",
+        border:{xs:"1px solid rgba(206, 208, 212, 1)",sm:"none"},
         borderRadius:"8px",
         padding:"10px",
       }}

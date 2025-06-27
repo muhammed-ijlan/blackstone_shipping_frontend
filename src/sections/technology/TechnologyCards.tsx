@@ -27,6 +27,13 @@ const TechnologyCards = ({ data }: { data: TechnologyNode[] }) => {
             </Typography>
             <Box
               component={"div"}
+              sx={{
+                "& p": {
+                  fontWeight:"600",
+                  typography:"h4",
+                  lineHeight:"34px !important",
+                }
+              }}
               dangerouslySetInnerHTML={{ __html: item.content }}
             />
           </Stack>

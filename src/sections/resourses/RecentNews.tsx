@@ -74,7 +74,7 @@ const RecentNews = () => {
                 sx={{
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: "2",
+                  WebkitLineClamp: "3",
                   overflow: "hidden",
                   "& p": {
                     m: 0,

@@ -28,9 +28,9 @@ const AllNews = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 2 }}>
+    <Container maxWidth="xl" >
+        <Divider sx={{my:6}} />
       <Stack gap={3}>
-        <Divider />
         <Typography variant="h2"> All News</Typography>
         <Stack
           direction={"row"}
