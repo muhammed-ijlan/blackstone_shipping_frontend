@@ -94,6 +94,7 @@ const WhatWeOffer = () => {
           <SliderButton2 scrollRef={scrollRef} />
         </Stack>
         <CustomArrowButton
+          onClick={() => router.push("/solutions")}
           name="View All"
           sx={{ px: "24px", py: "12px", width: { xs: "100%", sm: "50%" } }}
         />

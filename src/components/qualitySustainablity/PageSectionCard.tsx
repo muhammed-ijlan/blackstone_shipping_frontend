@@ -35,7 +35,7 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
           }}
         >
           <Typography color="rgba(11, 19, 40, 1)" variant="h2">
-            {subTitle}
+            {subTitle} 
           </Typography>
 
           <Box

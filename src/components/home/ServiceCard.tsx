@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import icon1 from "src/assets/icons/icon1.png";
 import { useRouter } from "src/routes/hooks";
@@ -10,15 +10,27 @@ const ServiceCard = ({
 }) => {
   const [hovered, setHovered] = useState(false);
   const router = useRouter();
+  const theme = useTheme();
+
+  const isHoverEnabled = theme.breakpoints.values.lg <= window.innerWidth;
+
   return (
     <Stack
       component={"div"}
       onClick={() => router.push(item.link)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (window.innerWidth >= theme.breakpoints.values.lg) {
+          setHovered(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (window.innerWidth >= theme.breakpoints.values.lg) {
+          setHovered(false);
+        }
+      }}
       sx={{
         border: "1px solid rgba(45, 55, 72, 1)",
-        width: "100% ",
+        width: "100%",
         height: { xs: "100%", md: "100%" },
         borderRadius: "8px",
         p: 3,
@@ -26,21 +38,29 @@ const ServiceCard = ({
         position: "relative",
         cursor: "pointer",
         background: "rgba(45, 55, 72, 1)",
-        transition: "color 0s ease-in-out",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          width: "300%",
-          height: "300%",
-          background: "white",
-          top: 0,
-          left: 0,
-          transform: hovered
-            ? "translate(-50%, -50%) scale(1)"
-            : "translate(60%, -100%) scale(1)",
-          transition: "transform 0.7s ease-in-out",
-          borderRadius: "50%",
-          zIndex: 0,
+        [theme.breakpoints.down("lg")]: {
+          transition: "none",
+          "&::before": {
+            display: "none",
+          },
+        },
+        [theme.breakpoints.up("lg")]: {
+          transition: "color 0s ease-in-out",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            width: "300%",
+            height: "300%",
+            background: "white",
+            top: 0,
+            left: 0,
+            transform: hovered
+              ? "translate(-50%, -50%) scale(1)"
+              : "translate(60%, -100%) scale(1)",
+            transition: "transform 0.7s ease-in-out",
+            borderRadius: "50%",
+            zIndex: 0,
+          },
         },
       }}
       justifyContent={"space-between"}
@@ -54,24 +74,29 @@ const ServiceCard = ({
       >
         <Typography
           sx={{
-            color: hovered ? "rgba(45, 55, 72, 1)" : "white",
-            transition: hovered
-              ? "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out 0.3s"
-              : "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out",
-
+            color: {
+              xs: "white",
+              lg: hovered ? "rgba(45, 55, 72, 1)" : "white",
+            },
+            transition: {
+              xs: "none",
+              lg: hovered
+                ? "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out 0.3s"
+                : "color 0.8s ease-in-out, text-decoration-color 0.3s ease-in-out",
+            },
             textDecoration: "underline",
-            textDecorationColor: hovered
-              ? "rgba(45, 55, 72, 1)"
-              : "transparent",
-
+            textDecorationColor: {
+              xs: "transparent",
+              lg: hovered ? "rgba(45, 55, 72, 1)" : "transparent",
+            },
             overflow: "hidden",
-            textOverflow: "ellipsis",
+            textOverflow: "ellipsis",      
             whiteSpace: "wrap",
             fontWeight: 600,
             fontSize: "20px",
             lineHeight: "32px",
             letterSpacing: "3%",
-            textTransform: "capitalize",
+            textTransform: "capitalize", 
             textAlign: "left",
             typography: { xs: "h4", lg: "h5" },
           }}

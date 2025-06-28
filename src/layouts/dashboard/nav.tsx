@@ -42,7 +42,6 @@ export function NavMobile({
   workspaces,
 }: NavContentProps & { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
-
   useEffect(() => {
     if (open) {
       onClose();
@@ -80,12 +79,14 @@ function MenuItemRenderer({
   pathname,
   openSections,
   handleToggle,
+  onClose,
 }: {
   item: MenuItem;
   depth?: number;
   pathname: string;
   openSections: Record<string, boolean>;
   handleToggle: (id: string) => void;
+  onClose: () => void;
 }) {
   const isItemActive = (menuItem: MenuItem): boolean => {
     if (menuItem.uri === pathname) return true;
@@ -108,7 +109,17 @@ function MenuItemRenderer({
         <ListItemButton
           component={hasChildren ? "div" : RouterLink}
           href={hasChildren ? undefined : item.uri}
-          onClick={() => hasChildren && handleToggle(item.id)}
+          onClick={() => {
+            if (hasChildren) {
+              handleToggle(item.id);
+            } else {
+              if (item.uri === pathname) {
+                // Same route clicked — just close the drawer
+                onClose();
+              }
+            }
+          }}
+
           disableGutters
           sx={(theme) => ({
             pl: paddingLeft,
@@ -140,7 +151,6 @@ function MenuItemRenderer({
           </Box>
           {hasChildren && (
             <Iconify
-              onClick={() => hasChildren && handleToggle(item.id)}
               icon={
                 openSections[item.id]
                   ? "ic:round-keyboard-arrow-down"
@@ -182,6 +192,7 @@ function MenuItemRenderer({
                 pathname={pathname}
                 openSections={openSections}
                 handleToggle={handleToggle}
+                onClose={onClose}
               />
             ))}
           </List>
@@ -229,30 +240,31 @@ export function NavContent({
 
   return (
     <>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
-      >
-        <Logo href={logo} sx={{ width: "100px" }} />
-        <Iconify
-          width={30}
-          icon="ic:round-close"
-          onClick={onClose}
-          sx={{ color: "rgba(45, 55, 72, 1)", cursor: "pointer" }}
-        />
-      </Stack>
-      <Divider />
-      {slots?.topArea}
-      <Scrollbar fillContent>
+      <Scrollbar fillContent sx={{
+      }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={2}
+        >
+          <Logo href={logo} sx={{ width: "100px" }} />
+          <Iconify
+            width={30}
+            icon="ic:round-close"
+            onClick={onClose}
+            sx={{ color: "rgba(45, 55, 72, 1)", cursor: "pointer" }}
+          />
+        </Stack>
+        <Divider />
+        {slots?.topArea}
         <Box
           component="nav"
           sx={[
             {
               display: "flex",
               flex: "1 1 auto",
-              height: "100vh",
+              height: "80vh",
               flexDirection: "column",
             },
             ...(Array.isArray(sx) ? sx : [sx]),
@@ -267,12 +279,13 @@ export function NavContent({
                 pathname={pathname}
                 openSections={openSections}
                 handleToggle={handleToggle}
+                onClose={onClose} // 👈 pass here
               />
             ))}
           </List>
         </Box>
       </Scrollbar>
-      {slots?.bottomArea}
+      {/* {slots?.bottomArea} */}
     </>
   );
 }

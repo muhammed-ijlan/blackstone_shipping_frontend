@@ -216,25 +216,39 @@ export interface OfficeLocationSection {
   officeLocationMapUrl?: string;
 }
 
-export interface GetCompanyOfficeLocationsResponse {
-  page: {
-    companyPageOfficeLocationSection: {
-      officeLocationsTitle: string;
-      officeLocationMapUrl?: string;
+export interface GetOfficeLocationsResponse {
+  officeLocations: {
+    pageInfo: {
+      hasNextPage: boolean;
+      endCursor: string | null;
     };
-  };
-  locations: {
-    nodes: {
-      title: string;
-      locationsOptions: {
-        latitude: string;
-        longitude: string;
-        name: string;
-        address: string;
-        phoneNumber: number;
-        emailAddress: string;
-      };
-    }[];
+    nodes: OfficeLocationNode[];
   };
 }
 
+export interface OfficeLocationNode {
+  id: string;
+  title: string;
+  officeLocationsOptions: {
+    address: string;
+    phoneNumber: string;
+    emailAddress: string;
+    latitude: string;
+    longitude: string;
+    country: {
+      nodes: CountryNode[];
+    };
+  };
+}
+
+export interface CountryNode {
+  id: string;
+  name: string;
+  countriesOptions?: {
+    countryFlag?: {
+      node?: {
+        sourceUrl: string;
+      };
+    };
+  };
+}

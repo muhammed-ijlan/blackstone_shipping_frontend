@@ -393,27 +393,48 @@ query GetCompanyPage {
 `;
 
 export const GET_COMPANY_LOCATION = gql`
-query GetCompanyOfficeLocations {
-  page(id: "company", idType: URI) {
-    companyPageOfficeLocationSection {
-      officeLocationsTitle
-      officeLocationMapUrl
+query GetOfficeLocations($count: Int!, $after: String, $search: String) {
+  officeLocations(
+    first: $count
+    after: $after
+    where: {
+      search: $search
+      orderby: { field: DATE, order: ASC }
     }
-  }
-  locations {
+  ) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
     nodes {
+      id
       title
-      locationsOptions {
-        latitude
-        longitude
-        name
+      officeLocationsOptions {
         address
         phoneNumber
         emailAddress
+        latitude
+        longitude
+        country {
+          nodes {
+            id
+            name
+            ... on Country {
+              countriesOptions {
+                countryFlag {
+                  node {
+                    sourceUrl
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 }
+
 `;
 
 export const GET_SERVICES_PAGE = gql`
@@ -1142,29 +1163,125 @@ query GetCareersPage {
 }
 `
 
-export const GET_JOB_OPENINGS = gql`
-query GetJobOpenings {
-  jobOpenings(
-    where: {
-      parentIn: [0]
-      orderby: { field: DATE, order: ASC }
-    }
-  ) {
-    nodes {
-      title
-      id
-      date
-      jobOpeningsOptions {
-        jobLocation {
-          nodes {
-            name
+export const GET_ALL_JOB_OPENINGS = gql`
+  query GetAllJobs($search: String) {
+    jobOpenings(
+      where: {
+        parentIn: [0]
+        orderby: { field: DATE, order: ASC }
+        search: $search
+      }
+    ) {
+      nodes {
+        id
+        title
+        date
+        jobOpeningsOptions {
+          jobLocation {
+            nodes {
+              name
+            }
           }
         }
       }
     }
   }
-}
-`
+`;
+
+export const GET_JOB_OPENINGS_BY_CATEGORY = gql`
+  query GetJobsByCategory($search: String, $categorySlug: String!) {
+    jobOpenings(
+      where: {
+        parentIn: [0]
+        orderby: { field: DATE, order: ASC }
+        search: $search
+        taxQuery: {
+          taxArray: [
+            { taxonomy: JOBCATEGORY, field: SLUG, terms: [$categorySlug] }
+          ]
+        }
+      }
+    ) {
+      nodes {
+        id
+        title
+        date
+        jobOpeningsOptions {
+          jobLocation {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_JOB_OPENINGS_BY_LOCATION = gql`
+  query GetJobsByLocation($search: String, $locationSlug: String!) {
+    jobOpenings(
+      where: {
+        parentIn: [0]
+        orderby: { field: DATE, order: ASC }
+        search: $search
+        taxQuery: {
+          taxArray: [
+            { taxonomy: JOBLOCATION, field: SLUG, terms: [$locationSlug] }
+          ]
+        }
+      }
+    ) {
+      nodes {
+        id
+        title
+        date
+        jobOpeningsOptions {
+          jobLocation {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_JOB_OPENINGS_BY_BOTH = gql`
+  query GetJobsByBoth($search: String, $locationSlug: String!, $categorySlug: String!) {
+    jobOpenings(
+      where: {
+        parentIn: [0]
+        orderby: { field: DATE, order: ASC }
+        search: $search
+        taxQuery: {
+          relation: AND
+          taxArray: [
+            { taxonomy: JOBLOCATION, field: SLUG, terms: [$locationSlug] }
+            { taxonomy: JOBCATEGORY, field: SLUG, terms: [$categorySlug] }
+          ]
+        }
+      }
+    ) {
+      nodes {
+        id
+        title
+        date
+        jobOpeningsOptions {
+          jobLocation {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+
 
 export const GET_JOB_POST_DETAILS_BY_ID = gql`
   query GetJobPostDetailsByID($id: ID!) {
@@ -1768,4 +1885,29 @@ export const GET_OFFICE_LOCATION_BY_URI = gql`
       }
     }
   }
+`;
+
+
+export const GET_JOB_CATEGORIES = gql`
+query GetJobCategories {
+  jobCategories {
+    nodes {
+      id
+      name
+      slug
+    }
+  }
+}
+`;
+
+export const GET_JOB_LOCATIONS = gql`
+query GetJobLocations {
+  jobLocations {
+    nodes {
+      id
+      name
+      slug
+    }
+  }
+}
 `;

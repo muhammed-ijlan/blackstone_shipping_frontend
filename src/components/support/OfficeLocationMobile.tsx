@@ -71,6 +71,30 @@ const OfficeLocationMobile = () => {
     getLocationDetails({ variables: { uri } });
   };
 
+
+  useEffect(() => {
+    if (countries.length && !selectedCountry) {
+      const defaultCountry = countries[0]
+     
+  
+      if (defaultCountry) {
+        setSelectedCountry(defaultCountry.slug);
+  
+        getCities({ variables: { slug: [defaultCountry.slug] } });
+      }
+    }
+  }, [countries]);
+  useEffect(() => {
+    if (cities.length && !selectedUri) {
+      const firstCity = cities[0];
+      if (firstCity) {
+        setSelectedUri(firstCity.uri);
+        getLocationDetails({ variables: { uri: firstCity.uri } });
+      }
+    }
+  }, [cities]);
+  
+
   return (
     <Stack
       display={{ xs: "flex", md: "none" }}

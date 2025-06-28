@@ -185,7 +185,7 @@ const HomeBanner: React.FC = () => {
                       {slide.sliderFields.shortDescription}
                     </Typography>
 
-                    <Stack direction="row" spacing={2} mt={2}>
+                    <Stack direction="row" spacing={2} mt={2} width={"100%"}>
                       <Button
                         onClick={() =>
                           router.push(slide.sliderFields.button1Link)

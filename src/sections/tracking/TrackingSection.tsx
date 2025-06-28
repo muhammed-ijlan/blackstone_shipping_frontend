@@ -6,13 +6,25 @@ import {
   TextField,
   Typography,
   CircularProgress,
+  Box,
+  Divider,
+  LinearProgress,
+  useTheme,
+  StepConnector,
+  StepIconProps,
+  Stepper,
+  Step,
+  StepLabel,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TrackingInput from "src/components/tracking/TrackingInput";
 import MapIcon from "@mui/icons-material/Map";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
+import calander from "src/assets/icons/calander.png";
+import location from "src/assets/icons/location-track.png";
+import { DirectionsBoatFilled } from "@mui/icons-material";
 
 interface VesselData {
   departure: string;
@@ -104,7 +116,7 @@ const TrackingSection = () => {
         );
         setLastLocation(
           data.result.Table[0].lastLocation ||
-            "Vessel Departure Mundra, GJ (INMUN), INDIA Rr 26/05/2025"
+          "Vessel Departure Mundra, GJ (INMUN), INDIA Rr 26/05/2025"
         );
         setVesselData(
           data.result.Table[0].vesselData || [
@@ -153,6 +165,32 @@ const TrackingSection = () => {
       fetchData(containerNo);
     }
   };
+  const ports = [
+    {
+      date: "26/05/2025",
+      label: "Vessel Departure",
+      location: "Mundra, GJ (INMUN), INDIA",
+      completed: true,
+    },
+    {
+      date: "03/07/2025",
+      label: "Vessel Arrival",
+      location: "Rotterdam, ZH (NLRTM), NETHERLANDS",
+      completed: true,
+    },
+    {
+      date: "03/07/2025",
+      label: "Vessel Departure",
+      location: "",
+      completed: false,
+    },
+    {
+      date: "09/07/2025",
+      label: "Vessel Arrival",
+      location: "Antwerpen, VAN (BEANR), BELGIUM",
+      completed: false,
+    },
+  ];
 
   const handleMapView = () => {
     const mapUrl = `https://vzone.in:2637/tracklivemap.html?LAT=${lat}&LON=${lon}&VesselName=${vesselName}&TIMESTAMP=${timestamp}&Speed=${speed}`;
@@ -163,8 +201,32 @@ const TrackingSection = () => {
     if (iframe) iframe.src = mapUrl;
   };
 
-  const handleCloseModal = () => setModalOpen(false);
 
+  const CustomConnector = styled(StepConnector)(({ theme }) => ({
+    '& .MuiStepConnector-line': {
+      height: 4,
+      border: 0,
+      backgroundColor: theme.palette.grey[300],
+      borderRadius: 1,
+    },
+  }));
+
+  // Custom Step Icon
+  const CustomStepIcon = (props: StepIconProps) => {
+    const { active, completed } = props;
+    return (
+      <DirectionsBoatFilled
+        sx={{
+          color: completed || active ? "#0052CC" : "#B0B0B0",
+          fontSize: 28,
+        }}
+      />
+    );
+  };
+
+
+  const handleCloseModal = () => setModalOpen(false);
+  const theme = useTheme();
   return (
     <Stack>
       <TrackingInput
@@ -279,7 +341,8 @@ const TrackingSection = () => {
             <Stack
               sx={{
                 width: "100%",
-                p: 3,
+                py: 1,
+                px: 3,
                 borderRadius: "8px 8px 0 0",
                 bgcolor: "rgba(54, 66, 86, 1)",
               }}
@@ -287,7 +350,65 @@ const TrackingSection = () => {
               alignItems={"center"}
               justifyContent={"space-between"}
             >
-              {}
+              <Typography variant="h4" color="white">
+                FDCU0343247 | 40' Highcube
+              </Typography>
+              <Typography variant="body1" color="white">
+                Emission 2.50613
+              </Typography>
+            </Stack>
+
+            <Stack p={3} gap={3}>
+              <Stack direction={"row"} justifyContent={"space-between"} >
+                <Stack gap={1}>
+                  <Stack direction={"row"} alignItems={"center"} gap={1}>
+                    <Box width={"24px"} height={"24px"} component={"img"} src={calander} alt="location" />
+                    <Typography variant="body1" sx={{ fontWeight: "600 !important" }} color="rgba(109, 110, 113, 1)">
+                      Estimated arrival date
+                    </Typography>
+                  </Stack>
+                  <Typography variant="h4"  >09/07/2025</Typography>
+                </Stack>
+
+                <Stack gap={1}>
+                  <Stack direction={"row"} alignItems={"center"} gap={1}>
+                    <Box width={"24px"} height={"24px"} component={"img"} src={location} alt="location" />
+                    <Typography variant="body1" sx={{ fontWeight: "600 !important" }} color="rgba(109, 110, 113, 1)">
+                      Last location
+                    </Typography>
+                  </Stack>
+                  <Typography variant="h4"  >Vessel Departure Mundra, GJ (INMUN), INDIA
+                    rr26/05/2025</Typography>
+                </Stack>
+                <Button variant="contained" sx={{ borderRadius: "8px", background: "rgba(26, 86, 219, 1)", typography: "body1", height: "42px" }}>Hide</Button>
+              </Stack>
+              <Divider sx={{ borderColor: "rgba(206, 208, 212, 1)" }} />
+
+              <Box
+                sx={{
+                  p: 2,
+                  border: "1px solid #E0E0E0",
+                  borderRadius: 2,
+                  bgcolor: "#FAFAFA",
+                }}
+              >
+                <Stepper
+                sx={{
+                  
+                }}
+                  alternativeLabel
+                  // activeStep={activeStep}
+                  connector={<CustomConnector />}
+                >
+                  {ports.map((port, index) => (
+                    <Step key={index} completed={port.completed}>
+                      <StepLabel StepIconComponent={CustomStepIcon}>
+                        test
+                      </StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </Box>
             </Stack>
           </Stack>
         </Stack>

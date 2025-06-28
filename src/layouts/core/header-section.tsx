@@ -274,7 +274,7 @@ export function HeaderSection({
       </Stack>
     );
   };
-
+console.log(data)
   const normalizePath = (path: string = "") => {
     if (!path) return "";
     return path.replace(/\/+$/, "").toLowerCase();

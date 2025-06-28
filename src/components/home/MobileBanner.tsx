@@ -13,8 +13,11 @@ import searchIcon from "src/assets/icons/search.png";
 import trackingIcon from "src/assets/icons/track.png";
 import myBBXIcon from "src/assets/icons/box.png";
 import contactIcon from "src/assets/icons/mail.png";
+import { useRouter } from "src/routes/hooks";
+
 
 const MobileBanner = () => {
+  const router = useRouter();
   return (
     <Stack spacing={2} mb={3} sx={{ display: { xs: "block", sm: "none" } }}>
       <Divider />
@@ -44,7 +47,8 @@ const MobileBanner = () => {
           </IconButton>
         </Grid>
         <Grid size={6}>
-          <IconButton
+          <IconButton 
+            onClick={() => router.push("/tracking")}  
             size="small"
             sx={{
               border: "1px solid rgba(109, 110, 113, 0.2)",
@@ -93,6 +97,7 @@ const MobileBanner = () => {
         </Grid>
         <Grid size={6}>
           <Button
+            onClick={() => router.push("/support")}
             fullWidth
             size="small"
             variant="contained"

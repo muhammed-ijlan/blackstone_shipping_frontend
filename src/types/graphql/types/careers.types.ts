@@ -138,3 +138,48 @@ export interface GetJobPostDetailsResponse {
 export interface GetJobPostDetailsVariables {
   id: string;
 }
+
+
+export interface GetJobCategoriesResponse {
+  jobCategories: {
+    nodes: JobCategoryNode[];
+  };
+}
+
+export interface JobCategoryNode {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+
+export interface GetJobLocationsResponse {
+  jobLocations: {
+    nodes: JobLocationNode[];
+  };
+}
+
+export interface JobLocationNode {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export interface GetJobOpeningsResponse {
+  jobOpenings: {
+    nodes: JobOpeningNode[];
+  };
+}
+
+export interface JobOpeningNode {
+  id: string;
+  title: string;
+  date: string;
+  jobOpeningsOptions: {
+    jobLocation: {
+      nodes: {
+        name: string;
+      }[];
+    };
+  };
+}

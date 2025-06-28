@@ -1,75 +1,87 @@
 import React, { useState } from 'react';
-import { APIProvider, Map, Marker, InfoWindow } from '@vis.gl/react-google-maps';
-import { Divider, IconButton, Paper, Stack, Typography } from '@mui/material';
+import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
-import { GET_COMPANY_LOCATION } from 'src/graphql/queries';
-import { GetCompanyOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
+import { GET_OFFICE_LOCATIONS } from 'src/graphql/queries';
+import { GetOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
 
-const LocationMap = ({ header = true }: { header: boolean }) => {
-  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
-  const { data } = useQuery<GetCompanyOfficeLocationsResponse>(GET_COMPANY_LOCATION);
+interface SelectedLocation {
+  lat: number;
+  lng: number;
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  image: string;
+}
 
-  const [selectedLocation, setSelectedLocation] = useState<{
-    lat: number;
-    lng: number;
-    name: string;
-    address: string;
-    phone: string;
-    email: string;
-  } | null>(null);
+const LocationMap = () => {
+  const { data } = useQuery<GetOfficeLocationsResponse>(GET_OFFICE_LOCATIONS, {
+    variables: {
+      count: 3,
+      after: null,
+      search: "",
+    },
+  });
+
+  const [selectedLocation, setSelectedLocation] = useState<SelectedLocation | null>(null);
+
+  const firstNode = data?.officeLocations.nodes[0]?.officeLocationsOptions;
+  const defaultLat = parseFloat(firstNode?.latitude ?? '0');
+  const defaultLng = parseFloat(firstNode?.longitude ?? '0');
 
   const defaultCenter = {
-    lat: parseFloat(data?.locations.nodes[0].locationsOptions.latitude ?? '0'),
-    lng: parseFloat(data?.locations.nodes[0].locationsOptions.longitude ?? '0'),
+    lat: isNaN(defaultLat) ? 0 : defaultLat,
+    lng: isNaN(defaultLng) ? 0 : defaultLng,
   };
 
   return (
     <Stack>
-      {
-        header &&
-        <Typography variant="h6" my={4}>
-          {data?.page.companyPageOfficeLocationSection.officeLocationsTitle.toUpperCase()}
-        </Typography>
-      }
+
+      <Typography variant="h6" my={{ xs: 1, md: 4 }}>
+        OFFICE LOCATIONS
+      </Typography>
 
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
-        <div style={{ height: '90vh', width: '100%' }}>
+        <Box component={"div"} sx={{ height: { xs: "60vh", md: '90vh' }, width: '100%', position: "relative" }}>
           <Map
-            center={defaultCenter}
             defaultZoom={2}
+            defaultCenter={defaultCenter}
             gestureHandling="cooperative"
-            disableDefaultUI={true}
+            disableDefaultUI
             zoomControl
-            streetViewControl
+            streetViewControl={false}
             mapTypeControl
             fullscreenControl
           >
-            {data?.locations.nodes.map((location, index) => {
+            {data?.officeLocations.nodes.map((location, index) => {
               const {
                 latitude,
                 longitude,
-                name,
                 address,
                 phoneNumber,
                 emailAddress,
-              } = location.locationsOptions;
+              } = location.officeLocationsOptions;
 
               const lat = parseFloat(latitude);
               const lng = parseFloat(longitude);
+
+              if (isNaN(lat) || isNaN(lng)) return null;
 
               return (
                 <Marker
                   key={index}
                   position={{ lat, lng }}
-                  title={name}
+                  title={location.title}
                   onClick={() =>
                     setSelectedLocation({
                       lat,
                       lng,
-                      name,
+                      name: location.title,
                       address,
-                      phone: phoneNumber.toString(),
+                      phone: phoneNumber,
                       email: emailAddress,
+                      image: location.officeLocationsOptions.country.nodes[0].countriesOptions?.countryFlag?.node?.sourceUrl ?? "",
                     })
                   }
                 />
@@ -77,33 +89,21 @@ const LocationMap = ({ header = true }: { header: boolean }) => {
             })}
 
             {selectedLocation && (
-              <Stack  className="custom-info-window"  sx={{display:{xs:"none",md:"flex"},flexDirection:"column",}}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom>
-                  {selectedLocation.name}
-                </Typography>
-                <Divider sx={{my:1}}/>
-                <Typography variant="body2" gutterBottom color='rgba(45, 55, 72, 0.8)'>
+              <Stack
+                display={{ xs: "none", md: "flex" }}
+                className="custom-info-window"
+              >
+                <Stack direction="row" gap={2} alignItems="center">
+                  <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />
+                  <Typography color='rgba(11, 19, 40, 1)' variant="h4" sx={{ fontWeight: "600 !important" }} width={"60%"}>
+                    {selectedLocation.address.split("\r\n")[0]}
+                  </Typography>
+                </Stack>
+                <Divider sx={{ my: 1 }} />
+                <Typography variant="body2" gutterBottom>
                   {selectedLocation.address}
                 </Typography>
-                <Divider sx={{my:1}}/>
-                <Typography variant="body2">
-                  <strong>Phone:</strong> {selectedLocation.phone}
-                </Typography>
-                <Typography variant="body2">
-                  <strong>Email:</strong> {selectedLocation.email}
-                </Typography>
-              </Stack>
-            )}
-        {selectedLocation && (
-              <Stack  className="custom-info-window"  sx={{display:{xs:"flex",md:"none"},flexDirection:"column",}}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom color='rgba(11, 19, 40, 1)'>
-                  {selectedLocation.name}
-                </Typography>
-                <Divider sx={{my:1}}/>
-                <Typography variant="body2" gutterBottom color='rgba(45, 55, 72, 0.8)'>
-                  {selectedLocation.address}
-                </Typography>
-                <Divider sx={{my:1}}/>
+                <Divider sx={{ my: 1 }} />
                 <Typography variant="body2">
                   <strong>Phone:</strong> {selectedLocation.phone}
                 </Typography>
@@ -113,10 +113,32 @@ const LocationMap = ({ header = true }: { header: boolean }) => {
               </Stack>
             )}
           </Map>
-        </div>
-
-
+        </Box>
       </APIProvider>
+      {selectedLocation && (
+        <Stack
+          display={{ xs: "flex", md: "none" }}
+          className="custom-info-window"
+        >
+          <Stack direction="row" gap={2} alignItems="center">
+            <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />
+            <Typography color='rgba(11, 19, 40, 1)' variant="h4" sx={{ fontWeight: "600 !important" }} width={"60%"}>
+              {selectedLocation.address.split("\r\n")[0]}
+            </Typography>
+          </Stack>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="body2" gutterBottom>
+            {selectedLocation.address}
+          </Typography>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="body2">
+            <strong>Phone:</strong> {selectedLocation.phone}
+          </Typography>
+          <Typography variant="body2">
+            <strong>Email:</strong> {selectedLocation.email}
+          </Typography>
+        </Stack>
+      )}
     </Stack>
   );
 };
