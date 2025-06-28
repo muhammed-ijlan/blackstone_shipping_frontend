@@ -1,7 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import arrow from "src/assets/icons/arrow.png";
-import { useRouter } from "src/routes/hooks";
 
 type CustomArrowButtonProps = {
   name: string;

@@ -82,8 +82,8 @@ function MenuItemRenderer({
             m: "5px 0",
             ...(depth === 0 && {
               color: "rgba(249, 250, 251, 0.6)",
-              textDecoration: "underline !important",
-              textUnderlineOffset: "5px",
+              // textDecoration: "underline !important",
+              // textUnderlineOffset: "5px",
             }),
             ...(depth !== 0 && {
               color: "rgba(249, 250, 251, 1)",
