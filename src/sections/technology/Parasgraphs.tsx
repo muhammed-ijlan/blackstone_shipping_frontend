@@ -18,8 +18,12 @@ const Parasgraphs = ({ data }: { data: Data }) => {
         sx={{
           "& p": {
             fontWeight:"600",
+            typography:"body1",
+            margin:"0"
+          },
+          "& strong": {
+            fontWeight:"600",
             typography:"h4",
-            lineHeight:"34px",
           }
         }}
 

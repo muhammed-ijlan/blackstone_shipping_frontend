@@ -131,6 +131,7 @@ const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
   "&:hover": {
     color: theme.palette.primary.main,
   },
+  cursor: "pointer",
 }));
 
 const SubMenuItem = styled(MuiLink)(({ theme }) => ({
@@ -252,18 +253,24 @@ export function HeaderSection({
           {subcategories.map((category) => (
             <SubMenuCategory key={category.id}>
               <SubMenuCategoryTitle
-                href={category.uri !== "#" ? category.uri : undefined}
-                onClick={() =>
-                  category.uri !== "#" && router.push(category.uri)
-                }
+                // href={category.uri !== "#" ? category.uri : undefined}
+                onClick={() => {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                  category.uri !== "#" && router.push(category.uri);
+                  handleMouseLeave();
+                }}
               >
                 {category.label}
               </SubMenuCategoryTitle>
               {category.children?.map((item) => (
                 <SubMenuItem
                   key={item.id}
-                  href={item.uri !== "#" ? item.uri : undefined}
-                  onClick={() => item.uri !== "#" && router.push(item.uri)}
+                  // href={item.uri !== "#" ? item.uri : undefined}
+                  onClick={() => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                    item.uri !== "#" && router.push(item.uri);
+                    handleMouseLeave();
+                  }}
                 >
                   {item.label}
                 </SubMenuItem>
@@ -274,7 +281,7 @@ export function HeaderSection({
       </Stack>
     );
   };
-console.log(data)
+  
   const normalizePath = (path: string = "") => {
     if (!path) return "";
     return path.replace(/\/+$/, "").toLowerCase();

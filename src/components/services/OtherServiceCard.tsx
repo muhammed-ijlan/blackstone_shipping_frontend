@@ -1,8 +1,9 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { ServiceChild } from "src/types/graphql/types/services.types";
 
 const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
+  const theme = useTheme();
   return (
     <Stack gap={2}>
       <Box
@@ -16,7 +17,14 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
           borderRadius: "8px",
         }}
       />
-      <Typography variant="h4">{data.title.toUpperCase()}</Typography>
+      <Typography variant="h4" sx={{
+        display:"-webkit-box",
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        height:"65px"
+      }}>{data.title.toUpperCase()}</Typography>
       <Box
         sx={{
           "& ul": {
@@ -38,6 +46,30 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
         <Box
           component="div"
           sx={{
+            paddingRight: "10px ",
+            [theme.breakpoints.down("md")]: {
+              overflow:"none"
+            },
+            [theme.breakpoints.up("md")]: {
+              overflowY: "auto",
+              maxHeight: "200px",
+              minHeight: "100px",
+              width: "100%",
+              "&::-webkit-scrollbar": {
+                width: "5px",
+                borderRadius: "10px",
+                WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,.3)",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                borderRadius: "10px",
+                background: "rgba(0,0,0,0.4)"
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "rgba(0,0,0,0.1)"
+              }
+
+            }, 
+          
             "& p": {
               margin: "0",
               typography: "body1",

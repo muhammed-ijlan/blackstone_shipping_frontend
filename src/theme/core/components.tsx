@@ -95,12 +95,16 @@ const MuiContainer: Components<Theme>["MuiContainer"] = {
       maxWidth: "100%",
 
       // Extra small mobiles (≤ 360px)
+     
       "@media (max-width: 360px)": {
         maxWidth: "320px",
       },
 
       // Small mobiles (361px–599px)
-      "@media (min-width: 361px) and (max-width: 599px)": {
+      "@media (min-width: 359px) and (max-width: 376px)": {
+        maxWidth: "340px",
+      },
+      "@media (min-width: 377px) and (max-width: 599px)": {
         maxWidth: "370px",
       },
 

@@ -22,6 +22,7 @@
     "axios": "^1.10.0",
     "change-case": "^5.4.4",
     "dompurify": "^3.2.5",
+    "fast-xml-parser": "^5.2.5",
     "flag-icon-css": "^4.1.7",
     "formik": "^2.4.6",
     "graphql": "^16.11.0",
@@ -40,6 +41,7 @@
     "swiper": "^11.2.8",
     "video.js": "^7.6.5",
     "videojs-youtube": "^3.0.1",
+    "xml2js": "^0.6.2",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -48,6 +50,7 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/video.js": "^7.3.58",
+    "@types/xml2js": "^0.4.14",
     "@vitejs/plugin-react": "^4.4.1",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",

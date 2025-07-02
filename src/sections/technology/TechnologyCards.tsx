@@ -31,7 +31,7 @@ const TechnologyCards = ({ data }: { data: TechnologyNode[] }) => {
                 "& p": {
                   fontWeight:"600",
                   typography:"h4",
-                  lineHeight:"34px !important",
+                  // lineHeight:"34px !important",
                 }
               }}
               dangerouslySetInnerHTML={{ __html: item.content }}

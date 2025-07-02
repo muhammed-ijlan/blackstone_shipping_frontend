@@ -110,8 +110,8 @@ export const typography: TypographyVariantsOptions = {
   h4: {
     fontWeight: 600,
     [defaultMuiTheme.breakpoints.up('xs')]: {
-      fontSize: '17px',
-      lineHeight: '25px',
+      fontSize: '16px',
+      lineHeight: '26px',
       letterSpacing: '3%',
       textTransform: 'capitalize',
       // textAlign: 'center',
