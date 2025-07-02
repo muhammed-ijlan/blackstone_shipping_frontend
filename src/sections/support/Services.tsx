@@ -71,14 +71,14 @@ const Services = ({ data }: { data: CountryPageData }) => {
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
-            height={{ xs: "100%", md: "243px" }}
+            height={{ xs: "100%", md: "100%" }}
             src={data.country.countriesOptions?.countryImage2?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", sm: "376px" }}
-            height={{ xs: "100%", sm: "243px" }}
+            height={{ xs: "100%", sm: "100%" }}
             src={data.country.countriesOptions?.countryImage3?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />

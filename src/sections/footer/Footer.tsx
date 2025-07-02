@@ -233,7 +233,7 @@ const Footer = () => {
           <Stack
             display={{ xs: "none", lg: "flex" }}
             direction={"row"}
-            gap={10}
+            // gap={10}
             justifyContent={"space-between"}
           >
             <Stack gap={3}>

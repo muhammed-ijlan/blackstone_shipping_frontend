@@ -1,27 +1,27 @@
 import { gql } from "@apollo/client";
 
 export const GET_SLIDERS = gql`
-query {
-  sliders {
-    nodes {
-      title
-      featuredImage {
-        node {
-          sourceUrl
-        }
+  query GetSliders {
+    page(id: "home", idType: URI) {
+      homePageFieldsSliderSection {
+        backgroundVideo
       }
-      sliderFields {
-        sliderMainHeading
-        subtitle
-        shortDescription
-        button1Text
-        button1Link
-        button2Text
-        button2Link
+    }
+    sliders {
+      nodes {
+        title
+        sliderFields {
+          sliderMainHeading
+          subtitle
+          shortDescription
+          button1Text
+          button1Link
+          button2Text
+          button2Link
+        }
       }
     }
   }
-}
 `;
 
 export const GET_HEADER_MENU = gql`

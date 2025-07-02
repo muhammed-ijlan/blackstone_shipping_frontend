@@ -19,7 +19,7 @@ import { useRouter } from "src/routes/hooks";
 const MobileBanner = () => {
   const router = useRouter();
   return (
-    <Stack spacing={2} mb={3} sx={{ display: { xs: "block", sm: "none" } }}>
+    <Stack spacing={2} mb={3} sx={{ display: { xs: "block", lg: "none" } }}>
       <Divider />
 
       <Grid container rowGap={2} columnSpacing={2}>

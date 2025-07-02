@@ -20,13 +20,19 @@ import VideoJS from "../VideoJs";
 import arrow from "src/assets/icons/arrowcircle.png";
 import LoadingFallback from "../LoadingFallback";
 
-interface SliderNode {
-  title: string;
-  featuredImage: {
-    node: {
-      sourceUrl: string;
+export interface GetSlidersResponse {
+  page: {
+    homePageFieldsSliderSection: {
+      backgroundVideo: string;
     };
   };
+  sliders: {
+    nodes: SliderNode[];
+  };
+}
+
+export interface SliderNode {
+  title: string;
   sliderFields: {
     sliderMainHeading: string;
     subtitle: string;
@@ -38,14 +44,9 @@ interface SliderNode {
   };
 }
 
-interface GetSlidersData {
-  sliders: {
-    nodes: SliderNode[];
-  };
-}
 
 const HomeBanner: React.FC = () => {
-  const { loading, error, data } = useQuery<GetSlidersData>(GET_SLIDERS);
+  const { loading, error, data } = useQuery<GetSlidersResponse>(GET_SLIDERS);
   const router = useRouter();
   const playerRef = useRef<VideoJsPlayer | null>(null);
 
@@ -63,7 +64,7 @@ const HomeBanner: React.FC = () => {
 
     sources: [
       {
-        src: "https://cdn.pixabay.com/video/2019/05/12/23544-335833111_large.mp4",
+        src: data?.page.homePageFieldsSliderSection.backgroundVideo || "",
         type: "video/mp4",
       },
     ],
@@ -86,7 +87,7 @@ const HomeBanner: React.FC = () => {
         width="100%"
         position={"relative"}
         height={{ xs: 400, md: 700 }}
-        display={{ xs: "none", sm: "block" }}
+        display={{ xs: "none", lg: "block" }}
       >
         <Box
           sx={{
@@ -99,7 +100,7 @@ const HomeBanner: React.FC = () => {
             zIndex: 0,
           }}
         >
-          <Box sx={{ filter: "brightness(0.7)" }}>
+          <Box sx={{ filter: "brightness(0.5)" }}>
             <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
           </Box>
         </Box>
@@ -201,7 +202,7 @@ const HomeBanner: React.FC = () => {
                         }
                         sx={{
                           backgroundColor: "#0061f2",
-                          width: {xs:"auto",md:"227px"},
+                          width: {xs:"auto",lg:"autp"},
                           borderRadius: "4px",
                           px: 3,
                           py: 1.5,
@@ -251,7 +252,7 @@ const HomeBanner: React.FC = () => {
       </Box>
 
       {/* MOBILE SCREEEN */}
-      <Stack display={{ xs: "block", sm: "none" }}>
+      <Stack display={{ xs: "block", lg: "none" }}>
         <Container maxWidth="xl">
           <MobileBanner />
           <Stack width={"100%"} gap={4}>
