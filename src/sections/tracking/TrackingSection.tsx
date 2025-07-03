@@ -74,7 +74,7 @@ const TrackingSection = () => {
                 {
                     BLISS: {
                         CONTAINER: {
-                            Type: 5,
+                            Type: 5, 
                             ContainerNo: number
                         }
                     }
