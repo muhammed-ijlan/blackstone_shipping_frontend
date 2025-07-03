@@ -1,323 +1,226 @@
-// import {
-//   Box,
-//   Button,
-//   Container,
-//   Divider,
-//   Grid,
-//   Stack,
-//   TextField,
-//   Typography,
-//   Stepper,
-//   Step,
-//   StepLabel,
-//   StepConnector,
-//   stepConnectorClasses,
-// } from "@mui/material";
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { styled } from "@mui/material/styles";
-// import { parseStringPromise } from "xml2js";
-// import calander from "src/assets/icons/calander.png";
-// import location from "src/assets/icons/location-track.png";
-// import TrackingInput from "src/components/tracking/TrackingInput";
-// import DirectionsBoatIcon from "@mui/icons-material/DirectionsBoat";
+import {
+    Box,
+    Button,
+    Container,
+    Divider,
+    Grid,
+    Stack,
+    TextField,
+    Typography,
+    Stepper,
+    Step,
+    StepLabel,
+    StepConnector,
+    stepConnectorClasses
+} from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import TrackingInput from "src/components/tracking/TrackingInput";
+import calander from "src/assets/icons/calander.png";
+import location from "src/assets/icons/location-track.png";
+import boatIcon from "src/assets/icons/boatIconWhite.png";
+import boatIconGray from "src/assets/icons/boatIconGray.png";
+import TrackingMap from "src/components/tracking/TrackingMap";
 
-// // Custom Step Connector
-// const CustomConnector = styled(StepConnector)(({ theme }) => ({
-//   [`&.${stepConnectorClasses.alternativeLabel}`]: {
-//     top: 22,
-//   },
-//   [`&.${stepConnectorClasses.active}`]: {
-//     [`& .${stepConnectorClasses.line}`]: {
-//       backgroundColor: "#1A56DB",
-//     },
-//   },
-//   [`& .${stepConnectorClasses.line}`]: {
-//     height: 2,
-//     border: 0,
-//     backgroundColor: "#E0E0E0",
-//   },
-// }));
+interface TrackingEvent {
+    location: string;
+    description: string;
+    date: string;
+}
 
-// // Custom Icon
-// const StepIcon = ({ icon }: any) => (
-//   <Box
-//     sx={{
-//       backgroundColor: "#1A56DB",
-//       color: "white",
-//       borderRadius: "50%",
-//       width: 32,
-//       height: 32,
-//       display: "flex",
-//       alignItems: "center",
-//       justifyContent: "center",
-//     }}
-//   >
-//     {icon}
-//   </Box>
-// );
+const CustomConnector = styled(StepConnector)(({ theme }) => ({
+    [`&.${stepConnectorClasses.root}`]: {
+        position: 'absolute !important',
+    },
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+        top: 75,
+    },
+    [`&.${stepConnectorClasses.active}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            backgroundColor: "#1A56DB",
+        },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            backgroundColor: "#1A56DB",
+        },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+        height: 2,
+        border: 0,
+        backgroundColor: "#E0E0E0",
+    },
+}));
 
-// const TrackingSection = () => {
-//   const [containerNo, setContainerNo] = useState<string>("");
-//   const [trackingData, setTrackingData] = useState<any>(null);
+const TrackingSection = () => {
+    const [containerNo, setContainerNo] = useState<string>("");
+    const [trackingData, setTrackingData] = useState<{
+        summary: {
+            type: string;
+            fpod: string;
+            fpodEta: string;
+        };
+        events: TrackingEvent[];
+    } | null>(null);
+    const [activeStep, setActiveStep] = useState<number>(0);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [data, setData] = useState<any>(null);
 
-//   useEffect(() => {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const myParam = urlParams.get("search");
-//     if (myParam) {
-//       setContainerNo(myParam);
-//       fetchData(myParam);
-//     }
-//   }, []);
+    const fetchTrackingData = async (number: string) => {
+        try {
+            const response = await axios.post(
+                "https://api.blackstoneshipping.com/master-api/Tracking/track_container",
+                {
+                    BLISS: {
+                        CONTAINER: {
+                            Type: 5,
+                            ContainerNo: number
+                        }
+                    }
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer vxSId2W1NCzz2BSiqGNKl4rMMyxUTE",
+                        appid: "bss_api_web",
+                        keyid: "5Q1AyHOCzfWBfyA",
+                    }
+                }
+            );
 
-//   const fetchData = async (containerNo: string) => {
-//     try {
-//             const res = await axios.get(`https://api.blackstoneshipping.com/master-api/Tracking/Enquiry_02?pType=5&pContainerNo=${containerNo}`, {
-//         headers: {
-//           Accept: "application/json",
-//         },
-//         withCredentials: false 
-//       });
-//       const result = res.data?.result;
-      
-//       const summary = {
-//         type: "40' Highcube",
-//         fpod: result?.Table?.[0]?.html?.includes("Antwerpen") ? "Antwerpen, VAN (BEANR), BELGIUM" : "",
-//         fpodEta: "09/07/2025", // extract from html string if needed
-//       };
-  
-//       const vesselEvents = result?.Table2 || [];
-//       const formattedEvents = vesselEvents.map((v: any, index: number) => [
-//         {
-//           location: v.POLName,
-//           description: "Vessel Departure",
-//           date: v.pETD?.slice(0, 10).split("-").reverse().join("/") || v.ETD?.slice(0, 10).split("-").reverse().join("/"),
-//         },
-//         {
-//           location: v.PODName,
-//           description: "Vessel Arrival",
-//           date: v.ETA?.slice(0, 10).split("-").reverse().join("/"),
-//         },
-//       ]).flat();
-      
-//       // Add Last Location from event[0]
-//       const events = formattedEvents;
-  
-//       setTrackingData({
-//         summary,
-//         events,
-//       });
-//     } catch (error) {
-//       console.error("Error fetching tracking data:", error);
-//     }
-//   };
+            const table = response.data.result.Table;
+            setData(table);
 
-//   const handleTrack = () => {
-//     if (containerNo) {
-//       fetchData(containerNo);
-//     }
-//   };
+            const summary = {
+                type: table?.[0]?.ISOCode === "45G1" ? "40' Highcube" : table?.[0]?.ISOCode || "",
+                fpod: table.at(-1)?.PODName || "",
+                fpodEta: table.at(-1)?.ETA || "",
+            };
 
-//   const events = trackingData?.events || [];
-//   const summary = trackingData?.summary || {};
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const rawEvents: TrackingEvent[] = table.flatMap((row: any) => {
+                const events: TrackingEvent[] = [];
+                if (row.ETD) {
+                    events.push({
+                        location: `${row.POLName}, ${row.POLPortCode}`,
+                        description: "Vessel Departure",
+                        date: row.ETD,
+                    });
+                }
+                if (row.ETA) {
+                    events.push({
+                        location: `${row.PODName}, ${row.PODPortcode}`,
+                        description: "Vessel Arrival",
+                        date: row.ETA,
+                    });
+                }
+                return events;
+            });
 
-//   console.log(events)
+            const parseDate = (d: string) => {
+                const [dd, mm, yyyy] = d.split("/");
+                return new Date(`${yyyy}-${mm}-${dd}`).getTime();
+            };
 
-//   return (
-//     <Stack>
-//       <TrackingInput
-//         value={containerNo}
-//         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-//           setContainerNo(e.target.value)
-//         }
-//         onClick={handleTrack}
-//       />
+            const events = rawEvents
+                .filter(e => e.date && e.location)
+                .sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
-//       <Container maxWidth="xl" sx={{ my: 6, gap: 4 }}>
-//         <Stack gap={3}>
-//           {/* Top Inputs */}
-//           <Grid container spacing={2} alignItems="center">
-//             <Grid item xs={12} md={4}>
-//               <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
-//                 Container Number
-//               </Typography>
-//               <TextField
-//                 fullWidth
-//                 disabled
-//                 value={containerNo}
-//                 sx={{
-//                   "& .MuiOutlinedInput-root": {
-//                     height: "60px",
-//                     borderRadius: "8px",
-//                     typography: "body1",
-//                     "& fieldset": { borderColor: "rgba(45, 55, 72, 0.2)" },
-//                   },
-//                   "& .MuiInputBase-input.Mui-disabled": {
-//                     WebkitTextFillColor: "rgba(45, 55, 72, 1)",
-//                     opacity: 1,
-//                     background: "white",
-//                   },
-//                 }}
-//               />
-//             </Grid>
+            const today = new Date();
+            const todayTime = today.setHours(0, 0, 0, 0);
 
-//             <Grid item xs={12} md={4}>
-//               <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
-//                 From
-//               </Typography>
-//               <TextField
-//                 disabled
-//                 fullWidth
-//                 value={events[0]?.location || ""}
-//                 sx={{
-//                   "& .MuiOutlinedInput-root": {
-//                     backgroundColor: "rgba(249, 250, 251, 1)",
-//                     height: "60px",
-//                     borderRadius: "8px",
-//                     typography: "body1",
-//                     "& fieldset": { borderColor: "rgba(45, 55, 72, 0.5)" },
-//                   },
-//                   "& .MuiInputBase-input.Mui-disabled": {
-//                     WebkitTextFillColor: "rgba(45, 55, 72, 1)",
-//                     opacity: 1,
-//                   },
-//                 }}
-//               />
-//             </Grid>
+            const activeIndex = events.reduce((acc, curr, idx) => {
+                const stepDate = parseDate(curr.date);
+                return stepDate <= todayTime ? idx : acc;
+            }, -1);
 
-//             <Grid item xs={12} md={4}>
-//               <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
-//                 To
-//               </Typography>
-//               <TextField
-//                 disabled
-//                 fullWidth
-//                 value={summary.fpod || ""}
-//                 sx={{
-//                   "& .MuiOutlinedInput-root": {
-//                     backgroundColor: "rgba(249, 250, 251, 1)",
-//                     height: "60px",
-//                     borderRadius: "8px",
-//                     typography: "body1",
-//                     "& fieldset": { borderColor: "rgba(45, 55, 72, 0.5)" },
-//                   },
-//                   "& .MuiInputBase-input.Mui-disabled": {
-//                     WebkitTextFillColor: "rgba(45, 55, 72, 1)",
-//                     opacity: 1,
-//                   },
-//                 }}
-//               />
-//             </Grid>
-//           </Grid>
+            setTrackingData({ summary, events });
+            setActiveStep(activeIndex === -1 ? 0 : activeIndex);
+        } catch (err) {
+            console.error("Tracking error:", err);
+        }
+    };
 
-//           {/* Tracking Box */}
-//           {trackingData && (
-//             <Stack sx={{ border: "1px solid rgba(45, 55, 72, 0.2)", borderRadius: "8px" }}>
-//               <Stack
-//                 sx={{ width: "100%", py: 1, px: 3, borderRadius: "8px 8px 0 0", bgcolor: "rgba(54, 66, 86, 1)" }}
-//                 direction={"row"}
-//                 alignItems={"center"}
-//                 justifyContent={"space-between"}
-//               >
-//                 <Typography variant="h4" color="white">
-//                   {containerNo} | {summary.type}
-//                 </Typography>
-//                 <Typography variant="body1" color="white">
-//                   Emission 2.50613
-//                 </Typography>
-//               </Stack>
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialContainer = urlParams.get("search");
+        if (initialContainer) {
+            setContainerNo(initialContainer);
+            fetchTrackingData(initialContainer);
+        }
+    }, []);
 
-//               <Stack p={3} gap={3}>
-//                 <Stack direction={"row"} justifyContent={"space-between"}>
-//                   <Stack gap={1}>
-//                     <Stack direction={"row"} alignItems={"center"} gap={1}>
-//                       <Box width={"24px"} height={"24px"} component={"img"} src={calander} alt="calendar" />
-//                       <Typography variant="body1" fontWeight={600} color="rgba(109, 110, 113, 1)">
-//                         Estimated arrival date
-//                       </Typography>
-//                     </Stack>
-//                     <Typography variant="h4">{summary.fpodEta}</Typography>
-//                   </Stack>
+    const summary = trackingData?.summary || {};
+    const events = trackingData?.events || [];
 
-//                   <Stack gap={1}>
-//                     <Stack direction={"row"} alignItems={"center"} gap={1}>
-//                       <Box width={"24px"} height={"24px"} component={"img"} src={location} alt="location" />
-//                       <Typography variant="body1" fontWeight={600} color="rgba(109, 110, 113, 1)">
-//                         Last location
-//                       </Typography>
-//                     </Stack>
-//                     <Typography variant="h4">
-//                       {events[0]?.description} {events[0]?.location}{" "}
-//                       <small>rr{events[0]?.date}</small>
-//                     </Typography>
-//                   </Stack>
+    return (
+        <Stack>
+            <TrackingInput
+                value={containerNo}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setContainerNo(e.target.value)}
+                onClick={() => fetchTrackingData(containerNo)}
+            />
 
-//                   <Button
-//                     variant="contained"
-//                     sx={{
-//                       borderRadius: "8px",
-//                       background: "rgba(26, 86, 219, 1)",
-//                       typography: "body1",
-//                       height: "42px",
-//                     }} 
-//                   >
-//                     Hide
-//                   </Button>
-//                 </Stack>
+            <Container maxWidth="xl" sx={{ my: 6, gap: 4 }}>
+                {trackingData && (
+                    <Stack gap={3}>
+                        <Box sx={{ border: "1px solid rgba(45, 55, 72, 0.2)", borderRadius: 2, p: 3, bgcolor: "#FAFAFA" }}>
+                            <Box sx={{ display: { xs: "block", md: "none" } }}>
+                                <Stepper orientation="vertical" activeStep={activeStep}>
+                                    {events.map((event, index) => {
+                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
+                                        return (
+                                            <Step key={index} completed={isCompleted}>
+                                                <StepLabel
+                                                    icon={
+                                                        <Box sx={{ width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                            <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
+                                                        </Box>
+                                                    }
+                                                >
+                                                    <Stack spacing={0.5}>
+                                                        <Typography fontWeight={600}>{event.description}</Typography>
+                                                        <Typography>{event.date}</Typography>
+                                                        <Typography fontWeight={600}>{event.location}</Typography>
+                                                    </Stack>
+                                                </StepLabel>
+                                            </Step>
+                                        );
+                                    })}
+                                </Stepper>
+                            </Box>
 
-//                 <Divider sx={{ borderColor: "rgba(206, 208, 212, 1)" }} />
+                            <Box sx={{ display: { xs: "none", md: "block" } }}>
+                                <Stepper alternativeLabel activeStep={activeStep} connector={<CustomConnector />}>
+                                    {events.map((event, index) => {
+                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
+                                        return (
+                                            <Step key={index} completed={isCompleted}>
+                                                <StepLabel
+                                                    StepIconComponent={() => (
+                                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                            <Typography fontWeight={600}>{event.description}</Typography>
+                                                            <Typography>{event.date}</Typography>
+                                                            <Box sx={{ mt: 0.5, mb: 0.5, width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
+                                                                <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
+                                                            </Box>
+                                                            <Typography fontWeight={600} align="center" maxWidth={200}>{event.location}</Typography>
+                                                        </Box>
+                                                    )}
+                                                />
+                                            </Step>
+                                        );
+                                    })}
+                                </Stepper>
+                            </Box>
+                        </Box>
+                        <TrackingMap apiData={data} />
+                    </Stack>
+                )}
+            </Container>
+        </Stack>
+    );
+};
 
-//                 {/* Stepper */}
-//                 <Box sx={{ p: 2, border: "1px solid #E0E0E0", borderRadius: 2, bgcolor: "#FAFAFA", width: "100%" }}>
-//                 <Stepper alternativeLabel connector={<CustomConnector />}>
-//   {events.map((event, index) => ( 
-//     <Step key={index}>
-//       <StepLabel
-//         StepIconComponent={() => (
-//           <Box 
-//             sx={{
-//               width: 32,
-//               height: 32,
-//               bgcolor: index === 0 ? "#1A56DB" : "#D1D5DB",
-//               borderRadius: "50%",
-//               display: "flex",
-//               alignItems: "center",
-//               justifyContent: "center",
-//               color: index === 0 ? "white" : "#4B5563",
-//             }}
-//           >
-//             <DirectionsBoatIcon sx={{ fontSize: 18 }} />
-//           </Box>
-//         )}
-//       >
-//         <Stack spacing={1} alignItems="center">
-//           <Typography variant="caption" fontWeight={600}>
-//             {event.description}
-//           </Typography>
-//           <Typography variant="caption" color="text.secondary">
-//             {event.date}
-//           </Typography>
-//           <Typography
-//             variant="caption"
-//             color="text.secondary"
-//             textAlign="center"
-//           >
-//             {event.location}
-//           </Typography>
-//         </Stack>
-//       </StepLabel>
-//     </Step>
-//   ))}
-// </Stepper>
-
-//                 </Box>
-//               </Stack>
-//             </Stack>
-//           )}
-//         </Stack>
-//       </Container>
-//     </Stack>
-//   );
-// };
-
-// export default TrackingSection;
+export default TrackingSection;

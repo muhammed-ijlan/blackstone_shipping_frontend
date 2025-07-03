@@ -43,6 +43,7 @@ export const MyBlackboxFrightPage = lazy(
 );
 export const TrackingPage = lazy(() => import("../pages/tracking"));
 export const PrivacyPolicyPage = lazy(() => import("../pages/general"));
+export const SearchPage = lazy(() => import("../pages/search"));
 
 const renderFallback = () => (
   <Box
@@ -226,6 +227,14 @@ export const routesSection: RouteObject[] = [
         element: (
           <Suspense fallback={renderFallback()}>
             <PrivacyPolicyPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "search",
+        element: (
+          <Suspense fallback={renderFallback()}>
+            <SearchPage />
           </Suspense>
         ),
       },

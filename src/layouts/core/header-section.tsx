@@ -360,6 +360,7 @@ export function HeaderSection({
                     gap: 0.5,
                     p: "10px 16px",
                   }}
+                  onClick={() => router.push("/search")}
                 >
                   <Box component={"img"} width={"16px"} src={searchIcon} />
                   <Typography

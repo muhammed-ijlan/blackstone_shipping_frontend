@@ -18,12 +18,17 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
         }}
       />
       <Typography variant="h4" sx={{
-        display:"-webkit-box",
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: "vertical",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        height:"65px"
+        // [theme.breakpoints.up("md")]: {
+        //   display:"-webkit-box",
+        //   WebkitLineClamp: 2,
+        //   WebkitBoxOrient: "vertical",
+        //   overflow: "hidden",
+        //   textOverflow: "ellipsis",
+        //   height:"100%"
+        // },
+        // [theme.breakpoints.down("md")]: {
+        //   display:"flex",
+        // },
       }}>{data.title.toUpperCase()}</Typography>
       <Box
         sx={{
