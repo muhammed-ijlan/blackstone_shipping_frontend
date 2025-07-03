@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Container, Stack, TextField } from "@mui/material";
 import React from "react";
 
 interface TrackingInputProps {
@@ -18,7 +18,11 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
         alignItems: "center",
       }}
     >
-      <Stack direction="row" gap={1} sx={{ width: "840px" }}>
+        <Container maxWidth="xl" sx={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}} >
+      <Stack direction={{xs: "column", md: "row"}} gap={1} sx={{ width: {xs: "100%", md: "840px"}, justifyContent: "center",
+        alignItems: "center", }}>
+
+       
         <TextField
           value={value}
           onChange={onChange}
@@ -26,7 +30,7 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
           variant="outlined"
           fullWidth
           sx={{
-            width: "550px",
+            width: {xs: "100%", md: "550px"},
             "& .MuiOutlinedInput-root": {
               height: "60px",
               backgroundColor: "#F4F5F7",
@@ -57,7 +61,7 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
           variant="contained"
           sx={{
             background: "rgba(26, 86, 219, 1)",
-            width: "290px",
+            width: {xs: "100%", md: "290px"},
             height: "60px",
             "&:hover": { backgroundColor: "rgba(21, 71, 204, 1)" },
             "& .MuiButton-label": {
@@ -71,6 +75,7 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
           Track
         </Button>
       </Stack>
+        </Container>
     </Stack>
   );
 };

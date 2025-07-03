@@ -1911,3 +1911,50 @@ query GetJobLocations {
   }
 }
 `;
+
+export const GLOBAL_SEARCH = gql`
+  query GlobalSearch($search: String!) {
+    posts(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+    pages(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+    services(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+    solutions(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+    caseStudies(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+    technologies(where: { search: $search }, first: 100) {
+      nodes {
+        id
+        title
+        uri
+      }
+    }
+  }
+`;

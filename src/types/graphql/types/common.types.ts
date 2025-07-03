@@ -37,3 +37,19 @@ export interface GetGeneralPagesData {
 export interface GetGeneralPagesVars {
     uri: string;
 }
+
+
+export interface GlobalSearchResponse {
+    posts: { nodes: SearchNode[] };
+    pages: { nodes: SearchNode[] };
+    services: { nodes: SearchNode[] };
+    solutions: { nodes: SearchNode[] };
+    caseStudies: { nodes: SearchNode[] };
+    technologies: { nodes: SearchNode[] };
+  }
+  
+  export interface SearchNode {
+    id: string;
+    title: string;
+    uri: string;
+  }
