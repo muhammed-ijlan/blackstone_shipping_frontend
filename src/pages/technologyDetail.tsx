@@ -28,7 +28,7 @@ const Page = () => {
     <>
       {data && (
         <>
-          <Banner
+          <Banner 
             mainTitle={
               data?.technology?.technologySinglePageBannerSection
                 ?.bannerTitle ?? ""

@@ -74,7 +74,7 @@ const TrackingSection = () => {
                 {
                     BLISS: {
                         CONTAINER: {
-                            Type: 5, 
+                            Type: 5,
                             ContainerNo: number
                         }
                     }
@@ -151,7 +151,7 @@ const TrackingSection = () => {
         }
     }, []);
 
-    const summary = trackingData?.summary || {};
+    const summary = trackingData?.summary || { type: "", fpod: "", fpodEta: "" };
     const events = trackingData?.events || [];
 
     return (
@@ -163,61 +163,191 @@ const TrackingSection = () => {
             />
 
             <Container maxWidth="xl" sx={{ my: 6, gap: 4 }}>
-                {trackingData && (
-                    <Stack gap={3}>
-                        <Box sx={{ border: "1px solid rgba(45, 55, 72, 0.2)", borderRadius: 2, p: 3, bgcolor: "#FAFAFA" }}>
-                            <Box sx={{ display: { xs: "block", md: "none" } }}>
-                                <Stepper orientation="vertical" activeStep={activeStep}>
-                                    {events.map((event, index) => {
-                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
-                                        return (
-                                            <Step key={index} completed={isCompleted}>
-                                                <StepLabel
-                                                    icon={
-                                                        <Box sx={{ width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                            <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
-                                                        </Box>
-                                                    }
-                                                >
-                                                    <Stack spacing={0.5}>
-                                                        <Typography fontWeight={600}>{event.description}</Typography>
-                                                        <Typography>{event.date}</Typography>
-                                                        <Typography fontWeight={600}>{event.location}</Typography>
-                                                    </Stack>
-                                                </StepLabel>
-                                            </Step>
-                                        );
-                                    })}
-                                </Stepper>
-                            </Box>
+                <Stack gap={3}>
+                    {/* Grid with TextFields */}
+                    <Grid container spacing={{xs:0,md:2}} alignItems="center">
+                        <Grid size={{xs:12,md:4}}>
+                            <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
+                                Container Number
+                            </Typography>
+                            <TextField
+                                fullWidth
+                                disabled
+                                value={containerNo}
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        height: "60px",
+                                        borderRadius: "8px",
+                                        typography: "body1",
+                                        "& fieldset": { borderColor: "rgba(45, 55, 72, 0.2)" },
+                                    },
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "rgba(45, 55, 72, 1)",
+                                        opacity: 1,
+                                        background: "white",
+                                    },
+                                }}
+                            />
+                        </Grid>
 
-                            <Box sx={{ display: { xs: "none", md: "block" } }}>
-                                <Stepper alternativeLabel activeStep={activeStep} connector={<CustomConnector />}>
-                                    {events.map((event, index) => {
-                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
-                                        return (
-                                            <Step key={index} completed={isCompleted}>
-                                                <StepLabel
-                                                    StepIconComponent={() => (
-                                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                            <Typography fontWeight={600}>{event.description}</Typography>
-                                                            <Typography>{event.date}</Typography>
-                                                            <Box sx={{ mt: 0.5, mb: 0.5, width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
-                                                                <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
-                                                            </Box>
-                                                            <Typography fontWeight={600} align="center" maxWidth={200}>{event.location}</Typography>
-                                                        </Box>
-                                                    )}
-                                                />
-                                            </Step>
-                                        );
-                                    })}
-                                </Stepper>
-                            </Box>
-                        </Box>
-                        <TrackingMap apiData={data} />
-                    </Stack>
-                )}
+                        <Grid size={{xs:12,md:4}}>
+                            <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
+                                From
+                            </Typography>
+                            <TextField
+                                disabled
+                                fullWidth
+                                value={events[0]?.location || ""}
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        backgroundColor: "rgba(249, 250, 251, 1)",
+                                        height: "60px",
+                                        borderRadius: "8px",
+                                        typography: "body1",
+                                        "& fieldset": { borderColor: "rgba(45, 55, 72, 0.5)" },
+                                    },
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "rgba(45, 55, 72, 1)",
+                                        opacity: 1,
+                                    },
+                                }}
+                            />
+                        </Grid>
+
+                        <Grid size={{xs:12,md:4}}>
+                            <Typography ml={0.5} sx={{ textAlign: "left", color: "rgba(109, 110, 113, 1)", fontWeight: 500 }}>
+                                To
+                            </Typography>
+                            <TextField
+                                disabled
+                                fullWidth
+                                value={summary.fpod}
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        backgroundColor: "rgba(249, 250, 251, 1)",
+                                        height: "60px",
+                                        borderRadius: "8px",
+                                        typography: "body1",
+                                        "& fieldset": { borderColor: "rgba(45, 55, 72, 0.5)" },
+                                    },
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "rgba(45, 55, 72, 1)",
+                                        opacity: 1,
+                                    },
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    {trackingData && (
+                        <Stack gap={3}>
+                            {/* Tracking Box Header and Details */}
+                            <Stack sx={{ border: "1px solid rgba(45, 55, 72, 0.2)", borderRadius: "8px" }}>
+                                <Stack
+                                    sx={{ width: "100%", py: 1, px: 3, borderRadius: "8px 8px 0 0", bgcolor: "rgba(54, 66, 86, 1)" }}
+                                    direction={"row"}
+                                    alignItems={"center"}
+                                    justifyContent={"space-between"}
+                                >
+                                    <Typography variant="h4" color="white">
+                                        {containerNo} | {summary.type}
+                                    </Typography>
+                                    <Typography variant="body1" color="white">
+                                        {/* Replace with dynamic emission value if available */}
+                                        Emission: N/A
+                                    </Typography>
+                                </Stack>
+
+                                <Stack p={3} gap={3}>
+                                    <Stack direction={{xs:"column",md:"row"}} gap={{xs:2,md:0}} justifyContent={"space-between"}>
+                                        <Stack gap={1}>
+                                            <Stack direction={"row"} alignItems={"center"} gap={1}>
+                                                <Box width={"24px"} height={"24px"} component={"img"} src={calander} alt="calendar" />
+                                                <Typography variant="body1" fontWeight={600} color="rgba(109, 110, 113, 1)">
+                                                    Estimated arrival date
+                                                </Typography>
+                                            </Stack>
+                                            <Typography variant="h4">{summary.fpodEta}</Typography>
+                                        </Stack>
+
+                                        <Stack gap={1} >
+                                            <Stack direction={"row"} alignItems={"center"} gap={1}>
+                                                <Box width={"24px"} height={"24px"} component={"img"} src={location} alt="location" />
+                                                <Typography variant="body1" fontWeight={600} color="rgba(109, 110, 113, 1)">
+                                                    Last location
+                                                </Typography>
+                                            </Stack>
+                                            <Typography variant="h4">
+                                                {events[events.length - 1]?.description} {events[events.length - 1]?.location}{" "}
+                                                <small>{events[events.length - 1]?.date}</small>
+                                            </Typography>
+                                        </Stack>
+
+                                        
+                                    </Stack>
+
+                                    <Divider sx={{ borderColor: "rgba(206, 208, 212, 1)" }} />
+
+                                    <Stack  gap={3}>
+                                        <Box sx={{ p: 3, bgcolor: "#FAFAFA" ,border: "1px solid rgba(45, 55, 72, 0.2)", borderRadius: "8px"}}  >
+                                            <Box sx={{ display: { xs: "block", md: "none" } }}>
+                                                <Stepper orientation="vertical" activeStep={activeStep}>
+                                                    {events.map((event, index) => {
+                                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
+                                                        return (
+                                                            <Step key={index} completed={isCompleted}>
+                                                                <StepLabel
+                                                                    icon={
+                                                                        <Box sx={{ width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                            <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
+                                                                        </Box>
+                                                                    }
+                                                                >
+                                                                    <Stack spacing={0.5}>
+                                                                        <Typography fontWeight={600}>{event.description}</Typography>
+                                                                        <Typography>{event.date}</Typography>
+                                                                        <Typography fontWeight={600}>{event.location}</Typography>
+                                                                    </Stack>
+                                                                </StepLabel>
+                                                            </Step>
+                                                        );
+                                                    })}
+                                                </Stepper>
+                                            </Box>
+
+                                            <Box sx={{ display: { xs: "none", md: "block" } }}>
+                                                <Stepper alternativeLabel activeStep={activeStep} connector={<CustomConnector />}>
+                                                    {events.map((event, index) => {
+                                                        const isCompleted = new Date(event.date.split("/").reverse().join("-")).getTime() <= new Date().setHours(0, 0, 0, 0);
+                                                        return (
+                                                            <Step key={index} completed={isCompleted}>
+                                                                <StepLabel
+                                                                    StepIconComponent={() => (
+                                                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                            <Typography fontWeight={600}>{event.description}</Typography>
+                                                                            <Typography>{event.date}</Typography>
+                                                                            <Box sx={{ mt: 0.5, mb: 0.5, width: 35, height: 35, bgcolor: isCompleted ? "#1A56DB" : "#D9D9D9", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
+                                                                                <Box component="img" src={isCompleted ? boatIcon : boatIconGray} width={24} height={9} />
+                                                                            </Box>
+                                                                            <Typography fontWeight={600} align="center" maxWidth={200}>{event.location}</Typography>
+                                                                        </Box>
+                                                                    )}
+                                                                />
+                                                            </Step>
+                                                        );
+                                                    })}
+                                                </Stepper>
+                                            </Box>
+                                        </Box>
+                                        <TrackingMap containerNo={containerNo} />
+                                    </Stack>
+                                </Stack>
+                            </Stack>
+
+                            {/* Stepper and Map in a separate Stack to match previous layout */}
+                        </Stack>
+                    )}
+                </Stack>
             </Container>
         </Stack>
     );
