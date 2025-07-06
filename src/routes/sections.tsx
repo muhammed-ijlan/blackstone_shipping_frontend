@@ -1,254 +1,70 @@
+import { Navigate, Outlet } from "react-router-dom";
 import type { RouteObject } from "react-router";
 
-import { lazy, Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { varAlpha } from "minimal-shared/utils";
-
-import Box from "@mui/material/Box";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
-
 import { DashboardLayout } from "../layouts/dashboard";
-
-// ----------------------------------------------------------------------
 import { NotFoundView } from "../sections/error/index";
-export const HomePage = lazy(() => import("../pages/home"));
-export const CompanyPage = lazy(() => import("../pages/company"));
-export const ServicesPage = lazy(() => import("../pages/services"));
-export const ServiceDetailPage = lazy(() => import("../pages/serviceDetail"));
-export const SolutionsPage = lazy(() => import("../pages/solutions"));
-export const SolutionDetailPage = lazy(() => import("../pages/solutionDetail"));
-export const ResoursesPage = lazy(() => import("../pages/resourses"));
-export const NewsDetailPage = lazy(() => import("../pages/newsDetail"));
-export const CaseStudyDetailPage = lazy(
-  () => import("../pages/caseStudyDetail")
-);
-export const TechnologyPage = lazy(() => import("../pages/technology"));
-export const TechnologyDetailPage = lazy(
-  () => import("../pages/technologyDetail")
-);
-export const CareersPage = lazy(() => import("../pages/careers"));
-export const CareerDetailPage = lazy(() => import("../pages/careerDetails"));
-export const SupportPage = lazy(() => import("../pages/support"));
-export const CountrySpecificPage = lazy(
-  () => import("../pages/countrySpecific")
-);
-export const QualitySustainabilityPage = lazy(
-  () => import("../pages/qualitySustainablity")
-);
-export const MyBlackboxFrightPage = lazy(
-  () => import("../pages/myBlackBoxFright")
-);
-export const TrackingPage = lazy(() => import("../pages/tracking"));
-export const PrivacyPolicyPage = lazy(() => import("../pages/general"));
-export const SearchPage = lazy(() => import("../pages/search"));
 
-const renderFallback = () => (
-  <Box
-    sx={{
-      display: "flex",
-      flex: "1 1 auto",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "70vh",
-    }}
-  >
-    <LinearProgress
-      sx={{
-        width: 1,
-        maxWidth: 320,
-        bgcolor: (theme) =>
-          varAlpha(theme.vars?.palette.text.primaryChannel, 0.16),
-        [`& .${linearProgressClasses.bar}`]: { bgcolor: "text.primary" },
-      }}
-    />
-  </Box>
-);
+import HomePage from "../pages/home";
+import CompanyPage from "../pages/company";
+import ServicesPage from "../pages/services";
+import ServiceDetailPage from "../pages/serviceDetail";
+import SolutionsPage from "../pages/solutions";
+import SolutionDetailPage from "../pages/solutionDetail";
+import ResoursesPage from "../pages/resourses";
+import NewsDetailPage from "../pages/newsDetail";
+import CaseStudyDetailPage from "../pages/caseStudyDetail";
+import TechnologyPage from "../pages/technology";
+import TechnologyDetailPage from "../pages/technologyDetail";
+import CareersPage from "../pages/careers";
+import CareerDetailPage from "../pages/careerDetails";
+import SupportPage from "../pages/support";
+import CountrySpecificPage from "../pages/countrySpecific";
+import QualitySustainabilityPage from "../pages/qualitySustainablity";
+import MyBlackboxFrightPage from "../pages/myBlackBoxFright";
+import TrackingPage from "../pages/tracking";
+import PrivacyPolicyPage from "../pages/general";
+import SearchPage from "../pages/search";
 
 export const routesSection: RouteObject[] = [
   {
     element: (
       <DashboardLayout>
-        <Suspense fallback={renderFallback()}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </DashboardLayout>
     ),
     children: [
-      {
-        index: true,
-        path: "home",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <HomePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "company",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <CompanyPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "services",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <ServicesPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "service/:serviceId",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <ServiceDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "solutions",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <SolutionsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "solution/:solutionId",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <SolutionDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "resources",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <ResoursesPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "resources/news/:postId",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <NewsDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "resources/case-study/:id",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <CaseStudyDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "technology",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <TechnologyPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "technology/:id",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <TechnologyDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "careers",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <CareersPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "careers/:id",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <CareerDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "support",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <SupportPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "support/:id",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <CountrySpecificPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "quality-sustainability",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <QualitySustainabilityPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "my-blackbox-freight",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <MyBlackboxFrightPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "tracking",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <TrackingPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "general/:uri",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <PrivacyPolicyPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "search",
-        element: (
-          <Suspense fallback={renderFallback()}>
-            <SearchPage />
-          </Suspense>
-        ),
-      },
+      { index: true, path: "home", element: <HomePage /> },
+      { path: "company", element: <CompanyPage /> },
+      { path: "services", element: <ServicesPage /> },
+      { path: "service/:serviceId", element: <ServiceDetailPage /> },
+      { path: "solutions", element: <SolutionsPage /> },
+      { path: "solution/:solutionId", element: <SolutionDetailPage /> },
+      { path: "resources", element: <ResoursesPage /> },
+      { path: "resources/news/:postId", element: <NewsDetailPage /> },
+      { path: "resources/case-study/:id", element: <CaseStudyDetailPage /> },
+      { path: "technology", element: <TechnologyPage /> },
+      { path: "technology/:id", element: <TechnologyDetailPage /> },
+      { path: "careers", element: <CareersPage /> },
+      { path: "careers/:id", element: <CareerDetailPage /> },
+      { path: "support", element: <SupportPage /> },
+      { path: "support/:id", element: <CountrySpecificPage /> },
+      { path: "quality-sustainability", element: <QualitySustainabilityPage /> },
+      { path: "my-blackbox-freight", element: <MyBlackboxFrightPage /> },
+      { path: "tracking", element: <TrackingPage /> },
+      { path: "general/:uri", element: <PrivacyPolicyPage /> },
+      { path: "search", element: <SearchPage /> },
     ],
   },
-
   {
     path: "",
     element: <Navigate to="/home" replace />,
   },
-
   {
     path: "404",
     element: <NotFoundView />,
   },
-  { path: "*", element: <NotFoundView /> },
+  {
+    path: "*",
+    element: <NotFoundView />,
+  },
 ];

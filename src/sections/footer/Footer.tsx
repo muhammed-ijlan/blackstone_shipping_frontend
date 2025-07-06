@@ -152,7 +152,7 @@ const Footer = () => {
     }));
   };
 
-  // if (loading) return <LoadingFallback />;
+  if (loading) return <LoadingFallback />;
 
   function buildNestedMenu(menuItems: MenuItem[]): MenuItem[] {
     const map: { [key: string]: MenuItem } = {};
@@ -204,18 +204,21 @@ const Footer = () => {
             />
             <Stack direction={"row"} alignItems={"center"} gap={2}>
               <Box
+                onClick={() => window.open("https://www.facebook.com/blackstoneshippinggroup", "_blank")}                
                 component={"img"}
                 src={fb}
                 width={{ xs: "40px", sm: "60px" }}
                 sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
+                onClick={() => window.open("https://www.linkedin.com/company/blackstone-shipping-group/", "_blank")}   
                 component={"img"}
                 src={linkedin}
                 width={{ xs: "40px", sm: "60px" }}
                 sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
+                onClick={() => window.open("https://www.instagram.com/blackstoneshipping/", "_blank")}   
                 component={"img"}
                 src={insta}
                 width={{ xs: "40px", sm: "60px" }}

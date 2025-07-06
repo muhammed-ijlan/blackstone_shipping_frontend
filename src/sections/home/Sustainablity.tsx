@@ -16,6 +16,7 @@ import SliderButton2 from "src/components/customSlider/SliderButton2";
 import LoadingFallback from "src/components/LoadingFallback";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { GET_SUSTAINABILITY } from "src/graphql/queries";
+import ScrollPane from "src/layouts/components/ScrollPane";
 import { useRouter } from "src/routes/hooks";
 
 // src/types/sustainability.ts
@@ -137,6 +138,9 @@ const Sustainability = () => {
               >
                 {card.title}
               </Typography>
+
+              <ScrollPane maxHeight={250}  >
+
               <Box
                 component={"div"}
                 sx={{
@@ -148,7 +152,8 @@ const Sustainability = () => {
                 }}
                 color="rgba(109, 110, 113, 1)"
                 dangerouslySetInnerHTML={{ __html: card.content }}
-              />
+                />
+                </ScrollPane>
             </Stack>
           ))}
         </CustomSlider2>
