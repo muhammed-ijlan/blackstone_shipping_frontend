@@ -3,6 +3,9 @@ import { Formik } from "formik";
 import React from "react";
 import SectionHead from "src/components/sectionHead/SectionHead";
 import { contactValidationSchema } from "src/validations/schema";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
+
 interface ContactFormValues {
   name: string;
   email: string;
@@ -14,20 +17,34 @@ interface FormikHelpers {
   resetForm: () => void;
 }
 
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+
 const Contact = () => {
-  const initialValues = {
+  const initialValues: ContactFormValues = {
     name: "",
     email: "",
     phone: "",
     message: "",
   };
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: ContactFormValues,
     { resetForm }: FormikHelpers
   ) => {
-    console.log("Form Data:", values);
-    resetForm();
+    const toastId = toast.loading("Sending message...");
+
+    try {
+      await emailjs.send(SERVICE_ID , TEMPLATE_ID, {...values,to_name: "Blackstone Shipping Group",to_email: "ijlanijlu580@gmail.com"}, PUBLIC_KEY); 
+      toast.success("Message sent successfully!", { id: toastId });
+      resetForm();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error("Failed to send message. Please try again.", { id: toastId });
+      console.error("EmailJS error:", error);
+    }
   };
 
   return (
@@ -65,12 +82,10 @@ const Contact = () => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <Grid container rowGap={2} columnSpacing={3}>
-                    <Grid size={{ xs: 12, md: 12 }}>
+                    <Grid size={{xs:12}}>
                       <TextField
                         name="name"
-                        variant="outlined"
                         label="Name"
-                        size="medium"
                         fullWidth
                         value={values.name}
                         onChange={handleChange}
@@ -91,38 +106,16 @@ const Contact = () => {
                         }}
                       />
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{xs:12,md:6}} >
                       <TextField
                         name="email"
-                        variant="outlined"
                         label="Email"
-                        size="medium"
                         fullWidth
-                        sx={{
-                          "& .MuiInputBase-root": {
-                            height: "60px",
-                          },
-                          "& input": {
-                            padding: "12px 14px",
-                          },
-                          "& .MuiInputLabel-root": {
-                            fontSize: "15px !important",
-                            fontWeight: "500 !important",
-                          },
-                        }}
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={touched.email && Boolean(errors.email)}
                         helperText={touched.email && errors.email}
-                      />
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                      <TextField
-                        name="phone"
-                        variant="outlined"
-                        label="Phone Number"
-                        size="medium"
                         sx={{
                           "& .MuiInputBase-root": {
                             height: "60px",
@@ -135,23 +128,22 @@ const Contact = () => {
                             fontWeight: "500 !important",
                           },
                         }}
+                      />
+                    </Grid>
+                    <Grid size={{xs:12,md:6}} >
+                      <TextField
+                        name="phone"
+                        label="Phone Number"
                         fullWidth
                         value={values.phone}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={touched.phone && Boolean(errors.phone)}
                         helperText={touched.phone && errors.phone}
-                      />
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 12 }}>
-                      <TextField
-                        name="message"
-                        multiline
-                        minRows={2}
-                        variant="outlined"
-                        label="Message"
-                        size="medium"
                         sx={{
+                          "& .MuiInputBase-root": {
+                            height: "60px",
+                          },
                           "& input": {
                             padding: "12px 14px",
                           },
@@ -160,25 +152,39 @@ const Contact = () => {
                             fontWeight: "500 !important",
                           },
                         }}
+                      />
+                    </Grid>
+                    <Grid size={{xs:12}}>
+                      <TextField
+                        name="message"
+                        label="Message"
                         fullWidth
+                        multiline
+                        minRows={2}
                         value={values.message}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={touched.message && Boolean(errors.message)}
                         helperText={touched.message && errors.message}
+                        sx={{
+                          "& .MuiInputLabel-root": {
+                            fontSize: "15px !important",
+                            fontWeight: "500 !important",
+                          },
+                        }}
                       />
                     </Grid>
-                    <Grid size={{ xs: 12, md: 12 }}>
+                    <Grid size={{xs:12}}>
                       <Button
+                        type="submit"
+                        variant="contained"
+                        fullWidth
+                        size="large"
+                        disabled={isSubmitting}
                         sx={{
                           height: "60px",
                           background: "rgba(26, 86, 219, 1)",
                         }}
-                        type="submit"
-                        size="large"
-                        fullWidth
-                        variant="contained"
-                        disabled={isSubmitting}
                       >
                         Submit
                       </Button>

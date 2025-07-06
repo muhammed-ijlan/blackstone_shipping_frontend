@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import quote from "src/assets/icons/testimonial.png";
+import ScrollPane from "src/layouts/components/ScrollPane";
 
 interface TestimonialCardProps {
   item: {
@@ -32,6 +33,20 @@ const TestimonialCard = ({ item }: TestimonialCardProps) => {
     >
       <Stack justifyContent={{ xs: "normal", sm: "space-between" }} gap={2}>
         <Box component={"img"} src={quote} width={"83px"} alt="quote icon" />
+        <ScrollPane maxHeight={250}  sx={{
+          "&::-webkit-scrollbar": {
+            width: "5px",
+            borderRadius: "10px",
+            WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,.3)",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            borderRadius: "10px",
+            background: "#ffffffb3",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "rgba(0,0,0,0.4)",
+          },
+        }} >
         <Box
           component={"div"}
           fontWeight={400}
@@ -42,9 +57,10 @@ const TestimonialCard = ({ item }: TestimonialCardProps) => {
             },
           }}
           dangerouslySetInnerHTML={{
-            __html: item.content,
+            __html: item.content 
           }}
-        />
+          />
+          </ScrollPane>
       </Stack>
 
       <Stack direction={"row"} gap={3}>

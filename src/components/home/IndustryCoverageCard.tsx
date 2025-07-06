@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import ScrollPane from "src/layouts/components/ScrollPane";
 
 interface IndustryItem {
   title: string;
@@ -93,14 +94,29 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
             borderBottom: "1px solid rgba(249, 250, 251, 1)",
           }}
         >
+          <ScrollPane maxHeight={150} customScrollbar={true} sx={{
+            "&::-webkit-scrollbar": {
+              width: "5px",
+              borderRadius: "10px",
+              WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,.3)",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              borderRadius: "10px",
+              background: "#ffffffb3",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "rgba(0,0,0,0.4)",
+            },
+          }}>
           <Typography
             sx={{ typography: { xs: "body1", lg: "body2" } }}
             color="white"
           >
             {item.content
               ? item.content.replace(/<[^>]+>/g, "")
-              : "No description available."}
+              : ""}
           </Typography>
+          </ScrollPane>
         </Stack>
       </ReactCardFlip>
     </div>

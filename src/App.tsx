@@ -1,9 +1,10 @@
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { usePathname } from './routes/hooks';
 import { ThemeProvider } from './theme/theme-provider';
-
+import ScrollRestorationManager from './utils/ScrollRestorationManager';
+import { Toaster } from "react-hot-toast";
 
 // ----------------------------------------------------------------------
 
@@ -12,22 +13,35 @@ type AppProps = {
 };
 
 export default function App({ children }: AppProps) {
-  useScrollToTop();
-  return (
+  const mainRef = useRef<HTMLDivElement | null>(null);
+  // useScrollToTop();
+  return (  <main ref={mainRef}>
+       <ScrollRestorationManager />
     <ThemeProvider>
+    <Toaster  reverseOrder={false} />
       {children}
     </ThemeProvider>
+  </main>
   );
 }
 
 // ----------------------------------------------------------------------
-
-function useScrollToTop() {
+export function useScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [pathname]);
 
-  return null;
+  useEffect(() => {
+    const handleScrollOnLoad = () => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+
+    const timeout = setTimeout(handleScrollOnLoad, 50);
+
+    return () => clearTimeout(timeout);
+  }, []);
 }

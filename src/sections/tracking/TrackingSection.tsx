@@ -82,9 +82,9 @@ const TrackingSection = () => {
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: "Bearer vxSId2W1NCzz2BSiqGNKl4rMMyxUTE",
-                        appid: "bss_api_web",
-                        keyid: "5Q1AyHOCzfWBfyA",
+                        Authorization: import.meta.env.VITE_TRACKING_AUTH_TOKEN,
+                        appid: import.meta.env.VITE_TRACKING_APP_ID,
+                        keyid: import.meta.env.VITE_TRACKING_KEY_ID,
                     }
                 }
             );

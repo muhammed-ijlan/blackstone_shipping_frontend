@@ -62,8 +62,8 @@ const NavLink = styled(MuiLink, {
 })<{ isActive?: boolean }>(({ theme, isActive }) => ({
   fontSize: "16px !important",
   fontWeight: 600,
-  lineHeight:"100%",
-  letterSpacing:"3%",
+  lineHeight: "100%",
+  letterSpacing: "3%",
   cursor: "pointer",
   textWrap: "nowrap",
   color: isActive ? "rgba(45, 55, 72, 1)" : "rgba(109, 110, 113, 1)",
@@ -136,7 +136,7 @@ const SubMenuCategoryTitle = styled(MuiLink)(({ theme }) => ({
 
 const SubMenuItem = styled(MuiLink)(({ theme }) => ({
   fontSize: 14,
-  fontWeight:"600",
+  fontWeight: "600",
   cursor: "pointer",
   color: "rgba(45, 55, 72, 1)",
   lineHeight: "1.5",
@@ -215,7 +215,7 @@ export function HeaderSection({
               borderBottomWidth: 1,
               borderColor: "rgba(45, 55, 72, 1)",
               mb: 3,
-            pt:2,
+              pt: 2,
             }}
           />
 
@@ -246,7 +246,7 @@ export function HeaderSection({
             borderBottomWidth: 1,
             borderColor: "rgba(45, 55, 72, 1)",
             mb: 3,
-            pt:2,
+            pt: 2,
           }}
         />
         <SubMenuContent>
@@ -281,7 +281,7 @@ export function HeaderSection({
       </Stack>
     );
   };
-  
+
   const normalizePath = (path: string = "") => {
     if (!path) return "";
     return path.replace(/\/+$/, "").toLowerCase();
@@ -350,7 +350,7 @@ export function HeaderSection({
               <Logo onClick={() => router.push("/")} href={logo} />
             </Stack>
 
-            <Stack gap={1} alignItems="flex-end" mr={{xs:"0px",lg:"55px"}}>
+            <Stack gap={1} alignItems="flex-end" mr={{ xs: "0px", lg: "55px" }}>
               <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
                 <IconButton
                   size="small"
@@ -404,6 +404,7 @@ export function HeaderSection({
                     p: "10px 16px",
                     gap: 0.5,
                   }}
+                  onClick={() => window.location.href = "https://portal.blackstoneshipping.com/login"}
                 >
                   <Box component={"img"} width={"16px"} src={myBBXIcon} />
                   <Typography
@@ -433,11 +434,11 @@ export function HeaderSection({
 
               <Divider
                 sx={{
-                  marginBottom:"5px",
+                  marginBottom: "5px",
                   width: "100%",
                   borderBottomWidth: 1,
                   borderColor: "rgba(109, 110, 113, 1)",
-                  color:"rgba(109, 110, 113, 1)"
+                  color: "rgba(109, 110, 113, 1)"
                 }}
               />
 
@@ -569,7 +570,7 @@ const HeaderContainer = styled(Container, {
     [theme.breakpoints.down("md")]: {
       height: "100px !important",
     },
-    padding: theme.spacing(2, 0), 
+    padding: theme.spacing(2, 0),
 
     // Override padding for medium (md) and up
     [theme.breakpoints.up("md")]: {
