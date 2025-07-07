@@ -102,23 +102,33 @@ function MenuItemRenderer({
 
   const isParent = depth === 0;
   const isChildWithChildren = depth > 0 && hasChildren;
+  const isExternal = item.uri?.startsWith("http");
 
   return (
     <Box key={item.id}>
       <ListItem disableGutters disablePadding>
-        <ListItemButton
-          component={hasChildren ? "div" : RouterLink}
-          href={hasChildren ? undefined : item.uri}
-          onClick={() => {
-            if (hasChildren) {
-              handleToggle(item.id);
-            } else {
-              if (item.uri === pathname) {
-                // Same route clicked — just close the drawer
-                onClose();
-              }
-            }
-          }}
+
+<ListItemButton
+  component={hasChildren || isExternal ? "div" : RouterLink}
+  href={!hasChildren && !isExternal ? item.uri : undefined}
+  onClick={() => {
+    if (hasChildren) {
+      handleToggle(item.id);
+    } else if (item.uri) {
+      if (isExternal) {
+        window.open(item.uri, "_blank");
+        onClose();
+      } else {
+        if (item.uri === pathname) {
+          onClose(); // same page
+        } else {
+        
+          onClose(); 
+        }
+      }
+    }
+  }}
+          
 
           disableGutters
           sx={(theme) => ({

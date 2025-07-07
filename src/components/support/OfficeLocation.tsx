@@ -49,7 +49,7 @@ const OfficeLocation: React.FC = () => {
     goToNextPage,
     goToPrevPage,
     goToPage,
-  } = useOfficeLocations(3, search);
+  } = useOfficeLocations(0, search);
 
 
 

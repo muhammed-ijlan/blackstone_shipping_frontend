@@ -213,7 +213,7 @@ export function HeaderSection({
       const isExternal = uri?.startsWith("http") && !uri.includes("blackstone.hexprojects.in");
   
       if (isExternal) {
-        window.location.href = uri;
+        window.open(uri, "_blank");
       } else if (uri && uri !== "#") {
         router.push(uri); 
       }
@@ -413,7 +413,7 @@ export function HeaderSection({
                     p: "10px 16px",
                     gap: 0.5,
                   }}
-                  onClick={() => window.location.href = "https://portal.blackstoneshipping.com/login"}
+                  onClick={() => window.open("https://portal.blackstoneshipping.com/login", "_blank")}
                 >
                   <Box component={"img"} width={"16px"} src={myBBXIcon} />
                   <Typography
