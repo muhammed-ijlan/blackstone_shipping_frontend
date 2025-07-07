@@ -25,6 +25,7 @@ const MobileBanner = () => {
       <Grid container rowGap={2} columnSpacing={2}>
         <Grid size={6}>
           <IconButton
+            onClick={() => router.push("/search")}
             size="small"
             sx={{
               border: "1px solid rgba(109, 110, 113, 0.2)",
@@ -73,6 +74,7 @@ const MobileBanner = () => {
         </Grid>
         <Grid size={6}>
           <IconButton
+            onClick={() =>  window.open("https://portal.blackstoneshipping.com/login", "_blank")}
             size="small"
             sx={{
               border: "1px solid rgba(109, 110, 113, 0.2)",

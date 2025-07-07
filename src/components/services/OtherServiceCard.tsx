@@ -30,7 +30,7 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
             "& p": {
               margin: "0",
               typography: "body1",
-              textTransform: "none",
+              textTransform: "initial",
               fontWeight: "500",
             },
             "& ul": {

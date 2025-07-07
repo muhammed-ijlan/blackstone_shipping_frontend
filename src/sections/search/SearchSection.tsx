@@ -86,9 +86,9 @@ const SearchSection = () => {
                                             border: "1px solid rgba(109, 110, 113, 0.5)",
                                             borderRadius: "8px",
                                             padding: 3
-                                        }} direction={"row"} justifyContent={"space-between"} alignItems={"center"} gap={3}>
-                                            <Typography variant="h4" sx={{ fontWeight: "700 !important" }} width={"80%"}>{item.title}</Typography>
-                                            <CustomArrowButton name="Read More" onClick={() => router.push(item.uri)} sx={{ height: "50px", width: "150px" }} />
+                                        }} direction={{xs:"column",md:"row"}} justifyContent={{xs:"flex-start",md:"space-between"}} alignItems={"center"} gap={3}>
+                                            <Typography variant="h4" sx={{ fontWeight: "700 !important" }} width={{xs:"100%",md:"80%"}}>{item.title}</Typography>
+                                            <CustomArrowButton name="Read More" onClick={() => router.push(item.uri)} sx={{ height: "50px", width: {xs:"100%",md:"150px"} }} />
                                         </Stack>
                                     ))}
                                 </Stack>

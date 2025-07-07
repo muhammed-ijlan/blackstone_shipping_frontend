@@ -215,6 +215,7 @@ const Footer = () => {
             justifyContent={"space-between"}
           >
             <Box
+              onClick={() => router.push("/")}
               component={"img"}
               src={navLogo}
               width={{ xs: "100px", sm: "152px" }}
