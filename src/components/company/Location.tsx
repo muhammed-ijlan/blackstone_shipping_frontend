@@ -24,13 +24,12 @@ const LocationMap = () => {
   
   const { data } = useQuery<GetOfficeLocationsResponse>(GET_OFFICE_LOCATIONS, {
     variables: {
-      count: 3,
+      count: 0,
       after: null,
       search: "",
     },
   });
 
-  console.log(data)
 
   const [selectedLocation, setSelectedLocation] = useState<SelectedLocation | null>(null);
 
