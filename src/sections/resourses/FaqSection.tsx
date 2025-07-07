@@ -138,13 +138,13 @@ const FaqSection = () => {
                         src={expanded === index ? collapse : expand}
                         alt="toggle icon"
                         sx={{
-                              width: "24px !important",
-                              height: {xs:"none",md:"24px !important"},
+                          width: "24px !important",
+                          height: { xs: "none", md: "24px !important" },
                           transition: "transform 0.2s ease-in-out",
                           "& img": {
                             // width: "30px !important",
                             // height: "24px !important",
-                            maxWidth:"auto !important",
+                            maxWidth: "auto !important",
                           },
                         }}
                       />
@@ -154,40 +154,40 @@ const FaqSection = () => {
                       justifyContent: "space-between",
                       alignItems: "center",
                       width: "100%",
-                      gap:1,
-                      padding: {xs:"10px 0px", md:"22px 0px"},
+                      gap: 1,
+                      padding: { xs: "10px 0px", md: "22px 0px" },
                       minHeight: "unset",
                     }}
                   >
-                    <Stack direction="row"  gap={1}>
+                    <Stack direction="row" gap={1}>
 
-                    <Typography
-                      sx={{
-                        typography: { xs: "h4", md: "h4 " },
-                        color: isActive ? "#2D3748" : "#4A5568",
-                        display: "flex",
-                        // alignItems: "center",
-                        gap: 1,
-                      }}
-                    >
-                      •
-                    </Typography>
-                    <Typography
-                      sx={{
-                        typography: { xs: "h4", md: "h4 " },
-                        color: isActive ? "#2D3748" : "#4A5568",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
-                        width: "100%",
-                      }}
+                      <Typography
+                        sx={{
+                          typography: { xs: "h4", md: "h4 " },
+                          color: isActive ? "#2D3748" : "#4A5568",
+                          display: "flex",
+                          // alignItems: "center",
+                          gap: 1,
+                        }}
                       >
-                      {faq.title}
-                    </Typography>
-                      </Stack>
+                        •
+                      </Typography>
+                      <Typography
+                        sx={{
+                          typography: { xs: "h4", md: "h4 " },
+                          color: isActive ? "#2D3748" : "#4A5568",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          width: "100%",
+                        }}
+                      >
+                        {faq.title}
+                      </Typography>
+                    </Stack>
                   </AccordionSummary>
-                  <AccordionDetails sx={{ padding: {xs:"0", md:"0px 0px 16px 22px" }}}>
-                  
+                  <AccordionDetails sx={{ padding: { xs: "0", md: "0px 0px 16px 22px" } }}>
+
                     <Typography
                       component="div"
                       sx={{
@@ -195,8 +195,8 @@ const FaqSection = () => {
                         color: "rgba(45, 55, 72, 1)",
                         typography: "body1",
                         "& p": {
-                          margin:{xs:"20",md:"unset"},
-                          ml:{xs:"20px",md:"unset"},
+                          margin: { xs: "20", md: "unset" },
+                          ml: { xs: "20px", md: "unset" },
                         }
                       }}
                       dangerouslySetInnerHTML={{ __html: faq.content }}

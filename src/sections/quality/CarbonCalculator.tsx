@@ -11,6 +11,7 @@ import {
   Container,
   Grid,
   Autocomplete,
+  InputAdornment,
 } from "@mui/material";
 import { ImageNode } from "src/types/graphql/types/services.types";
 
@@ -21,7 +22,9 @@ interface CarbonCalculatorInterface {
 }
 
 const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
-  type PortOption = { label: string; value: string };
+  type PortOption = {
+    flag: string | undefined; label: string; value: string 
+};
 
   const [pol, setPol] = useState<PortOption | null>(null);
   const [pod, setPod] = useState<PortOption | null>(null);
@@ -33,10 +36,10 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
 
   // Simulated port data from the original script
   const availableTags = [
-    { label: "IND", value: "India" },
-    { label: "CHN", value: "China" },
-    { label: "NEP", value: "Nepal" },
-    { label: "BHU", value: "Bhutan" },
+    { label: "IND", value: "India", flag: "https://flagcdn.com/w40/in.png" },
+    { label: "CHN", value: "China", flag: "https://flagcdn.com/w40/cn.png" },
+    { label: "NEP", value: "Nepal", flag: "https://flagcdn.com/w40/np.png" },
+    { label: "BHU", value: "Bhutan", flag: "https://flagcdn.com/w40/bt.png" },
   ];
 
   // Define the type for portDistances with an index signature
@@ -113,9 +116,28 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
               getOptionLabel={(option) => option.label}
               value={pol}
               onChange={(event, newValue) => setPol(newValue)}
+              renderOption={(props, option) => (
+                <li {...props} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <img
+                    src={option.flag}
+                    alt={option.label}
+                    width="20"
+                    style={{ borderRadius: '3px' }}
+                  />
+                  {option.label}
+                </li>
+              )}
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  InputProps={{
+                    ...params.InputProps,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={pol?.flag} alt={pol?.label} width="20" style={{ borderRadius: '3px' }} />
+                      </InputAdornment>
+                    ),
+                  }}
                   label="Port of Loading (POL)"
                   margin="normal"
                   variant="outlined"
@@ -123,14 +145,34 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
                 />
               )}
             />
+
             <Autocomplete
               options={availableTags}
               getOptionLabel={(option) => option.label}
               value={pod}
               onChange={(event, newValue) => setPod(newValue)}
+              renderOption={(props, option) => (
+                <li {...props} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <img
+                    src={option.flag}
+                    alt={option.label}
+                    width="20"
+                    style={{ borderRadius: '3px' }}
+                  />
+                  {option.label}
+                </li>
+              )}
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  InputProps={{
+                    ...params.InputProps,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={pod?.flag} alt={pod?.label} width="20" style={{ borderRadius: '3px' }} />
+                      </InputAdornment>
+                    ),
+                  }}
                   label="Port of Discharge (POD)"
                   margin="normal"
                   variant="outlined"
@@ -196,7 +238,13 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
         <Box sx={{ mt: 4 }}>
           <Typography
             variant="body2"
-            color="textSecondary"
+            sx={{
+              fontStyle: "medium italic",
+              "& p": {
+                fontStyle: "italic",
+              },
+            }}
+            color="rgba(45, 55, 72, 0.5)"
             dangerouslySetInnerHTML={{
               __html: data.calculatorSectionContent,
             }}
