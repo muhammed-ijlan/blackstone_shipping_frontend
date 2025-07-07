@@ -24,6 +24,8 @@ import MyBlackboxFrightPage from "../pages/myBlackBoxFright";
 import TrackingPage from "../pages/tracking";
 import PrivacyPolicyPage from "../pages/general";
 import SearchPage from "../pages/search";
+import TermDetailPage from "src/pages/TermDetailPage";
+import CookiesPage from "src/pages/cookiesPage";
 
 export const routesSection: RouteObject[] = [
   {
@@ -51,7 +53,9 @@ export const routesSection: RouteObject[] = [
       { path: "quality-sustainability", element: <QualitySustainabilityPage /> },
       { path: "my-blackbox-freight", element: <MyBlackboxFrightPage /> },
       { path: "tracking", element: <TrackingPage /> },
-      { path: "general/:uri", element: <PrivacyPolicyPage /> },
+      { path: "general/terms-conditions", element: <PrivacyPolicyPage /> },
+      { path: "general/terms-conditions/:slug", element: <TermDetailPage /> },
+      { path: "general/cookies", element: <CookiesPage /> },
       { path: "search", element: <SearchPage /> },
     ],
   },

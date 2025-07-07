@@ -1,50 +1,77 @@
 import { useQuery } from "@apollo/client";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import { useParams } from "react-router";
 import Banner from "src/components/banner/Banner";
-import LoadingFallback from "src/components/LoadingFallback";
-import { GET_GENERAL_PAGES } from "src/graphql/queries";
-import {
-  GetGeneralPagesData,
-  GetGeneralPagesVars,
-} from "src/types/graphql/types/common.types";
+import termsIcon from "src/assets/icons/termsIcon.png"
+import { useRouter } from "src/routes/hooks";
+
 
 const Page = () => {
-  const { uri } = useParams();
 
-  const { data, loading } = useQuery<GetGeneralPagesData, GetGeneralPagesVars>(
-    GET_GENERAL_PAGES,
-    {
-      variables: { uri: uri ?? "" },
-      skip: !uri,
-    }
-  );
+ const data = [
+  {
+    name: "General",
+    url: "/general/terms-conditions/general",
+  },
+  {
+    name:"Warehouse",
+    url: "/general/terms-conditions/warehouse",
+  },
+  {
+    name:"Belgium",
+    url: "/general/terms-conditions/belgium",
+  },
+  {
+    name:"Netherlands",
+    url: "/general/terms-conditions/netherlands",
+  },
+  {
+    name:"United Kingdom",
+    url: "/general/terms-conditions/uk",
+  },
+  {
+    name:"India",
+    url: "/general/terms-conditions/india",
+  },
+  {
+    name:"Germany",
+    url: "/general/terms-conditions/germany",
+  },
+  {
+   name:"Antwerp Warehouse",
+   url: "/general/terms-conditions/antwerp",
+  },
+ ];
 
-  if (loading) return <LoadingFallback />;
+ const router = useRouter();
+
 
   return (
     <Stack>
-      {data && (
         <>
-          <Banner
+          {/* <Banner
             mainTitle={
-              data?.pageBy.blackboxFreightPageBannerSection.bannerTitle
+              "data?.pageBy.blackboxFreightPageBannerSection.bannerTitle"
             }
             bgUrl={
-              data?.pageBy.blackboxFreightPageBannerSection.bannerImage.node
-                .sourceUrl
+              "data?.pageBy.blackboxFreightPageBannerSection.bannerImage.node"
             }
-          />
+          /> */}
           <Container maxWidth="xl">
-            <Box
+            <Stack
               my={7}
-              component={"div"}
-              dangerouslySetInnerHTML={{ __html: data?.pageBy.content }}
-            />
+            >
+              <Stack direction={{xs:"column",md:"row"}} gap={3} flexWrap={"wrap"}>
+                {data.map((item, index) => (
+                  <Stack key={index} direction="row" spacing={2} alignItems="center" sx={{cursor:"pointer"}} onClick={() => router.push(item.url)}> 
+                    <Box component="img" src={termsIcon} alt="termsIcon" width={"80px"} height={"auto"} sx={{padding:"10px",borderRadius:"50%",border:"1px solid #8e8e8e"}} />
+                    <Typography variant="h4">{item.name}</Typography>
+                  </Stack>
+                ))}
+              </Stack>
+            </Stack>
           </Container>
         </>
-      )}
     </Stack>
   );
 };
