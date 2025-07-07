@@ -186,7 +186,7 @@ const HomeBanner: React.FC = () => {
                       {slide.sliderFields.shortDescription}
                     </Typography>
 
-                    <Stack direction="row" spacing={2} mt={2} width={"100%"}>
+                    <Stack direction="row" spacing={2} mt={2} width={"100%"} flexWrap={"wrap"}> 
                       <Button
                         onClick={() =>
                           router.push(slide.sliderFields.button1Link)
@@ -196,13 +196,15 @@ const HomeBanner: React.FC = () => {
                           <Box
                             component={"img"}
                             src={arrow}
-                            width="36px"
-                            height={"36px"}
+                           sx={{
+                            width: {xs:"24px",lg:"36px !important"},
+                            height: {xs:"24px",lg:"36px !important"},
+                           }}
                           />
                         }
                         sx={{
                           backgroundColor: "#0061f2",
-                          width: {xs:"auto",lg:"autp"},
+                          width: {xs:"auto",lg:"auto"},
                           borderRadius: "4px",
                           px: 3,
                           py: 1.5,
@@ -221,7 +223,7 @@ const HomeBanner: React.FC = () => {
                         {slide.sliderFields.button1Text}
                       </Button>
                       <Button
-                        onClick={() => router.push("/services")}
+                        onClick={() => router.push(slide.sliderFields.button2Link)}
                         variant="contained"
                         sx={{
                           backgroundColor: "#28a745",
