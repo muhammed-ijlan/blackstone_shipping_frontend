@@ -4,6 +4,7 @@ import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { GET_OFFICE_LOCATIONS } from 'src/graphql/queries';
 import { GetOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
+import { useRouter } from 'src/routes/hooks';
 
 interface SelectedLocation {
   lat: number;
@@ -13,9 +14,14 @@ interface SelectedLocation {
   phone: string;
   email: string;
   image: string;
+  countryId: string;
 }
 
+
 const LocationMap = () => {
+
+  const router = useRouter();
+  
   const { data } = useQuery<GetOfficeLocationsResponse>(GET_OFFICE_LOCATIONS, {
     variables: {
       count: 3,
@@ -23,6 +29,8 @@ const LocationMap = () => {
       search: "",
     },
   });
+
+  console.log(data)
 
   const [selectedLocation, setSelectedLocation] = useState<SelectedLocation | null>(null);
 
@@ -82,17 +90,25 @@ const LocationMap = () => {
                       phone: phoneNumber,
                       email: emailAddress,
                       image: location.officeLocationsOptions.country.nodes[0].countriesOptions?.countryFlag?.node?.sourceUrl ?? "",
+                      countryId: location.officeLocationsOptions.country.nodes[0]?.id ?? ""
                     })
                   }
+                  
                 />
               );
             })}
 
             {selectedLocation && (
               <Stack
-                display={{ xs: "none", md: "flex" }}
-                className="custom-info-window"
-              >
+              display={{ xs: "none", md: "flex" }}
+              className="custom-info-window"
+              onClick={() => {
+                if (selectedLocation?.countryId) {
+                  router.push(`/support/${selectedLocation.countryId}`);
+                }
+              }}
+              sx={{ cursor: "pointer" }}
+            >
                 <Stack direction="row" gap={2} alignItems="center">
                   <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />
                   <Typography color='rgba(11, 19, 40, 1)' variant="h4" sx={{ fontWeight: "600 !important" }} width={"60%"}>
@@ -119,6 +135,12 @@ const LocationMap = () => {
         <Stack
           display={{ xs: "flex", md: "none" }}
           className="custom-info-window"
+          onClick={() => {
+            if (selectedLocation?.countryId) {
+              router.push(`/support/${selectedLocation.countryId}`);
+            }
+          }}
+          sx={{ cursor: "pointer" }}
         >
           <Stack direction="row" gap={2} alignItems="center">
             <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />

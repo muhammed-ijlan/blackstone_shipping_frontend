@@ -183,6 +183,7 @@ export function HeaderSection({
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+
   const handleMouseEnter = (label: string) => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
@@ -205,7 +206,19 @@ export function HeaderSection({
     const hasNestedItems = subcategories.some(
       (subItem) => subItem.children && subItem.children.length > 0
     );
-
+  
+    const handleNavigation = (item: MenuItem) => {
+      const {  uri } = item;
+  
+      const isExternal = uri?.startsWith("http") && !uri.includes("blackstone.hexprojects.in");
+  
+      if (isExternal) {
+        window.location.href = uri;
+      } else if (uri && uri !== "#") {
+        router.push(uri); 
+      }
+    };
+  
     if (!hasNestedItems) {
       return (
         <Stack>
@@ -218,16 +231,12 @@ export function HeaderSection({
               pt: 2,
             }}
           />
-
           <SubMenuContent>
             <SubMenuCategory>
               {subcategories.map((subItem) => (
                 <SubMenuItem
                   key={subItem.id}
-                  href={subItem.uri !== "#" ? subItem.uri : undefined}
-                  onClick={() =>
-                    subItem.uri !== "#" && router.push(subItem.uri)
-                  }
+                  onClick={() => handleNavigation(subItem)}
                 >
                   {subItem.label}
                 </SubMenuItem>
@@ -237,7 +246,7 @@ export function HeaderSection({
         </Stack>
       );
     }
-
+  
     return (
       <Stack>
         <Divider
@@ -253,22 +262,19 @@ export function HeaderSection({
           {subcategories.map((category) => (
             <SubMenuCategory key={category.id}>
               <SubMenuCategoryTitle
-                // href={category.uri !== "#" ? category.uri : undefined}
                 onClick={() => {
-                  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                  category.uri !== "#" && router.push(category.uri);
+                  handleNavigation(category);
                   handleMouseLeave();
                 }}
               >
                 {category.label}
               </SubMenuCategoryTitle>
+  
               {category.children?.map((item) => (
                 <SubMenuItem
                   key={item.id}
-                  // href={item.uri !== "#" ? item.uri : undefined}
                   onClick={() => {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                    item.uri !== "#" && router.push(item.uri);
+                    handleNavigation(item);
                     handleMouseLeave();
                   }}
                 >
@@ -281,7 +287,10 @@ export function HeaderSection({
       </Stack>
     );
   };
-
+  
+  
+  
+  
   const normalizePath = (path: string = "") => {
     if (!path) return "";
     return path.replace(/\/+$/, "").toLowerCase();

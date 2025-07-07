@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router";
+import { useRouter } from "src/routes/hooks";
 import { CountryPageData } from "src/types/graphql/types/support.types";
 
 const GlobalOffices = ({ data }: { data: CountryPageData }) => {
@@ -8,6 +9,8 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
   const officeLocations = data.officeLocations.nodes.filter((office) =>
     office.countries.nodes.some((country) => country.id !== id)
   );
+
+  const router = useRouter();
   return (
     <Stack
       gap={2}
@@ -29,6 +32,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
         {officeLocations.map((office) => (
           <>
             <Box
+              onClick={() => router.push(`/support/${office.countries.nodes[0].id}`)}
               sx={{
                 display: { xs: "none", sm: "flex" },
                 alignItems: "center",
@@ -36,16 +40,17 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
                 padding: "17px 59px",
                 border: "1px solid rgba(217, 217, 217, 1)",
                 borderRadius: "8px",
+                cursor: "pointer",
               }}
             >
-              <Typography variant="body1" sx={{fontWeight:"600"}} color="rgba(11, 19, 40, 1)">
+              <Typography variant="body1" sx={{ fontWeight: "600" }} color="rgba(11, 19, 40, 1)">
                 {office.title}
               </Typography>
             </Box>
 
-                 <Typography  variant="h4" sx={{display:{xs:"flex",sm:"none"},textAlign:"left !important"}}>
-                              • &nbsp;&nbsp;{office.title}
-                            </Typography>
+            <Typography variant="h4" sx={{ display: { xs: "flex", sm: "none" }, textAlign: "left !important" }}>
+              • &nbsp;&nbsp;{office.title}
+            </Typography>
           </>
         ))}
       </Stack>
