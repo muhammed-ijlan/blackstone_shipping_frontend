@@ -190,7 +190,7 @@ export function HeaderSection({
     }
     hoverTimeoutRef.current = setTimeout(() => {
       setOpenSubmenu(label);
-    }, 200);
+    }, 50);
   };
 
   const handleMouseLeave = () => {
@@ -199,7 +199,7 @@ export function HeaderSection({
     }
     hoverTimeoutRef.current = setTimeout(() => {
       setOpenSubmenu(null);
-    }, 200);
+    }, 50);
   };
 
   const renderSubcategories = (subcategories: MenuItem[]) => {
