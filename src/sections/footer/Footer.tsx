@@ -49,6 +49,8 @@ function MenuItemRenderer({
   openSections: Record<string, boolean>;
   handleToggle: (id: string) => void;
 }) {
+  const router = useRouter();
+
   const isItemActive = (menuItem: MenuItem): boolean => {
     if (menuItem.uri === pathname) return true;
     if (menuItem.children && menuItem.children.length > 0) {
@@ -60,16 +62,30 @@ function MenuItemRenderer({
   const hasChildren = item.children && item.children.length > 0;
   const paddingLeft = 2 + depth * 2;
 
+  const handleClick = () => {
+    if (hasChildren) {
+      handleToggle(item.id);
+    } else {
+      const isPDF = item.url?.endsWith(".pdf");
+      const isExternal =
+        item.url?.startsWith("http") &&
+        !item.url.includes("blackstone.hexprojects.in");
+
+      if (isPDF || isExternal) {
+        window.open(item.url, "_blank");
+      } else {
+        router.push(item.uri);
+      }
+    }
+  };
+
   return (
     <Box key={item.id}>
       <ListItem disableGutters disablePadding>
         <ListItemButton
-          component={hasChildren ? "div" : RouterLink}
-          href={hasChildren ? undefined : item.uri}
-          onClick={() => hasChildren && handleToggle(item.id)}
+          onClick={handleClick}
           disableGutters
-          sx={(theme) => ({
-            // pl: paddingLeft,
+          sx={{
             py: 1,
             pr: 1.5,
             gap: 2,
@@ -82,27 +98,28 @@ function MenuItemRenderer({
             m: "5px 0",
             ...(depth === 0 && {
               color: "rgba(249, 250, 251, 0.6)",
-              // textDecoration: "underline !important",
-              // textUnderlineOffset: "5px",
             }),
             ...(depth !== 0 && {
               color: "rgba(249, 250, 251, 1)",
               paddingLeft: 2.5,
             }),
-          })}
+          }}
         >
           <Box
             component="span"
             sx={{
               flexGrow: 1,
-              ...(hasChildren && {}),
             }}
           >
             {item.label}
           </Box>
+
           {hasChildren && (
             <Iconify
-              onClick={() => hasChildren && handleToggle(item.id)}
+              onClick={(e) => {
+                e.stopPropagation(); // prevent bubbling click to parent
+                handleToggle(item.id);
+              }}
               icon={
                 openSections[item.id]
                   ? "ic:round-keyboard-arrow-down"
@@ -186,6 +203,7 @@ const Footer = () => {
   const menuItems: MenuItem[] = data?.menu?.menuItems?.nodes ?? [];
   const nestedMenu = buildNestedMenu(menuItems);
 
+
   const currentYear = new Date().getFullYear();
   return (
     <Stack color={"white"} sx={{ background: "rgba(26, 32, 44, 1)" }}>
@@ -204,21 +222,21 @@ const Footer = () => {
             />
             <Stack direction={"row"} alignItems={"center"} gap={2}>
               <Box
-                onClick={() => window.open("https://www.facebook.com/blackstoneshippinggroup", "_blank")}                
+                onClick={() => window.open("https://www.facebook.com/blackstoneshippinggroup", "_blank")}
                 component={"img"}
                 src={fb}
                 width={{ xs: "40px", sm: "60px" }}
                 sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
-                onClick={() => window.open("https://www.linkedin.com/company/blackstone-shipping-group/", "_blank")}   
+                onClick={() => window.open("https://www.linkedin.com/company/blackstone-shipping-group/", "_blank")}
                 component={"img"}
                 src={linkedin}
                 width={{ xs: "40px", sm: "60px" }}
                 sx={{ cursor: "pointer", "&:hover": { transform: "scale(1.03)" } }}
               />
               <Box
-                onClick={() => window.open("https://www.instagram.com/blackstoneshipping/", "_blank")}   
+                onClick={() => window.open("https://www.instagram.com/blackstoneshipping/", "_blank")}
                 component={"img"}
                 src={insta}
                 width={{ xs: "40px", sm: "60px" }}
@@ -282,7 +300,7 @@ const Footer = () => {
                 Subscribe
               </Button>
             </Stack>
-            <Stack gap={2} height={"700px"} flexWrap={"wrap"}>
+            <Stack gap={3} height={"700px"} flexWrap={"wrap"}>
               {nestedMenu.map((item, idx) => (
                 <Stack key={idx}>
                   <Typography
@@ -301,18 +319,29 @@ const Footer = () => {
                   >
                     {item.label}
                   </Typography>
-                  {item?.children?.map((subItem, subIdx) => (
-                    <Typography
-                      component={"div"}
-                      onClick={() => router.push(subItem.uri)}
-                      key={subIdx}
-                      variant="body2"
-                      color="white"
-                      sx={{ my: 0.5, cursor: "pointer" }}
-                    >
-                      {subItem.label}
-                    </Typography>
-                  ))}
+                  {item?.children?.map((subItem, subIdx) => {
+                    const isPDF = subItem.url?.endsWith(".pdf");
+                    const isExternal = subItem.url?.startsWith("http") && !subItem.url.includes("blackstone.hexprojects.in");
+
+                    return (
+                      <Typography
+                        key={subIdx}
+                        component="div"
+                        onClick={() => {
+                          if (isPDF || isExternal) {
+                            window.open(subItem.url, "_blank");
+                          } else {
+                            router.push(subItem.uri);
+                          }
+                        }}
+                        variant="body2"
+                        color="white"
+                        sx={{ my: 0.8, cursor: "pointer", maxWidth: "150px" }}
+                      >
+                        {subItem.label}
+                      </Typography>
+                    );
+                  })}
                 </Stack>
               ))}
             </Stack>

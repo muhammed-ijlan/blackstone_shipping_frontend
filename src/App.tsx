@@ -16,7 +16,7 @@ export default function App({ children }: AppProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
   // useScrollToTop();
   return (  <main ref={mainRef}>
-       <ScrollRestorationManager />
+    <ScrollRestorationManager />
     <ThemeProvider>
     <Toaster  reverseOrder={false} />
       {children}
