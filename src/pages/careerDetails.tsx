@@ -1,8 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Container, Stack } from "@mui/material";
-import React from "react";
 import { useParams } from "react-router";
-import Banner from "src/components/banner/Banner";
 import ApplyNowForm from "src/components/careers/ApplyNowForm";
 import CareerBanner from "src/components/careers/CareerBanner";
 import JobDetails from "src/components/careers/JobDetails";

@@ -5,6 +5,7 @@ import { usePathname } from './routes/hooks';
 import { ThemeProvider } from './theme/theme-provider';
 import ScrollRestorationManager from './utils/ScrollRestorationManager';
 import { Toaster } from "react-hot-toast";
+import ErrorBoundary from 'src/components/ErrorBoundary';
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +16,13 @@ type AppProps = {
 export default function App({ children }: AppProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
   // useScrollToTop();
-  return (  <main ref={mainRef}>
+  return (<main ref={mainRef}>
     <ScrollRestorationManager />
     <ThemeProvider>
-    <Toaster  reverseOrder={false} />
-      {children}
+      <Toaster reverseOrder={false} />
+      <ErrorBoundary >
+        {children}
+      </ErrorBoundary>
     </ThemeProvider>
   </main>
   );

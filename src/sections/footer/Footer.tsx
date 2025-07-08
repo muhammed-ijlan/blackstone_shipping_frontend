@@ -252,12 +252,13 @@ const Footer = () => {
             }}
           />
           {/* Large device */}
-          <Stack
+          <Box
             display={{ xs: "none", lg: "flex" }}
-            direction={"row"}
+            flexDirection={"row"}
             justifyContent={"space-between"}
+            minWidth={0}
           >
-            <Stack gap={3}>
+            <Box gap={3} sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="h2" fontWeight={600}>
                 Subscribe to Newsletters
               </Typography>
@@ -300,8 +301,8 @@ const Footer = () => {
               >
                 Subscribe
               </Button>
-            </Stack>
-            <Stack gap={3} height={"700px"} flexWrap={"wrap"}>
+            </Box>
+            <Box gap={3} height={"700px"} sx={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
               {nestedMenu.map((item, idx) => (
                 <Stack key={idx}>
                   <Typography
@@ -345,8 +346,8 @@ const Footer = () => {
                   })}
                 </Stack>
               ))}
-            </Stack>
-          </Stack>
+            </Box>
+          </Box>
 
           {/* Mobile Device */}
 

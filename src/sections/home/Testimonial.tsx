@@ -1,14 +1,13 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
-import React, { useRef, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
-import DOMPurify from "dompurify";
+import { Container, Stack, Typography } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
-import SectionHead from "src/components/sectionHead/SectionHead";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
-import { GET_TESTIMONIALS } from "src/graphql/queries";
 import SliderProgress from "src/components/customSlider/SliderProgress";
-import LoadingFallback from "src/components/LoadingFallback";
 import TestimonialCard from "src/components/home/TestimonialCard";
+import LoadingFallback from "src/components/LoadingFallback";
+import SectionHead from "src/components/sectionHead/SectionHead";
+import { GET_TESTIMONIALS } from "src/graphql/queries";
 
 interface TestimonialNode {
   title: string;
@@ -82,7 +81,7 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={{ xs: "column", lg: "row" }} gap={{xs:1,md:7}}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={{ xs: 1, md: 7 }}>
           <Stack
             width={{ xs: "100%", lg: "40%" }}
             gap={{ xs: 0, sm: 3 }}
@@ -108,7 +107,7 @@ const Testimonial = () => {
               <SliderProgress
                 currentIndex={currentIndex}
                 totalItems={testimonialsList.length}
-                sx={{color:"white",background:"rgba(109, 110, 113, 1)"}}
+                sx={{ color: "white", background: "rgba(109, 110, 113, 1)" }}
               />
             </Stack>
           </Stack>

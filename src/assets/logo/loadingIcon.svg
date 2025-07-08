@@ -1,0 +1,39 @@
+<svg width="156" height="161" viewBox="0 0 156 161" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    .blink1, .blink2, .blink3 {
+      animation: blink 1.5s infinite ease-in-out;
+    }
+
+    .blink1 {
+      animation-delay: 0s;
+    }
+
+    .blink2 {
+      animation-delay: 0.3s;
+    }
+
+    .blink3 {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+  <g clip-path="url(#clip0_1_2)">
+    <mask id="mask0_1_2" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="156" height="161">
+      <path d="M156 0H0V161H156V0Z" fill="white"></path>
+    </mask>
+    <g mask="url(#mask0_1_2)">
+      <path class="blink1" d="M0 98.8706L68.931 35.2188V65.1723L0 128.824V98.8706Z" fill="#1BBA64" fill-opacity="0.83"></path>
+      <path class="blink2" d="M43.5346 98.8706L112.465 35.2188V65.1723L43.5346 128.824V98.8706Z" fill="#081DF2"></path>
+      <path class="blink3" d="M87.0694 98.8706L156 35.2188V65.1723L87.0694 128.824V98.8706Z" fill="#6A6B6F"></path>
+    </g>
+  </g>
+  <defs>
+    <clipPath id="clip0_1_2">
+      <rect width="156" height="161" fill="white"></rect>
+    </clipPath>
+  </defs>
+</svg>
