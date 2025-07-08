@@ -6,9 +6,9 @@ import { useParams } from "react-router";
 import { CountryPageData } from "src/types/graphql/types/support.types";
 
 
-const CountrySpecificBanner = ({ data }: { data: CountryPageData }) => {
+const   CountrySpecificBanner = ({ data }: { data: CountryPageData }) => {
   const bannerImage =
-    data.country?.countriesOptions?.countryBannerImage?.node.sourceUrl ?? "";
+    data.country?.countriesOptions?.countryBannerImage?.node?.sourceUrl ?? "";
   const countryName = data.country?.name ?? "Country";
 
   const { id } = useParams<{ id: string }>();
