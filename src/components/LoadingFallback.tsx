@@ -1,5 +1,6 @@
 import { Box, LinearProgress, linearProgressClasses } from "@mui/material";
 import { varAlpha } from "minimal-shared/utils";
+import loader from "src/assets/logo/loadingIcon.svg"
 
 const LoadingFallback = () => (
   <Box
@@ -11,16 +12,14 @@ const LoadingFallback = () => (
       height: "70vh",
     }}
   >
-    <LinearProgress
-      sx={{
-        width: 1,
-        maxWidth: 320,
-        bgcolor: (theme) =>
-          varAlpha(theme.vars?.palette.text.primaryChannel, 0.16),
-        [`& .${linearProgressClasses.bar}`]: { bgcolor: "text.primary" },
-      }}
+    <Box
+      component="img"
+      src={loader}
+      alt="Loading..."
+      sx={{ width: 100, height: 100 }}
     />
   </Box>
 );
+
 
 export default LoadingFallback;
