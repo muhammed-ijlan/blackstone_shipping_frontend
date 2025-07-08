@@ -1,9 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import ScrollPane from "src/layouts/components/ScrollPane";
-import { GetCountryPageData } from "src/types/graphql/types/support.types";
+import { CountryPageData } from "src/types/graphql/types/support.types";
 
-const Services = ({ data }: { data: GetCountryPageData }) => {
+const Services = ({ data }: { data: CountryPageData }) => {
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}

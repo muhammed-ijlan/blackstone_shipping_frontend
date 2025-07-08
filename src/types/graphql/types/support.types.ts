@@ -71,7 +71,7 @@ export interface OfficeLocationsVars {
 
 
 
-export interface GetCountryPageData {
+export interface CountryPageData {
   country: {
     name: string;
     countriesOptions?: {
@@ -116,6 +116,6 @@ export interface GetCountryPageData {
   };
 }
 
-export interface GetCountryPageVars {
+export interface CountryPageVars {
   id: string;
 }
