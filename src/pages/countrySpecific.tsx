@@ -9,14 +9,14 @@ import CountrySpecificBanner from "src/sections/support/CountrySpecificBanner";
 import GlobalOffices from "src/sections/support/GlobalOffices";
 import Services from "src/sections/support/Services";
 import {
-  GetCountryPageData,
-  GetCountryPageVars,
+  CountryPageData,
+  CountryPageVars,
 } from "src/types/graphql/types/support.types";
 
 const Page = () => {
   const { id } = useParams();
 
-  const { data, loading, error } = useQuery<GetCountryPageData, GetCountryPageVars>(
+  const { data, loading, error } = useQuery<CountryPageData, CountryPageVars>(
     GET_COUNTRY_PAGE,
     {
       variables: { id: id ?? "" },
