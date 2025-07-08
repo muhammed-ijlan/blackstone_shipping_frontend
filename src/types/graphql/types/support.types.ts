@@ -71,41 +71,35 @@ export interface OfficeLocationsVars {
 
 
 
-export interface CountryPageData {
+export interface GetCountryPageData {
   country: {
     name: string;
     countriesOptions?: {
-      countryBannerImage: {
-        node: {
+      countryBannerImage?: {
+        node?: {
           sourceUrl: string;
         };
       };
-      countryBannerCaption: string;
-      countryMainAddress: string;
-      countryMainEmailAddress: string;
-      countryMainPhoneNumber: string;
-      countryImage1: {
-        node: {
+      countryBannerCaption?: string;
+      countryServices?: string;
+      countryMainAddress?: string;
+      countryMainEmailAddress?: string;
+      countryMainPhoneNumber?: string;
+      countryImage1?: {
+        node?: {
           sourceUrl: string;
         };
       };
-      countryImage2: {
-        node: {
+      countryImage2?: {
+        node?: {
           sourceUrl: string;
         };
       };
-      countryImage3: {
-        node: {
+      countryImage3?: {
+        node?: {
           sourceUrl: string;
         };
       };
-    };
-    services: {
-      nodes: {
-        id: string;
-        title: string;
-        uri: string;
-      }[];
     };
   };
   officeLocations: {
@@ -114,14 +108,14 @@ export interface CountryPageData {
       title: string;
       countries: {
         nodes: {
-          id: string;
           name: string;
+          id: string;
         }[];
       };
     }[];
   };
 }
 
-export interface CountryPageVars {
+export interface GetCountryPageVars {
   id: string;
 }

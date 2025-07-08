@@ -1388,6 +1388,7 @@ export const GET_OFFICE_LOCATIONS = gql`
 
 
 
+
 export const GET_COUNTRY_PAGE = gql`
   query GetCountryPage($id: ID!) {
     country(id: $id, idType: ID) {
@@ -1400,6 +1401,7 @@ export const GET_COUNTRY_PAGE = gql`
             }
           }
           countryBannerCaption
+          countryServices
           countryMainAddress
           countryMainEmailAddress
           countryMainPhoneNumber
@@ -1418,13 +1420,6 @@ export const GET_COUNTRY_PAGE = gql`
               sourceUrl
             }
           }
-        }
-      }
-      services {
-        nodes {
-          id
-          title
-          uri
         }
       }
     }
