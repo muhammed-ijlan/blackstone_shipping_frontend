@@ -1,8 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import { CountryPageData } from "src/types/graphql/types/support.types";
+import ScrollPane from "src/layouts/components/ScrollPane";
+import { GetCountryPageData } from "src/types/graphql/types/support.types";
 
-const Services = ({ data }: { data: CountryPageData }) => {
+const Services = ({ data }: { data: GetCountryPageData }) => {
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
@@ -28,32 +29,26 @@ const Services = ({ data }: { data: CountryPageData }) => {
           Services
         </Typography>
         <Stack style={{ padding: "10px", listStyleType: "unset", margin: 0 }}>
-          {data.country?.services?.nodes?.map((service) => (
-            <Box
-              key={service.id}
-              sx={{
-                margin: "20px 10px",
-                padding: "15px",
-                fontSize: "16px",
-                lineHeight: "24px",
-                boxShadow: "0px 2px 3px 0px rgba(45, 55, 72, 0.08)",
-              }}
-            >
-              <a
-                href={service.uri}
-                style={{
-                  textDecoration: "none",
-                  color: "rgba(0, 0, 0, 1)",
-                  fontSize: "16px",
-                  background: "rgba(255, 255, 255, 1)",
-                }}
-              >
-                <Typography variant="h4" sx={{ textAlign: "left !important" }}>
-                  • &nbsp;&nbsp;{service.title}
-                </Typography>
-              </a>
-            </Box>
-          ))}
+          <ScrollPane maxHeight={600}>
+          <Box component={"div"} dangerouslySetInnerHTML={{ __html: data.country?.countriesOptions?.countryServices ?? "" }} sx={{
+            "& ul": {
+              listStyleType: "disc",
+              margin: 0,
+              padding: "10px",
+             
+            },
+            "& li": {
+              listStyleType: "disc",
+              margin: "20px 10px",
+              padding: "15px",
+              fontSize: "16px",
+              lineHeight: "24px",
+              boxShadow: "0px 2px 3px 0px rgba(45, 55, 72, 0.08)", 
+             
+            },
+          }}/>
+          </ScrollPane>
+         
         </Stack>
       </Stack>
 
@@ -62,7 +57,7 @@ const Services = ({ data }: { data: CountryPageData }) => {
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
-            height={{ xs: "100%", md: "524px" }}
+            height={{ xs: "100%", md: "100%" }}
             src={data.country?.countriesOptions?.countryImage1?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
