@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { GET_OFFICE_LOCATIONS } from 'src/graphql/queries';
 import { GetOfficeLocationsResponse } from 'src/types/graphql/types/company.types';
 import { useRouter } from 'src/routes/hooks';
+
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 interface SelectedLocation {
   lat: number;
@@ -21,7 +24,11 @@ interface SelectedLocation {
 const LocationMap = () => {
 
   const router = useRouter();
-  
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const mobileInfoRef = useRef<HTMLDivElement>(null);
+
   const { data } = useQuery<GetOfficeLocationsResponse>(GET_OFFICE_LOCATIONS, {
     variables: {
       count: 0,
@@ -80,7 +87,7 @@ const LocationMap = () => {
                   key={index}
                   position={{ lat, lng }}
                   title={location.title}
-                  onClick={() =>
+                  onClick={() => {
                     setSelectedLocation({
                       lat,
                       lng,
@@ -90,24 +97,34 @@ const LocationMap = () => {
                       email: emailAddress,
                       image: location.officeLocationsOptions.country.nodes[0].countriesOptions?.countryFlag?.node?.sourceUrl ?? "",
                       countryId: location.officeLocationsOptions.country.nodes[0]?.id ?? ""
-                    })
-                  }
-                  
+                    });
+
+                    if (isMobile && mobileInfoRef.current) {
+                      setTimeout(() => {
+                        const yOffset = -150;
+                        const ref = mobileInfoRef.current;
+                        if (ref) {
+                          const y = ref.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                      }, 100);
+                    }
+                  }}
                 />
               );
             })}
 
             {selectedLocation && (
               <Stack
-              display={{ xs: "none", md: "flex" }}
-              className="custom-info-window"
-              onClick={() => {
-                if (selectedLocation?.countryId) {
-                  router.push(`/support/${selectedLocation.countryId}`);
-                }
-              }}
-              sx={{ cursor: "pointer" }}
-            >
+                display={{ xs: "none", md: "flex" }}
+                className="custom-info-window"
+                onClick={() => {
+                  if (selectedLocation?.countryId) {
+                    router.push(`/support/${selectedLocation.countryId}`);
+                  }
+                }}
+                sx={{ cursor: "pointer" }}
+              >
                 <Stack direction="row" gap={2} alignItems="center">
                   <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />
                   <Typography color='rgba(11, 19, 40, 1)' variant="h4" sx={{ fontWeight: "600 !important" }} width={"60%"}>
@@ -130,16 +147,19 @@ const LocationMap = () => {
           </Map>
         </Box>
       </APIProvider>
+      <Stack  ref={mobileInfoRef}>
+
       {selectedLocation && (
         <Stack
+         
           display={{ xs: "flex", md: "none" }}
           className="custom-info-window"
+          sx={{ cursor: "pointer", paddingTop: 2 }} // optional spacing
           onClick={() => {
             if (selectedLocation?.countryId) {
               router.push(`/support/${selectedLocation.countryId}`);
             }
           }}
-          sx={{ cursor: "pointer" }}
         >
           <Stack direction="row" gap={2} alignItems="center">
             <Box sx={{ borderRadius: "4px" }} width={"48px"} component={"img"} src={selectedLocation.image} alt={selectedLocation.name} />
@@ -160,6 +180,7 @@ const LocationMap = () => {
           </Typography>
         </Stack>
       )}
+      </Stack>
     </Stack>
   );
 };

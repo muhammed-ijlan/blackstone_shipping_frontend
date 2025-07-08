@@ -94,7 +94,6 @@ const OfficeLocationMobile = () => {
     }
   }, [cities]);
   
-
   return (
     <Stack
       display={{ xs: "flex", md: "none" }}
@@ -203,7 +202,9 @@ const OfficeLocationMobile = () => {
 
       {selectedLocation && (
         <Stack sx={{ gap: 2 }}>
-          <Stack>
+          <Stack onClick={() => {
+            window.open(selectedLocation.officeLocationsOptions.address, "_blank");
+          }}>
             <Typography fontWeight={600} mb={1}>
               Address
             </Typography>
