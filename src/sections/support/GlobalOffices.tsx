@@ -48,7 +48,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
               </Typography>
             </Box>
 
-            <Typography variant="h4" sx={{ display: { xs: "flex", sm: "none" }, textAlign: "left !important" }}>
+            <Typography onClick={() => router.push(`/support/${office.countries.nodes[0].id}`)} variant="h4" sx={{ display: { xs: "flex", sm: "none" }, textAlign: "left !important" }}>
               • &nbsp;&nbsp;{office.title}
             </Typography>
           </>

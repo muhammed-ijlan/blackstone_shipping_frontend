@@ -108,28 +108,26 @@ function MenuItemRenderer({
     <Box key={item.id}>
       <ListItem disableGutters disablePadding>
 
-<ListItemButton
-  component={hasChildren || isExternal ? "div" : RouterLink}
-  href={!hasChildren && !isExternal ? item.uri : undefined}
-  onClick={() => {
-    if (hasChildren) {
-      handleToggle(item.id);
-    } else if (item.uri) {
-      if (isExternal) {
-        window.open(item.uri, "_blank");
-        onClose();
-      } else {
-        if (item.uri === pathname) {
-          onClose(); // same page
-        } else {
-        
-          onClose(); 
-        }
-      }
-    }
-  }}
-          
+        <ListItemButton
+          component={hasChildren || isExternal ? "div" : RouterLink}
+          href={!hasChildren && !isExternal ? item.uri : undefined}
+          onClick={() => {
+            if (hasChildren) {
+              handleToggle(item.id);
+            } else if (item.uri) {
+              if (isExternal) {
+                window.open(item.uri, "_blank");
+                onClose();
+              } else {
+                if (item.uri === pathname) {
+                  onClose(); // same page
+                } else {
 
+                  onClose();
+                }
+              }
+            }
+          }}
           disableGutters
           sx={(theme) => ({
             pl: paddingLeft,
@@ -250,7 +248,8 @@ export function NavContent({
 
   return (
     <>
-      <Scrollbar fillContent sx={{
+      <Scrollbar  fillContent sx={{
+        
       }}>
         <Stack
           direction="row"
@@ -274,7 +273,7 @@ export function NavContent({
             {
               display: "flex",
               flex: "1 1 auto",
-              height: "80vh",
+              height: "70vh",
               flexDirection: "column",
             },
             ...(Array.isArray(sx) ? sx : [sx]),
@@ -289,7 +288,7 @@ export function NavContent({
                 pathname={pathname}
                 openSections={openSections}
                 handleToggle={handleToggle}
-                onClose={onClose} // 👈 pass here
+                onClose={onClose} 
               />
             ))}
           </List>

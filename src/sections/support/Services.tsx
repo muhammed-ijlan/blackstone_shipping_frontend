@@ -28,27 +28,42 @@ const Services = ({ data }: { data: CountryPageData }) => {
         >
           Services
         </Typography>
-        <Stack style={{ padding: "10px", listStyleType: "unset", margin: 0 }}>
+        <Stack sx={{ padding:{xs:"0px" , sm:"10px"}, listStyleType: "unset", margin: 0 }}>
           <ScrollPane maxHeight={600}>
-          <Box component={"div"} dangerouslySetInnerHTML={{ __html: data.country?.countriesOptions?.countryServices ?? "" }} sx={{
-            "& ul": {
-              listStyleType: "disc",
-              margin: 0,
-              padding: "10px",
-             
-            },
-            "& li": {
-              listStyleType: "disc",
-              margin: "20px 10px",
-              padding: "15px",
-              fontSize: "16px",
-              lineHeight: "24px",
-              boxShadow: "0px 2px 3px 0px rgba(45, 55, 72, 0.08)", 
-             
-            },
-          }}/>
+            <Box
+              component="div"
+              dangerouslySetInnerHTML={{
+                __html: data.country?.countriesOptions?.countryServices ?? "",
+              }}
+              sx={{
+                "& ul": {
+                  listStyle: "none",
+                  margin: 0,
+                  padding: 0,
+                },
+                "& li": {
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  margin: "15px 0",
+                  padding: "15px",
+                  fontSize: "16px",
+                  lineHeight: "24px",
+                  boxShadow: "0px 2px 3px 0px rgba(45, 55, 72, 0.08)",
+                  borderRadius: "6px",
+                  position: "relative",
+                },
+                "& li::before": {
+                  content: '"•"',
+                  color: "#000", // or any color you like
+                  fontSize: "20px",
+                  lineHeight: "1",
+                  marginTop: "3px",
+                },
+              }}
+            />
           </ScrollPane>
-         
+
         </Stack>
       </Stack>
 
@@ -57,7 +72,7 @@ const Services = ({ data }: { data: CountryPageData }) => {
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
-            height={{ xs: "100%", md: "100%" }}
+            height={{ xs: "270px", md: "100%" }}
             src={data.country?.countriesOptions?.countryImage1?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
