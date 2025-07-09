@@ -15,6 +15,8 @@ import {
   GET_OFFICE_LOCATION_BY_URI,
 } from "src/graphql/queries";
 import { useQuery, useLazyQuery } from "@apollo/client";
+import { useRouter } from "src/routes/hooks";
+
 
 interface Country {
   id: string;
@@ -36,19 +38,35 @@ interface OfficeLocation {
   uri: string;
 }
 
-interface OfficeLocationDetails {
+export interface OfficeLocationDetails {
   title: string;
   officeLocationsOptions: {
     address: string;
     phoneNumber: string;
     emailAddress: string;
+    country: {
+      nodes: {
+        id: string;
+        name: string;
+        countriesOptions?: {
+          countryFlag?: {
+            node?: {
+              sourceUrl: string;
+            };
+          };
+        };
+      }[];
+    };
   };
 }
+
 
 const OfficeLocationMobile = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedUri, setSelectedUri] = useState("");
   const [selectedLocation, setSelectedLocation] = useState<OfficeLocationDetails | null>(null);
+
+  const router = useRouter();
 
   const { data: countriesData } = useQuery(GET_COUNTRIES);
   const [getCities, { data: citiesData }] = useLazyQuery(GET_OFFICE_LOCATIONS_BY_COUNTRY);
@@ -202,9 +220,7 @@ const OfficeLocationMobile = () => {
 
       {selectedLocation && (
         <Stack sx={{ gap: 2 }}>
-          <Stack onClick={() => {
-            window.open(selectedLocation.officeLocationsOptions.address, "_blank");
-          }}>
+          <Stack onClick={() => router.push(`/support/${selectedLocation.officeLocationsOptions.country.nodes[0].id}`)}>
             <Typography fontWeight={600} mb={1}>
               Address
             </Typography>

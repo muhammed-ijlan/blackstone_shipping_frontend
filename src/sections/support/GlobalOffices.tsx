@@ -28,7 +28,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
       >
         Global offices
       </Typography>
-      <Stack direction="row" gap={2} flexWrap={"wrap"}>
+      <Stack direction="row" gap={2} flexWrap={"wrap"} justifyContent={"flex-start  "} alignItems={""} >
         {officeLocations.map((office) => (
           <>
             <Box
@@ -37,10 +37,11 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
                 display: { xs: "none", sm: "flex" },
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "17px 59px",
+                padding: "17px 0px",
                 border: "1px solid rgba(217, 217, 217, 1)",
                 borderRadius: "8px",
                 cursor: "pointer",
+                minWidth: {sm:"185px"},
               }}
             >
               <Typography variant="body1" sx={{ fontWeight: "600" }} color="rgba(11, 19, 40, 1)">

@@ -1420,6 +1420,11 @@ export const GET_COUNTRY_PAGE = gql`
               sourceUrl
             }
           }
+          countryflyer {
+            node {
+              sourceUrl
+            }
+          }
         }
       }
     }
@@ -1877,10 +1882,26 @@ export const GET_OFFICE_LOCATION_BY_URI = gql`
         address
         phoneNumber
         emailAddress
+        country {
+          nodes {
+            id
+            name
+            ... on Country {
+              countriesOptions {
+                countryFlag {
+                  node {
+                    sourceUrl
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 `;
+
 
 
 export const GET_JOB_CATEGORIES = gql`

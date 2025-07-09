@@ -69,8 +69,6 @@ export interface OfficeLocationsVars {
 
 
 
-
-
 export interface CountryPageData {
   country: {
     name: string;
@@ -96,6 +94,11 @@ export interface CountryPageData {
         };
       };
       countryImage3?: {
+        node?: {
+          sourceUrl: string;
+        };
+      };
+      countryflyer?: {
         node?: {
           sourceUrl: string;
         };
