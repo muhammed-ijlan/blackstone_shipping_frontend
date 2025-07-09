@@ -1,8 +1,43 @@
-import { Stack, Typography } from "@mui/material";
+import { ArrowForward, Download } from "@mui/icons-material";
+import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { CountryPageData } from "src/types/graphql/types/support.types";
 
 const Contact = ({ data }: { data: CountryPageData }) => {
+
+  const handleDownload = async () => {
+    const fileUrl = data.country?.countriesOptions?.countryflyer?.node?.sourceUrl;
+    if (!fileUrl  ) { 
+      alert("No file available");
+      return;
+    }
+
+    try {
+      const response = await fetch(fileUrl, { mode: "cors" });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      // Try to extract file name from URL
+      const fileName = fileUrl.split("/").pop() || "flyer";
+
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+      alert("Download failed.");
+    }
+  };
+
   return (
     <Stack
       gap={2}
@@ -79,6 +114,30 @@ const Contact = ({ data }: { data: CountryPageData }) => {
             </Typography>
           </Stack>
         </Stack>
+      </Stack>
+      <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} mt={2}>
+      <Button
+  sx={{
+    background: "rgba(255, 255, 255, 1)",
+    color: "rgba(45, 55, 72, 1)",
+    borderRadius: "8px",
+    padding: "10px 20px",
+    fontSize: "16px",
+    fontWeight: "600",
+    textTransform: "none",
+    "&:hover": {
+      background: "rgba(255, 255, 255, 0.9)",
+    },
+  }}
+  size="large"
+  href={data.country?.countriesOptions?.countryflyer?.node?.sourceUrl ?? ""}
+  target="_blank"
+  rel="noopener noreferrer"
+  download 
+  endIcon={<Download />}
+>
+  Download Flyer
+</Button>
       </Stack>
     </Stack>
   );

@@ -48,7 +48,7 @@ const SupplyChain = ({
           }}
         />
       </Stack>
-      <Stack direction={"row"} gap={3} flexWrap={"wrap"}>
+      <Stack direction={{ xs: "column", md: "row" }} gap={3} flexWrap={"wrap"}>
         <SupplyChainCard
           data={{
             title: fitSection.fitTitle,
