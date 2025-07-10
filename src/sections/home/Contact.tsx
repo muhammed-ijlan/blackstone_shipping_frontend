@@ -182,6 +182,7 @@ const Contact = () => {
                         size="large"
                         disabled={isSubmitting}
                         sx={{
+                          typography:"body1",
                           height: "60px",
                           background: "rgba(26, 86, 219, 1)",
                         }}

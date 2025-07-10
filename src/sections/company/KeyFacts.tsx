@@ -32,13 +32,13 @@ const KeyFacts = ({ data }: { data: GetCompanyKeyFactsResponse }) => {
         <Grid container spacing={4} justifyContent={"center"}>
           {data.keyFacts.nodes.map((item, index) => (
             <Grid
-              size={{ xs: 12, sm: 6, lg: 4 }}
+              size={{ xs: 6, sm: 6, lg: 4 }}
               key={index}
-              sx={{ width: "295px !important  ", height: "184px" }}
+              sx={{ width:{ xs: "100%", sm: "295px !important  "}, height: "184px" }}
             >
               <Stack
                 sx={{
-                  width: "295px",
+                  // width: "295px",
                   height: "184px",
                   color: "rgba(33, 52, 72, 1)",
                   background: "rgba(245, 247, 251, 1)",

@@ -65,7 +65,7 @@ const LocationMap = () => {
             disableDefaultUI
             zoomControl
             streetViewControl={false}
-            mapTypeControl
+            mapTypeControl={false} 
             fullscreenControl
           >
             {data?.officeLocations.nodes.map((location, index) => {

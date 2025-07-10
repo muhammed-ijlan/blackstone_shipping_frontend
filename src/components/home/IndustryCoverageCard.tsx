@@ -41,7 +41,8 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
           justifyContent="space-between"
           sx={{
             width: "100%",
-            height: "218px",
+            minHeight: "218px",
+            height: {xs:"auto",sm:"218px"},
             borderRadius: "8px",
             background: "linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)",
             position: "relative",
@@ -88,7 +89,8 @@ const IndustryCoverageCard = ({ item }: { item: IndustryItem }) => {
           justifyContent="center"
           sx={{
             width: "100%",
-            height: "218px",
+            minHeight: "218px",
+            height: {xs:"auto",sm:"218px"},
             borderRadius: "8px",
             background: "linear-gradient(114.75deg, #343D4D 0%, #242E40 100%)",
             borderBottom: "1px solid rgba(249, 250, 251, 1)",

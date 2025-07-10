@@ -307,6 +307,7 @@ const Footer = () => {
         "&:hover": {
           backgroundColor: "rgba(26, 86, 211, 1)",
         },
+        typography:"body1",
       }}
     >
       Subscribe
@@ -452,6 +453,7 @@ const Footer = () => {
                   "&:hover": {
                     backgroundColor: "rgba(26, 86, 2111, 1)",
                   },
+                  typography:"body1",
                 }}
               >
                 Subscribe

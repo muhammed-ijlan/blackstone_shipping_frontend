@@ -32,9 +32,9 @@ const Certification = ({
           {data.page.companyPageCertifications.certificationContent2}
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{xs: 2, md: 4}}>
           {data.certifications.nodes.map((item, index) => (
-            <Grid size={{ xs: 12, sm: 4, lg: 3 }}>
+            <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",
@@ -68,9 +68,9 @@ const Certification = ({
           {data.page.companyPageCertifications.certificationContent3}
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{xs: 2, md: 4}}>
           {data.partners.nodes.map((item, index) => (
-            <Grid size={{ xs: 12, sm: 4, lg: 3 }}>
+            <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
               <Stack
                 sx={{
                   border: "1px solid rgba(182, 183, 184, 0.3)",

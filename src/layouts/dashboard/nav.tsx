@@ -257,7 +257,7 @@ export function NavContent({
           alignItems="center"
           mb={2}
         >
-          <Logo href={logo} sx={{ width: "100px" }} />
+          <Logo href={logo} sx={{ width: "90px" }} />
           <Iconify
             width={30}
             icon="ic:round-close"

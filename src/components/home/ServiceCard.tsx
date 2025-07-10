@@ -33,7 +33,7 @@ const ServiceCard = ({
         width: "100%",
         height: { xs: "100%", md: "100%" },
         borderRadius: "8px",
-        p: 3,
+        p: {xs: 2, md: 3},
         overflow: "hidden",
         position: "relative",
         cursor: "pointer",
@@ -101,14 +101,14 @@ const ServiceCard = ({
             typography: { xs: "h4", lg: "h5" },
           }}
         >
-          {item.title}
+          {item.title} 
         </Typography>
         <Box
           component={"img"}
           src={icon1}
           width="40px"
           height={"40px"}
-          sx={{ background: "rgba(45, 55, 72, 1)", borderRadius: "50%" }}
+          sx={{ background: "rgba(45, 55, 72, 1)", borderRadius: "50%", display: { xs: "none", md: "block" } }}
         />
       </Stack>
 
@@ -117,7 +117,7 @@ const ServiceCard = ({
           component={"img"}
           src={item.image}
           width={"100%"}
-          height={{ xs: "355px", md: "255px" }}
+          height={{ xs: "150px", md: "255px" }}
           sx={{ objectFit: "cover" }}
           borderRadius={"4px"}
         />
