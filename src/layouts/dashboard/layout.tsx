@@ -96,7 +96,7 @@ export function DashboardLayout({
           onClick={() => router.push("/home")}
           component="img"
           sx={{ [theme.breakpoints.up(layoutQuery)]: { display: "none" } }}
-          width="70px"
+          width="90px"
           src={logo}
         />
       ),

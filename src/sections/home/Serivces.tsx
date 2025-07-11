@@ -50,7 +50,7 @@ const Serivces = () => {
       <Stack mb={5}>
         <SectionHead title={heading} titleColor="rgba(26, 32, 44, 1)" />
 
-        <Grid container rowGap={4} spacing={4} mb={5} sx={{ height: "auto" }}>
+        <Grid container rowGap={{xs:2, md:  4}} spacing={{xs:2, md:  4}} mb={5} sx={{ height: "auto" }}>
           {services.map((item, index) => (
             <Grid
               sx={{
@@ -58,7 +58,7 @@ const Serivces = () => {
                 alignItems: "center !important",
                 justifyContent: "center  ",
               }}
-              size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+              size={{ xs: 6, sm: 6, md: 4, lg: 3 }}
               key={index}
               p={0}
             >

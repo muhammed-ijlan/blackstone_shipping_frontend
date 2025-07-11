@@ -23,9 +23,9 @@ const Vision = ({ data }: { data: GetCompanyVisionResponse }) => {
             }}
           />
 
-          <Grid container spacing={5} mt={5} justifyContent="space-between">
+          <Grid container spacing={{xs: 3, md: 5}} mt={5} justifyContent="space-between">
             {data.visions.nodes.map((vision, index) => (
-              <Grid size={{ xs: 12, md: 4 }} key={index}>
+              <Grid size={{ xs: 6, sm: 6, md: 4 }} key={index}>
                 <VisionCard vision={vision} />
               </Grid>
             ))}

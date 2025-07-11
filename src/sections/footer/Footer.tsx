@@ -253,127 +253,128 @@ const Footer = () => {
           />
           {/* Large device */}
           <Box
-  display={{ xs: "none", lg: "flex" }}
-  flexDirection="row"
-  justifyContent="space-between"
-  minWidth={0}
-  sx={{
-    "& > *": {
-      minWidth: 0,
-      flexShrink: 1,
-    },
-    "@supports (-webkit-appearance: none)": {
-      justifyContent: "flex-start", // fallback if Safari breaks with space-between
-      gap: 8, // add spacing between columns for Safari
-    },
-  }}
->
-  <Box gap={3} sx={{ display: "flex", flexDirection: "column" }}>
-    <Typography variant="h2" fontWeight={600}>
-      Subscribe to Newsletters
-    </Typography>
-    <TextField
-      fullWidth
-      placeholder="Enter your email address"
-      variant="outlined"
-      InputLabelProps={{
-        style: { color: "rgba(249, 250, 251, 0.6)" },
-      }}
-      InputProps={{
-        style: { color: "white" },
-      }}
-      sx={{
-        borderRadius: "4px",
-        "& .MuiOutlinedInput-root": {
-          "& fieldset": {
-            borderColor: "rgba(45, 55, 72, 1)",
-          },
-          "&:hover fieldset": {
-            borderColor: "rgba(109, 110, 113, 0.8)",
-          },
-          "&.Mui-focused fieldset": {
-            borderColor: "rgba(109, 110, 113, 1)",
-          },
-        },
-      }}
-    />
-    <Button
-      fullWidth
-      variant="contained"
-      size="large"
-      sx={{
-        backgroundColor: "rgba(26, 86, 219, 1)",
-        color: "white",
-        "&:hover": {
-          backgroundColor: "rgba(26, 86, 211, 1)",
-        },
-      }}
-    >
-      Subscribe
-    </Button>
-  </Box>
+            display={{ xs: "none", lg: "flex" }}
+            flexDirection="row"
+            justifyContent="space-between"
+            minWidth={0}
+            sx={{
+              "& > *": {
+                minWidth: 0,
+                flexShrink: 1,
+              },
+              "@supports (-webkit-appearance: none)": {
+                justifyContent: "flex-start",
+                gap: 8,
+              },
+            }}
+          >
+            <Box gap={3} sx={{ display: "flex", flexDirection: "column" }}>
+              <Typography variant="h2" fontWeight={600}>
+                Subscribe to Newsletters
+              </Typography>
+              <TextField
+                fullWidth
+                placeholder="Enter your email address"
+                variant="outlined"
+                InputLabelProps={{
+                  style: { color: "rgba(249, 250, 251, 0.6)" },
+                }}
+                InputProps={{
+                  style: { color: "white" },
+                }}
+                sx={{
+                  borderRadius: "4px",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "rgba(45, 55, 72, 1)",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "rgba(109, 110, 113, 0.8)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "rgba(109, 110, 113, 1)",
+                    },
+                  },
+                }}
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                size="large"
+                sx={{
+                  backgroundColor: "rgba(26, 86, 219, 1)",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "rgba(26, 86, 211, 1)",
+                  },
+                  typography: "body1",
+                }}
+              >
+                Subscribe
+              </Button>
+            </Box>
 
-  <Box
-    gap={3}
-    height="700px"
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "wrap",
-      "& *": {
-        minWidth: 0,
-      },
-    }}
-  >
-    {nestedMenu.map((item, idx) => (
-      <Stack key={idx}>
-        <Typography
-          component="div"
-          onClick={() => {
-            router.push(item.uri);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          variant="body2"
-          color="rgba(249, 250, 251, 0.6)"
-          sx={{
-            textDecoration: "underline",
-            textUnderlineOffset: "5px",
-            cursor: "pointer",
-          }}
-        >
-          {item.label}
-        </Typography>
-        {item?.children?.map((subItem, subIdx) => {
-          const isPDF = subItem.url?.endsWith(".pdf");
-          const isExternal = subItem.url?.startsWith("http") && !subItem.url.includes("blackstone.hexprojects.in");
-
-          return (
-            <Typography
-              key={subIdx}
-              component="div"
-              onClick={() => {
-                if (isPDF || isExternal) {
-                  window.open(subItem.url, "_blank");
-                } else {
-                  router.push(subItem.uri);
-                }
-              }}
-              variant="body2"
-              color="white"
+            <Box
+              gap={3}
+              height="700px"
               sx={{
-                my: 0.8,
-                cursor: "pointer",
-                maxWidth: "150px",
+                display: "flex",
+                flexDirection: "column",
+                flexWrap: "wrap",
+                "& *": {
+                  minWidth: 0,
+                },
               }}
             >
-              {subItem.label}
-            </Typography>
-          );
-        })}
-      </Stack>
-    ))}
-  </Box>
-</Box>
+              {nestedMenu.map((item, idx) => (
+                <Stack key={idx}>
+                  <Typography
+                    component="div"
+                    onClick={() => {
+                      router.push(item.uri);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    variant="body2"
+                    color="rgba(249, 250, 251, 0.6)"
+                    sx={{
+                      textDecoration: "underline",
+                      textUnderlineOffset: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  {item?.children?.map((subItem, subIdx) => {
+                    const isPDF = subItem.url?.endsWith(".pdf");
+                    const isExternal = subItem.url?.startsWith("http") && !subItem.url.includes("blackstone.hexprojects.in");
+
+                    return (
+                      <Typography
+                        key={subIdx}
+                        component="div"
+                        onClick={() => {
+                          if (isPDF || isExternal) {
+                            window.open(subItem.url, "_blank");
+                          } else {
+                            router.push(subItem.uri);
+                          }
+                        }}
+                        variant="body2"
+                        color="white"
+                        sx={{
+                          my: 0.8,
+                          cursor: "pointer",
+                          maxWidth: "150px",
+                        }}
+                      >
+                        {subItem.label}
+                      </Typography>
+                    );
+                  })}
+                </Stack>
+              ))}
+            </Box>
+          </Box>
 
 
           {/* Mobile Device */}
@@ -452,6 +453,7 @@ const Footer = () => {
                   "&:hover": {
                     backgroundColor: "rgba(26, 86, 2111, 1)",
                   },
+                  typography: "body1",
                 }}
               >
                 Subscribe

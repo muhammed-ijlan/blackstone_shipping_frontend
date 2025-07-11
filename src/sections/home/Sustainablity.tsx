@@ -101,13 +101,13 @@ const Sustainability = () => {
               gap={2}
               width="500px"
               sx={{
-                minWidth: "400px",
+                minWidth: {xs: "100%", sm: "400px"},
                 maxWidth: "400px",
                 borderRadius: "5px",
                 mb: 3,
                 height: "auto",
                 bgcolor: "white",
-                p: 3,
+                p: {xs: 2, md: 3},
               }}
             >
               <Box

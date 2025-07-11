@@ -123,11 +123,12 @@ const Contact = ({ data }: { data: CountryPageData }) => {
     borderRadius: "8px",
     padding: "10px 20px",
     fontSize: "16px",
-    fontWeight: "600",
     textTransform: "none",
     "&:hover": {
       background: "rgba(255, 255, 255, 0.9)",
-    },
+    },  
+    typography:"body1",
+    fontWeight:"600 !important"
   }}
   size="large"
   href={data.country?.countriesOptions?.countryflyer?.node?.sourceUrl ?? ""}
