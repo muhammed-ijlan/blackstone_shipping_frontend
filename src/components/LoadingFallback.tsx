@@ -9,7 +9,8 @@ const LoadingFallback = () => (
       flex: "1 1 auto",
       alignItems: "center",
       justifyContent: "center",
-      height: "70vh",
+      height:{xs: "70vh", md: "80vh"},
+      width: "100%",
     }}
   >
     <Box
