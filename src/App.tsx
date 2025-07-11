@@ -16,6 +16,29 @@ type AppProps = {
 export default function App({ children }: AppProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
   // useScrollToTop();
+
+
+  useEffect(() => {
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    const handleKeyDown = (e) => {
+      if (
+        (e.ctrlKey && ["c", "u", "s"].includes(e.key.toLowerCase())) ||
+        e.key === "F12"
+      ) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+
   return (<main ref={mainRef}>
     <ScrollRestorationManager />
     <ThemeProvider>
