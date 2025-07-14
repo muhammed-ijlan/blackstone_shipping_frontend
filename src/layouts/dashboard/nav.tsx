@@ -60,6 +60,7 @@ export function NavMobile({
           overflow: "unset",
           width: "100%",
           ...sx,
+          height: '100%',
         },
       }}
     >
@@ -248,32 +249,35 @@ export function NavContent({
 
   return (
     <>
-      <Scrollbar  fillContent sx={{
-        
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
+        <Logo href={logo} sx={{ width: "90px" }} />
+        <Iconify
+          width={30}
+          icon="ic:round-close"
+          onClick={onClose}
+          sx={{ color: "rgba(45, 55, 72, 1)", cursor: "pointer" }}
+        />
+      </Stack>
+      <Divider />
+      {slots?.topArea}
+      <Scrollbar fillContent sx={{
+        height: '100%',
+        '& .simplebar-content': {
+          paddingBottom: 24,
+        },
       }}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={2}
-        >
-          <Logo href={logo} sx={{ width: "90px" }} />
-          <Iconify
-            width={30}
-            icon="ic:round-close"
-            onClick={onClose}
-            sx={{ color: "rgba(45, 55, 72, 1)", cursor: "pointer" }}
-          />
-        </Stack>
-        <Divider />
-        {slots?.topArea}
         <Box
           component="nav"
           sx={[
             {
               display: "flex",
               flex: "1 1 auto",
-              height: "70vh",
+              height: "70vh", 
               flexDirection: "column",
             },
             ...(Array.isArray(sx) ? sx : [sx]),
@@ -288,7 +292,7 @@ export function NavContent({
                 pathname={pathname}
                 openSections={openSections}
                 handleToggle={handleToggle}
-                onClose={onClose} 
+                onClose={onClose}
               />
             ))}
           </List>
