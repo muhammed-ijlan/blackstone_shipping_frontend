@@ -2,27 +2,34 @@ import { Box, Stack } from "@mui/material";
 import React from "react";
 
 interface ImageNode {
-  node: {
-    sourceUrl: string;
+  node?: {
+    sourceUrl?: string;
   };
 }
 
 interface AreasOfSubImagesProps {
-  images: ImageNode[];
+  images: (ImageNode | null)[];
 }
 
 const AreasOfSubImages: React.FC<AreasOfSubImagesProps> = ({ images }) => {
+  const validImages = images?.filter(
+    (img): img is ImageNode =>
+      !!img?.node?.sourceUrl
+  );
+
+  if (!validImages || validImages.length === 0) return null;
+
   return (
     <Stack direction="row" spacing={2} sx={{ mt: 3, flexWrap: "wrap" }}>
-      {images?.map((img, idx) => (
+      {validImages.map((img, idx) => (
         <Box
           component="img"
           key={idx}
-          src={img?.node?.sourceUrl}
+          src={img.node!.sourceUrl}
           alt={`sub image ${idx + 1}`}
           width={{ xs: "80px", sm: "115px" }}
-          height={"auto"}
-          style={{ borderRadius: 8 }}
+          height="auto"
+          sx={{ borderRadius: 2 }}
         />
       ))}
     </Stack>

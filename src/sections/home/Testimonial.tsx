@@ -81,7 +81,7 @@ const Testimonial = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Stack direction={{ xs: "column", lg: "row" }} gap={{ xs: 1, md: 7 }}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={{ xs: 3, md: 7 }}>
           <Stack
             width={{ xs: "100%", lg: "40%" }}
             gap={{ xs: 0, sm: 3 }}
