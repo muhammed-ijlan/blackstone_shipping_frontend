@@ -98,16 +98,16 @@ const matchedCities = data.officeLocations?.nodes
       <Box
         sx={{
           position: "absolute",
-          bottom: { xs: 20, md: 30 },
-          right: { xs: 20, md: 40 },
+          bottom: { xs: 20, md: 45 },
+          right: { xs: 20, md: 45 },
           textAlign: "right",
           color: "#fff",
           zIndex: 4,
-          maxWidth:"600px"
+          // maxWidth:"600px"
         }}
       >
-        <Typography variant="h2" sx={{fontWeight:"400 !important",textAlign:{xs:"center !important",md:"left"}}} >
-         {data.country?.countriesOptions?.countryBannerCaption || ""}
+        <Typography variant="h2" sx={{fontWeight:"500 !important",textAlign:{xs:"center !important",md:"left !important"}}} >
+         {data.country?.countriesOptions?.countryBannerCaption || ""}   
         </Typography>
       </Box>
     </Box>
