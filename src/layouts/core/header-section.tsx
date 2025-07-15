@@ -9,7 +9,6 @@ import {
   Stack,
   useTheme,
   Link as MuiLink,
-  LinearProgress,
 } from "@mui/material";
 import { Logo } from "../../components/logo";
 import logo from "../../assets/logo/medium.png";

@@ -316,7 +316,7 @@ const Footer = () => {
 
             <Box
               gap={3}
-              height="700px"
+              height="800px"
               sx={{
                 display: "flex",
                 flexDirection: "column",
