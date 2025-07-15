@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Typography, Stack, Container } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import shape from "src/assets/icons/shape.png";
 import { useParams } from "react-router";
@@ -64,52 +64,53 @@ const matchedCities = data.officeLocations?.nodes
       >
         <Typography>Support</Typography>
       </Box>
-
-      {/* Country Card */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: { xs: "60px", md: "80px" },
-          left: { xs: "20px", md: "30px" },
-          backgroundColor: "rgba(255, 255, 255, 0.24)",
-          color: "#fff",
-          px: 3,
-          py: 2,
-          borderRadius: "6px",
-          zIndex: 4,
-        }}
-      >
-        <Typography
-          variant="h1"
-          sx={{ fontWeight: 700, fontSize: "48px", lineHeight: "48px" }}
+<Container maxWidth="xl"> 
+        <Box
+          sx={{
+            position: "absolute",
+            top: { xs: "60px", md: "80px" },
+            left: { xs: "20px", md: "30px" },
+            backgroundColor: "rgba(255, 255, 255, 0.24)",
+            color: "#fff",
+            px: 3,
+            py: 2,
+            borderRadius: "6px",
+            zIndex: 4,
+              width:{xs:"auto",md:"90%"}
+          }}
         >
-          {countryName}
-        </Typography>
-
-        <Stack direction="row" spacing={1} alignItems="center" mt={1}>
-          <LocationOnIcon sx={{ fontSize: 22 }} />
-          <Typography variant="h3" sx={{textTransform:"capitalize !important"}}>
-            {matchedCities}
+          <Typography
+            variant="h1"
+            sx={{ fontWeight: 700, fontSize: "48px", lineHeight: "48px" }}
+          >
+            {countryName}
           </Typography>
-        </Stack>
-      </Box>
-
-      {/* Bottom Right Arabic Text */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: { xs: 20, md: 45 },
-          right: { xs: 20, md: 45 },
-          textAlign: "right",
-          color: "#fff",
-          zIndex: 4,
-          // maxWidth:"600px"
-        }}
-      >
-        <Typography variant="h2" sx={{fontWeight:"500 !important",textAlign:{xs:"center !important",md:"left !important"}}} >
-         {data.country?.countriesOptions?.countryBannerCaption || ""}   
-        </Typography>
-      </Box>
+  
+          <Stack direction="row" spacing={1} alignItems="center" mt={1} sx={{display:{xs:"none",md:"flex"}}}>
+            <LocationOnIcon sx={{ fontSize: 22 }} />
+            <Typography variant="h3" sx={{textTransform:"capitalize !important"}}>
+              {matchedCities} 
+            </Typography>
+          </Stack>
+        </Box>
+  
+        {/* Bottom Right Arabic Text */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: { xs: 20, md: 45 },
+            right: { xs: 20, md: 45 },
+            textAlign: "right",
+            color: "#fff",
+            zIndex: 4,
+            // maxWidth:"600px"
+          }}
+        >
+          <Typography variant="h2" sx={{fontWeight:"500 !important",textAlign:{xs:"center !important",md:"left !important"}}} >
+           {data.country?.countriesOptions?.countryBannerCaption || ""}   
+          </Typography>
+        </Box>
+      {/* Country Card */}</Container>
     </Box>
   );
 };
