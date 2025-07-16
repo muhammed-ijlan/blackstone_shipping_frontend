@@ -64,11 +64,7 @@ const TrackingInput = ({ value, onClick, onChange }: TrackingInputProps) => {
             width: {xs: "100%", md: "290px"},
             height: "60px",
             "&:hover": { backgroundColor: "rgba(21, 71, 204, 1)" },
-            "& .MuiButton-label": {
-              typography: "h6",
-              fontWeight: 500,
-              textTransform: "none",
-            },
+            typography:"body1"
           }}
           onClick={onClick}
         >

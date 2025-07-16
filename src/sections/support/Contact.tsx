@@ -1,5 +1,5 @@
 import { ArrowForward, Download } from "@mui/icons-material";
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { CountryPageData } from "src/types/graphql/types/support.types";
 
@@ -72,9 +72,8 @@ const Contact = ({ data }: { data: CountryPageData }) => {
           >
             Address
           </Typography>
-          <Typography variant="h4" color="rgba(45, 55, 72, 1)">
-            {data.country?.countriesOptions?.countryMainAddress}
-          </Typography>
+          <Box  component={"div"}sx={{typography:"h4"}} dangerouslySetInnerHTML={{__html:data.country?.countriesOptions?.countryMainAddress ?? ""}}/>
+           
         </Stack>
         <Stack gap={2} flex={1}>
           <Stack
@@ -82,6 +81,7 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               bgcolor: "rgba(255, 255, 255, 1)",
               borderRadius: "8px",
               padding: 2,
+              height:"100%"
             }}
             gap={1}
           >
@@ -100,6 +100,7 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               bgcolor: "rgba(255, 255, 255, 1)",
               borderRadius: "8px",
               padding: 2,
+               height:"100%"
             }}
             gap={1}
           >
