@@ -76,7 +76,7 @@ const matchedCities = data.officeLocations?.nodes
             py: 2,
             borderRadius: "6px",
             zIndex: 4,
-              width:{xs:"auto",md:"90%"}
+              maxWidth:{xs:"auto",md:"90%"}
           }}
         >
           <Typography
