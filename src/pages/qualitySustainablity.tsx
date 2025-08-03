@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Container, Divider } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "src/components/banner/Banner";
 import LoadingFallback from "src/components/LoadingFallback";
 import {
@@ -24,6 +24,8 @@ const QualitySustainablity = () => {
     GET_QUALITY_AND_SUSTAINABILITY_PAGE
   );
 
+  
+
   if (loading) return <LoadingFallback />;
 
   return (
@@ -43,6 +45,7 @@ const QualitySustainablity = () => {
           <Container maxWidth="xl">
             <PageContentSection
               data={{
+                sectionId: "quality",
                 mainTitle:
                   data.pageBy.qualitySustainabilityPageQualitySections
                     .qualitySectionMainTitle,
@@ -89,6 +92,7 @@ const QualitySustainablity = () => {
 
             <PageContentSection
               data={{
+                sectionId: "sustainability",
                 mainTitle:
                   data.pageBy.qualitySustainabilityPageSustainabilitySection
                     .sustainabilitySectionMainTitle,
@@ -119,9 +123,11 @@ const QualitySustainablity = () => {
               data={data.pageBy.qualitySustainabilityPageAreasofCommitment}
             />
             <Divider />
+            <div id="calculator">
             <CarbonCalculator
               data={data.pageBy.qualitySustainabilityPageCalculatorSection}
-            />
+              />
+              </div>
             <Divider />
 
             <AreasOfCommitmentSection

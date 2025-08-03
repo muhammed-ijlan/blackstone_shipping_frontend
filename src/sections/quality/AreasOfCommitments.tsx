@@ -10,7 +10,7 @@ type AreasOfCommitmentProps = {
 
 const AreasOfCommitments: React.FC<AreasOfCommitmentProps> = ({ data }) => {
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} id="areasofcommitment">
       <Typography variant="h2" color="rgba(45, 55, 72, 1)">
         {data.areasOfCommitmentSectionMainTitle}
       </Typography>

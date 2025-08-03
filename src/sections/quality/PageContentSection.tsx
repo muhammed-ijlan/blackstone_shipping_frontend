@@ -17,12 +17,17 @@ export interface UnifiedContentSection {
   content2: string;
   image2: ImageNode;
   bottomContent?: string;
+  sectionId: string;
 }
 
 const PageContentSection = ({ data }: { data: UnifiedContentSection }) => {
+
+
+
   return (
-    <Stack my={6}>
+    <Stack my={6} >
       <Typography
+      id={data.sectionId}
         variant="h1"
         sx={{
           textTransform: "capitalize !important",
@@ -30,15 +35,18 @@ const PageContentSection = ({ data }: { data: UnifiedContentSection }) => {
           color: "rgba(45, 55, 72, 1)",
         }}
       >
-        {data.mainTitle}
+        {data.mainTitle} 
       </Typography>
       <PageSectionCard
+
+       sectionId= {data.sectionId === "quality" ? "qualitypolicy" : "vision"} 
         subTitle={data.subTitle1}
         content={data.content1}
         imageUrl={data.image1.node.sourceUrl}
       />
       <Divider />
       <PageSectionCard
+        sectionId= {data.sectionId === "quality" ? "qualitypolicy" : "vision"}
         subTitle={data.subTitle2}
         content={data.content2}
         imageUrl={data.image2.node.sourceUrl}

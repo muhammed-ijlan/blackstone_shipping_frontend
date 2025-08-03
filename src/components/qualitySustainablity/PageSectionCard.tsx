@@ -5,6 +5,7 @@ interface PageSectionCardProps {
   subTitle: string;
   content: string;
   imageUrl: string;
+  sectionId: string;
   images?: {
     node: {
       sourceUrl: string;
@@ -13,13 +14,15 @@ interface PageSectionCardProps {
 }
 
 const PageSectionCard: React.FC<PageSectionCardProps> = ({
+  sectionId,
   subTitle,
   content,
   imageUrl,
   images = [],
 }) => {
+
   return (
-    <Stack>
+    <Stack id={sectionId} >
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={2}
@@ -35,7 +38,7 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
           }}
         >
           <Typography color="rgba(11, 19, 40, 1)" variant="h2">
-            {subTitle} 
+            {subTitle}  
           </Typography>
 
           <Box
@@ -44,24 +47,24 @@ const PageSectionCard: React.FC<PageSectionCardProps> = ({
             sx={{
               "& p": {
                 marginBottom: 2,
-                typography:"body1 ",
+                typography: "body1 ",
               },
               "& strong": {
 
                 typography: "h4",
               },
-              "& h3": { 
+              "& h3": {
                 typography: "h4 ",
               },
               color: "rgba(45, 55, 72, 1)",
             }}
           />
-        </Stack> 
+        </Stack>
         <Stack>
           <img
             src={imageUrl}
             alt={subTitle}
-            style={{  
+            style={{
               width: "100%",
               maxWidth: 505,
               height: "auto",

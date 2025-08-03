@@ -19,7 +19,7 @@ const QualitiesList = ({
   return (
     <Stack my={5} gap={3}>
       <Typography variant="h4" align="center" gutterBottom>
-        {title1}
+        {title1} 
       </Typography>
       <Grid container spacing={3}>
         {qualities.map((quality, index) => (
@@ -30,7 +30,7 @@ const QualitiesList = ({
       </Grid>
 
       <Typography variant="h4" align="center" gutterBottom>
-        {title2}
+        {title2} 
       </Typography>
 
       <Box
