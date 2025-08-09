@@ -58,9 +58,12 @@ const Page = () => {
             }
           /> */}
           <Container maxWidth="xl">
+
             <Stack
               my={7}
-            >
+              gap={4}
+              >
+              <Typography variant="h2">Terms & Conditions, Disclaimers and Privay Policy</Typography>
               <Stack direction={{xs:"column",md:"row"}} gap={3} flexWrap={"wrap"}>
                 {data.map((item, index) => (
                   <Stack key={index} direction="row" spacing={2} alignItems="center" sx={{cursor:"pointer"}} onClick={() => router.push(item.url)}> 

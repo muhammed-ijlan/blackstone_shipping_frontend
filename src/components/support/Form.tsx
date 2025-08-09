@@ -26,8 +26,8 @@ const validationSchema = (state: string) =>
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     phoneNumber: Yup.string()
-      .matches(/^[0-9]{10}$/, "Must be 10 digits")
-      .required("Phone number is required"),
+  .matches(/^[0-9]{6,14}$/, "Enter a valid phone number")
+  .required("Phone number is required"),
     companyName: Yup.string().required("Company name is required"),
     message:
       state === "general"
@@ -57,7 +57,7 @@ const validationSchema = (state: string) =>
 
 const Form = ({ state }: { state: string }) => {
   const [country, setCountry] = useState(
-    countries.find((item) => item.name === "India") || countries[0]
+    countries.find((item) => item.name === "Netherlands") || countries[0]
   );
   const getFlagUrl = (iso: string) =>
     `https://flagcdn.com/w40/${iso.toLowerCase()}.png`;
