@@ -22,6 +22,7 @@ const AreasOfCommitmentSection: React.FC<AreasOfCommitmentSectionProps> = ({
 }) => {
   return (
     <PageSectionCard
+      sectionId=""
       subTitle={subTitle}
       content={content}
       imageUrl={mainImage.node.sourceUrl}
