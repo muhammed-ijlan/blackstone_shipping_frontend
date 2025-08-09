@@ -316,7 +316,7 @@ const Footer = () => {
 
             <Box
               gap={3}
-              height="800px"
+              height="550px"
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -359,10 +359,10 @@ const Footer = () => {
                             router.push(subItem.uri);
                           }
                         }}
-                        variant="body2"
+                        variant="caption"
                         color="white"
                         sx={{
-                          my: 0.8,
+                          my: 0.6,
                           cursor: "pointer",
                           maxWidth: "150px",
                         }}

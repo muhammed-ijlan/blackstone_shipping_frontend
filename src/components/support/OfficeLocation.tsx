@@ -326,6 +326,7 @@ const OfficeLocation: React.FC = () => {
                         style={{
                           ...baseCellStyle,
                           borderTop: "1px solid rgba(217, 217, 217, 1)",
+                          textTransform:"lowercase"
                         }}
                       >
                         {item.officeLocationsOptions.emailAddress}

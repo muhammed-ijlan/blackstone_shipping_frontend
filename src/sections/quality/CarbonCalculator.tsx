@@ -94,6 +94,13 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
     setMtco2e(calculatedMtco2e);
   };
 
+
+  const styledContent = data.calculatorSectionContent.replace(
+    /(sustainability@blackstoneshipping\.com)/g,
+    '<a href="mailto:$1" style="color:#1A56DB;">$1</a>'
+  );
+  
+
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 4 }}>
@@ -243,10 +250,11 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
               "& p": {
                 fontStyle: "italic",
               },
+              
             }}
             color="rgba(45, 55, 72, 0.5)"
             dangerouslySetInnerHTML={{
-              __html: data.calculatorSectionContent,
+              __html: styledContent,
             }}
           />
         </Box>

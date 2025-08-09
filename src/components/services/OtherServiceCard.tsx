@@ -19,7 +19,7 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
         }}
       />
 
-      <ScrollPane maxHeight={220}>
+      <ScrollPane maxHeight={300}>
         <Typography variant="h4" sx={{
         }}>{data.title.toUpperCase()}
         </Typography>

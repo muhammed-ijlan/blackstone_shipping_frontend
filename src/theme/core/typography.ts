@@ -325,7 +325,7 @@ export const typography: TypographyVariantsOptions = {
     },
   },
   caption: {
-    fontWeight: 400,
+    fontWeight: 500,
     [defaultMuiTheme.breakpoints.up('xs')]: {
       fontSize: '10px',
       lineHeight: '12px',
