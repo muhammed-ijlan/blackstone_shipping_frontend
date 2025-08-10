@@ -37,38 +37,7 @@ export default function App({ children }: AppProps) {
       document.removeEventListener("contextmenu", handleContextMenu);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-
-  const location = useLocation();
-
-  useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash;
-
-      if (hash) {
-        // Use a timeout to ensure the DOM is ready
-        setTimeout(() => {
-          const element = document.querySelector(hash);
-          if (element) {
-            const yOffset = -200; // Adjust this if you have a fixed navbar
-            const y =
-              element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-            window.scrollTo({ top: y, behavior: "smooth" });
-          }
-        }, 100); // delay helps when route changes and DOM needs time
-      }
-    };
-
-    scrollToHash(); // Trigger on initial mount and route change
-
-    window.addEventListener("hashchange", scrollToHash); // Trigger on hash change
-
-    return () => {
-      window.removeEventListener("hashchange", scrollToHash);
-    };
-  }, [location]);
+  }, []);  
 
 
   return (<main ref={mainRef}>

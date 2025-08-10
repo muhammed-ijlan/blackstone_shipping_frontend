@@ -42,8 +42,10 @@ const warehouseTerms = `
 
     <h4>Genral Terms & Conditions</h4>
     <p>This offer is subject to Blackstone Shipping General Standard Terms and Conditions (GSTC) a copy of which is available upon request or at www.blackstoneshipping.com as per links below. The GSTC apply to this offer and any final agreement and contains provisions which limit Blackstone Shipping's legal liability:</p>
-    <p>https://www.blackstoneshipping.com/Blackstone Shipping_General_Standard_Terms_Conditiom.pdf</p>
-    <p>GENERAL LOGISTICS CONDITIONS: https://www.blackstoneshipping.com/terms_belgium.html.</p>
+    <a href="https://www.blackstoneshipping.com/Blackstone Shipping_General_Standard_Terms_Conditiom.pdf">https://www.blackstoneshipping.com/Blackstone Shipping_General_Standard_Terms_Conditiom.pdf</a>
+    <br/>
+    GENERAL LOGISTICS CONDITIONS:
+    <a href="https://www.blackstoneshipping.com/general/terms-conditions/belgium"> https://www.blackstoneshipping.com/general/terms-conditions/belgium.</a>
     <p>This offer is subject to satisfactory completion by Blackstone Shipping of its customers Due Diligence.</p>
     <p>Blackstone Shipping reserves the right to withdraw this offer at any time in the event due diligence is not completed to its satisfaction.</p>
     <p>Without prejudice to the applicability of all conditions set forth in the GSTC. please note that the Goods are not insured by Blackstone Shipping.</p>
