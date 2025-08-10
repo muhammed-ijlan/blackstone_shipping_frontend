@@ -9,7 +9,7 @@ const OtherServices = ({ data }: { data: ServiceChild[] }) => {
       <Grid container rowGap={6} spacing={4}>
         {data.map((service, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 6 }} key={index}>
-            <OtherServiceCard data={service} />
+            <OtherServiceCard data={service} length={data.length} />
           </Grid>
         ))}
       </Grid>
