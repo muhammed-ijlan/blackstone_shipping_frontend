@@ -5,6 +5,7 @@ import Banner from "src/components/banner/Banner";
 import ContactUsCard from "src/components/ContactUsCard";
 import LoadingFallback from "src/components/LoadingFallback";
 import { GET_SOLUTIONS_WITH_SUBSOLUTIONS } from "src/graphql/queries";
+import BannerContent from "src/sections/services/BannerContent";
 import OtherServices from "src/sections/services/OtherServices";
 import OtherTopics from "src/sections/services/OtherTopics";
 import { GetSolutionsWithSubSolutionsData } from "src/types/graphql/types/solutions.types";
@@ -32,7 +33,7 @@ const Page = () => {
   const childNodes = data?.solution?.children?.nodes || [];
 
   const otherTopicsData = data?.solution?.solutionsPageOtherTopicsSection;
-
+  const bannerContent = data?.solution.content || "";
   return (
     <>
       <Banner
@@ -40,6 +41,7 @@ const Page = () => {
         mainTitle={bannerTitle}
         subTitle="Solutions"
       />
+      <BannerContent content={bannerContent}/>
       <OtherServices data={childNodes} />
       <ContactUsCard />
       {otherTopicsData && <OtherTopics data={otherTopicsData} />}

@@ -20,9 +20,9 @@ const Certification = ({
           color="rgba(45, 55, 72, 0.8)"
           fontWeight={500}
         >
-          {data.page.companyPageCertifications.certificationContent1}
+          {data.page.companyPageCertifications.certificationContent1} 
         </Typography>
-        <Typography variant="h6" sx={{fontWeight:"600 !important"}}>
+        <Typography  id="industryCertifications" variant="h6" sx={{fontWeight:"600 !important"}}>
           {data.page.companyPageCertifications.certificationSubTitle2.toUpperCase()}
         </Typography>
         <Typography variant="h6" sx={{fontWeight:"500 !important"}}
@@ -58,8 +58,8 @@ const Certification = ({
           ))}
         </Grid>
 
-        <Typography variant="h6" sx={{fontWeight:"600 !important"}}>
-          {data.page.companyPageCertifications.certificationSubTitle3.toUpperCase()}
+        <Typography id="strategicalliances" variant="h6" sx={{fontWeight:"600 !important"}}>
+          {data.page.companyPageCertifications.certificationSubTitle3.toUpperCase()} 
         </Typography>
         <Typography variant="h6" sx={{fontWeight:"500 !important"}}
           color="rgba(45, 55, 72, 0.8)"

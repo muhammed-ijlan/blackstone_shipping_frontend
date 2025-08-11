@@ -505,73 +505,72 @@ query GetServicePage {
 
 export const GET_SERVICE_WITH_SUBSERVICES = gql`
   query GetServiceWithSubServices($uri: ID!) {
-    service(id: $uri, idType: URI) {
-      id
-      title
-      servicesPageBannerSection {
-        bannerImage {
-          node {
-            sourceUrl
-          }
-        }
-        bannerTitle
-      }
-      servicePageOtherTopicsSection {
-        otherTopicsMainTitle
-
-        topic1Title
-        topic1Image {
-          node {
-            sourceUrl
-          }
-        }
-        topic1Link {
-          nodes {
-            uri
-          }
-        }
-
-        topic2Title
-        topic2Image {
-          node {
-            sourceUrl
-          }
-        }
-        topic2Link {
-          nodes {
-            uri
-          }
-        }
-
-        topic3Title
-        topic3Image {
-          node {
-            sourceUrl
-          }
-        }
-        topic3Link {
-          nodes {
-            uri
-          }
+  service(id: $uri, idType: URI) {
+    id
+    title
+    content
+    servicesPageBannerSection {
+      bannerImage {
+        node {
+          sourceUrl
         }
       }
-      children {
+      bannerTitle
+    }
+    servicePageOtherTopicsSection {
+      otherTopicsMainTitle
+      topic1Title
+      topic1Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic1Link {
         nodes {
-          ... on Service {
-            id
-            title
-            content
-            uri
-            featuredImage {
-              node {
-                sourceUrl
-              }
+          uri
+        }
+      }
+      topic2Title
+      topic2Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic2Link {
+        nodes {
+          uri
+        }
+      }
+      topic3Title
+      topic3Image {
+        node {
+          sourceUrl
+        }
+      }
+      topic3Link {
+        nodes {
+          uri
+        }
+      }
+    }
+    children {
+      nodes {
+        ... on Service {
+          id
+          title
+          content
+          uri
+          featuredImage {
+            node {
+              sourceUrl
             }
           }
         }
       }
     }
   }
+}
+
 `;
 
 
@@ -645,6 +644,7 @@ export const GET_SOLUTIONS_WITH_SUBSOLUTIONS = gql`
     solution(id: $uri, idType: URI) {
       id
       title
+      content
       solutionsSinglePageBannerSection {
         bannerImage {
           node {

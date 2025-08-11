@@ -4,6 +4,7 @@ import React from "react";
 import Banner from "src/components/banner/Banner";
 import JoinOurTeam from "src/components/careers/JoinOurTeam";
 import LoadingFallback from "src/components/LoadingFallback";
+import ScrollToHash from "src/components/ScrollToHash";
 import { GET_CAREERS_PAGE } from "src/graphql/queries";
 import AllJobjsSection from "src/sections/careers/AllJobjsSection";
 import OpenPositions from "src/sections/careers/OpenPositions";
@@ -18,6 +19,7 @@ const Page = () => {
   if (loading) return <LoadingFallback />;
   return (
     <>
+    <ScrollToHash deps={[data]} offset={150} />
       {data && (
         <>
           <Banner
@@ -28,11 +30,17 @@ const Page = () => {
           />
           <Container maxWidth="xl">
             <JoinOurTeam data={data} />
+            <div id="meetpeople">
             <PageSliderSection data={data} />
+            </div>
+            <div id="jobs">
             <AllJobjsSection data={data} />
+            </div>
             <OpenPositions data={data} />
           </Container>
+          <div id="whyjoin">
           <WhyJoinUs data={data} />
+          </div>
           <Container maxWidth="xl">
             <WeAreLookingFor data={data} />
           </Container>

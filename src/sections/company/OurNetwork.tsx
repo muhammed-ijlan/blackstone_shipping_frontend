@@ -6,7 +6,7 @@ import { GetCompanyGlobalNetworkResponse } from "src/types/graphql/types/company
 
 const OurNetwork = ({ data }: { data: GetCompanyGlobalNetworkResponse }) => {
   return (
-    <Stack sx={{ background: "rgba(245, 247, 251, 1)", py: {xs:4,md:10} }}>
+    <Stack id="globalnetwork" sx={{ background: "rgba(245, 247, 251, 1)", py: {xs:4,md:10} }}>
       <Container maxWidth="xl">
         <Stack gap={3}>
           <Typography variant="h2" sx={{fontWeight:"700 !important"}}>

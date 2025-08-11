@@ -7,6 +7,8 @@ interface Data {
   title: string;
   content: string;
   img: ImageNode;
+  sectionId: string;
+
 }
 
 const SupplyChainCard = ({
@@ -15,9 +17,11 @@ const SupplyChainCard = ({
 }: {
   data: Data;
   loopData: FeaturedContent[];
+  
 }) => {
   return (
     <Stack
+    id={data.sectionId}
       flex={1}
       sx={{
         boxShadow: "3px 3px 20px 0px rgba(45, 55, 72, 0.13)",

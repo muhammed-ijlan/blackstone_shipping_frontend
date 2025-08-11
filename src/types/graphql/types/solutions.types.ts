@@ -83,6 +83,7 @@ export interface GetSolutionsWithSubSolutionsData {
   solution: {
     id: string;
     title: string;
+    content: string;
     solutionsSinglePageBannerSection: {
       bannerImage: ImageNode;
       bannerTitle: string;
