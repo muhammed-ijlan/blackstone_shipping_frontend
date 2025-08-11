@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Container, Divider } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Banner from "src/components/banner/Banner";
 import LoadingFallback from "src/components/LoadingFallback";
 import {
@@ -18,13 +18,75 @@ import {
   GetCsrYearsData,
   GetQualityAndSustainabilityPageData,
 } from "src/types/graphql/types/quality.types";
+import { useLocation } from "react-router-dom";
 
 const QualitySustainablity = () => {
   const { data, loading } = useQuery<GetQualityAndSustainabilityPageData>(
     GET_QUALITY_AND_SUSTAINABILITY_PAGE
   );
 
-  
+  const location = useLocation();
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (!loading && data) {
+      const handleScrollToHash = () => {
+        const hash = location.hash.slice(1);
+        if (hash) {
+          setTimeout(() => {
+            const element = document.getElementById(hash); 
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100); // Small delay to ensure DOM is ready
+        }
+      };
+
+      // Prevent default scroll on initial mount
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        window.scrollTo(0, 0); 
+        handleScrollToHash(); 
+      } else {
+        handleScrollToHash(); 
+      }
+    }
+  }, [loading, data, location.hash]);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100); // Small delay to ensure DOM is ready
+      }
+    };
+
+    // Prevent default scroll behavior on hash change
+    const originalPushState = history.pushState;
+    history.pushState = function (...args) {
+      const result = originalPushState.apply(this, args);
+      window.dispatchEvent(new Event("pushstate"));
+      window.dispatchEvent(new Event("locationchange"));
+      return result;
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+
+    // Handle initial load or manual URL change
+    handleHashChange();
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+      history.pushState = originalPushState;
+    };
+  }, [data, loading]);
 
   if (loading) return <LoadingFallback />;
 
@@ -43,35 +105,37 @@ const QualitySustainablity = () => {
           />
 
           <Container maxWidth="xl">
-            <PageContentSection
-              data={{
-                sectionId: "quality",
-                mainTitle:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionMainTitle,
-                subTitle1:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionSubTitle1,
-                content1:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionContent1,
-                image1:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionImage1,
-                subTitle2:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionSubTitle2,
-                content2:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionContent2,
-                image2:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionImage2,
-                bottomContent:
-                  data.pageBy.qualitySustainabilityPageQualitySections
-                    .qualitySectionBottomContent,
-              }}
-            />
+            <div id="quality">
+              <PageContentSection
+                data={{
+                  sectionId: "quality",
+                  mainTitle:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionMainTitle,
+                  subTitle1:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionSubTitle1,
+                  content1:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionContent1,
+                  image1:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionImage1,
+                  subTitle2:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionSubTitle2,
+                  content2:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionContent2,
+                  image2:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionImage2,
+                  bottomContent:
+                    data.pageBy.qualitySustainabilityPageQualitySections
+                      .qualitySectionBottomContent,
+                }}
+              />
+            </div>
             <Divider />
             <QualitiesList
               title1={
@@ -90,32 +154,34 @@ const QualitySustainablity = () => {
             />
             <Divider />
 
-            <PageContentSection
-              data={{
-                sectionId: "sustainability",
-                mainTitle:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionMainTitle,
-                subTitle1:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionSubTitle1,
-                content1:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionContent1,
-                image1:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionImage1,
-                subTitle2:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionSubTitle2,
-                content2:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionContent2,
-                image2:
-                  data.pageBy.qualitySustainabilityPageSustainabilitySection
-                    .sustainabilitySectionImage2,
-              }}
-            />
+            <div id="sustainability">
+              <PageContentSection
+                data={{
+                  sectionId: "sustainability",
+                  mainTitle:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionMainTitle,
+                  subTitle1:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionSubTitle1,
+                  content1:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionContent1,
+                  image1:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionImage1,
+                  subTitle2:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionSubTitle2,
+                  content2:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionContent2,
+                  image2:
+                    data.pageBy.qualitySustainabilityPageSustainabilitySection
+                      .sustainabilitySectionImage2,
+                }}
+              />
+            </div>
 
             <Divider />
             <SustainablityList data={data.sustainabilities.nodes} />
@@ -124,44 +190,48 @@ const QualitySustainablity = () => {
             />
             <Divider />
             <div id="calculator">
-            <CarbonCalculator
-              data={data.pageBy.qualitySustainabilityPageCalculatorSection}
+              <CarbonCalculator
+                data={data.pageBy.qualitySustainabilityPageCalculatorSection}
               />
-              </div>
+            </div>
             <Divider />
 
-            <AreasOfCommitmentSection
-              subTitle={
-                data.pageBy.qualitySustainabilityPageOurReportingSection
-                  .ourReportingSectionTitle
-              }
-              content={
-                data.pageBy.qualitySustainabilityPageOurReportingSection
-                  .ourReportingSectionContent
-              }
-              mainImage={
-                data.pageBy.qualitySustainabilityPageOurReportingSection
-                  .ourReportingSectionImage
-              }
-              subImages={[]}
-            />
+            <div id="ourReporting">
+              <AreasOfCommitmentSection
+                subTitle={
+                  data.pageBy.qualitySustainabilityPageOurReportingSection
+                    .ourReportingSectionTitle
+                }
+                content={
+                  data.pageBy.qualitySustainabilityPageOurReportingSection
+                    .ourReportingSectionContent
+                }
+                mainImage={
+                  data.pageBy.qualitySustainabilityPageOurReportingSection
+                    .ourReportingSectionImage
+                }
+                subImages={[]}
+              />
+            </div>
 
             <Divider />
-            <AreasOfCommitmentSection
-              subTitle={
-                data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
-                  .codeOfConductTitle
-              }
-              content={
-                data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
-                  .codeOfConductContent
-              }
-              mainImage={
-                data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
-                  .codeOfConductImage
-              }
-              subImages={[]}
-            />
+            <div id="codeOfConduct">
+              <AreasOfCommitmentSection
+                subTitle={
+                  data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
+                    .codeOfConductTitle
+                }
+                content={
+                  data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
+                    .codeOfConductContent
+                }
+                mainImage={
+                  data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection
+                    .codeOfConductImage
+                }
+                subImages={[]}
+              />
+            </div>
             <Divider />
             <CsrSection />
           </Container>

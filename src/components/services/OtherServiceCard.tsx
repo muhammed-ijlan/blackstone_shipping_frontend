@@ -3,8 +3,7 @@ import React from "react";
 import ScrollPane from "src/layouts/components/ScrollPane";
 import { ServiceChild } from "src/types/graphql/types/services.types";
 
-const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
-  const theme = useTheme();
+const OtherServiceCard = ({ data ,length}: { data: ServiceChild,length:number }) => {
   return (
     <Stack gap={2}>
       <Box
@@ -19,7 +18,7 @@ const OtherServiceCard = ({ data }: { data: ServiceChild }) => {
         }}
       />
 
-      <ScrollPane maxHeight={300}>
+      <ScrollPane maxHeight={length <=2 ? 500:300}>
         <Typography variant="h4" sx={{
         }}>{data.title.toUpperCase()}
         </Typography>

@@ -34,7 +34,7 @@ const Page = () => {
             mainTitle={data?.service?.servicesPageBannerSection.bannerTitle}
             subTitle={"Services"}
           />
-          <OtherServices data={data?.service.children.nodes} />
+          <OtherServices data={data?.service.children.nodes}  />
           <ContactUsCard />
           <OtherTopics data={data?.service?.servicePageOtherTopicsSection} />
         </>

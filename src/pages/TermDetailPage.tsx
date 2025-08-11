@@ -13,6 +13,9 @@ const TermDetailPage = () => {
   return (
     <Container maxWidth="xl" sx={{ my: 3 }}>
       <Box
+      sx={{
+        textTransform:"none !important"
+      }}
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </Container>
