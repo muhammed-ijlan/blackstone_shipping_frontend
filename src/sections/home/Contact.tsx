@@ -1,15 +1,19 @@
-import { Button, Container, Grid, Stack, TextField } from "@mui/material";
+import { Box, Button, Container, Grid, InputAdornment, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { Formik } from "formik";
-import React from "react";
-import SectionHead from "src/components/sectionHead/SectionHead";
-import { contactValidationSchema } from "src/validations/schema";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import PhoneNumberInput from "src/components/PhoneInput";
+import SectionHead from "src/components/sectionHead/SectionHead";
+import { countries } from "src/utils/countries";
+import { generateEmailTemplate } from "src/utils/generateEmailTemplate";
+import { sendEmail } from "src/utils/sendEmail";
+import { contactValidationSchema } from "src/validations/schema";
 
 interface ContactFormValues {
   name: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
+  countryIso: string;
   message: string;
 }
 
@@ -17,33 +21,41 @@ interface FormikHelpers {
   resetForm: () => void;
 }
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-
 const Contact = () => {
-  const initialValues: ContactFormValues = {
+
+  const initialValues = {
     name: "",
     email: "",
-    phone: "",
+    countryIso: countries.find((c) => c.name === "Netherlands")?.iso || countries[0].iso,
+    phoneNumber: "",
     message: "",
   };
 
-  const handleSubmit = async (
-    values: ContactFormValues,
-    { resetForm }: FormikHelpers
-  ) => {
+  const handleSubmit = async (values: ContactFormValues, { resetForm }: FormikHelpers) => {
     const toastId = toast.loading("Sending message...");
+    const fullPhoneNumber = `${countries.find(c => c.iso === values.countryIso)?.code || ""} ${values.phoneNumber}`;
 
     try {
-      await emailjs.send(SERVICE_ID , TEMPLATE_ID, {...values,to_name: "Blackstone Shipping Group",to_email: "ijlanijlu580@gmail.com"}, PUBLIC_KEY); 
+      const htmlBody = generateEmailTemplate({
+        fields: {
+          Name: values.name,
+          Email: values.email,
+          Phone: fullPhoneNumber,
+        },
+        message: values.message,
+      });
+
+      await sendEmail({
+        Subject: `Contact Form Enquiry from ${values.name}`,
+        HTMLBody: htmlBody,
+        TOMail: import.meta.env.VITE_CONTACT_TO_EMAIL_ID,
+        SenderName: values.name,
+      });
+
       toast.success("Message sent successfully!", { id: toastId });
       resetForm();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error("Failed to send message. Please try again.", { id: toastId });
-      console.error("EmailJS error:", error);
+    } catch (error) {
+      toast.error("Failed to send message", { id: toastId });
     }
   };
 
@@ -79,10 +91,11 @@ const Contact = () => {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                setFieldValue
               }) => (
                 <form onSubmit={handleSubmit}>
                   <Grid container rowGap={2} columnSpacing={3}>
-                    <Grid size={{xs:12}}>
+                    <Grid size={{ xs: 12 }}>
                       <TextField
                         name="name"
                         label="Name"
@@ -106,7 +119,7 @@ const Contact = () => {
                         }}
                       />
                     </Grid>
-                    <Grid size={{xs:12,md:6}} >
+                    <Grid size={{ xs: 12, md: 6 }} >
                       <TextField
                         name="email"
                         label="Email"
@@ -130,31 +143,23 @@ const Contact = () => {
                         }}
                       />
                     </Grid>
-                    <Grid size={{xs:12,md:6}} >
-                      <TextField
-                        name="phone"
-                        label="Phone Number"
-                        fullWidth
-                        value={values.phone}
+                    <Grid size={{ xs: 12, md: 6 }}>
+
+                      <PhoneNumberInput
+                        name="phoneNumber"
+                        value={values.phoneNumber}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        error={touched.phone && Boolean(errors.phone)}
-                        helperText={touched.phone && errors.phone}
-                        sx={{
-                          "& .MuiInputBase-root": {
-                            height: "60px",
-                          },
-                          "& input": {
-                            padding: "12px 14px",
-                          },
-                          "& .MuiInputLabel-root": {
-                            fontSize: "15px !important",
-                            fontWeight: "500 !important",
-                          },
-                        }}
+                        error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                        helperText={touched.phoneNumber ? errors.phoneNumber : undefined}
+                        countryIso={values.countryIso}
+                        onCountryChange={(iso) =>
+                          setFieldValue("countryIso", iso)
+                        }
                       />
+
                     </Grid>
-                    <Grid size={{xs:12}}>
+                    <Grid size={{ xs: 12 }}>
                       <TextField
                         name="message"
                         label="Message"
@@ -174,15 +179,16 @@ const Contact = () => {
                         }}
                       />
                     </Grid>
-                    <Grid size={{xs:12}}>
+                    <Grid size={{ xs: 12 }}>
                       <Button
+                      
                         type="submit"
                         variant="contained"
                         fullWidth
                         size="large"
                         disabled={isSubmitting}
                         sx={{
-                          typography:"body1",
+                          typography: "body1",
                           height: "60px",
                           background: "rgba(26, 86, 219, 1)",
                         }}

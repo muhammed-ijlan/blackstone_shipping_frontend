@@ -34,7 +34,7 @@ const Page = () => {
         <Stack gap={6}>
           <CareerBanner data={data} />
           <JobDetails data={data} />
-          <ApplyNowForm />
+          <ApplyNowForm data={data}/>
         </Stack>
       )}
     </Container>

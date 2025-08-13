@@ -19,7 +19,7 @@ const Page = () => {
   const { data, loading, error } = useQuery<CountryPageData, CountryPageVars>(
     GET_COUNTRY_PAGE,
     {
-      variables: { id: id ?? "" },
+      variables: { uri: id ?? "" },
       skip: !id,
     }
   );
@@ -33,7 +33,7 @@ const Page = () => {
           <CountrySpecificBanner data={data} />
           <Services data={data} />
           <Contact data={data} />
-          <GlobalOffices data={data} />
+          <GlobalOffices data={data} /> 
         </>
       )}
     </Container>

@@ -20,6 +20,8 @@ interface TestimonialNode {
   uri: string;
   testimonialsFieldOptions: {
     testimonialAuthorDesignation: string;
+    testimonialAuthorCompany: string;
+
   };
 }
 

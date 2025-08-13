@@ -68,37 +68,41 @@ export interface OfficeLocationsVars {
 }
 
 
-
 export interface CountryPageData {
-  country: {
-    name: string;
-    countriesOptions?: {
-      countryBannerImage?: {
+  officeLocation: {
+    title: string;
+    officeLocationsOptions?: {
+      address?: string;
+      phoneNumber?: string;
+      emailAddress?: string;
+      country?: {
+        nodes: {
+          name: string;
+        }[];
+      };
+      officeLocationImage1?: {
         node?: {
           sourceUrl: string;
         };
       };
-      countryBannerCaption?: string;
-      countryServices?: string;
-      countryMainAddress?: string;
-      countryMainEmailAddress?: string;
-      countryMainPhoneNumber?: string;
-      countryImage1?: {
+      officeLocationImage2?: {
         node?: {
           sourceUrl: string;
         };
       };
-      countryImage2?: {
+      officeLocationImage3?: {
         node?: {
           sourceUrl: string;
         };
       };
-      countryImage3?: {
+      officeLocationBannerImage?: {
         node?: {
           sourceUrl: string;
         };
       };
-      countryflyer?: {
+      officeLocationBannerCaption?: string;
+      officeLocationServices?: string;
+      officeLocationFlyer?: {
         node?: {
           sourceUrl: string;
         };
@@ -109,6 +113,7 @@ export interface CountryPageData {
     nodes: {
       id: string;
       title: string;
+      uri: string;
       countries: {
         nodes: {
           name: string;
@@ -120,5 +125,5 @@ export interface CountryPageData {
 }
 
 export interface CountryPageVars {
-  id: string;
+  uri: string;
 }

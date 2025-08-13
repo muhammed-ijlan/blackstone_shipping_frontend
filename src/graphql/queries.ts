@@ -171,6 +171,8 @@ export const GET_TESTIMONIALS = gql`
         uri
         testimonialsFieldOptions {
           testimonialAuthorDesignation
+          testimonialAuthorCompany
+
         }
       }
     }
@@ -1359,6 +1361,7 @@ export const GET_OFFICE_LOCATIONS = gql`
       nodes {
         id
         title
+        uri
         officeLocationsOptions {
           address
           phoneNumber
@@ -1390,40 +1393,43 @@ export const GET_OFFICE_LOCATIONS = gql`
 
 
 export const GET_COUNTRY_PAGE = gql`
-  query GetCountryPage($id: ID!) {
-    country(id: $id, idType: ID) {
-      name
-      ... on Country {
-        countriesOptions {
-          countryBannerImage {
-            node {
-              sourceUrl
-            }
+  query GetOfficeLocationByURI($uri: ID!) {
+    officeLocation(id: $uri, idType: URI) {
+      title
+      officeLocationsOptions {
+        address
+        phoneNumber
+        emailAddress
+        country {
+          nodes {
+            name
           }
-          countryBannerCaption
-          countryServices
-          countryMainAddress
-          countryMainEmailAddress
-          countryMainPhoneNumber
-          countryImage1 {
-            node {
-              sourceUrl
-            }
+        }
+        officeLocationImage1 {
+          node {
+            sourceUrl
           }
-          countryImage2 {
-            node {
-              sourceUrl
-            }
+        }
+        officeLocationImage2 {
+          node {
+            sourceUrl
           }
-          countryImage3 {
-            node {
-              sourceUrl
-            }
+        }
+        officeLocationImage3 {
+          node {
+            sourceUrl
           }
-          countryflyer {
-            node {
-              sourceUrl
-            }
+        }
+        officeLocationBannerImage {
+          node {
+            sourceUrl
+          }
+        }
+        officeLocationBannerCaption
+        officeLocationServices
+        officeLocationFlyer {
+          node {
+            sourceUrl
           }
         }
       }
@@ -1432,6 +1438,7 @@ export const GET_COUNTRY_PAGE = gql`
       nodes {
         id
         title
+        uri
         countries {
           nodes {
             name

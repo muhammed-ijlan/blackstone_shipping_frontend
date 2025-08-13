@@ -33,7 +33,7 @@ const Services = ({ data }: { data: CountryPageData }) => {
             <Box
               component="div"
               dangerouslySetInnerHTML={{
-                __html: data.country?.countriesOptions?.countryServices ?? "",
+                __html: data.officeLocation.officeLocationsOptions?.officeLocationServices ?? "",
               }}
               sx={{
                 "& ul": {
@@ -73,7 +73,7 @@ const Services = ({ data }: { data: CountryPageData }) => {
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
             height={{ xs: "270px", md: "100%" }}
-            src={data.country?.countriesOptions?.countryImage1?.node?.sourceUrl}
+            src={data.officeLocation.officeLocationsOptions?.officeLocationImage1?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
         </Stack>
@@ -82,14 +82,14 @@ const Services = ({ data }: { data: CountryPageData }) => {
             component={"img"}
             maxWidth={{ xs: "100%", md: "376px" }}
             height={{ xs: "100%", md: "100%" }}
-            src={data.country.countriesOptions?.countryImage2?.node?.sourceUrl}
+            src={data.officeLocation.officeLocationsOptions?.officeLocationImage2?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
           <Box
             component={"img"}
             maxWidth={{ xs: "100%", sm: "376px" }}
             height={{ xs: "100%", sm: "100%" }}
-            src={data.country.countriesOptions?.countryImage3?.node?.sourceUrl}
+            src={data.officeLocation.officeLocationsOptions?.officeLocationImage3?.node?.sourceUrl}
             sx={{ borderRadius: "4px", objectFit: "cover" }}
           />
         </Stack>

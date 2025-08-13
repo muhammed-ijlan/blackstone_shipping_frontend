@@ -32,7 +32,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
         {officeLocations.map((office) => (
           <>
             <Box
-              onClick={() => router.push(`/support/${office.countries.nodes[0].id}`)}
+              onClick={() => router.push(`/support${office.uri}`)}
               sx={{
                 display: { xs: "none", sm: "flex" },
                 alignItems: "center",

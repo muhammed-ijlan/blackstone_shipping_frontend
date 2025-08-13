@@ -6,8 +6,8 @@ import { CountryPageData } from "src/types/graphql/types/support.types";
 const Contact = ({ data }: { data: CountryPageData }) => {
 
   const handleDownload = async () => {
-    const fileUrl = data.country?.countriesOptions?.countryflyer?.node?.sourceUrl;
-    if (!fileUrl  ) { 
+    const fileUrl = data.officeLocation.officeLocationsOptions?.officeLocationFlyer?.node?.sourceUrl;
+    if (!fileUrl) {
       alert("No file available");
       return;
     }
@@ -72,8 +72,8 @@ const Contact = ({ data }: { data: CountryPageData }) => {
           >
             Address
           </Typography>
-          <Box  component={"div"}sx={{typography:"h4"}} dangerouslySetInnerHTML={{__html:data.country?.countriesOptions?.countryMainAddress ?? ""}}/>
-           
+          <Box component={"div"} sx={{ typography: "h4" }} dangerouslySetInnerHTML={{ __html: data.officeLocation.officeLocationsOptions?.address ?? "" }} />
+
         </Stack>
         <Stack gap={2} flex={1}>
           <Stack
@@ -81,7 +81,7 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               bgcolor: "rgba(255, 255, 255, 1)",
               borderRadius: "8px",
               padding: 2,
-              height:"100%"
+              height: "100%"
             }}
             gap={1}
           >
@@ -92,7 +92,7 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               Email
             </Typography>
             <Typography variant="h4" color="rgba(45, 55, 72, 1)">
-              {data.country?.countriesOptions?.countryMainEmailAddress}
+              {data.officeLocation.officeLocationsOptions?.emailAddress}
             </Typography>
           </Stack>
           <Stack
@@ -100,7 +100,7 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               bgcolor: "rgba(255, 255, 255, 1)",
               borderRadius: "8px",
               padding: 2,
-               height:"100%"
+              height: "100%"
             }}
             gap={1}
           >
@@ -111,35 +111,35 @@ const Contact = ({ data }: { data: CountryPageData }) => {
               Phone Number
             </Typography>
             <Typography variant="h4" color="rgba(45, 55, 72, 1)">
-              {data.country?.countriesOptions?.countryMainPhoneNumber}
+              {data.officeLocation.officeLocationsOptions?.phoneNumber}
             </Typography>
           </Stack>
         </Stack>
       </Stack>
       <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} mt={2}>
-      <Button
-  sx={{
-    background: "rgba(255, 255, 255, 1)",
-    color: "rgba(45, 55, 72, 1)",
-    borderRadius: "8px",
-    padding: "10px 20px",
-    fontSize: "16px",
-    textTransform: "none",
-    "&:hover": {
-      background: "rgba(255, 255, 255, 0.9)",
-    },  
-    typography:"body1",
-    fontWeight:"600 !important"
-  }}
-  size="large"
-  href={data.country?.countriesOptions?.countryflyer?.node?.sourceUrl ?? ""}
-  target="_blank"
-  rel="noopener noreferrer"
-  download 
-  endIcon={<Download />}
->
-  Download Flyer
-</Button>
+        <Button
+          sx={{
+            background: "rgba(255, 255, 255, 1)",
+            color: "rgba(45, 55, 72, 1)",
+            borderRadius: "8px",
+            padding: "10px 20px",
+            fontSize: "16px",
+            textTransform: "none",
+            "&:hover": {
+              background: "rgba(255, 255, 255, 0.9)",
+            },
+            typography: "body1",
+            fontWeight: "600 !important"
+          }}
+          size="large"
+          href={data.officeLocation.officeLocationsOptions?.officeLocationFlyer?.node?.sourceUrl ?? ""}
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+          endIcon={<Download />}
+        >
+          Download Flyer
+        </Button>
       </Stack>
     </Stack>
   );

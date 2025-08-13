@@ -36,8 +36,6 @@ const baseCellStyle = {
 const OfficeLocation: React.FC = () => {
   const router = useRouter();
 
-
-
   const [search, setSearch] = useState("");
   const {
     locations,
@@ -50,9 +48,6 @@ const OfficeLocation: React.FC = () => {
     goToPrevPage,
     goToPage,
   } = useOfficeLocations(0, search);
-
-
-
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -264,14 +259,7 @@ const OfficeLocation: React.FC = () => {
                           direction="row"
                           alignItems="center"
                           gap={1}
-                          sx={{ cursor: "pointer" }}
                           component={"div"}
-                          // TODO: API ID Confusion
-                          onClick={() =>
-                            router.push(
-                              `/support/${item.officeLocationsOptions.country.nodes[0].id}`
-                            )
-                          }
                         >
                           <img
                             src={
@@ -291,7 +279,13 @@ const OfficeLocation: React.FC = () => {
                           ...baseCellStyle,
                           borderRight: "1px solid rgba(255, 255, 255, 0.1)",
                           borderTop: "1px solid rgba(217, 217, 217, 1)",
+                          cursor:"pointer"
                         }}
+                        onClick={() =>
+                          router.push(
+                            `/support${item.uri}`
+                          )
+                        }
                       >
                         {item.title}
                       </Td>

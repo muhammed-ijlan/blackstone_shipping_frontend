@@ -2,10 +2,12 @@
 import * as Yup from 'yup';
 
 export const contactValidationSchema = Yup.object().shape({
-  name: Yup.string().trim().required('Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  phone: Yup.string()
-    .matches(/^[0-9]{10}$/, 'Phone must be 10 digits')
-    .required('Phone is required'),
-  message: Yup.string().trim().required('Message is required'),
+  name: Yup.string().required("Name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .matches(/^[0-9]{6,15}$/, "Enter a valid phone number"),
+  message: Yup.string().required("Message is required"),
 });
