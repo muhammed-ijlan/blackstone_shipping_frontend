@@ -25,8 +25,8 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   phoneNumber: Yup.string()
-    .matches(/^[0-9]{10}$/, "Must be 10 digits")
-    .required("Phone number is required"),
+      .matches(/^[0-9]{6,14}$/, "Enter a valid phone number")
+      .required("Phone number is required"),
   address: Yup.string().required("Address is required"),
   message: Yup.string().required("Message is required"),
   resume: Yup.mixed()
@@ -51,7 +51,7 @@ const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
         title: "Job Application",
         intro: "A new job application has been submitted through your website.",
         fields: {
-          position: data.jobOpening.title,
+          Position: data.jobOpening.title,
           Name: values.name,
           Email: values.email,
           Phone: fullPhoneNumber,
