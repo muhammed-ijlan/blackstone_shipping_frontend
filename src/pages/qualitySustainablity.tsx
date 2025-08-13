@@ -19,79 +19,20 @@ import {
   GetQualityAndSustainabilityPageData,
 } from "src/types/graphql/types/quality.types";
 import { useLocation } from "react-router-dom";
+import ScrollToHash from "src/components/ScrollToHash";
 
 const QualitySustainablity = () => {
   const { data, loading } = useQuery<GetQualityAndSustainabilityPageData>(
     GET_QUALITY_AND_SUSTAINABILITY_PAGE
   );
 
-  const location = useLocation();
-  const isInitialMount = useRef(true);
-
-  useEffect(() => {
-    if (!loading && data) {
-      const handleScrollToHash = () => {
-        const hash = location.hash.slice(1);
-        if (hash) {
-          setTimeout(() => {
-            const element = document.getElementById(hash); 
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
-          }, 100); // Small delay to ensure DOM is ready
-        }
-      };
-
-      // Prevent default scroll on initial mount
-      if (isInitialMount.current) {
-        isInitialMount.current = false;
-        window.scrollTo(0, 0); 
-        handleScrollToHash(); 
-      } else {
-        handleScrollToHash(); 
-      }
-    }
-  }, [loading, data, location.hash]);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      if (hash) {
-        setTimeout(() => {
-          const element = document.getElementById(hash);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100); // Small delay to ensure DOM is ready
-      }
-    };
-
-    // Prevent default scroll behavior on hash change
-    const originalPushState = history.pushState;
-    history.pushState = function (...args) {
-      const result = originalPushState.apply(this, args);
-      window.dispatchEvent(new Event("pushstate"));
-      window.dispatchEvent(new Event("locationchange"));
-      return result;
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    window.addEventListener("popstate", handleHashChange);
-
-    // Handle initial load or manual URL change
-    handleHashChange();
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("popstate", handleHashChange);
-      history.pushState = originalPushState;
-    };
-  }, [data, loading]);
+ 
 
   if (loading) return <LoadingFallback />;
 
   return (
     <>
+    <ScrollToHash deps={[data]} offset={150} />
       {data && (
         <>
           <Banner
@@ -108,7 +49,7 @@ const QualitySustainablity = () => {
             <div id="quality">
               <PageContentSection
                 data={{
-                  sectionId: "quality",
+                  sectionId: "quality", 
                   mainTitle:
                     data.pageBy.qualitySustainabilityPageQualitySections
                       .qualitySectionMainTitle,
@@ -189,7 +130,7 @@ const QualitySustainablity = () => {
               data={data.pageBy.qualitySustainabilityPageAreasofCommitment}
             />
             <Divider />
-            <div id="calculator">
+            <div >
               <CarbonCalculator
                 data={data.pageBy.qualitySustainabilityPageCalculatorSection}
               />
@@ -215,7 +156,7 @@ const QualitySustainablity = () => {
             </div>
 
             <Divider />
-            <div id="codeOfConduct">
+            <div id="esg">
               <AreasOfCommitmentSection
                 subTitle={
                   data.pageBy.qualitySustainabilityPageEsgCodeOfConductSection

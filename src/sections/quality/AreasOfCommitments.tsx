@@ -51,12 +51,16 @@ const AreasOfCommitments: React.FC<AreasOfCommitmentProps> = ({ data }) => {
         ]}
       />
       <Divider />
+      <div id="calculator">
+
       <AreasOfCommitmentSection
         subTitle={data.areasOfCommitmentSection4SubTitle}
         content={data.areasOfCommitmentSection4Content}
         mainImage={data.areasOfCommitmentSection4MainImage}
         subImages={[]}
-      />
+        />
+      
+        </div>
     </Stack>
   );
 };

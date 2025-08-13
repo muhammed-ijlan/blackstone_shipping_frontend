@@ -49,7 +49,7 @@ export const routesSection: RouteObject[] = [
       { path: "careers", element: <CareersPage /> },
       { path: "careers/:id", element: <CareerDetailPage /> },
       { path: "support", element: <SupportPage /> },
-      { path: "support/:id", element: <CountrySpecificPage /> },
+      { path: "support/office-location/:id", element: <CountrySpecificPage /> },
       { path: "quality-sustainability", element: <QualitySustainabilityPage /> },
       { path: "my-blackbox-freight", element: <MyBlackboxFrightPage /> },
       { path: "tracking", element: <TrackingPage /> },

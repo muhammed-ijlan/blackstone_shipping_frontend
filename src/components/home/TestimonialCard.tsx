@@ -14,6 +14,7 @@ interface TestimonialCardProps {
     };
     testimonialsFieldOptions: {
       testimonialAuthorDesignation: string;
+      testimonialAuthorCompany:string;
     };
   };
 }
@@ -96,10 +97,11 @@ const TestimonialCard = ({ item }: TestimonialCardProps) => {
               lineHeight: "26px",
               letterSpacing: "3%",
               textTransform: "capitalize",
+              textWrap:"wrap"
             }}
             color="rgba(249, 250, 251, 0.5)"
           >
-            {item.testimonialsFieldOptions.testimonialAuthorDesignation}
+            {item.testimonialsFieldOptions.testimonialAuthorCompany}
           </Typography>
         </Stack>
       </Stack>

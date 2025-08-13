@@ -6,8 +6,7 @@ import { ServiceNode } from "src/types/graphql/types/services.types";
 const ServiceCards = ({ data }: { data: ServiceNode[] }) => {
   return (
     <Container maxWidth="xl">
-      <Divider />
-      <Grid container my={6} spacing={4}>
+      <Grid container my={3} spacing={4}>
         {data.map((item, index) => (
           <Grid
             size={{ xs: 12, sm: 6, md: 4, lg: 4 }}

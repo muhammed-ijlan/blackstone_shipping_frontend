@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Add, CloudUpload } from "@mui/icons-material";
 import {
   Avatar,
@@ -12,8 +13,13 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { countries } from "src/utils/countries";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { sendEmail } from "src/utils/sendEmail"; // make sure correct path
+import { generateEmailTemplate } from "src/utils/generateEmailTemplate"; // make sure correct path
+import PhoneNumberInput from "../PhoneInput";
+import toast from "react-hot-toast";
+import { GetJobPostDetailsResponse } from "src/types/graphql/types/careers.types";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -25,36 +31,81 @@ const validationSchema = Yup.object({
   message: Yup.string().required("Message is required"),
   resume: Yup.mixed()
     .required("Resume is required")
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .test("fileType", "Only PDF files are allowed", (value: any) => {
       return value && value.type === "application/pdf";
     }),
 });
 
-const ApplyNowForm = () => {
-  const [country, setCountry] = useState(
-    countries.find((item) => item.name === "India") || countries[0]
-  );
-  const getFlagUrl = (iso: string) =>
-    `https://flagcdn.com/w40/${iso.toLowerCase()}.png`;
-
+const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
+  
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState("");
+  const [isSubmitting,setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = async (values: any, { resetForm }: any) => {
+    const toastId = toast.loading("Sending message...");
+    const fullPhoneNumber = `${countries.find(c => c.iso === values.countryIso)?.code || ""} ${values.phoneNumber}`;
+    setIsSubmitting(true)
+    try {
+      const htmlBody = generateEmailTemplate({
+        title: "Job Application",
+        intro: "A new job application has been submitted through your website.",
+        fields: {
+          position: data.jobOpening.title,
+          Name: values.name,
+          Email: values.email,
+          Phone: fullPhoneNumber,
+          Address: values.address,
+        },
+        message: values.message,
+      });
+
+      await sendEmail({
+        Subject: `Job Application from ${values.name} for the position of ${data.jobOpening.title}`,
+        HTMLBody: htmlBody,
+        TOMail: import.meta.env.VITE_CONTACT_TO_EMAIL_ID,
+        SenderName: values.name,
+        Attachments: [
+          {
+            FileName: fileName,
+            FileData: await fileToBase64(values.resume),
+          },
+        ],
+      });
+
+      toast.success("Message sent successfully!", { id: toastId });
+      resetForm();
+    setIsSubmitting(false)
+      setFileName("");
+    } catch (error) {
+      console.error("Error sending application:", error);
+    setIsSubmitting(false)
+      toast.error("Failed to send message", { id: toastId });
+    }
+  };
+
+  const fileToBase64 = (file: File) => {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve((reader.result as string).split(",")[1]);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   return (
     <Formik
       initialValues={{
         name: "",
         email: "",
+        countryIso: countries.find((c) => c.name === "Netherlands")?.iso || countries[0].iso,
         phoneNumber: "",
         address: "",
         message: "",
         resume: null,
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        console.log("Form Submitted", values);
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({
         values,
@@ -63,12 +114,14 @@ const ApplyNowForm = () => {
         handleChange,
         handleSubmit,
         setFieldValue,
+        handleBlur
       }) => (
         <Form onSubmit={handleSubmit}>
           <Stack gap={2} pb={7}>
             <Typography variant="h2">Apply Now</Typography>
 
             <Grid container spacing={{ xs: 1.5, sm: 3 }}>
+              {/* Name */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Name
@@ -83,6 +136,8 @@ const ApplyNowForm = () => {
                   helperText={touched.name && errors.name}
                 />
               </Grid>
+
+              {/* Email */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Email Address
@@ -97,75 +152,27 @@ const ApplyNowForm = () => {
                   helperText={touched.email && errors.email}
                 />
               </Grid>
+
+              {/* Phone */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Phone Number
                 </Typography>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid size={{ xs: 12, sm: 2.5 }}>
-                    <Select
-                      value={country.code}
-                      onChange={(e) => {
-                        const selected = countries.find(
-                          (c) => c.code === e.target.value
-                        );
-                        if (selected) setCountry(selected);
-                      }}
-                      fullWidth
-                      displayEmpty
-                      variant="outlined"
-                      sx={{ height: 56 }}
-                      renderValue={() => (
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                        >
-                          <Avatar
-                            src={getFlagUrl(country.iso)}
-                            alt={country.name}
-                            sx={{ width: 24, height: 16 }}
-                            variant="square"
-                          />
-                          {country.code}
-                        </Box>
-                      )}
-                    >
-                      {countries.map((c) => (
-                        <MenuItem key={c.code} value={c.code}>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <Avatar
-                              src={getFlagUrl(c.iso)}
-                              alt={c.name}
-                              sx={{ width: 24, height: 16 }}
-                              variant="square"
-                            />
-                            {c.name} ({c.code})
-                          </Box>
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 9.5 }}>
-                    <TextField
-                      name="phoneNumber"
-                      autoComplete="off"
-                      variant="outlined"
-                      fullWidth
-                      value={values.phoneNumber}
-                      onChange={handleChange}
-                      error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                      helperText={touched.phoneNumber && errors.phoneNumber}
-                      sx={{ height: 56, width: "100%" }}
-                    />
-                  </Grid>
-                </Grid>
+                <PhoneNumberInput
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                  helperText={touched.phoneNumber ? errors.phoneNumber : undefined}
+                  countryIso={values.countryIso}
+                  onCountryChange={(iso) =>
+                    setFieldValue("countryIso", iso)
+                  }
+                />
               </Grid>
 
+              {/* Address */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Address
@@ -180,6 +187,8 @@ const ApplyNowForm = () => {
                   helperText={touched.address && errors.address}
                 />
               </Grid>
+
+              {/* Message */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Your Message
@@ -197,6 +206,7 @@ const ApplyNowForm = () => {
                 />
               </Grid>
 
+              {/* Resume */}
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography ml={0.5} sx={{ textAlign: "left !important" }}>
                   Attach Resume
@@ -265,13 +275,25 @@ const ApplyNowForm = () => {
                 </Box>
               </Grid>
 
+              {/* Buttons */}
               <Grid size={{ xs: 12, md: 12 }}>
                 <Stack alignItems={"flex-end"}>
                   <Stack direction={"row"} gap={2}>
-                    <Button sx={{color:"rgba(45, 55, 72, 1) !important",typography:"body1"}} color="inherit" variant="outlined" size="large" type="reset">
+                    <Button
+                     disabled={isSubmitting}
+                      color="inherit"
+                      variant="outlined"
+                      size="large"
+                      type="reset"
+                    >
                       Cancel
                     </Button>
-                    <Button sx={{backgroundColor:"rgba(26, 86, 219, 1) !important",typography:"body1","&:hover":{backgroundColor:"rgba(26, 86, 219, 0.9) !important"}}} size="large" variant="contained" type="submit">
+                    <Button
+                    disabled={isSubmitting}
+                      size="large"
+                      variant="contained"
+                      type="submit"
+                    >
                       Submit Application
                     </Button>
                   </Stack>

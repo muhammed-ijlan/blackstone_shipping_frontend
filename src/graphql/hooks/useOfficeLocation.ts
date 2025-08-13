@@ -16,6 +16,7 @@ interface CountryNode {
 interface OfficeLocation {
   id: string;
   title: string;
+  uri:string;
   officeLocationsOptions: {
     country: {
       nodes: CountryNode[];

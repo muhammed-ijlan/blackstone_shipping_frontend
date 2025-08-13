@@ -85,15 +85,16 @@ const CsrSection = () => {
             }}
           >
             <Typography
-              bottom={40}
+              bottom={60}
               left={40}
-              width={"50%"}
+              width={"80%"}
               color="white"
               sx={{
                 fontSize: {
                   xs: "20px",
                   sm: "20px",
                   textAlign: "left !important",
+                  textWrap:"wrap"
                 },
               }}
               fontWeight={600}
@@ -105,18 +106,16 @@ const CsrSection = () => {
             <Box
               component={"div"}
               dangerouslySetInnerHTML={{ __html: item.content }}
-              bottom={-5}
+              bottom={0}
               left={40}
-              width={"50%"}
+              width={"80%"}
               color="white"
               sx={{
-                fontSize: {
-                  xs: "20px",
-                  sm: "20px",
-                  textAlign: "left !important",
-                },
+               typography:"caption",
+               lineHeight:"15px !important",
+                textAlign: "left !important",
+                 textWrap:"wrap"
               }}
-              fontWeight={600}
               position="absolute"
               zIndex={888}
             />

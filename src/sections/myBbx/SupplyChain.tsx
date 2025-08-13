@@ -48,9 +48,10 @@ const SupplyChain = ({
           }}
         />
       </Stack>
-      <Stack direction={{ xs: "column", md: "row" }} gap={3} flexWrap={"wrap"}>
+      <Stack direction={{ xs: "column", md: "row" }} gap={3} flexWrap={"wrap"} >
         <SupplyChainCard
           data={{
+            sectionId: "freightindextrends",
             title: fitSection.fitTitle,
             content: fitSection.fitContent,
             img: fitSection.fitImage,
@@ -59,6 +60,7 @@ const SupplyChain = ({
         />
         <SupplyChainCard
           data={{
+            sectionId: "toolsreportsanalytics",
             title: traSection.traTitle,
             content: traSection.traContent,
             img: traSection.traImage,

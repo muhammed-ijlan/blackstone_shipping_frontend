@@ -106,6 +106,7 @@ export interface GetServiceWithSubServicesData {
   service: {
     id: string;
     title: string;
+    content: string;
     servicesPageBannerSection: {
       bannerImage: ImageNode;
       bannerTitle: string;

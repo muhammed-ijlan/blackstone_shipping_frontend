@@ -3,6 +3,7 @@ import React from "react";
 import Banner from "src/components/banner/Banner";
 import BannerBottom from "src/components/banner/BannerBottom";
 import LoadingFallback from "src/components/LoadingFallback";
+import ScrollToHash from "src/components/ScrollToHash";
 import {
   GET_COMPANY_ABOUT,
   GET_COMPANY_BANNER,
@@ -68,8 +69,22 @@ const Page = () => {
   const { data: ourCertificationData, loading: ourCertificationLoading } =
     useQuery<GetCompanyCertificationsResponse>(GET_COMPANY_CERTIFICATION);
 
+    const allLoaded =
+  !companyBannerLoading &&
+  !aboutLoading &&
+  !historyLoading &&
+  !visionLoading &&
+  !simplifyShippingLoading &&
+  !whoWeAreLoading &&
+  !ourValueLoading &&
+  !keyFactsLoading &&
+  !ourNetworkLoading &&
+  !ourCertificationLoading;
+
+
   return (
     <>
+    <ScrollToHash deps={[allLoaded]} offset={150}/>
       {companyBannerLoading ? (
         <LoadingFallback />
       ) : (
@@ -97,7 +112,10 @@ const Page = () => {
       {historyLoading ? (
         <LoadingFallback />
       ) : (
-        companyHistoryData && <History data={companyHistoryData} />
+        companyHistoryData && 
+        <div   id="history">
+          <History data={companyHistoryData} />
+        </div>
       )}
 
       {visionLoading ? (
@@ -121,25 +139,38 @@ const Page = () => {
       {ourValueLoading ? (
         <LoadingFallback />
       ) : (
-        ourValueData && <OurValues data={ourValueData} />
+        ourValueData && 
+         <div   id="mission">
+        <OurValues data={ourValueData} />
+         </div>
       )}
 
       {keyFactsLoading ? (
         <LoadingFallback />
       ) : (
-        keyFactsData && <KeyFacts data={keyFactsData} />
+        keyFactsData &&
+         <div   id="keyfacts">
+        <KeyFacts data={keyFactsData} />
+         </div>
       )}
 
       {ourNetworkLoading ? (
         <LoadingFallback />
       ) : (
-        ourNetworkData && <OurNetwork data={ourNetworkData} />
+        ourNetworkData &&
+         <div   id="network">
+        <OurNetwork data={ourNetworkData} />
+         </div>
       )}
 
       {ourCertificationLoading ? (
         <LoadingFallback />
       ) : (
-        ourCertificationData && <Certification data={ourCertificationData} />
+        ourCertificationData && 
+        <div  id="certification">
+        <Certification data={ourCertificationData}
+         />
+         </div>
       )}
     </>
   );

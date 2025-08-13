@@ -8,17 +8,12 @@ import { CountryPageData } from "src/types/graphql/types/support.types";
 
 const   CountrySpecificBanner = ({ data }: { data: CountryPageData }) => {
   const bannerImage =
-    data.country?.countriesOptions?.countryBannerImage?.node?.sourceUrl ?? "";
-  const countryName = data.country?.name ?? "Country";
+    data.officeLocation.officeLocationsOptions?.officeLocationBannerImage?.node?.sourceUrl ?? "";
+  const countryName = data.officeLocation.officeLocationsOptions?.country?.nodes[0].name ?? "Country";
 
   const { id } = useParams<{ id: string }>();
 
-const matchedCities = data.officeLocations?.nodes
-  ?.filter(location =>
-    location.countries?.nodes?.some(country => country.id === id)
-  )
-  ?.map(loc => loc.title)
-  ?.join(", ") || "City";
+const matchedCities = data.officeLocation.title || "City";
 
 
   return (
@@ -107,7 +102,7 @@ const matchedCities = data.officeLocations?.nodes
           }}
         >
           <Typography variant="h2" sx={{fontWeight:"500 !important",textAlign:{xs:"center !important",md:"left !important"}}} >
-           {data.country?.countriesOptions?.countryBannerCaption || ""}   
+           {data.officeLocation.officeLocationsOptions?.officeLocationBannerCaption || ""}   
           </Typography>
         </Box>
       {/* Country Card */}</Container>

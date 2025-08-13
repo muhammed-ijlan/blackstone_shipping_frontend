@@ -20,6 +20,7 @@ import {
 } from "src/types/graphql/types/support.types";
 import Location from "src/components/company/Location";
 import LoadingFallback from "src/components/LoadingFallback";
+import ScrollToHash from "src/components/ScrollToHash";
 
 const Page = () => {
   const { data, loading } = useQuery<SupportPageData>(GET_SUPPORT_PAGE);
@@ -38,6 +39,7 @@ const Page = () => {
 
   return (
     <>
+      <ScrollToHash deps={[data]} offset={150} />
       {data && (
         <Stack>
           <Banner
@@ -51,9 +53,13 @@ const Page = () => {
               <SupportBannerContent data={data} />
             </BannerBottom>
             <Divider />
+            <div id="contactform">
             <SupportFormSection />
+            </div>
           </Container>
+          <div id="officelocations">
           <OfficeLocation />
+          </div>
           <Container maxWidth="xl" sx={{ my: 7 }}>
             <Location  />
           </Container>
