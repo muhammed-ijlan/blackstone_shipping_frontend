@@ -1,85 +1,85 @@
 export interface GetCareersPageData {
-    page: {
-        careersPageBannerSection: {
-            bannerImage: {
-                node: {
-                    sourceUrl: string;
-                };
-            };
-            bannerTitle: string;
+  page: {
+    careersPageBannerSection: {
+      bannerImage: {
+        node: {
+          sourceUrl: string;
         };
-        careersPageSection1: {
-            mainTitle: string;
-            subTitle: string;
-            content: string;
-            image: {
-                node: {
-                    sourceUrl: string;
-                };
-            };
-        };
-        careersPageMeetOur: {
-            meetOurPeopleTitle: string;
-            meetOurPeopleContent: string;
-        };
-        careersPageJobsSection: {
-            jobSectionMainTitle: string;
-            jobSectionSubTitle: string;
-            jobSectionBottomContent: string;
-        };
-        careersPageFind: {
-            openPositionTitle: string;
-        };
-        careersPageWhyJoinUsSection: {
-            whyJoinUsTitle: string;
-            whyJoinUsContent: string;
-        };
-        careersPageWeAreLookingForSection: {
-            title: string;
-            number1: string;
-            number2: string;
-            number3: string;
-            number4: string;
-            number5: string;
-            rightSideContent: string;
-        };
+      };
+      bannerTitle: string;
     };
-    peoples: {
-        nodes: {
-            title: string;
-            content: string;
-            featuredImage: {
-                node: {
-                    sourceUrl: string;
-                };
-            };
-            peoplesOptions: {
-                videoUrl: string;
-            };
-        }[];
+    careersPageSection1: {
+      mainTitle: string;
+      subTitle: string;
+      content: string;
+      image: {
+        node: {
+          sourceUrl: string;
+        };
+      };
     };
-    jobCategories: {
-        nodes: {
-            name: string;
-            description: string;
-        }[];
+    careersPageMeetOur: {
+      meetOurPeopleTitle: string;
+      meetOurPeopleContent: string;
     };
-    jobLocations: {
-        nodes: {
-            name: string;
-        }[];
+    careersPageJobsSection: {
+      jobSectionMainTitle: string;
+      jobSectionSubTitle: string;
+      jobSectionBottomContent: string;
     };
-    careerAdvantages: {
-        nodes: {
-            title: string;
-            content: string;
-            featuredImage: {
-                node: {
-                    sourceUrl: string;
-                };
-            };
-        }[];
+    careersPageFind: {
+      openPositionTitle: string;
     };
+    careersPageWhyJoinUsSection: {
+      whyJoinUsTitle: string;
+      whyJoinUsContent: string;
+    };
+    careersPageWeAreLookingForSection: {
+      title: string;
+      number1: string;
+      number2: string;
+      number3: string;
+      number4: string;
+      number5: string;
+      rightSideContent: string;
+    };
+  };
+  peoples: {
+    nodes: {
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      peoplesOptions: {
+        videoUrl: string;
+      };
+    }[];
+  };
+  jobCategories: {
+    nodes: {
+      name: string;
+      description: string;
+    }[];
+  };
+  jobLocations: {
+    nodes: {
+      name: string;
+    }[];
+  };
+  careerAdvantages: {
+    nodes: {
+      title: string;
+      content: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+    }[];
+  };
 }
 
 export interface JobOpening {
@@ -95,7 +95,7 @@ export interface JobOpeningsOptions {
   };
 }
 
- export interface JobLocation {
+export interface JobLocation {
   name: string;
 }
 
@@ -127,6 +127,8 @@ export interface JobOpeningDetails {
     };
     keyResponsibilities?: string;
     requirements?: string;
+    whatWeOffer?: string;
+    summary?: string;
     applicationEmail?: string;
   };
 }

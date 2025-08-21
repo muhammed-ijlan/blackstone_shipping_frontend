@@ -107,12 +107,15 @@ export interface TechnologyNode {
   id: string;
   title: string;
   content: string;
-  technologySinglePageOptions: {
-    subTitle: string;
-  };
-  featuredImage: ImageNode | null;
   children?: {
-    nodes: TechnologyNode[];
+    nodes: {
+      id: string;
+      title: string;
+      content: string;
+      featuredImage: {
+        node: ImageNode;
+      };
+    }[];
   };
 }
 
@@ -128,7 +131,21 @@ export interface GetTechnologyDetailsByURIData {
       subTitle: string;
     };
     children: {
-      nodes: TechnologyNode[];
+      nodes: {
+        id: string;
+        title: string;
+        content: string;
+        children: {
+          nodes: {
+            id: string;
+            title: string;
+            content: string;
+            featuredImage: {
+              node: ImageNode;
+            };
+          }[];
+        };
+      }[];
     };
   };
 }

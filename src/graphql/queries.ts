@@ -1045,23 +1045,12 @@ export const GET_TECHNOLOGY_DETAILS_BY_URI = gql`
               id
               title
               content
-              technologySinglePageOptions {
-                subTitle
-              }
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
               children {
                 nodes {
                   ... on Technology {
                     id
                     title
                     content
-                    technologySinglePageOptions {
-                      subTitle
-                    }
                     featuredImage {
                       node {
                         sourceUrl
@@ -1077,6 +1066,7 @@ export const GET_TECHNOLOGY_DETAILS_BY_URI = gql`
     }
   }
 `;
+
 
 
 export const GET_CAREERS_PAGE = gql`
@@ -1307,6 +1297,8 @@ export const GET_JOB_POST_DETAILS_BY_ID = gql`
         }
         keyResponsibilities
         requirements
+        summary
+        whatWeOffer
         applicationEmail
       }
     }
