@@ -108,6 +108,7 @@ const TechnologyCards = ({ data }: { data: TechnologyNode[] }) => {
                           },
                         },
                         "& strong": {
+                          display: "unset !important",
                           fontWeight: "700 !important",
                           fontSize: "1rem",
                           mb: "2px",

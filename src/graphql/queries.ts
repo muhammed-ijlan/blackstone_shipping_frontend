@@ -1297,6 +1297,8 @@ export const GET_JOB_POST_DETAILS_BY_ID = gql`
         }
         keyResponsibilities
         requirements
+        summary
+        whatWeOffer
         applicationEmail
       }
     }
