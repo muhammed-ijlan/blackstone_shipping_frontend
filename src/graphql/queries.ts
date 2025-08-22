@@ -835,30 +835,33 @@ export const GET_NEWS_BY_CATEGORY = gql`
 
 
 export const GET_CASE_STUDIES = gql`
-query GetCaseStudies($count: Int) {
-  caseStudies(first: $count) {
-    nodes {
-      id
-      title
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-      caseStudiesOptions {
-        companyDescription
-        caseStudyPersonName
-        caseStudyPersonDesignation
-        caseStudyPersonImage {
+  query GetCaseStudies($count: Int) {
+    caseStudies(first: $count) {
+      nodes {
+        id
+        title
+        uri
+        content
+        featuredImage {
           node {
             sourceUrl
+          }
+        }
+        caseStudiesOptions {
+          customerDescription
+          caseStudyPersonName
+          caseStudyPersonDesignation
+          caseStudyPersonImage {
+            node {
+              sourceUrl
+            }
           }
         }
       }
     }
   }
-}
 `;
+
 
 export const GET_FAQS = gql`
   query SearchFAQs($search: String!) {
@@ -919,43 +922,32 @@ export const GET_RELATED_POSTS_BY_ID = gql`
 
 
 export const GET_SINGLE_CASE_STUDY = gql`
-  query GetSingleCaseStudy($id: ID!) {
-    caseStudy(id: $id, idType: ID) {
-      title
-      content
-      featuredImage {
+  query GetCaseStudy($slug: ID!) {
+  caseStudy(id: $slug, idType: SLUG) {
+    title
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+    caseStudiesOptions {
+      caseStudyImage {
         node {
           sourceUrl
         }
       }
-      caseStudiesOptions {
-        caseStudyImage {
-          node {
-            sourceUrl
-          }
-        }
-        companyName
-        companyLogo {
-          node {
-            sourceUrl
-          }
-        }
-        companyLocation
-        companyDescription
-        challenges
-        solutions
-        results
-        caseStudyPersonName
-        caseStudyPersonDesignation
-        caseStudyPersonImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
+      customerDescription
+      customerLocation
+      intro
+      challenges
+      solutions
+      keytakeaways
     }
   }
+}
+
 `;
+
 
 export const GET_TECHNOLOGY_PAGE = gql`
 query GetTechnologyPage {
@@ -1973,3 +1965,30 @@ export const GLOBAL_SEARCH = gql`
     }
   }
 `;
+
+
+export const GET_DOWNLOADS = gql`
+query GetDownloadsByCategory($slug: [String!]) {
+  downloads(
+    where: {
+      taxQuery: {
+        taxArray: [
+          { taxonomy: DOWNLOADCATEGORY, field: SLUG, terms: $slug }
+        ]
+      }
+    }
+  ) {
+    nodes {
+      title
+      downloadOptions {
+        downloadFile {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+}
+
+`

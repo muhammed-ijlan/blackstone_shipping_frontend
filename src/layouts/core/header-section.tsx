@@ -205,19 +205,19 @@ export function HeaderSection({
     const hasNestedItems = subcategories.some(
       (subItem) => subItem.children && subItem.children.length > 0
     );
-  
+
     const handleNavigation = (item: MenuItem) => {
-      const {  uri } = item;
-  
+      const { uri } = item;
+
       const isExternal = uri?.startsWith("http") && !uri.includes("blackstone.hexprojects.in");
-  
+
       if (isExternal) {
         window.open(uri, "_blank");
       } else if (uri && uri !== "#") {
-        router.push(uri); 
+        router.push(uri);
       }
     };
-  
+
     if (!hasNestedItems) {
       return (
         <Stack>
@@ -245,7 +245,7 @@ export function HeaderSection({
         </Stack>
       );
     }
-  
+
     return (
       <Stack>
         <Divider
@@ -268,7 +268,7 @@ export function HeaderSection({
               >
                 {category.label}
               </SubMenuCategoryTitle>
-  
+
               {category.children?.map((item) => (
                 <SubMenuItem
                   key={item.id}
@@ -286,10 +286,10 @@ export function HeaderSection({
       </Stack>
     );
   };
-  
-  
-  
-  
+
+
+
+
   const normalizePath = (path: string = "") => {
     if (!path) return "";
     return path.replace(/\/+$/, "").toLowerCase();
@@ -452,7 +452,7 @@ export function HeaderSection({
 
               <NavBar>
                 {data.length === 0 ? (
-                  <>loading..</>
+                  <></>
                 ) : (
                   data.map((item, index) => (
                     <div

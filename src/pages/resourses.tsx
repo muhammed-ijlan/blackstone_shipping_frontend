@@ -47,26 +47,26 @@ const Page = () => {
             mainTitle={pageData?.page.resourcesPageBannerSection.bannerTitle}
           />
           <div id="news">
-          <NewsSection data={pageData.page.resourcesPageNewsSection} />
+            <NewsSection data={pageData.page.resourcesPageNewsSection} />
           </div>
 
           {caseStudiesLoading ? (
             <LoadingFallback />
           ) : (
-            caseStudiesData && 
+            caseStudiesData &&
             <div id="casestudies">
-            <CaseStudies data={caseStudiesData} />
+              <CaseStudies data={caseStudiesData} />
             </div>
           )}
 
-          {faqLoading ? <LoadingFallback /> : 
-          <div id="faq">
-            <FaqSection />
+          {faqLoading ? <LoadingFallback /> :
+            <div id="faq">
+              <FaqSection />
+            </div>
+          }
+          <div id="downloads">
+            <Downloads data={pageData} />
           </div>
-            }
-        <div id="downloads">
-          <Downloads data={pageData} />
-         </div>
         </>
       )}
     </>

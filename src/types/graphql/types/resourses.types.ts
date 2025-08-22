@@ -119,14 +119,15 @@ export interface CaseStudiesData {
 export interface CaseStudy {
   id: string;
   title: string;
+  uri: string;
+  content: string;
   featuredImage: {
     node: {
       sourceUrl: string;
     };
   } | null;
-  content?:string;
   caseStudiesOptions: {
-    companyDescription:string;
+    customerDescription: string;
     caseStudyPersonName: string;
     caseStudyPersonDesignation: string;
     caseStudyPersonImage: {
@@ -136,6 +137,7 @@ export interface CaseStudy {
     } | null;
   } | null;
 }
+
 
 
 export interface Faq {
@@ -175,7 +177,7 @@ export interface GetPostDetailsByIDData {
       } | null;
     } | null;
     categories: {
-      nodes: { 
+      nodes: {
         id: string;
         name: string;
         slug: string;
@@ -227,17 +229,50 @@ export interface CaseStudiesOptions {
   caseStudyPersonDesignation: string | null;
   caseStudyPersonImage: MediaNode | null;
 }
+export interface GetCaseStudyVars {
+  slug: string;
+}
 
-export interface CaseStudyData {
+export interface GetCaseStudyResponse {
   caseStudy: {
     title: string;
-    content: string;
-    featuredImage: MediaNode | null;
-    caseStudiesOptions: CaseStudiesOptions | null;
+    featuredImage?: {
+      node: {
+        sourceUrl: string;
+      };
+    };
+    caseStudiesOptions?: {
+      caseStudyImage?: {
+        node: {
+          sourceUrl: string;
+        };
+      };
+      customerDescription?: string;
+      customerLocation?: string;
+      intro?: string;
+      challenges?: string;
+      solutions?: string;
+      keytakeaways?: string;
+    };
+  } | null;
+}
+
+
+export interface GetDownloadsByCategoryResponse {
+  downloads: {
+    nodes: {
+      title: string;
+      downloadOptions: {
+        downloadFile: {
+          node: {
+            sourceUrl: string;
+          };
+        } | null;
+      } | null;
+    }[];
   };
 }
 
-export interface CaseStudyVars {
-  id: string; 
+export interface GetDownloadsByCategoryVariables {
+  slug: string[];
 }
-
