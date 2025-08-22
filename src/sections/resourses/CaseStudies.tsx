@@ -26,7 +26,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
       const firstChild = container.querySelector(":scope > *") as HTMLElement;
       if (!firstChild) return;
 
-      const itemWidth = firstChild.offsetWidth + 16; 
+      const itemWidth = firstChild.offsetWidth + 16;
       const index = Math.round(container.scrollLeft / itemWidth);
       setCurrentIndex(index);
     };
@@ -90,7 +90,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                           {item.title}
                         </Typography>
                         <Typography
-                          
+
                           sx={{
                             typography: { xs: "body1", md: "body2" },
                             display: "-webkit-box",
@@ -101,7 +101,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                           }}
                           dangerouslySetInnerHTML={{
                             __html:
-                              item.caseStudiesOptions?.companyDescription ?? "",
+                              item.caseStudiesOptions?.customerDescription ?? "",
                           }}
                         />
                       </Stack>
@@ -109,7 +109,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                     <Stack alignItems={"flex-end"}>
                       <CustomArrowButton
                         onClick={() =>
-                          router.push(`/resources/case-study/${item.id}`)
+                          router.push(`/resources${item.uri}`)
                         }
                         name="Read More"
                         sx={{
@@ -176,7 +176,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
               <SliderProgress
                 currentIndex={currentIndex}
                 totalItems={mockMoreItems.length}
-                sx={{color:"rgba(249, 250, 251, 1)",background:"rgba(109, 110, 113, 1)"}}
+                sx={{ color: "rgba(249, 250, 251, 1)", background: "rgba(109, 110, 113, 1)" }}
               />
             </Stack>
           </Stack>

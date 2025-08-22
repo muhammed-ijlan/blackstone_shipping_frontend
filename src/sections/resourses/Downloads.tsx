@@ -1,15 +1,19 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   Container,
+  Divider,
   Grid,
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { Iconify } from "src/components/iconify";
-import { ResourcesPageData } from "src/types/graphql/types/resourses.types";
+import {
+  GetDownloadsByCategoryResponse,
+  ResourcesPageData,
+} from "src/types/graphql/types/resourses.types";
+import { useQuery } from "@apollo/client";
+import { GET_DOWNLOADS } from "src/graphql/queries";
 
 import brochure from "src/assets/icons/brochure.png";
 import service from "src/assets/icons/service.png";
@@ -18,19 +22,44 @@ import whitepapper from "src/assets/icons/whitepapper.png";
 const Downloads = ({ data }: { data: ResourcesPageData }) => {
   const resourseData = data.page.resourcesPageDownloadsSection;
 
+  // 3 queries
+  const { data: brochuresData, loading: brochuresLoading } =
+    useQuery<GetDownloadsByCategoryResponse>(GET_DOWNLOADS, {
+      variables: { slug: ["brochures"] },
+    });
+
+  const { data: servicesData, loading: servicesLoading } =
+    useQuery<GetDownloadsByCategoryResponse>(GET_DOWNLOADS, {
+      variables: { slug: ["service-guides"] },
+    });
+
+  const { data: whitepapersData, loading: whitepapersLoading } =
+    useQuery<GetDownloadsByCategoryResponse>(GET_DOWNLOADS, {
+      variables: { slug: ["whitepapers"] },
+    });
+
+  if (brochuresLoading || servicesLoading || whitepapersLoading) {
+    return (
+      <Container maxWidth="xl" sx={{ my: 6 }}>
+        <Typography>Loading downloads...</Typography>
+      </Container>
+    );
+  }
+
   return (
     <Container maxWidth="xl" sx={{ my: 6 }}>
       <Stack gap={3}>
         <Typography variant="h2">
           {resourseData.downloadsSectionTitle}
         </Typography>
+
         <Box
-          component={"div"}
+          component="div"
           sx={{
             "& p": {
-              margin: "0",
-              fontWeight:"600 !important",
-              color:"rgba(45, 55, 72, 1)"
+              margin: 0,
+              fontWeight: "600 !important",
+              color: "rgba(45, 55, 72, 1)",
             },
           }}
           dangerouslySetInnerHTML={{
@@ -40,184 +69,124 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
 
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 4 }}>
-            <Stack
-              sx={{
-                borderRadius: "8px",
-                background: "rgba(45, 55, 72, 1)",
-                color: "white",
-                padding: 3,
-              }}
-              justifyContent={"space-between"}
-              gap={2}
-            >
-              <Stack gap={3}>
-                <Stack gap={2} direction={"row"}>
-                  <Box
-                    src={brochure}
-                    component={"img"}
-                    alt="img"
-                    width={"32px"}
-                  />
-                  <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
-                    {resourseData.brochureTitle}
-                  </Typography>
-                </Stack>
-                <Typography variant="body2">
-                  {resourseData.brochureContent}
-                </Typography>
-              </Stack>
-
-              <ButtonGroup
-                sx={{
-                  width: "100%",
-                  height: "60px",
-                  backgroundColor: "rgba(26, 86, 219, 1) !important",
-                  color: "white",
-                }}
-                fullWidth
-                aria-label="Button group with a nested menu"
-              >
-                <Button
-                  target="_blank"
-                  href={resourseData.brochureFile?.node?.sourceUrl}
-                  sx={{ color: "white" }}
-                >
-                  Download
-                </Button>
-                <Button
-                  sx={{ width: "60px", color: "white" }}
-                  size="small"
-                  aria-label="select merge strategy"
-                  aria-haspopup="menu"
-                  target="_blank"
-                  href={resourseData.brochureFile?.node?.sourceUrl}
-                >
-                  <Iconify icon={"charm:download"} />
-                </Button>
-              </ButtonGroup>
-            </Stack>
+            <DownloadCard
+              title="Brochure"
+              icon={brochure}
+              items={
+                brochuresData?.downloads?.nodes?.map((n) => ({
+                  name: n.title,
+                  url: n.downloadOptions?.downloadFile?.node?.sourceUrl,
+                })) || []
+              }
+            />
           </Grid>
+
           <Grid size={{ xs: 12, md: 4 }}>
-            <Stack
-              sx={{
-                borderRadius: "8px",
-                background: "rgba(45, 55, 72, 1)",
-                color: "white",
-                padding: 3,
-              }}
-              justifyContent={"space-between"}
-              gap={2}
-            >
-              <Stack gap={3}>
-                <Stack gap={2} direction={"row"}>
-                  <Box
-                    src={service}
-                    component={"img"}
-                    alt="img"
-                    height="32px"
-                  />
-                 <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
-                    {resourseData.serviceGuidesTitle}
-                  </Typography>
-                </Stack>
-                <Typography variant="body2">
-                  {resourseData.serviceGuidesContent}
-                </Typography>
-              </Stack>
-
-              <ButtonGroup
-                sx={{
-                  width: "100%",
-                  height: "60px",
-                  backgroundColor: "rgba(26, 86, 219, 1) !important",
-                  color: "white",
-                }}
-                fullWidth
-                aria-label="Button group with a nested menu"
-              >
-                <Button
-                  target="_blank"
-                  href={resourseData.serviceGuidesFile?.node?.sourceUrl}
-                  sx={{ color: "white" }}
-                >
-                  Download
-                </Button>
-                <Button
-                  sx={{ width: "60px", color: "white" }}
-                  size="small"
-                  aria-label="select merge strategy"
-                  aria-haspopup="menu"
-                  target="_blank"
-                  href={resourseData.serviceGuidesFile?.node?.sourceUrl}
-                >
-                  <Iconify icon={"charm:download"} />
-                </Button>
-              </ButtonGroup>
-            </Stack>
+            <DownloadCard
+              title="Corporate Presentations"
+              icon={service}
+              items={
+                servicesData?.downloads?.nodes?.map((n) => ({
+                  name: n.title,
+                  url: n.downloadOptions?.downloadFile?.node?.sourceUrl,
+                })) || []
+              }
+            />
           </Grid>
+
           <Grid size={{ xs: 12, md: 4 }}>
-            <Stack
-              sx={{
-                borderRadius: "8px",
-                background: "rgba(45, 55, 72, 1)",
-                color: "white",
-                padding: 3,
-              }}
-              justifyContent={"space-between"}
-              gap={2}
-            >
-              <Stack gap={3}>
-                <Stack gap={2} direction={"row"}>
-                  <Box
-                    src={whitepapper}
-                    component={"img"}
-                    alt="img"
-                    width={"32px"}
-                    height="32px"
-                  />
-                 <Typography sx={{ typography: { xs: "h3", md: "h6 " },textTransform:"capitalize !important" }}>
-                    {resourseData.whitePapersTitle}
-                  </Typography>
-                </Stack>
-                <Typography variant="body2">
-                  {resourseData.whitePapersContent}
-                </Typography>
-              </Stack>
-
-              <ButtonGroup
-                sx={{
-                  width: "100%",
-                  height: "60px",
-                  backgroundColor: "rgba(26, 86, 219, 1) !important",
-                  color: "white",
-                }}
-                fullWidth
-                aria-label="Button group with a nested menu"
-              >
-                <Button
-                  sx={{ color: "white" }}
-                  target="_blank"
-                  href={resourseData.whitePapersFile?.node?.sourceUrl}
-                >
-                  Download
-                </Button>
-                <Button
-                  sx={{ width: "60px", color: "white" }}
-                  size="small"
-                  aria-label="select merge strategy"
-                  aria-haspopup="menu"
-                  target="_blank"
-                  href={resourseData.whitePapersFile?.node?.sourceUrl}
-                >
-                  <Iconify icon={"charm:download"} />
-                </Button>
-              </ButtonGroup>
-            </Stack>
+            <DownloadCard
+              title="Corporate Sustainability Reports"
+              icon={whitepapper}
+              items={
+                whitepapersData?.downloads?.nodes?.map((n) => ({
+                  name: n.title,
+                  url: n.downloadOptions?.downloadFile?.node?.sourceUrl,
+                })) || []
+              }
+            />
           </Grid>
-        </Grid>
-      </Stack>
-    </Container>
+        </Grid >
+      </Stack >
+    </Container >
   );
 };
+
+const DownloadCard = ({
+  title,
+  icon,
+  items,
+}: {
+  title: string;
+  icon: string;
+  items: { name: string; url?: string }[];
+}) => (
+  <Stack
+    sx={{
+      borderRadius: "12px",
+      background: "rgba(45, 55, 72, 1)",
+      color: "white",
+      p: 3,
+      minHeight: 300,
+      height: "100%",
+    }}
+    gap={2}
+  >
+    <Stack gap={2} direction="row">
+      <Box
+        src={icon}
+        component="img"
+        alt={title}
+        height="42px"
+        sx={{
+          background: "#5C7DFF1A",
+          padding: "6px",
+          borderRadius: "6px",
+        }}
+      />
+      <Typography
+        sx={{
+          typography: { xs: "h5", md: "h6" },
+          height: "65px",
+          fontWeight: 600,
+        }}
+      >
+        {title}
+      </Typography>
+    </Stack>
+    <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
+
+    <Stack gap={1.5}>
+      {items.length > 0 ? (
+        items.map((item, idx) => (
+          <Button
+            key={idx}
+            target="_blank"
+            href={item.url || "#"}
+            sx={{
+              justifyContent: "space-between",
+              background: "rgba(26, 86, 219, 1)",
+              color: "white",
+              textTransform: "none",
+              fontWeight: 500,
+              typography: "h5",
+              px: 2,
+              py: 2,
+              borderRadius: "6px",
+              "&:hover": { background: "rgba(26, 86, 219, 0.9)" },
+            }}
+            endIcon={<Iconify icon="charm:download" />}
+          >
+            {item.name}
+          </Button>
+        ))
+      ) : (
+        <Typography variant="body2" color="gray">
+          No files available
+        </Typography>
+      )}
+    </Stack>
+  </Stack>
+);
 
 export default Downloads;

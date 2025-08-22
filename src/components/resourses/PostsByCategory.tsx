@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { usePostsByCategory } from "src/graphql/hooks/usePostsByCategory";
 import {
   Typography,
@@ -37,11 +37,27 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
 
   const router = useRouter();
 
+  const postsContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (postsContainerRef.current) {
+      const yOffset = -300;
+      const y =
+        postsContainerRef.current.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [currentPage]);
+
+
+
   if (loading && posts.length === 0) {
     return (
       <Grid container spacing={3}>
         {[...Array(count)].map((_, i) => (
-          <Grid key={i} size={{ xs: 12,md: 6,lg: 4 }}>
+          <Grid key={i} size={{ xs: 12, md: 6, lg: 4 }}>
             <Stack
               sx={{ maxWidth: { xs: "100%", md: "400px" } }}
               direction={{ xs: "row", md: "column" }}
@@ -86,7 +102,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
       </Grid>
     );
   }
-  
+
 
   if (error) return <p>Error: {error.message}</p>;
 
@@ -100,7 +116,6 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
       siblingCount={1}
       boundaryCount={1}
       renderItem={(item) => {
-        // Render only page number buttons here
         if (item.type === "page") {
           return (
             <PaginationItem
@@ -132,33 +147,32 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
   );
 
   return (
-    <Stack>
+    <Stack ref={postsContainerRef}>
       <Grid
         container
-        // alignItems={"center"}
-        justifyContent={"space-between"}
+        // justifyContent={"space-between"}
         justifyItems={"center"}
         spacing={3}
       >
         {posts?.map((post) => (
           <Grid
-            size={{ xs: 12,md: 6,lg: 4 }}
+            size={{ xs: 12, md: 6, lg: 4 }}
             spacing={5}
             key={post.id || post.title}
           >
-            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{xs: "row", md: "column"}} gap={{xs:1,md:0}} 
-             onClick={() => router.push(`/resources/news/${post.id}`)}>
+            <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{ xs: "row", md: "column" }} gap={{ xs: 1, md: 0 }}
+              onClick={() => router.push(`/resources/news/${post.id}`)}>
               <Box
                 component={"img"}
                 alt={post?.title}
                 src={post.featuredImage?.node?.sourceUrl}
-                width={{xs:"150px",md:"100%"}}
-                height={{xs:"92px",md:"283px"}}
+                width={{ xs: "150px", md: "100%" }}
+                height={{ xs: "92px", md: "283px" }}
                 sx={{ objectFit: "cover" }}
                 borderRadius={"8px"}
               />
               <Stack sx={{ height: "100%" }} justifyContent={"space-between"}>
-                <Stack gap={{xs:0,md:1}} direction={{xs:"column-reverse",md:"column"}}>
+                <Stack gap={{ xs: 0, md: 1 }} direction={{ xs: "column-reverse", md: "column" }}>
                   <Typography
                     mt={1}
                     variant="caption"
@@ -170,11 +184,11 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                   <Typography
                     sx={{
                       textAlign: "left !important",
-                      display: {xs:"unset",md:"-webkit-box"},
+                      display: { xs: "unset", md: "-webkit-box" },
                       WebkitBoxOrient: "vertical",
-                      WebkitLineClamp: {xs:2,md:2},
-                      overflow: {xs:"unset",md:"hidden"},
-                      height: {xs:"unset",md:"60px"},
+                      WebkitLineClamp: { xs: 2, md: 2 },
+                      overflow: { xs: "unset", md: "hidden" },
+                      height: { xs: "unset", md: "60px" },
                     }}
                     variant="h4"
                     fontWeight={"bold"}
@@ -188,8 +202,8 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     mb={2}
                     color="rgba(45, 55, 72, 1)"
                     sx={{
-                      
-                      display: {xs:"none",md:"-webkit-box"},
+
+                      display: { xs: "none", md: "-webkit-box" },
                       WebkitBoxOrient: "vertical",
                       WebkitLineClamp: 3,
                       overflow: "hidden",
@@ -201,7 +215,7 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
                     dangerouslySetInnerHTML={{ __html: post.excerpt }}
                   />
                 </Stack>
-                <Stack height={"100%"} alignItems={"flex-end"} sx={{display:{xs:"none",md:"flex"}}}>
+                <Stack height={"100%"} alignItems={"flex-end"} sx={{ display: { xs: "none", md: "flex" } }}>
                   <CustomArrowButton
                     name="Read More"
                     sx={{ border: "none" }}
@@ -214,55 +228,55 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
         ))}
       </Grid>
 
-     
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          mt={6}
-          sx={{ width: "100%" }}
+
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mt={6}
+        sx={{ width: "100%" }}
+      >
+        <Button
+          variant="outlined"
+          startIcon={<ArrowBack />}
+          onClick={goToPrevPage}
+          disabled={currentPage === 1}
+          sx={{
+            color: "rgba(11, 19, 40, 1)",
+            borderColor: "rgba(109, 110, 113, 0.3)",
+            fontWeight: "bold",
+            minWidth: 80,
+            "&:hover": {
+              backgroundColor: "rgba(11, 19, 40, 0.15)",
+              borderColor: "rgba(11, 19, 40, 0.5)",
+            },
+          }}
         >
-          <Button
-            variant="outlined"
-            startIcon={<ArrowBack />}
-            onClick={goToPrevPage}
-            disabled={currentPage === 1}
-            sx={{
-              color: "rgba(11, 19, 40, 1)",
-              borderColor: "rgba(109, 110, 113, 0.3)",
-              fontWeight: "bold",
-              minWidth: 80,
-              "&:hover": {
-                backgroundColor: "rgba(11, 19, 40, 0.15)",
-                borderColor: "rgba(11, 19, 40, 0.5)",
-              },
-            }}
-          >
-            Prev
-          </Button>
+          Prev
+        </Button>
 
-          {renderPageNumbers()}
+        {renderPageNumbers()}
 
-          <Button
-            variant="outlined"
-            endIcon={<ArrowForward />}
-            onClick={goToNextPage}
-            disabled={currentPage >= totalPages}
-            sx={{
-              color: "rgba(11, 19, 40, 1)",
-              borderColor: "rgba(109, 110, 113, 0.3)",
-              fontWeight: "bold",
-              minWidth: 80,
-              "&:hover": {
-                backgroundColor: "rgba(11, 19, 40, 0.15)",
-                borderColor: "rgba(11, 19, 40, 0.5)",
-              },
-            }}
-          >
-            Next
-          </Button>
-        </Stack>
-      
+        <Button
+          variant="outlined"
+          endIcon={<ArrowForward />}
+          onClick={goToNextPage}
+          disabled={currentPage >= totalPages}
+          sx={{
+            color: "rgba(11, 19, 40, 1)",
+            borderColor: "rgba(109, 110, 113, 0.3)",
+            fontWeight: "bold",
+            minWidth: 80,
+            "&:hover": {
+              backgroundColor: "rgba(11, 19, 40, 0.15)",
+              borderColor: "rgba(11, 19, 40, 0.5)",
+            },
+          }}
+        >
+          Next
+        </Button>
+      </Stack>
+
     </Stack>
   );
 };

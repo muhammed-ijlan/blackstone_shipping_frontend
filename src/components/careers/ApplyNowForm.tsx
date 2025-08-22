@@ -25,8 +25,8 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   phoneNumber: Yup.string()
-      .matches(/^[0-9]{6,14}$/, "Enter a valid phone number")
-      .required("Phone number is required"),
+    .matches(/^[0-9]{6,14}$/, "Enter a valid phone number")
+    .required("Phone number is required"),
   address: Yup.string().required("Address is required"),
   message: Yup.string().required("Message is required"),
   resume: Yup.mixed()
@@ -37,10 +37,10 @@ const validationSchema = Yup.object({
 });
 
 const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
-  
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState("");
-  const [isSubmitting,setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFormSubmit = async (values: any, { resetForm }: any) => {
     const toastId = toast.loading("Sending message...");
@@ -61,7 +61,7 @@ const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
       });
 
       await sendEmail({
-        Subject: `Job Application from ${values.name} for the position of ${data.jobOpening.title}`,
+        Subject: `Job Application for the position of ${data.jobOpening.title}`,
         HTMLBody: htmlBody,
         TOMail: import.meta.env.VITE_CONTACT_TO_EMAIL_ID,
         SenderName: values.name,
@@ -75,11 +75,11 @@ const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
 
       toast.success("Message sent successfully!", { id: toastId });
       resetForm();
-    setIsSubmitting(false)
+      setIsSubmitting(false)
       setFileName("");
     } catch (error) {
       console.error("Error sending application:", error);
-    setIsSubmitting(false)
+      setIsSubmitting(false)
       toast.error("Failed to send message", { id: toastId });
     }
   };
@@ -280,7 +280,7 @@ const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
                 <Stack alignItems={"flex-end"}>
                   <Stack direction={"row"} gap={2}>
                     <Button
-                     disabled={isSubmitting}
+                      disabled={isSubmitting}
                       color="inherit"
                       variant="outlined"
                       size="large"
@@ -289,7 +289,7 @@ const ApplyNowForm = ({ data }: { data: GetJobPostDetailsResponse }) => {
                       Cancel
                     </Button>
                     <Button
-                    disabled={isSubmitting}
+                      disabled={isSubmitting}
                       size="large"
                       variant="contained"
                       type="submit"

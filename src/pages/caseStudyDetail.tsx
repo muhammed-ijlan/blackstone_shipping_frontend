@@ -1,33 +1,48 @@
 import { useQuery } from "@apollo/client";
-import { Container } from "@mui/material";
-import React from "react";
+import { Container, Typography } from "@mui/material";
 import { useParams } from "react-router";
 import LoadingFallback from "src/components/LoadingFallback";
-import { GET_NEWS_DETAIL, GET_SINGLE_CASE_STUDY } from "src/graphql/queries";
-import { usePathname, useRouter } from "src/routes/hooks";
+import { GET_SINGLE_CASE_STUDY } from "src/graphql/queries";
 import CaseStudyDetail from "src/sections/newsDetails/CaseStudyDetail";
-import NewsDetail from "src/sections/newsDetails/NewsDetail";
 import {
-  CaseStudyData,
-  CaseStudyVars,
-  GetPostDetailsByIDData,
-  GetPostDetailsByIDVariables,
+  GetCaseStudyResponse,
+  GetCaseStudyVars,
 } from "src/types/graphql/types/resourses.types";
 
 const Page = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data, loading, error } = useQuery<CaseStudyData, CaseStudyVars>(
+  const { data, loading, error } = useQuery<GetCaseStudyResponse, GetCaseStudyVars>(
     GET_SINGLE_CASE_STUDY,
     {
       skip: !id,
-      variables: { id: id ?? "" },
+      variables: { slug: id ?? "" },
     }
   );
+
   if (loading) return <LoadingFallback />;
+
+  if (error) {
+    return (
+      <Container maxWidth="xl">
+        <Typography color="error">
+          Failed to load case study: {error.message}
+        </Typography>
+      </Container>
+    );
+  }
+
+  if (!data?.caseStudy) {
+    return (
+      <Container maxWidth="xl">
+        <Typography>No case study found.</Typography>
+      </Container>
+    );
+  }
+
   return (
     <Container maxWidth="xl">
-      {data && <CaseStudyDetail data={data} />}
+      <CaseStudyDetail data={data} />
     </Container>
   );
 };
