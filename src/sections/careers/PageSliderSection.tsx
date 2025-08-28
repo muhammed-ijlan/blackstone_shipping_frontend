@@ -60,7 +60,7 @@ const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
           right={0}
           bottom={0}
         >
-          <Stack display={{ xs: "none", sm: "flex" }}>
+          <Stack display={{ xs: "none", md: "flex" }}>
             <SliderButton2 scrollRef={scrollRef} />
           </Stack>
         </Stack>
@@ -78,7 +78,7 @@ const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
           currentIndex={currentIndex}
           totalItems={data.peoples.nodes.length}
           textColor="rgba(45, 55, 72, 1)"
-          sx={{ color:"rgba(109, 110, 113, 1) !important", background:"rgba(217, 217, 217, 1) !important" }}
+          sx={{ color: "rgba(109, 110, 113, 1) !important", background: "rgba(217, 217, 217, 1) !important" }}
         />
       </Stack>
     </Stack>

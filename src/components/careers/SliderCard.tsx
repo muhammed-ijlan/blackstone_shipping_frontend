@@ -1,9 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useRef } from "react";
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from "video.js";
-import "video.js/dist/video-js.css";
-import "videojs-youtube";
-import VideoJS from "../VideoJs";
+import React, { useRef, useState } from "react";
+import YouTube, { YouTubeProps } from "react-youtube";
 
 interface CardData {
   title: string;
@@ -19,63 +17,119 @@ interface CardData {
 }
 
 const SliderCard = ({ data }: { data: CardData }) => {
-  const playerRef = useRef<VideoJsPlayer | null>(null);
+  const ytPlayerRef = useRef<any>(null);
   const videoUrl = data.peoplesOptions?.videoUrl;
   const thumbnail = data.featuredImage?.node?.sourceUrl;
+  const [hovered, setHovered] = useState(false);
 
-  const isYouTubeUrl =
-    videoUrl?.includes("youtube.com") || videoUrl?.includes("youtu.be");
-  const isSelfHosted = videoUrl?.match(/\.(mp4|webm)$/i);
-
-  const videoJsOptions: VideoJsPlayerOptions = {
-    autoplay: true,
-    controls: false,
-    responsive: true,
-    fluid: true,
-    loop: true,
-    muted: true,
-    playsinline: false,
-    poster: thumbnail,
-    techOrder: isYouTubeUrl ? ["youtube"] : ["html5"],
-    sources: videoUrl
-      ? [
-          {
-            src: videoUrl,
-            type: isYouTubeUrl ? "video/youtube" : "video/mp4",
-          },
-        ]
-      : [],
+  const getYouTubeId = (url: string): string | null => {
+    if (!url) return null;
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname.includes("youtu.be")) {
+        return parsed.pathname.split("/")[1] || null;
+      }
+      if (parsed.searchParams.get("v")) {
+        return parsed.searchParams.get("v");
+      }
+      if (parsed.pathname.includes("/shorts/")) {
+        return parsed.pathname.split("/shorts/")[1]?.split("?")[0] || null;
+      }
+    } catch {
+      return null;
+    }
+    return null;
   };
 
-  const handlePlayerReady = (player: VideoJsPlayer) => {
-    playerRef.current = player;
+  const videoId = videoUrl ? getYouTubeId(videoUrl) : null;
 
-    player.on("waiting", () => {
-      videojs.log("player is waiting");
-    });
+  const youtubeOpts: YouTubeProps["opts"] = {
+    width: "298px",
+    height: "531px",
+    playerVars: {
+      autoplay: 0,
+      mute: 0,
+      controls: 1,
+      modestbranding: 1,
+      rel: 0,
+      fs: 0,
+      iv_load_policy: 3,
+      loop: 1,
+      playlist: videoId,
+      playsinline: 1,
+    },
+  };
 
-    player.on("dispose", () => {
-      videojs.log("player will dispose");
-    });
+  const handleYouTubeReady: YouTubeProps["onReady"] = (event) => {
+    ytPlayerRef.current = event.target;
+  };
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+    if (ytPlayerRef.current) {
+      ytPlayerRef.current.playVideo();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    if (ytPlayerRef.current) {
+      ytPlayerRef.current.pauseVideo();
+    }
   };
 
   return (
-    <Stack gap={1} sx={{width:{xs:370,md:400}}}>
-      <Box sx={{ width: {xs:370,md:400}, borderRadius: 2, overflow: "hidden" }}>
-        {videoUrl ? (
-          <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-        ) : (
-          <Box
-            component="img"
-            src={thumbnail}
-            alt={data.title}
-            sx={{
-              width: "100%",
-              height: 225,
-              objectFit: "cover",
-              borderRadius: 2,
-            }}
-          />
+    <Stack
+      ml={1}
+      mt={2}
+      gap={1}
+      sx={{ width: { xs: 298, md: 298 } }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Box
+        sx={{
+          width: { xs: 298, md: 298 },
+          borderRadius: 2,
+          overflow: "hidden",
+          height: "531px",
+          transform: hovered ? "scale(1.02)" : "scale(1)",
+          boxShadow: hovered ? 4 : 1,
+          transition: "all 0.3s ease-in-out",
+          position: "relative",
+        }}
+      >
+        {videoId && (
+          <>
+            {!hovered && (
+              <Box
+                component="img"
+                src={thumbnail}
+                alt={data.title}
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: 2,
+                  zIndex: 2,
+                }}
+              />
+            )}
+
+            <YouTube
+              videoId={videoId}
+              opts={youtubeOpts}
+              onReady={handleYouTubeReady}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "16px",
+              }}
+            />
+          </>
         )}
       </Box>
 
@@ -88,7 +142,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
 
       <Box
         component="div"
-        sx={{ "& p": { typography: "body1", margin: 0 ,textWrap:"wrap"} }}
+        sx={{ "& p": { typography: "body1", margin: 0, textWrap: "wrap" } }}
         dangerouslySetInnerHTML={{ __html: data.content }}
       />
     </Stack>

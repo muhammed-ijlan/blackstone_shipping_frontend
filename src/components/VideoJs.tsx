@@ -45,6 +45,12 @@ export const VideoJS: React.FC<VideoJSProps> = ({ options, onReady }) => {
       }
       if (videoRef.current) {
         videoRef.current.innerHTML = '';
+      } else if (playerRef.current) {
+        const player = playerRef.current;
+        if (options.sources && options.sources.length > 0 && options.sources[0].src) {
+          player.src(options.sources);
+        }
+        player.autoplay(options.autoplay ?? false);
       }
     };
   }, []);
