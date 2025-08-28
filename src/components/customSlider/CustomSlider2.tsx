@@ -27,7 +27,6 @@ const CustomSlider2: React.FC<CustomSliderProps> = ({
 
       scrollElement.scrollLeft += scrollSpeed;
 
-      // If scrolled past the first half (original content), reset
       const halfWidth = scrollElement.scrollWidth / 2;
       if (scrollElement.scrollLeft >= halfWidth) {
         scrollElement.scrollLeft = 0;
@@ -40,7 +39,6 @@ const CustomSlider2: React.FC<CustomSliderProps> = ({
     return () => cancelAnimationFrame(animationFrameId);
   }, [autoScroll, scrollRef, scrollSpeed]);
 
-  // Clone children for infinite loop illusion
   const duplicatedChildren = (
     <>
       {children}
@@ -55,7 +53,7 @@ const CustomSlider2: React.FC<CustomSliderProps> = ({
         sx={{
           display: "flex",
           overflowX: "auto",
-          scrollBehavior: "auto", // not "smooth" for controlled scroll
+          scrollBehavior: "auto",
           gap: gap,
           "&::-webkit-scrollbar": { display: "none" },
           whiteSpace: "nowrap",

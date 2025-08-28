@@ -30,12 +30,12 @@ const Downloads = ({ data }: { data: ResourcesPageData }) => {
 
   const { data: servicesData, loading: servicesLoading } =
     useQuery<GetDownloadsByCategoryResponse>(GET_DOWNLOADS, {
-      variables: { slug: ["service-guides"] },
+      variables: { slug: ["co-corporate-presentations"] },
     });
 
   const { data: whitepapersData, loading: whitepapersLoading } =
     useQuery<GetDownloadsByCategoryResponse>(GET_DOWNLOADS, {
-      variables: { slug: ["whitepapers"] },
+      variables: { slug: ["co-corporate-sustainability-reports"] },
     });
 
   if (brochuresLoading || servicesLoading || whitepapersLoading) {
