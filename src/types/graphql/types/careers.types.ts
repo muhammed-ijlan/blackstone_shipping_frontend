@@ -86,6 +86,7 @@ export interface JobOpening {
   title: string;
   id: string;
   date: string;
+  uri: string;
   jobOpeningsOptions: JobOpeningsOptions;
 }
 
@@ -138,7 +139,7 @@ export interface GetJobPostDetailsResponse {
 }
 
 export interface GetJobPostDetailsVariables {
-  id: string;
+  uri: string;
 }
 
 
@@ -175,6 +176,7 @@ export interface GetJobOpeningsResponse {
 
 export interface JobOpeningNode {
   id: string;
+  uri: string;
   title: string;
   date: string;
   jobOpeningsOptions: {

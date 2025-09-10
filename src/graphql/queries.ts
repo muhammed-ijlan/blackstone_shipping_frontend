@@ -1160,6 +1160,7 @@ export const GET_ALL_JOB_OPENINGS = gql`
         id
         title
         date
+        uri
         jobOpeningsOptions {
           jobLocation {
             nodes {
@@ -1268,8 +1269,8 @@ export const GET_JOB_OPENINGS_BY_BOTH = gql`
 
 
 export const GET_JOB_POST_DETAILS_BY_ID = gql`
-  query GetJobPostDetailsByID($id: ID!) {
-    jobOpening(id: $id, idType: ID) {
+  query GetJobPostDetailsByID($uri: ID!) {
+    jobOpening(id: $uri, idType: URI) {
       title
       jobOpeningsOptions {
         bannerImage {

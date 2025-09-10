@@ -47,7 +47,7 @@ export const routesSection: RouteObject[] = [
       { path: "technology", element: <TechnologyPage /> },
       { path: "technology/:id", element: <TechnologyDetailPage /> },
       { path: "careers", element: <CareersPage /> },
-      { path: "careers/:id", element: <CareerDetailPage /> },
+      { path: "careers/job-opening/:id", element: <CareerDetailPage /> },
       { path: "support", element: <SupportPage /> },
       { path: "support/office-location/:id", element: <CountrySpecificPage /> },
       { path: "quality-sustainability", element: <QualitySustainabilityPage /> },

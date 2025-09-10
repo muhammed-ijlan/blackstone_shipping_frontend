@@ -18,7 +18,7 @@ const Page = () => {
     GetJobPostDetailsResponse,
     GetJobPostDetailsVariables
   >(GET_JOB_POST_DETAILS_BY_ID, {
-    variables: { id: id ?? "" },
+    variables: { uri: id ?? "" },
     skip: !id,
   });
 
@@ -34,7 +34,7 @@ const Page = () => {
         <Stack gap={6}>
           <CareerBanner data={data} />
           <JobDetails data={data} />
-          <ApplyNowForm data={data}/>
+          <ApplyNowForm data={data} />
         </Stack>
       )}
     </Container>
