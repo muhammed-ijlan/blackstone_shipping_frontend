@@ -17,9 +17,9 @@ const JobCard = ({ data }: { data: JobOpening }) => {
       alignItems={"center"}
       gap={{ xs: 2 }}
       sx={{
-        border:{xs:"1px solid rgba(206, 208, 212, 1)",sm:"none"},
-        borderRadius:"8px",
-        padding:"10px",
+        border: { xs: "1px solid rgba(206, 208, 212, 1)", sm: "none" },
+        borderRadius: "8px",
+        padding: "10px",
       }}
     >
       <Stack gap={1}>
@@ -27,7 +27,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
         <Typography color="rgba(109, 110, 113, 1)" variant="body2">
           {`Posted ${moment(data.date).fromNow()}`}
         </Typography>
-        <Stack direction={"row"} alignItems={"center"} mt={{xs:0, sm:1}} gap={1}>
+        <Stack direction={"row"} alignItems={"center"} mt={{ xs: 0, sm: 1 }} gap={1}>
           <Box
             component={"img"}
             src={location}
@@ -42,7 +42,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
       </Stack>
       <Button
         sx={{
-          width:{xs:"100%",sm:"auto"},
+          width: { xs: "100%", sm: "auto" },
           bgcolor: "rgba(14, 159, 110, 1)",
           color: "white",
           // fontSize: "18px !important",
@@ -63,7 +63,7 @@ const JobCard = ({ data }: { data: JobOpening }) => {
             alignItems={"center"}
           />
         }
-        onClick={() => router.push(`/careers/${data.id}`)}
+        onClick={() => router.push(`/careers${data.uri}`)}
       >
         Submit Application
       </Button>
