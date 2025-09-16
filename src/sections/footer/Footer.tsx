@@ -25,6 +25,11 @@ import LoadingFallback from "src/components/LoadingFallback";
 import { Scrollbar } from "src/components/scrollbar";
 import { RouterLink } from "src/routes/components";
 import { Iconify } from "src/components/iconify";
+import { t } from "node_modules/react-router/dist/development/index-react-server-client-DXb0OgpJ.mjs";
+import { generateEmailSubscribeTemplate, generateEmailTemplate } from "src/utils/generateEmailTemplate";
+import { send } from "process";
+import { sendEmail } from "src/utils/sendEmail";
+import toast from "react-hot-toast";
 
 interface MenuItem {
   id: string;
@@ -117,7 +122,7 @@ function MenuItemRenderer({
           {hasChildren && (
             <Iconify
               onClick={(e) => {
-                e.stopPropagation(); // prevent bubbling click to parent
+                e.stopPropagation();
                 handleToggle(item.id);
               }}
               icon={
@@ -161,6 +166,7 @@ const Footer = () => {
   const router = useRouter();
 
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  const [email, setEmail] = useState("");
 
   const handleToggle = (id: string) => {
     setOpenSections((prev) => ({
@@ -168,6 +174,36 @@ const Footer = () => {
       [id]: !prev[id],
     }));
   };
+
+  const verifyEmail = (email: string) => {
+    if (!email) return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+
+  const handleSubscribe = async () => {
+    try {
+      if (!verifyEmail(email)) {
+        toast.error("Please enter a valid email address.");
+        return;
+      }
+      const htmlBody = generateEmailSubscribeTemplate({
+        fields: { Email: email }, message: "User subscribed to newsletter.",
+      })
+      await sendEmail({
+        Subject: `Newsletter Subscription`,
+        HTMLBody: htmlBody,
+        TOMail: import.meta.env.VITE_CONTACT_TO_EMAIL_ID,
+        SenderName: email,
+      })
+      toast.success("Subscribed successfully!");
+      setEmail("");
+    } catch (e) {
+      toast.error("Subscription failed. Please try again.");
+      console.error("Subscription error:", e);
+    }
+  }
 
   if (loading) return <LoadingFallback />;
 
@@ -273,6 +309,8 @@ const Footer = () => {
                 Subscribe to Newsletters
               </Typography>
               <TextField
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 placeholder="Enter your email address"
                 variant="outlined"
@@ -298,6 +336,7 @@ const Footer = () => {
                 }}
               />
               <Button
+                onClick={handleSubscribe}
                 fullWidth
                 variant="contained"
                 size="large"

@@ -3,10 +3,9 @@ import React from "react";
 import { GetCompanyAboutResponse } from "src/types/graphql/types/company.types";
 
 const ConnectingWorld = ({ data }: { data: GetCompanyAboutResponse }) => {
-  console.log(data);
   return (
     <Stack
-    my={8}
+      my={8}
       direction={{ xs: "column", lg: "row" }}
       spacing={1}
       justifyContent={"space-between"}
