@@ -74,11 +74,11 @@ const HomeBanner: React.FC = () => {
     playerRef.current = player;
 
     player.on("waiting", () => {
-      videojs.log("player is waiting");
+      // videojs.log("player is waiting");
     });
 
     player.on("dispose", () => {
-      videojs.log("player will dispose");
+      // videojs.log("player will dispose");
     });
   };
   return (

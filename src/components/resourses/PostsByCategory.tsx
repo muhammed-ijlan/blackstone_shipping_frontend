@@ -156,8 +156,9 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
       >
         {posts?.map((post) => (
           <Grid
+
             size={{ xs: 12, md: 6, lg: 4 }}
-            spacing={5}
+            // spacing={5}
             key={post.id || post.title}
           >
             <Stack sx={{ maxWidth: { xs: "100%", md: "400px" } }} direction={{ xs: "row", md: "column" }} gap={{ xs: 1, md: 0 }}

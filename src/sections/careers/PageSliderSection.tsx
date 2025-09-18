@@ -68,7 +68,7 @@ const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
 
       <CustomSlider2 scrollRef={scrollRef}>
         {data.peoples.nodes.map((item, index) => (
-          <SliderCard data={item} />
+          <SliderCard data={item} key={index} />
         ))}
       </CustomSlider2>
 

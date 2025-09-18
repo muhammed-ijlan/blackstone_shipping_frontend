@@ -45,6 +45,7 @@ const CsrSection = () => {
         CSR{" "}
         <Typography
           variant="subtitle2"
+          component={"span"}
           sx={{
             position: "absolute",
             ml: 12,
@@ -62,11 +63,17 @@ const CsrSection = () => {
           onChange={(e) => setSelectedYear(e.target.value)}
           sx={{ width: "190px" }}
         >
-          {yearData?.csrYears.nodes.map((year) => (
-            <MenuItem key={year.name} value={year.name}>
-              {year.name}
+          {yearData?.csrYears?.nodes?.length ? (
+            yearData.csrYears.nodes.map((year) => (
+              <MenuItem key={year.name} value={year.name}>
+                {year.name}
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem disabled value="">
+              Loading...
             </MenuItem>
-          ))}
+          )}
         </TextField>
       </Stack>
 
@@ -94,7 +101,7 @@ const CsrSection = () => {
                   xs: "20px",
                   sm: "20px",
                   textAlign: "left !important",
-                  textWrap:"wrap"
+                  textWrap: "wrap"
                 },
               }}
               fontWeight={600}
@@ -111,10 +118,10 @@ const CsrSection = () => {
               width={"80%"}
               color="white"
               sx={{
-               typography:"caption",
-               lineHeight:"15px !important",
+                typography: "caption",
+                lineHeight: "15px !important",
                 textAlign: "left !important",
-                 textWrap:"wrap"
+                textWrap: "wrap"
               }}
               position="absolute"
               zIndex={888}

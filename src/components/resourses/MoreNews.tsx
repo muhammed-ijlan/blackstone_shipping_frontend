@@ -30,6 +30,7 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
       >
         {data.posts.nodes.map((item, idx) => (
           <Stack
+            key={idx}
             onClick={() => router.push(`/resources/news${item.uri}`)}
             sx={{ cursor: "pointer", width: { xs: "100%", sm: "231px" } }}
             direction={{ xs: "row", sm: "column" }}

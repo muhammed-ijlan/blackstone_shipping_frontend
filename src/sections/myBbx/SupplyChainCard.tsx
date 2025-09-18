@@ -17,11 +17,11 @@ const SupplyChainCard = ({
 }: {
   data: Data;
   loopData: FeaturedContent[];
-  
+
 }) => {
   return (
     <Stack
-    id={data.sectionId}
+      id={data.sectionId}
       flex={1}
       sx={{
         boxShadow: "3px 3px 20px 0px rgba(45, 55, 72, 0.13)",
@@ -57,8 +57,8 @@ const SupplyChainCard = ({
       />
       <Divider sx={{ my: 3 }} />
       <Stack gap={3}>
-        {loopData.map((item) => (
-          <Stack gap={2}>
+        {loopData.map((item, index) => (
+          <Stack gap={2} key={index}>
             <Stack direction={"row"} gap={2}>
               <Box
                 component={"img"}

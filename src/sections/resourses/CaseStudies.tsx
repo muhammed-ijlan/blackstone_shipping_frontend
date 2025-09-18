@@ -45,7 +45,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
 
           <CustomSlider2 scrollRef={scrollRef}>
             {mockMoreItems.map((item, index) => (
-              <>
+              <React.Fragment key={index}>
                 <Stack
                   key={index}
                   sx={{
@@ -154,7 +154,7 @@ const CaseStudies = ({ data }: { data: CaseStudiesData }) => {
                     </Stack>
                   </Stack>
                 </Stack>
-              </>
+              </React.Fragment>
             ))}
           </CustomSlider2>
 

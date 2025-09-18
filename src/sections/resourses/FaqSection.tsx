@@ -195,7 +195,7 @@ const FaqSection = () => {
                         color: "rgba(45, 55, 72, 1)",
                         typography: "body1",
                         "& p": {
-                          margin: { xs: "20", md: "unset" },
+                          margin: { xs: "20px", md: "unset" },
                           ml: { xs: "20px", md: "unset" },
                         }
                       }}

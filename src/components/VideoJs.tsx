@@ -24,7 +24,7 @@ export const VideoJS: React.FC<VideoJSProps> = ({ options, onReady }) => {
       }
 
       const player = (playerRef.current = videojs(videoElement, options, () => {
-        videojs.log('player is ready');
+        // videojs.log('player is ready');
         if (onReady) {
           onReady(player);
         }
