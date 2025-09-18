@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://blackstone.hexprojects.in/admin/graphql",
+  uri: "https://wp.blackstoneshipping.com/graphql",
   cache: new InMemoryCache(),
 });
 
