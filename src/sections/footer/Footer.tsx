@@ -72,9 +72,7 @@ function MenuItemRenderer({
       handleToggle(item.id);
     } else {
       const isPDF = item.url?.endsWith(".pdf");
-      const isExternal =
-        item.url?.startsWith("http") &&
-        !item.url.includes("blackstone.hexprojects.in");
+      const isExternal = item.url?.startsWith("https") && !item.url.includes("wp.blackstoneshipping.com");
 
       if (isPDF || isExternal) {
         window.open(item.url, "_blank");

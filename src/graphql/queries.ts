@@ -797,19 +797,17 @@ export const GET_NEWS_CATEGORIES = gql`query GetPostCategories {
 export const GET_NEWS_BY_CATEGORY = gql`
   query GetPostsByCategorySlug(
     $slug: String!
+    $catId: ID!
     $count: Int!
     $after: String
     $search: String
+    $isAll: Boolean!
   ) {
     posts(
       first: $count
       after: $after
-      where: {
-        categoryName: $slug
-        search: $search
-        orderby: { field: DATE, order: DESC }
-      }
-    ) {
+      where: { categoryName: $slug, search: $search, orderby: { field: DATE, order: DESC } }
+    ) @skip(if: $isAll) {
       pageInfo {
         hasNextPage
         endCursor
@@ -827,6 +825,35 @@ export const GET_NEWS_BY_CATEGORY = gql`
         }
       }
     }
+
+    allPosts: posts(
+      first: $count
+      after: $after
+      where: { search: $search, orderby: { field: DATE, order: DESC } }
+    ) @include(if: $isAll) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        title
+        excerpt
+        uri
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+
+    category(id: $catId, idType: SLUG) @skip(if: $isAll) {
+      totalCount: count
+    }
+
+    allPostsCount
   }
 `;
 

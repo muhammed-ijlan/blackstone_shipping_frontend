@@ -20,9 +20,11 @@ interface Props {
   slug: string;
   count?: number;
   search: string;
+  catId: string;
+  isAll: boolean;
 }
 
-const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
+const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search, catId, isAll }) => {
   const {
     posts,
     loading,
@@ -33,24 +35,29 @@ const PostsByCategory: React.FC<Props> = ({ slug, count = 3, search }) => {
     goToPrevPage,
     hasNextPage,
     totalPages,
-  } = usePostsByCategory(slug, count, search);
+  } = usePostsByCategory(slug, catId, count, search);
 
   const router = useRouter();
 
   const postsContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const prevPage = useRef(currentPage);
+
   useEffect(() => {
-    if (postsContainerRef.current) {
-      const yOffset = -300;
-      const y =
-        postsContainerRef.current.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
+    if (prevPage.current !== currentPage) {
+      if (postsContainerRef.current) {
+        const yOffset = -300;
+        const y =
+          postsContainerRef.current.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
 
-      window.scrollTo({ top: y, behavior: "smooth" });
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
-  }, [currentPage]);
 
+    prevPage.current = currentPage;
+  }, [currentPage]);
 
 
   if (loading && posts.length === 0) {

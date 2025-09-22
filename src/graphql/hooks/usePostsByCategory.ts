@@ -1,34 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useApolloClient, gql } from '@apollo/client';
-import { GET_NEWS_BY_CATEGORY } from '../queries';
-
-const GET_POSTS_BY_CATEGORY = gql`
-  query GetPostsByCategorySlug($slug: String!, $count: Int!, $after: String) {
-    posts(
-      first: $count
-      after: $after
-      where: { categoryName: $slug, orderby: { field: DATE, order: DESC } }
-    ) {
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      nodes {
-        id
-        title
-        excerpt
-        uri
-        date
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-`;
-
+import { useEffect, useState } from "react";
+import { useApolloClient } from "@apollo/client";
+import { GET_NEWS_BY_CATEGORY } from "../queries";
 interface FeaturedImage {
   node: { sourceUrl: string };
 }
@@ -42,18 +14,24 @@ export interface Post {
   featuredImage: FeaturedImage | null;
 }
 
+
 export const usePostsByCategory = (
   slug: string,
-  count: number = 3,
+  catId: string,
+  count: number = 6,
   search: string = ""
 ) => {
+  const client = useApolloClient();
+
   const [pageCursors, setPageCursors] = useState<(string | null)[]>([null]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsByPage, setPostsByPage] = useState<Record<number, Post[]>>({});
-  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const client = useApolloClient();
+  const [totalCount, setTotalCount] = useState(0);
+
+  const isAll = slug === "";
 
   const fetchPage = async (page: number) => {
     try {
@@ -62,16 +40,28 @@ export const usePostsByCategory = (
 
       const { data } = await client.query({
         query: GET_NEWS_BY_CATEGORY,
-        variables: { slug, count, after, search },
+        variables: { slug, catId, count, after, search, isAll },
         fetchPolicy: "network-only",
       });
 
-      const newPosts: Post[] = data?.posts?.nodes || [];
-      const nextCursor: string | null = data?.posts?.pageInfo?.endCursor || null;
-      const nextHasNextPage: boolean = data?.posts?.pageInfo?.hasNextPage || false;
+      const newPosts: Post[] = isAll
+        ? data?.allPosts?.nodes || []
+        : data?.posts?.nodes || [];
+
+      const nextCursor: string | null = isAll
+        ? data?.allPosts?.pageInfo?.endCursor || null
+        : data?.posts?.pageInfo?.endCursor || null;
+
+      const nextHasNextPage: boolean = isAll
+        ? data?.allPosts?.pageInfo?.hasNextPage || false
+        : data?.posts?.pageInfo?.hasNextPage || false;
 
       setPostsByPage((prev) => ({ ...prev, [page]: newPosts }));
       setHasNextPage(nextHasNextPage);
+
+      const total =
+        isAll ? data?.allPostsCount || 0 : data?.category?.totalCount || 0;
+      setTotalCount(total);
 
       if (newPosts.length > 0) {
         setPageCursors((prev) => {
@@ -95,47 +85,30 @@ export const usePostsByCategory = (
     setCurrentPage(1);
     setHasNextPage(false);
     setError(null);
+    setTotalCount(0);
     fetchPage(1);
-  }, [slug, search]);
+  }, [slug, search, catId]);
 
   useEffect(() => {
-    if (currentPage !== 1) {
+    if (currentPage !== 1 && !postsByPage[currentPage]) {
       fetchPage(currentPage);
+    } else {
+      const prevPageCursor = pageCursors[currentPage] || null;
+      setHasNextPage(prevPageCursor !== null);
     }
   }, [currentPage]);
 
+
+  const totalPages = Math.ceil(totalCount / count);
+
   const goToNextPage = () => {
-    if (hasNextPage) {
-      setCurrentPage((prev) => prev + 1);
-    }
+    if (hasNextPage && currentPage < totalPages) setCurrentPage((p) => p + 1);
   };
-
   const goToPrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
+    if (currentPage > 1) setCurrentPage((p) => p - 1);
   };
-
-  const getTotalPages = () => {
-    const loadedPages = Object.keys(postsByPage).length;
-    const lastLoadedPagePosts = postsByPage[loadedPages] || [];
-
-    if (lastLoadedPagePosts.length < count) {
-      return loadedPages;
-    }
-
-    if (lastLoadedPagePosts.length === count && hasNextPage) {
-      return loadedPages + 1;
-    }
-
-    return loadedPages;
-  };
-
-  const totalPages = getTotalPages();
   const goToPage = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
   const posts = postsByPage[currentPage] || [];
