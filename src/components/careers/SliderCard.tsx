@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 
 interface CardData {
@@ -16,11 +16,10 @@ interface CardData {
   };
 }
 
-const SliderCard = ({ data }: { data: CardData }) => {
+const SliderCard = ({ data, isPlayable }: { data: CardData, isPlayable: boolean }) => {
   const ytPlayerRef = useRef<any>(null);
   const videoUrl = data.peoplesOptions?.videoUrl;
   const thumbnail = data.featuredImage?.node?.sourceUrl;
-  const [hovered, setHovered] = useState(false);
 
   const getYouTubeId = (url: string): string | null => {
     if (!url) return null;
@@ -64,19 +63,26 @@ const SliderCard = ({ data }: { data: CardData }) => {
     ytPlayerRef.current = event.target;
   };
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-    if (ytPlayerRef.current) {
-      ytPlayerRef.current.playVideo();
-    }
-  };
+  useEffect(() => {
+    if (!ytPlayerRef.current) return;
 
-  const handleMouseLeave = () => {
-    setHovered(false);
-    if (ytPlayerRef.current) {
-      ytPlayerRef.current.pauseVideo();
+    let timer: NodeJS.Timeout;
+
+    if (isPlayable) {
+      timer = setTimeout(() => {
+        ytPlayerRef.current.mute();
+        ytPlayerRef.current.playVideo();
+        ytPlayerRef.current.unMute();
+
+      }, 300);
+    } else {
+      timer = setTimeout(() => {
+        ytPlayerRef.current?.pauseVideo();
+      }, 300);
     }
-  };
+
+    return () => clearTimeout(timer);
+  }, [isPlayable]);
 
   return (
     <Stack
@@ -84,8 +90,6 @@ const SliderCard = ({ data }: { data: CardData }) => {
       mt={2}
       gap={1}
       sx={{ width: { xs: 298, md: 298 } }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <Box
         sx={{
@@ -93,19 +97,19 @@ const SliderCard = ({ data }: { data: CardData }) => {
           borderRadius: 2,
           overflow: "hidden",
           height: "531px",
-          transform: hovered ? "scale(1.02)" : "scale(1)",
-          boxShadow: hovered ? 4 : 1,
+          transform: isPlayable ? "scale(1.02)" : "scale(1)",
+          boxShadow: isPlayable ? 4 : 1,
           transition: "all 0.3s ease-in-out",
           position: "relative",
         }}
       >
         {videoId && (
           <>
-            {!hovered && (
+            {!isPlayable && thumbnail ? (
               <Box
                 component="img"
-                src={thumbnail}
-                alt={data.title}
+                src={thumbnail || ""}
+                alt={data.title || "Video Thumbnail"}
                 sx={{
                   position: "absolute",
                   top: 0,
@@ -117,7 +121,7 @@ const SliderCard = ({ data }: { data: CardData }) => {
                   zIndex: 2,
                 }}
               />
-            )}
+            ) : null}
 
             <YouTube
               videoId={videoId}

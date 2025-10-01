@@ -4,12 +4,11 @@ import SliderCard from "src/components/careers/SliderCard";
 import CustomSlider2 from "src/components/customSlider/CustomSlider2";
 import SliderButton2 from "src/components/customSlider/SliderButton2";
 import SliderProgress from "src/components/customSlider/SliderProgress";
-import { background } from "src/theme";
 import { GetCareersPageData } from "src/types/graphql/types/careers.types";
 
 const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [youtubeIndex, setYoutubeIndex] = useState(-1)
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -27,6 +26,10 @@ const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
     container.addEventListener("scroll", handleScroll);
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleYoutubeIndex = (index: number) => {
+    setYoutubeIndex(index)
+  }
 
   const scrollRef = useRef<HTMLDivElement>(
     null
@@ -68,7 +71,9 @@ const PageSliderSection = ({ data }: { data: GetCareersPageData }) => {
 
       <CustomSlider2 scrollRef={scrollRef}>
         {data.peoples.nodes.map((item, index) => (
-          <SliderCard data={item} key={index} />
+          <Box onMouseEnter={() => handleYoutubeIndex(index)} onMouseLeave={() => handleYoutubeIndex(-1)}>
+            <SliderCard isPlayable={youtubeIndex === index} data={item} key={index} />
+          </Box>
         ))}
       </CustomSlider2>
 
