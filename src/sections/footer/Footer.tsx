@@ -72,9 +72,7 @@ function MenuItemRenderer({
       handleToggle(item.id);
     } else {
       const isPDF = item.url?.endsWith(".pdf");
-      const isExternal =
-        item.url?.startsWith("http") &&
-        !item.url.includes("blackstone.hexprojects.in");
+      const isExternal = item.url?.startsWith("https") && !item.url.includes("wp.blackstoneshipping.com");
 
       if (isPDF || isExternal) {
         window.open(item.url, "_blank");
@@ -239,7 +237,6 @@ const Footer = () => {
   const menuItems: MenuItem[] = data?.menu?.menuItems?.nodes ?? [];
   const nestedMenu = buildNestedMenu(menuItems);
 
-
   const currentYear = new Date().getFullYear();
   return (
     <Stack color={"white"} sx={{ background: "rgba(26, 32, 44, 1)" }}>
@@ -385,7 +382,7 @@ const Footer = () => {
                   </Typography>
                   {item?.children?.map((subItem, subIdx) => {
                     const isPDF = subItem.url?.endsWith(".pdf");
-                    const isExternal = subItem.url?.startsWith("http") && !subItem.url.includes("blackstone.hexprojects.in");
+                    const isExternal = subItem.url?.startsWith("https") && !subItem.url.includes("wp.blackstoneshipping.com");
 
                     return (
                       <Typography

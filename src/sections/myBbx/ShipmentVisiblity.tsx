@@ -35,7 +35,7 @@ const ShipmentVisiblity = ({
           component={"div"}
           sx={{
             "& p": {
-              typography:"h4",
+              typography: "h4",
               textAlign: "center !important",
               m: "0",
             },
@@ -57,6 +57,7 @@ const ShipmentVisiblity = ({
           };
           return (
             <Stack
+              key={index}
               flex={1}
               gap={2}
               sx={{

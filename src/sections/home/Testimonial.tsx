@@ -117,7 +117,7 @@ const Testimonial = () => {
           <Stack mt={{ xs: 0, lg: 10 }} width={{ xs: "100%", lg: "60%" }}>
             <CustomSlider2 scrollRef={scrollRef}>
               {testimonialsList.map((item, index) => (
-                <TestimonialCard item={item} />
+                <TestimonialCard key={index} item={item} />
               ))}
             </CustomSlider2>
           </Stack>

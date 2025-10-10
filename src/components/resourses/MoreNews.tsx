@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import moment from "moment";
-import React from "react";
+
 import { useRouter } from "src/routes/hooks";
 import {
   GetRelatedPostsByIDData,
@@ -30,7 +29,8 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
       >
         {data.posts.nodes.map((item, idx) => (
           <Stack
-            onClick={() => router.push(`/resources/news${item.uri}`)}
+            key={idx}
+            onClick={() => router.push(`/resources/news/${item?.id}`)}
             sx={{ cursor: "pointer", width: { xs: "100%", sm: "231px" } }}
             direction={{ xs: "row", sm: "column" }}
             gap={{ xs: 1, sm: 0 }}

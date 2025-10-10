@@ -3,14 +3,12 @@ import { Search } from "@mui/icons-material";
 import {
   Container,
   Divider,
-  Grid,
-  IconButton,
-  InputAdornment,
   Stack,
   TextField,
   Typography,
   useMediaQuery,
   useTheme,
+  InputAdornment,
 } from "@mui/material";
 import React, { useState } from "react";
 import PostsByCategory from "src/components/resourses/PostsByCategory";
@@ -19,19 +17,25 @@ import { NewsCategoriesData } from "src/types/graphql/types/resourses.types";
 
 const AllNews = () => {
   const { data } = useQuery<NewsCategoriesData>(GET_NEWS_CATEGORIES);
-  const [activeCategory, setActiveCategory] = useState<string>("");
+  const [activeCategory, setActiveCategory] = useState<{
+    slug: string;
+    id: string;
+  }>({ slug: "", id: "" });
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const theme = useTheme();
 
-  const handleCategoryClick = (slug: string) => {
-    setActiveCategory(slug);
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleCategoryClick = (slug: string, id: string) => {
+    setActiveCategory({ slug, id });
   };
 
   return (
-    <Container maxWidth="xl" >
+    <Container maxWidth="xl">
       <Divider sx={{ my: 6 }} />
       <Stack gap={3}>
-        <Typography variant="h2"> All News</Typography>
+        <Typography variant="h2">All News</Typography>
+
         <Stack
           direction={"row"}
           flexWrap={"wrap"}
@@ -48,26 +52,25 @@ const AllNews = () => {
           >
             <CategoryBox
               label="All"
-              isActive={activeCategory === ""}
-              onClick={() => handleCategoryClick("")}
+              isActive={activeCategory.slug === ""}
+              onClick={() => handleCategoryClick("", "")}
             />
 
             {data?.categories.nodes.map((item) => (
               <CategoryBox
                 key={item.id}
                 label={item.name}
-                isActive={activeCategory === item.slug}
-                onClick={() => handleCategoryClick(item.slug)}
+                isActive={activeCategory.slug === item.slug}
+                onClick={() => handleCategoryClick(item.slug, item.id)}
               />
             ))}
           </Stack>
+
           <Stack width={{ xs: "100%", sm: "auto" }}>
             <TextField
               name="search"
               placeholder="Search"
-              size={
-                useMediaQuery(theme.breakpoints.down("sm")) ? "medium" : "small"
-              }
+              size={isSmall ? "medium" : "small"}
               variant="outlined"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -80,30 +83,25 @@ const AllNews = () => {
                 sx: {
                   backgroundColor: "#fff",
                   borderRadius: "4px",
-                  "& fieldset": {
-                    borderColor: "black",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "black",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "black",
-                  },
+                  "& fieldset": { borderColor: "black" },
+                  "&:hover fieldset": { borderColor: "black" },
+                  "&.Mui-focused fieldset": { borderColor: "black" },
                 },
               }}
               inputProps={{
-                sx: {
-                  "&::placeholder": {
-                    color: "black",
-                    opacity: 1,
-                  },
-                },
+                sx: { "&::placeholder": { color: "black", opacity: 1 } },
               }}
             />
           </Stack>
         </Stack>
 
-        <PostsByCategory slug={activeCategory} count={6} search={searchQuery} />
+        <PostsByCategory
+          slug={activeCategory.slug}
+          catId={activeCategory.slug}
+          count={6}
+          search={searchQuery}
+          isAll={!activeCategory.slug}
+        />
       </Stack>
     </Container>
   );
@@ -124,7 +122,7 @@ const CategoryBox = ({ label, isActive, onClick }: CategoryBoxProps) => (
       border: "1px solid rgba(109, 110, 113, 0.5)",
       borderRadius: "4px",
       height: 48,
-      paddingX: 2,
+      px: 2,
       cursor: "pointer",
       backgroundColor: isActive ? "rgba(11, 19, 40, 1)" : "transparent",
       color: !isActive ? "rgba(11, 19, 40, 1)" : "white",

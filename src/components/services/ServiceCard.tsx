@@ -22,7 +22,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
         alt={data.title}
         sx={{
           width: "400px",
-          height: "244px !important",
+          height: "234px !important",
           objectFit: "cover",
           borderRadius: "8px 8px 0px 0px",
         }}
@@ -30,10 +30,10 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
       <Stack
         p={"15px"}
         justifyContent={"space-between"}
-        sx={{ height: "100%" }}
-        gap={1}
+        sx={{ height: { xs: "auto", md: "220px" } }}
+        gap={1.5}
       >
-        <Stack sx={{ height: "auto" }}>
+        <Stack sx={{ height: "auto" }} gap={1.5}>
           <Typography
             sx={{
               color: "rgba(11, 19, 40, 1) !important",
@@ -55,6 +55,7 @@ const ServiceCard = ({ data }: { data: ServiceNode }) => {
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 3,
               overflow: "hidden",
+              "& p": { margin: 0 }
             }}
             dangerouslySetInnerHTML={{ __html: data.content }}
           />

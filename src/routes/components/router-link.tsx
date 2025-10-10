@@ -1,14 +1,12 @@
-import type { LinkProps } from 'react-router';
+import React from "react";
+import { Link as RouterDomLink, LinkProps as RouterDomLinkProps } from "react-router-dom";
 
-import { Link } from 'react-router';
-
-// ----------------------------------------------------------------------
-
-interface RouterLinkProps extends Omit<LinkProps, 'to'> {
+interface RouterLinkProps extends Omit<RouterDomLinkProps, "to"> {
   href: string;
-  ref?: React.Ref<HTMLAnchorElement>;
 }
 
-export function RouterLink({ href, ref, ...other }: RouterLinkProps) {
-  return <Link ref={ref} to={href} {...other} />;
-}
+export const RouterLink = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
+  ({ href, ...other }, ref) => <RouterDomLink ref={ref} to={href} {...other} />
+);
+
+RouterLink.displayName = "RouterLink"; 

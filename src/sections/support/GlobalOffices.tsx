@@ -29,8 +29,8 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
         Global offices
       </Typography>
       <Stack direction="row" gap={2} flexWrap={"wrap"} justifyContent={"flex-start  "} alignItems={""} >
-        {officeLocations.map((office) => (
-          <>
+        {officeLocations.map((office, index) => (
+          <React.Fragment key={index}>
             <Box
               onClick={() => router.push(`/support${office.uri}`)}
               sx={{
@@ -41,7 +41,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
                 border: "1px solid rgba(217, 217, 217, 1)",
                 borderRadius: "8px",
                 cursor: "pointer",
-                minWidth: {sm:"185px"},
+                minWidth: { sm: "185px" },
               }}
             >
               <Typography variant="body1" sx={{ fontWeight: "600" }} color="rgba(11, 19, 40, 1)">
@@ -52,7 +52,7 @@ const GlobalOffices = ({ data }: { data: CountryPageData }) => {
             <Typography onClick={() => router.push(`/support/${office.countries.nodes[0].id}`)} variant="h4" sx={{ display: { xs: "flex", sm: "none" }, textAlign: "left !important" }}>
               • &nbsp;&nbsp;{office.title}
             </Typography>
-          </>
+          </React.Fragment>
         ))}
       </Stack>
     </Stack>

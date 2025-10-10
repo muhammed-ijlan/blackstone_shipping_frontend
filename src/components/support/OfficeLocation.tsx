@@ -1,29 +1,19 @@
-import { ArrowBack, ArrowForward, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import {
   Box,
-  Button,
   Container,
   Stack,
   TextField,
   Typography,
-  Pagination,
-  PaginationItem,
-  CircularProgress,
   InputAdornment,
-  Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { useOfficeLocations } from "src/graphql/hooks/useOfficeLocation";
 import { useRouter } from "src/routes/hooks";
-import OfficeLocationMobile from "./OfficeLocationMobile";
 import LoadingFallback from "../LoadingFallback";
+import OfficeLocationMobile from "./OfficeLocationMobile";
 
 const baseCellStyle = {
   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -35,70 +25,29 @@ const baseCellStyle = {
 
 const OfficeLocation: React.FC = () => {
   const router = useRouter();
-
   const [search, setSearch] = useState("");
-  const {
-    locations,
-    loading,
-    error,
-    currentPage,
-    totalPages,
-    hasNextPage,
-    goToNextPage,
-    goToPrevPage,
-    goToPage,
-  } = useOfficeLocations(0, search);
+  const { locations, loading, error } = useOfficeLocations();
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+  if (error) return <Typography color="error">Error: {error.message}</Typography>;
 
-  if (error)
-    return <Typography color="error">Error: {error.message}</Typography>;
+  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */ }
+  const filteredLocations = locations.filter((item: any) => {
+    const query = search.toLowerCase();
+    const country =
+      item.officeLocationsOptions.country.nodes[0]?.name?.toLowerCase() || "";
+    const city = item.title?.toLowerCase() || "";
+    const address = item.officeLocationsOptions.address?.toLowerCase() || "";
+    const phone = item.officeLocationsOptions.phoneNumber?.toLowerCase() || "";
+    const email = item.officeLocationsOptions.emailAddress?.toLowerCase() || "";
 
-  const renderPageNumbers = () => (
-    <Pagination
-      count={totalPages}
-      page={currentPage}
-      onChange={(e, value) => goToPage(value)}
-      showFirstButton={false}
-      showLastButton={false}
-      siblingCount={1}
-      boundaryCount={1}
-      renderItem={(item) => {
-        if (item.type === "page") {
-          return (
-            <PaginationItem
-              {...item}
-              sx={{
-                border: "1px solid rgba(109, 110, 113, 0.13)",
-                color: "rgba(217, 217, 217, 1)",
-                "&:hover": {
-                  backgroundColor: "rgba(11, 19, 40, 0.1)",
-                },
-                "&.Mui-selected": {
-                  color: "rgba(45, 55, 72, 1)",
-                  backgroundColor: "rgba(255, 255, 255, 1)",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "rgba(11, 19, 40, 0.8)",
-                    fontWeight: "bold",
-                    color: "white",
-                  },
-                },
-              }}
-            />
-          );
-        }
-        return null;
-      }}
-      shape="rounded"
-    />
-  );
-
-
-
-
+    return (
+      country.includes(query) ||
+      city.includes(query) ||
+      address.includes(query) ||
+      phone.includes(query) ||
+      email.includes(query)
+    );
+  });
 
   return (
     <Stack
@@ -108,8 +57,7 @@ const OfficeLocation: React.FC = () => {
       }}
     >
       <Container maxWidth="xl">
-
-        <Stack gap={{ xs: 0, md: 5 }} color={"white"} >
+        <Stack gap={{ xs: 0, md: 5 }} color={"white"}>
           <Stack
             direction={"row"}
             justifyContent={"space-between"}
@@ -119,6 +67,8 @@ const OfficeLocation: React.FC = () => {
             <Typography variant="h2" color="white">
               Office Locations
             </Typography>
+
+            {/* Search Input */}
             <Stack width={{ xs: "100%", sm: "auto" }} display={{ xs: "none", md: "block" }}>
               <TextField
                 fullWidth
@@ -127,7 +77,7 @@ const OfficeLocation: React.FC = () => {
                 size="small"
                 variant="outlined"
                 value={search}
-                onChange={handleSearchChange}
+                onChange={(e) => setSearch(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -160,17 +110,14 @@ const OfficeLocation: React.FC = () => {
                   },
                 }}
               />
-
             </Stack>
           </Stack>
-          {/* Desktop View */}
-          {
-            loading ? (
-             
-                <LoadingFallback />
-              
-            ) : (
-              <Box
+
+          {/* Table View */}
+          {loading ? (
+            <LoadingFallback />
+          ) : (
+            <Box
               sx={{
                 display: { xs: "none", md: "block" },
                 border: "none",
@@ -243,10 +190,10 @@ const OfficeLocation: React.FC = () => {
                     </Th>
                   </Tr>
                 </Thead>
-                <Stack my={0.5} />
+                <Box my={0.5} />
                 <Tbody style={{ backgroundColor: "rgba(45, 55, 72, 1)" }}>
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {locations.map((item: any) => (
+                  {filteredLocations.map((item: any) => (
                     <Tr key={item.id}>
                       <Td
                         style={{
@@ -259,7 +206,7 @@ const OfficeLocation: React.FC = () => {
                           direction="row"
                           alignItems="center"
                           gap={1}
-                          component={"div"}
+                          component={"span"}
                         >
                           <img
                             src={
@@ -279,7 +226,7 @@ const OfficeLocation: React.FC = () => {
                           ...baseCellStyle,
                           borderRight: "1px solid rgba(255, 255, 255, 0.1)",
                           borderTop: "1px solid rgba(217, 217, 217, 1)",
-                          cursor:"pointer"
+                          cursor: "pointer"
                         }}
                         onClick={() =>
                           router.push(
@@ -297,7 +244,7 @@ const OfficeLocation: React.FC = () => {
                         }}
                       >
                         <Box
-                          component={"div"}
+                          component={"span"}
                           dangerouslySetInnerHTML={{
                             __html:
                               item.officeLocationsOptions.address?.replace(
@@ -320,7 +267,7 @@ const OfficeLocation: React.FC = () => {
                         style={{
                           ...baseCellStyle,
                           borderTop: "1px solid rgba(217, 217, 217, 1)",
-                          textTransform:"lowercase"
+                          textTransform: "lowercase"
                         }}
                       >
                         {item.officeLocationsOptions.emailAddress}
@@ -330,29 +277,13 @@ const OfficeLocation: React.FC = () => {
                 </Tbody>
               </Table>
             </Box>
-            )
-          }
-        
-
-          {totalPages > 1 && (
-            <Stack
-              display={{ xs: "none", md: "flex" }}
-              direction="row"
-              alignItems="center"
-              justifyContent="center"
-              mt={6}
-              sx={{ width: "100%" }}
-            >
-              {renderPageNumbers()}
-            </Stack>
-
           )}
+
           {/* Mobile View */}
           <OfficeLocationMobile />
-        </Stack >
-
-      </Container >
-    </Stack >
+        </Stack>
+      </Container>
+    </Stack>
   );
 };
 
