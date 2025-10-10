@@ -934,6 +934,7 @@ export const GET_RELATED_POSTS_BY_ID = gql`
       first: 3
     ) {
       nodes {
+        id
         title
         excerpt
         featuredImage {

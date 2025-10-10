@@ -23,8 +23,8 @@ interface CarbonCalculatorInterface {
 
 const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
   type PortOption = {
-    flag: string | undefined; label: string; value: string 
-};
+    flag: string | undefined; label: string; value: string
+  };
 
   const [pol, setPol] = useState<PortOption | null>(null);
   const [pod, setPod] = useState<PortOption | null>(null);
@@ -34,7 +34,6 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
   const [polid, setPolid] = useState("");
   const [podid, setPodid] = useState("");
 
-  // Simulated port data from the original script
   const availableTags = [
     { label: "IND", value: "India", flag: "https://flagcdn.com/w40/in.png" },
     { label: "CHN", value: "China", flag: "https://flagcdn.com/w40/cn.png" },
@@ -42,12 +41,10 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
     { label: "BHU", value: "Bhutan", flag: "https://flagcdn.com/w40/bt.png" },
   ];
 
-  // Define the type for portDistances with an index signature
   interface PortDistance {
     [key: string]: { [key: string]: number };
   }
 
-  // Simulated distance between ports (in km) - replace with actual data or API
   const portDistances: PortDistance = {
     India: { China: 5000, Nepal: 1000, Bhutan: 800 },
     China: { India: 5000, Nepal: 3000, Bhutan: 2500 },
@@ -55,7 +52,6 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
     Bhutan: { India: 800, China: 2500, Nepal: 400 },
   };
 
-  // Emission factor (tons CO2e per ton of cargo per km)
   const emissionFactor = 0.00002;
 
   useEffect(() => {
@@ -94,12 +90,11 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
     setMtco2e(calculatedMtco2e);
   };
 
-
   const styledContent = data.calculatorSectionContent.replace(
     /(sustainability@blackstoneshipping\.com)/g,
     '<a href="mailto:$1" style="color:#1A56DB;">$1</a>'
   );
-  
+
 
   return (
     <Container maxWidth="lg">
@@ -250,7 +245,7 @@ const CarbonCalculator = ({ data }: { data: CarbonCalculatorInterface }) => {
               "& p": {
                 fontStyle: "italic",
               },
-              
+
             }}
             color="rgba(45, 55, 72, 0.5)"
             dangerouslySetInnerHTML={{

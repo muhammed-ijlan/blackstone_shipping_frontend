@@ -188,6 +188,7 @@ export interface GetPostDetailsByIDData {
 
 
 export interface RelatedPost {
+  id: string;
   title: string;
   excerpt: string;
   uri: string;

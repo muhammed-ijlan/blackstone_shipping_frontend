@@ -8,6 +8,7 @@ import {
 } from "src/types/graphql/types/resourses.types";
 
 const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
+  console.log(data)
   const router = useRouter();
   return (
     <Stack gap={3}>
@@ -31,7 +32,7 @@ const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
         {data.posts.nodes.map((item, idx) => (
           <Stack
             key={idx}
-            onClick={() => router.push(`/resources/news${item.uri}`)}
+            onClick={() => router.push(`/resources/news/${item?.id}`)}
             sx={{ cursor: "pointer", width: { xs: "100%", sm: "231px" } }}
             direction={{ xs: "row", sm: "column" }}
             gap={{ xs: 1, sm: 0 }}

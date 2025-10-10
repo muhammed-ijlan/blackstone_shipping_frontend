@@ -43,7 +43,7 @@ const SliderCard = ({ data, isPlayable }: { data: CardData, isPlayable: boolean 
   const videoId = videoUrl ? getYouTubeId(videoUrl) : null;
 
   const youtubeOpts: YouTubeProps["opts"] = {
-    width: "298px",
+    width: "225px",
     height: "531px",
     playerVars: {
       autoplay: 0,
@@ -89,14 +89,14 @@ const SliderCard = ({ data, isPlayable }: { data: CardData, isPlayable: boolean 
       ml={1}
       mt={2}
       gap={1}
-      sx={{ width: { xs: 298, md: 298 } }}
+      sx={{ width: { xs: 298, md: 225 } }}
     >
       <Box
         sx={{
-          width: { xs: 298, md: 298 },
+          width: { xs: 298, md: 225 },
           borderRadius: 2,
           overflow: "hidden",
-          height: "531px",
+          height: "431px",
           transform: isPlayable ? "scale(1.02)" : "scale(1)",
           boxShadow: isPlayable ? 4 : 1,
           transition: "all 0.3s ease-in-out",

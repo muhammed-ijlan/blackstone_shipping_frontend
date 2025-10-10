@@ -20,7 +20,7 @@ const Page = () => {
       },
     }
   );
-
+  console.log(solutionId)
   if (loading) return <LoadingFallback />;
 
   const bannerImage =
@@ -41,7 +41,7 @@ const Page = () => {
         mainTitle={bannerTitle}
         subTitle="Solutions"
       />
-      <BannerContent content={bannerContent}/>
+      <BannerContent content={bannerContent} />
       <OtherServices data={childNodes} />
       <ContactUsCard />
       {otherTopicsData && <OtherTopics data={otherTopicsData} />}

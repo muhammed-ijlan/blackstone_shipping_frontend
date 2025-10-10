@@ -86,7 +86,7 @@ const OtherTopics = ({ data }: { data: OtherTopicsSection }) => {
             <Stack
               gap={1}
               sx={{ cursor: "pointer" }}
-              onClick={() => router.push(data.topic2Link.nodes[0].uri)}
+              onClick={() => router.push(data.topic3Link.nodes[0].uri)}
             >
               <Stack
                 sx={{
