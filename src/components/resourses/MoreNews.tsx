@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import moment from "moment";
-import React from "react";
+
 import { useRouter } from "src/routes/hooks";
 import {
   GetRelatedPostsByIDData,
@@ -8,7 +7,6 @@ import {
 } from "src/types/graphql/types/resourses.types";
 
 const MoreNews = ({ data }: { data: GetRelatedPostsByIDData }) => {
-  console.log(data)
   const router = useRouter();
   return (
     <Stack gap={3}>

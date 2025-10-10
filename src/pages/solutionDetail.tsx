@@ -20,7 +20,6 @@ const Page = () => {
       },
     }
   );
-  console.log(solutionId)
   if (loading) return <LoadingFallback />;
 
   const bannerImage =
